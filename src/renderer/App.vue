@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <div class="ui fluid container">
-      <div class="layout" :is="layout">
-        <router-view />
-      </div>
+    <div class="layout" :is="layout">
+      <router-view />
     </div>
   </div>
 </template>

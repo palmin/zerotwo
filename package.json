@@ -49,15 +49,12 @@
       ]
     },
     "mac": {
-      "publish": "build",
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "publish": "build",
       "icon": "build/icons/icon.ico"
     },
     "linux": {
-      "publish": "build",
       "icon": "build/icons"
     }
   },

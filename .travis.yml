@@ -2,6 +2,8 @@ osx_image: xcode8.3
 sudo: required
 dist: trusty
 language: c
+env:
+  - TRAVIS_ENV="v0.1.*"
 matrix:
   include:
   - os: osx
@@ -37,7 +39,7 @@ after_success:
 before_deploy:
 - export RELEASE_FILE=$(ls)
 - echo "deploying to GitHub releases"
-- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+- git tag "$(TRAVIS_TAG)"
 deploy:
   provider: releases
   file_glob: true

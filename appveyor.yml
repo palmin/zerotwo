@@ -29,6 +29,9 @@ build_script:
 
 test: off
 
+before_deploy:
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+
 deploy:
   release: zerotwo-v$(appveyor_build_version)
   description: 'Finished build'

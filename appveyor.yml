@@ -35,7 +35,7 @@ deploy:
   description: 'Finished build'
   provider: GitHub
   auth_token:
-    secure: QizBlL2AG4d1YpaDgDKyWjZaFnuWWP2bMOLX5FZedt0= # your encrypted token from GitHub
+    secure: fU/ojGR4grE9pO35D4bDruLE/93FrWPzmg6ifQRNky8VFI4L9GV26YFfcnJ+nez7 # your encrypted token from GitHub
   artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
   draft: true
   prerelease: true

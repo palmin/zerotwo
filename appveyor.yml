@@ -8,6 +8,9 @@ image: Visual Studio 2017
 platform:
   - x64
 
+env:
+  - appveyor_repo_tag="true"
+
 cache:
   - node_modules
   - '%APPDATA%\npm-cache'

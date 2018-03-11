@@ -3,6 +3,7 @@ Electron - Vue.js Anime Tracker
 
 [![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
 [![Coverage Status](https://coveralls.io/repos/github/NicoAiko/zerotwo/badge.svg)](https://coveralls.io/github/NicoAiko/zerotwo)
+[![Build status](https://ci.appveyor.com/api/projects/status/kupylgo0f4ocen8w?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
 > Taiga alternative
 

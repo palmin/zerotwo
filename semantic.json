@@ -1,0 +1,88 @@
+{
+  // base path added to all other paths specified in "paths"
+  "base": "src/renderer/assets/semantic",
+   // current version of Semantic UI
+  "version": "2.3.0",
+   "paths": {
+     "source": {
+       // source theme.config
+      "config"      : "src/theme.config",
+       // source definition folder
+      "definitions" : "src/definitions/",
+       // source site theme
+      "site"        : "src/site/",
+       // source themes folder
+      "themes"      : "src/themes/"
+    },
+     "output": {
+      // packaged source (both compressed/uncompressed)
+      "packaged"     : "dist/",
+       // uncompressed source
+      "uncompressed" : "dist/components/",
+       // compressed source
+      "compressed"   : "dist/components/",
+       // output directory for theme assets
+      "themes"       : "dist/themes/"
+    },
+     // directory for gulp clean task
+    "clean"        : "dist/"
+  },
+   // when set to an integer permission, will set dist files with this file permission
+  "permission" : false,
+  // autoInstall
+  "autoInstall": true,
+  // whether gulp watch/build should run RTLCSS
+  "rtl": false,
+   // will only include components with these names
+  "components": [
+    "reset",
+    "site",
+    "button",
+    "container",
+    "divider",
+    "flag",
+    "header",
+    "icon",
+    "image",
+    "input",
+    "label",
+    "list",
+    "loader",
+    "rail",
+    "reveal",
+    "segment",
+    "step",
+    "breadcrumb",
+    "form",
+    "grid",
+    "menu",
+    "message",
+    "table",
+    "ad",
+    "card",
+    "comment",
+    "feed",
+    "item",
+    "statistic",
+    "accordion",
+    "checkbox",
+    "dimmer",
+    "dropdown",
+    "embed",
+    "modal",
+    "nag",
+    "popup",
+    "progress",
+    "rating",
+    "search",
+    "shape",
+    "sidebar",
+    "sticky",
+    "tab",
+    "transition",
+    "api",
+    "state",
+    "visibility"
+  ],
+  "admin": false
+}

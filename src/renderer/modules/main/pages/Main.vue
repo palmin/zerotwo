@@ -1,23 +1,13 @@
 <template>
   <div>
-    {{ $t('hello') }}
+    <list-component />
   </div>
 </template>
 
 <script>
+import ListComponent from '../components/List';
+
 export default {
-  mounted() {
-  },
+  components: { ListComponent },
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "hello": "Hello"
-  },
-  "de": {
-    "hello": "Hallo"
-  }
-}
-</i18n>

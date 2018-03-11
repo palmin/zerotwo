@@ -1,12 +1,8 @@
 <template>
   <div class="ui fluid container">
-    <div class="ui stackable two column grid container">
-      <div class="sixteen wide column">
-        <transition name="fade" mode="out-in">
-          <slot/>
-        </transition>
-      </div>
-    </div>
+    <transition name="fade" mode="out-in">
+      <slot/>
+    </transition>
   </div>
 </template>
 

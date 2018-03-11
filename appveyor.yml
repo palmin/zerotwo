@@ -28,3 +28,16 @@ build_script:
   - yarn build
 
 test: off
+
+deploy:
+  release: zerotwo-v$(appveyor_build_version)
+  description: 'Finished build'
+  provider: GitHub
+  auth_token:
+    secure: QizBlL2AG4d1YpaDgDKyWjZaFnuWWP2bMOLX5FZedt0= # your encrypted token from GitHub
+  artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: true        # deploy on tag push only

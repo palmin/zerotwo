@@ -8,9 +8,6 @@ image: Visual Studio 2017
 platform:
   - x64
 
-env:
-  - appveyor_repo_tag="true"
-
 cache:
   - node_modules
   - '%APPDATA%\npm-cache'
@@ -37,6 +34,7 @@ before_deploy:
 
 deploy:
   release: zerotwo-v$(appveyor_build_version)
+  tag: "v0.1.$(appveyor_build_version)"
   description: 'Finished build'
   provider: GitHub
   auth_token:

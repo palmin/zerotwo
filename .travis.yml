@@ -35,7 +35,7 @@ script:
 after_success:
 - npm run coveralls
 before_deploy:
-- export RELEASE_FILE=$(ls)
+- export RELEASE_FILE=$(ls dist/)
 - echo "deploying to GitHub releases"
 deploy:
   provider: releases

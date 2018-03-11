@@ -1,4 +1,4 @@
-version: 0.1.{build}
+version: 0.0.{build}
 
 branches:
   only:
@@ -29,19 +29,16 @@ build_script:
 
 test: off
 
-before_deploy:
-  - git tag "v0.1.$(appveyor_build_version)"
-
 deploy:
-  release: zerotwo-v$(appveyor_build_version)
-  tag: "v0.1.$(appveyor_build_version)"
+  release: zerotwo-v0.0.1
+  tag: "v0.0.1"
   description: 'Finished build'
   provider: GitHub
   auth_token:
     secure: QizBlL2AG4d1YpaDgDKyWjZaFnuWWP2bMOLX5FZedt0= # your encrypted token from GitHub
   artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
-  draft: false
-  prerelease: false
+  draft: true
+  prerelease: true
   on:
     branch: master                 # release from master branch only
-    appveyor_repo_tag: true        # deploy on tag push only
+    appveyor_repo_tag: false        # deploy on tag push only

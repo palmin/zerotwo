@@ -1,5 +1,7 @@
 <template>
   <div class="ui fluid container">
+    <main-menu :openSettings="openSettings" />
+    <settings :ref="event" />
     <transition name="fade" mode="out-in">
       <slot/>
     </transition>
@@ -7,8 +9,25 @@
 </template>
 
 <script>
+import MainMenu from '@/components/Menu';
+import Settings from '@/components/Settings';
+
 export default {
+  components: {
+    MainMenu,
+    Settings,
+  },
+  methods: {
+    openSettings() {
+      this.$refs[this.event].show();
+    },
+  },
   name: 'app',
+  data() {
+    return {
+      event: 'showSettings',
+    };
+  },
 };
 </script>
 

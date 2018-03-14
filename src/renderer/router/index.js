@@ -1,15 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { routes as Main } from '@/modules/main';
+
+import routes from './routes';
+import applyStoreReadyHook from './hooks/store-ready';
 
 Vue.use(Router);
 
-export default new Router({
-  routes: [
-    ...Main,
-    {
-      path: '*',
-      redirect: '/',
-    },
-  ],
-});
+const router = new Router({ routes });
+
+applyStoreReadyHook(router);
+
+export default router;

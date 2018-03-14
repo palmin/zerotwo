@@ -1,61 +1,91 @@
 <template>
-  <table class="ui compact celled table">
+  <table class="ui compact single line celled table">
     <thead>
       <tr>
         <th class="collapsing"></th>
         <th>{{ $t('animeTitle') }}</th>
-        <th>{{ $t('progress') }}</th>
-        <th>{{ $t('score') }}</th>
-        <th>{{ $t('season') }}</th>
-        <th>{{ $t('lastUpdated') }}</th>
+        <th class="collapsing center aligned">{{ $t('progress') }}</th>
+        <th class="collapsing center aligned">
+          {{ $t('score') }}
+        </th>
+        <th class="collapsing center aligned">{{ $t('season') }}</th>
+        <th class="collapsing right aligned">{{ $t('lastUpdated') }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="data in dummyData" :key="data.title">
+      <tr v-for="(data, index) in listItems" :key="index">
         <td>
-          <i class="bell icon" :class="{ outline: data.status === 2 }"></i>
+          <i class="stop icon" :class="{
+            green: Number(data.my_status.text) === 1,
+            blue: Number(data.my_status.text) === 2,
+            yellow: Number(data.my_status.text) === 3,
+            red: Number(data.my_status.text) === 4,
+            outline: Number(data.my_status.text) === 6
+          }"></i>
         </td>
-        <td>{{ data.title }}</td>
-        <td>{{ data.progress }}</td>
-        <td>{{ data.score }}</td>
-        <td>{{ data.season }}</td>
-        <td>{{ data.lastUpdated.toDateString() }}</td>
+        <td>{{ data.series_title.text }}</td>
+        <td class="collapsing">
+          <progress :value="data.my_watched_episodes.text" :max="data.series_episodes.text" />
+          {{ data.my_watched_episodes.text }} / {{ data.series_episodes.text }}
+        </td>
+        <td class="collapsing center aligned">
+          {{ data.my_score.text | score }}
+        </td>
+        <td class="collapsing center aligned">
+          {{ getSeason(data.series_start.text) }}
+        </td>
+        <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated.text * 1000).fromNow() }}</td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-const AIRING = 1;
-const NOT_AIRING = 2;
-
 export default {
-  data() {
-    return {
-      dummyData: [
-        {
-          status: AIRING,
-          title: 'Darling in the FRANXX',
-          progress: 10,
-          episodes: 13,
-          score: 8.5,
-          season: 'Winter 2018',
-          lastUpdated: new Date(),
-        },
-        {
-          status: NOT_AIRING,
-          title: 'Saki',
-          progress: 24,
-          episodes: 24,
-          score: 10,
-          season: 'Winter 2009',
-          lastUpdated: new Date(),
-        },
-      ],
-    };
+  props: ['listItems'],
+
+  filters: {
+    score: value => (value <= 0 ? '-' : value),
+  },
+
+  methods: {
+    getSeason(date) {
+      const seasons = [this.$t('winter'), this.$t('spring'), this.$t('summer'), this.$t('autumn')];
+      const dateMonth = Math.floor(new Date(date).getMonth() / 3);
+      const dateYear = new Date(date).getFullYear();
+      const season = seasons[dateMonth];
+
+      if (isNaN(dateYear) || season === undefined) {
+        return date.split('-')[0];
+      }
+
+      return `${season} ${dateYear}`;
+    },
   },
 };
 </script>
+
+<style scoped>
+progress[value] {
+  -webkit-appearance: none;
+  vertical-align: -webkit-baseline-middle;
+}
+
+progress[value]::-webkit-progress-bar,
+progress[value]::-webkit-progress-value {
+  border-radius: 1em;
+  height: 5px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #aaaaaa;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: #00AAEE;
+}
+</style>
+
 
 <i18n>
 {
@@ -64,14 +94,24 @@ export default {
     "progress": "Progress",
     "score": "Score",
     "season": "Season",
-    "lastUpdated": "Last Updated"
+    "lastUpdated": "Last Updated",
+    "winter": "Winter",
+    "spring": "Spring",
+    "summer": "Summer",
+    "autumn": "Autumn",
+    "dateFormat": "MMM DD YYYY"
   },
   "de": {
     "animeTitle": "Animetitel",
     "progress": "Fortschritt",
     "score": "Bewertung",
     "season": "Saison",
-    "lastUpdated": "Zuletzt aktualisiert"
+    "lastUpdated": "Zuletzt aktualisiert",
+    "winter": "Winter",
+    "spring": "Frühling",
+    "summer": "Sommer",
+    "autumn": "Herbst",
+    "dateFormat": "DD[.] MMM YYYY"
   }
 }
 </i18n>

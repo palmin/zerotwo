@@ -27,8 +27,8 @@ build_script:
 test: off
 
 deploy:
-  release: zerotwo-v0.1.{build}
-  tag: "v0.1.{build}"
+  release: zerotwo-v0.1.0
+  tag: "v0.1.0"
   description: 'Finished build'
   provider: GitHub
   auth_token:

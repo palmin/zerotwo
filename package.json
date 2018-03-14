@@ -21,7 +21,7 @@
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "npm run lint:fix",
-    "release": "npm run build",
+    "release": "build",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "build": {
@@ -53,10 +53,7 @@
     },
     "win": {
       "icon": "build/icons/icon.ico",
-      "publish": {
-        "provider": "github",
-        "url": "https://github.com/NicoAiko/zerotwo/"
-      }
+      "publish": [{ "provider": "github" }]
     },
     "linux": {
       "icon": "build/icons"

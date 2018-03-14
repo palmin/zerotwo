@@ -1,4 +1,4 @@
-version: 0.0.{build}
+version: 0.1.{build}
 
 branches:
   only:
@@ -12,26 +12,23 @@ cache:
   - node_modules
   - '%APPDATA%\npm-cache'
   - '%USERPROFILE%\.electron'
-  - '%USERPROFILE%\AppData\Local\Yarn\cache'
 
 init:
   - git config --global core.autocrlf input
 
 install:
   - ps: Install-Product node 8 x64
-  - choco install yarn --ignore-dependencies
   - git reset --hard HEAD
-  - yarn
-  - node --version
+  - npm install
 
 build_script:
-  - yarn build
+  - npm run build
 
 test: off
 
 deploy:
-  release: zerotwo-v0.0.1
-  tag: "v0.0.1"
+  release: zerotwo-v0.1.{build}
+  tag: "v0.1.{build}"
   description: 'Finished build'
   provider: GitHub
   auth_token:

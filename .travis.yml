@@ -26,16 +26,13 @@ before_install:
   -y icnsutils graphicsmagick xz-utils; fi
 install:
 - nvm install 8
-- curl -o- -L https://yarnpkg.com/install.sh | bash
-- source ~/.bashrc
 - npm install -g xvfb-maybe
-- yarn
 script:
-- travis_wait 60 yarn run build
+- travis_wait 60 npm run build
 deploy:
   provider: releases
   file_glob: true
-  file: dist/*
+  file: build/*
   skip_cleanup: true
   api_key:
     secure: Q+nlcyLzncLUM7G09D73jTSn/9XUp/0VoQpiQ7rRGczEeX6XFzWaYooMFLGkZHVGhwpOb40yfcU51nyvp1XwvYAE6pj6+TkfIu6rPNA/bDjoU+ZPRZg2WzkJg4BrrbDDUDgP6TfSvcX0L8/QKZvK3lSSCYWLl4PAYycqMvC9mr+/QQD7Ho4uym7s+sQE6ufgLvsnsEnoeadyikGvgMrf6KN2MXmiddVTM+mtjoWjyH0uB/tfUBrscJhV7qG4F9H46fQKmwiz7WSmwN6uZGnfme1paps8UVpRj5i4ivRhTXVAGmHxCVLPF87YjftBeuU4SgzPrBfgCkg2zcDpQDWnEgMSGS3SvC7ZnwgZkQ23fFvK62DJTAxq8kilIbrpGZvYsFu542WfrznoZbm/T8IxMQ4NnaqaKaBo0mbKAPGGNSW6VMA5sg8+fdlGx3/Il5v/nuU0gWK20pVZBNYkvsr3Sqh8RjLy7NUKaG9Ce+hbWf4PM+SE5cKTIyx2zmQSiic/RX8DUUwSLkcaxeGkF/OwqZ1253qT6uXmXJF4ljuks5jWOmbx14MTD4Zm+8Bdvkb00QCwzJ7aENYl82h28QMRal3vZ2v7CeQokLjqqcH/2dHTEHFbTBDDz039g1fg/SYMYONRyK0trGCKrtAgH3FKMDeo75LsvvMiEdVpJJg/tOI=

@@ -49,14 +49,16 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "publish": ["always"]
     },
     "win": {
       "icon": "build/icons/icon.ico",
-      "publish": [{ "provider": "github" }]
+      "publish": ["always"]
     },
     "linux": {
-      "icon": "build/icons"
+      "icon": "build/icons",
+      "publish": ["always"]
     }
   },
   "dependencies": {

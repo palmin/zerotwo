@@ -1,18 +1,19 @@
 import Vue from 'vue';
-import axios from 'axios';
 import VueI18n from 'vue-i18n';
-import semantic from 'semantic-ui/dist/semantic.min';
 import 'semantic-ui/dist/semantic.min.css';
-
+import 'semantic-ui/dist/semantic.min';
+import api from '@/modules/api';
 import App from './App';
 import router from './router';
 import store from './store';
+import getDate from './plugins/getDate';
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
-Vue.http = Vue.prototype.$http = axios;
+Vue.http = Vue.prototype.$http = api;
 Vue.config.productionTip = false;
 
 Vue.use(VueI18n);
+Vue.use(getDate);
 
 const i18n = new VueI18n({
   fallbackLocale: 'en',
@@ -23,7 +24,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  semantic,
   i18n,
   ...App,
 });

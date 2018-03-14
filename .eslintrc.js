@@ -6,7 +6,8 @@ module.exports = {
   },
   env: {
     browser: true,
-    node: true
+    node: true,
+    jquery: true,
   },
   extends: 'airbnb-base',
   globals: {

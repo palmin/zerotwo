@@ -1,5 +1,5 @@
 <template>
-  <table class="ui compact single line celled table">
+  <table class="ui compact single line selectable celled table" :class="{ disabled: loading }">
     <thead>
       <tr>
         <th class="collapsing"></th>
@@ -13,42 +13,82 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in listItems" :key="index">
+      <div class="ui dimmer" :class="{ active: loading }">
+        <div class="ui text loader">{{ $t('loading') }}</div>
+      </div>
+      <tr v-for="(data, index) in listItems" :key="index" @click="openInformation(data.series_title)">
         <td>
           <i class="stop icon" :class="{
-            green: Number(data.my_status.text) === 1,
-            blue: Number(data.my_status.text) === 2,
-            yellow: Number(data.my_status.text) === 3,
-            red: Number(data.my_status.text) === 4,
-            outline: Number(data.my_status.text) === 6
+            green: Number(data.my_status) === 1,
+            blue: Number(data.my_status) === 2,
+            yellow: Number(data.my_status) === 3,
+            red: Number(data.my_status) === 4,
+            outline: Number(data.my_status) === 6
           }"></i>
         </td>
-        <td>{{ data.series_title.text }}</td>
+        <td>{{ data.series_title }}</td>
         <td class="collapsing">
-          <progress :value="data.my_watched_episodes.text" :max="data.series_episodes.text" />
-          {{ data.my_watched_episodes.text }} / {{ data.series_episodes.text }}
+          <progress :value="data.my_watched_episodes" :max="data.series_episodes" />
+          {{ data.my_watched_episodes }} / {{ data.series_episodes }}
         </td>
         <td class="collapsing center aligned">
-          {{ data.my_score.text | score }}
+          {{ data.my_score | score }}
         </td>
         <td class="collapsing center aligned">
-          {{ getSeason(data.series_start.text) }}
+          {{ getSeason(data.series_start) }}
         </td>
-        <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated.text * 1000).fromNow() }}</td>
+        <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated * 1000).fromNow() }}</td>
       </tr>
     </tbody>
+    <info-box :ref="infoBox" :data="infoData" @update:loading="val => loading = val" />
   </table>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import InfoBox from './InformationModal';
+
 export default {
   props: ['listItems'],
+
+  components: { InfoBox },
+
+  computed: {
+    ...mapState('myAnimeList', ['auth']),
+  },
 
   filters: {
     score: value => (value <= 0 ? '-' : value),
   },
 
+  data() {
+    return {
+      loading: false,
+      infoBox: 'informationModal',
+      infoData: {
+        title: { text: '' },
+        synopsis: { text: '' },
+      },
+    };
+  },
+
   methods: {
+    openInformation(name) {
+      this.loading = true;
+      this.$http.findAnime(name, this.auth)
+        .then((data) => {
+          if (data !== null) {
+            this.infoData = data;
+            this.$refs[this.infoBox].show();
+          } else {
+            this.loading = false;
+          }
+        })
+        .catch(() => {
+          this.loading = false;
+        });
+    },
+
     getSeason(date) {
       const seasons = [this.$t('winter'), this.$t('spring'), this.$t('summer'), this.$t('autumn')];
       const dateMonth = Math.floor(new Date(date).getMonth() / 3);
@@ -99,7 +139,8 @@ progress[value]::-webkit-progress-value {
     "spring": "Spring",
     "summer": "Summer",
     "autumn": "Autumn",
-    "dateFormat": "MMM DD YYYY"
+    "dateFormat": "MMM DD YYYY",
+    "loading": "Loading"
   },
   "de": {
     "animeTitle": "Animetitel",
@@ -111,7 +152,21 @@ progress[value]::-webkit-progress-value {
     "spring": "Frühling",
     "summer": "Sommer",
     "autumn": "Herbst",
-    "dateFormat": "DD[.] MMM YYYY"
+    "dateFormat": "DD[.] MMM YYYY",
+    "loading": "Lädt"
+  },
+  "ja": {
+    "animeTitle": "アニメのタイトル",
+    "progress": "進行",
+    "score": "評価",
+    "season": "シーズン",
+    "lastUpdated": "最新更新",
+    "winter": "冬",
+    "spring": "春",
+    "summer": "夏",
+    "autumn": "秋",
+    "dateFormat": "MMM DD YYYY",
+    "loading": "通信中"
   }
 }
 </i18n>

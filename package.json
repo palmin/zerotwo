@@ -50,19 +50,26 @@
     },
     "mac": {
       "icon": "build/icons/icon.icns",
-      "publish": ["always"]
+      "publish": [
+        "always"
+      ]
     },
     "win": {
       "icon": "build/icons/icon.ico",
-      "publish": ["always"]
+      "publish": [
+        "always"
+      ]
     },
     "linux": {
       "icon": "build/icons",
-      "publish": ["always"]
+      "publish": [
+        "always"
+      ]
     }
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "bluebird": "^3.5.1",
     "jquery": "^3.3.1",
     "localforage": "^1.6.0",
     "lodash": "^4.17.5",
@@ -73,7 +80,7 @@
     "vue-i18n": "^7.4.2",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.1",
-    "xml-js": "^1.6.2"
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",

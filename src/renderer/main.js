@@ -3,9 +3,9 @@ import VueI18n from 'vue-i18n';
 import 'semantic-ui/dist/semantic.min.css';
 import 'semantic-ui/dist/semantic.min';
 import api from '@/modules/api';
+import store from './store';
 import App from './App';
 import router from './router';
-import store from './store';
 import getDate from './plugins/getDate';
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));

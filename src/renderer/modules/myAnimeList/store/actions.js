@@ -9,10 +9,8 @@ export default {
     // eslint-disable-next-line no-underscore-dangle
     return this._vm.$http.getAnimeList(this.state.myAnimeList.auth.username)
       .then((data) => {
-        const json = JSON.parse(data);
-
-        commit('setMALData', sortBy(json.myanimelist.anime, item =>
-          item.series_title.text.toLowerCase()));
+        commit('setMALData', sortBy(data, item =>
+          item.series_title.toLowerCase()));
       })
       .then(() => Promise.resolve());
   },

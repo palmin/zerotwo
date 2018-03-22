@@ -27,15 +27,11 @@ export default {
     close() {
       $(this.$el).modal('hide');
     },
-    onVisible() {
-      this.$emit('update:loading', false);
-    },
     show() {
       $(this.$el)
         .modal({
           closable: false,
           centered: false,
-          onVisible: this.onVisible,
         })
         .modal('show');
     },

@@ -1,5 +1,6 @@
 <template>
-  <table class="ui compact single line selectable celled table" :class="{ disabled: loading }">
+  <table class="ui compact single line selectable celled table">
+    <info-box :ref="infoBox" :data="infoData" />
     <thead>
       <tr>
         <th class="collapsing"></th>
@@ -13,9 +14,6 @@
       </tr>
     </thead>
     <tbody>
-      <div class="ui dimmer" :class="{ active: loading }">
-        <div class="ui text loader">{{ $t('loading') }}</div>
-      </div>
       <tr v-for="(data, index) in listItems" :key="index" @click="openInformation(data.series_title)">
         <td>
           <i class="stop icon" :class="{
@@ -23,7 +21,7 @@
             blue: Number(data.my_status) === 2,
             yellow: Number(data.my_status) === 3,
             red: Number(data.my_status) === 4,
-            outline: Number(data.my_status) === 6
+            black: Number(data.my_status) === 6
           }"></i>
         </td>
         <td>{{ data.series_title }}</td>
@@ -40,13 +38,12 @@
         <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated * 1000).fromNow() }}</td>
       </tr>
     </tbody>
-    <info-box :ref="infoBox" :data="infoData" @update:loading="val => loading = val" />
   </table>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import InfoBox from './InformationModal';
+import InfoBox from '@/components/InformationModal';
 
 export default {
   props: ['listItems'],
@@ -63,7 +60,6 @@ export default {
 
   data() {
     return {
-      loading: false,
       infoBox: 'informationModal',
       infoData: {
         title: { text: '' },
@@ -74,18 +70,12 @@ export default {
 
   methods: {
     openInformation(name) {
-      this.loading = true;
       this.$http.findAnime(name, this.auth)
         .then((data) => {
           if (data !== null) {
             this.infoData = data;
             this.$refs[this.infoBox].show();
-          } else {
-            this.loading = false;
           }
-        })
-        .catch(() => {
-          this.loading = false;
         });
     },
 

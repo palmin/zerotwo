@@ -1,9 +1,5 @@
-# zerotwo
+# ZeroTwo
 Electron - Vue.js Anime Tracker
-
-[![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
-[![Coverage Status](https://coveralls.io/repos/github/NicoAiko/zerotwo/badge.svg)](https://coveralls.io/github/NicoAiko/zerotwo)
-[![Build status](https://ci.appveyor.com/api/projects/status/kupylgo0f4ocen8w?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
 > Taiga alternative
 
@@ -28,3 +24,10 @@ npm run lint
 ---
 
 This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[1c165f7](https://github.com/SimulatedGREG/electron-vue/tree/1c165f7c5e56edaf48be0fbb70838a1af26bb015) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+
+# LICENSE
+
+GNU General Public License v3.0
+
+Read more here: [License](LICENSE)
+

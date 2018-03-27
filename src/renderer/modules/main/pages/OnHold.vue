@@ -16,8 +16,8 @@ export default {
     ...mapState('myAnimeList', ['malData']),
     onHoldAnime() {
       return _.chain(this.malData)
-        .filter(item => Number(item.my_status.text) === 3)
-        .sortBy(item => item.series_title.text.toLowerCase())
+        .filter(item => Number(item.my_status) === 3)
+        .sortBy(item => item.series_title.toLowerCase())
         .value();
     },
   },

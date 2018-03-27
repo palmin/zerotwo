@@ -5,4 +5,7 @@ export default {
   setLoginData(state, payload) {
     state.auth = payload;
   },
+  setInformation(state, payload) {
+    state.information = payload;
+  },
 };

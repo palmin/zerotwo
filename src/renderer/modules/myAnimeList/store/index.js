@@ -8,5 +8,6 @@ export default {
   state: {
     malData: null,
     auth: null,
+    information: null,
   },
 };

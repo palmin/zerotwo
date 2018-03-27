@@ -7,11 +7,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import DefaultLayout from '@/layouts/Default';
+import malTimer from '@/mixins/malTimer';
 
 export default {
   name: 'app',
+  mixins: [malTimer],
 
   created() {
     this.setLocale(this.$electron.remote.app.getLocale());
@@ -39,6 +41,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['setReady']),
     setLayout(layout) {
       this.layout = layout || DefaultLayout;
     },

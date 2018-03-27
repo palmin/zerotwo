@@ -1,4 +1,3 @@
-import List from './pages/List';
 import Airing from './pages/Airing';
 import Canceled from './pages/Canceled';
 import Finished from './pages/Finished';
@@ -6,11 +5,6 @@ import OnHold from './pages/OnHold';
 import Planned from './pages/Planned';
 
 export default [
-  {
-    path: '/',
-    name: 'Main',
-    component: List,
-  },
   {
     path: '/airing',
     name: 'Airing',

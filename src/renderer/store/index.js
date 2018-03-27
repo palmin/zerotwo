@@ -39,7 +39,7 @@ export default new Vuex.Store({
       merge(state, payload);
     },
     setReady(state, payload) {
-      state.isReady = payload; // eslint-disable-line no-param-reassign
+      state.isReady = payload;
     },
   },
   modules: {

@@ -1,8 +1,5 @@
 <template>
   <div class="ui top fixed menu">
-    <router-link class="item" tag="a" :to="{ name: 'Main' }" active-class="active" exact>
-      {{ $t('allAnime') }}
-    </router-link>
     <router-link class="item" tag="a" :to="{ name: 'Airing' }" active-class="active" exact>
       {{ $t('airing') }}
     </router-link>
@@ -19,7 +16,7 @@
       {{ $t('planned') }}
     </router-link>
     <div class="right menu">
-      <div class="ui right aligned search item" id="searchBar">
+      <div class="ui right aligned search item">
         <div class="ui transparent icon input">
           <input class="prompt" type="text" :placeholder="$t('searchAnime')">
           <i class="search link icon"></i>
@@ -27,8 +24,8 @@
         <div class="results"></div>
       </div>
       <a class="ui item" @click="refreshMAL">
-        <i class="refresh icon"></i>
-        {{ $t('refreshMAL') }}
+        <i class="refresh icon" :class="{ loading: !isReady }"></i>
+        {{ $t('refreshMAL') }} ({{ readableTimeUntilNextRefresh }})
       </a>
       <a class="ui item" @click="openSettings">
         <i class="settings icon"></i>
@@ -39,10 +36,16 @@
 
 <script>
 import _ from 'lodash';
+import { mapState } from 'vuex';
 
 export default {
   props: ['openSettings', 'refreshMAL', 'malData', 'openInformation'],
   computed: {
+    ...mapState(['isReady']),
+    ...mapState('myAnimeList', ['timeUntilNextRefresh']),
+    readableTimeUntilNextRefresh() {
+      return this.$getMoment(this.timeUntilNextRefresh).format('mm:ss');
+    },
     searchContent() {
       return _.map(this.malData, item => ({
         category: this.getStatus(item.my_status),
@@ -52,7 +55,7 @@ export default {
   },
   watch: {
     searchContent() {
-      $('#searchBar', this.$el)
+      $('.ui.search', this.$el)
         .search({
           type: 'category',
           source: this.searchContent,
@@ -92,7 +95,7 @@ export default {
     },
   },
   mounted() {
-    $('#searchBar', this.$el)
+    $('.ui.search', this.$el)
       .search({
         type: 'category',
         source: this.searchContent,
@@ -102,7 +105,7 @@ export default {
       });
   },
   updated() {
-    $('#searchBar', this.$el)
+    $('.ui.search', this.$el)
       .search({
         type: 'category',
         source: this.searchContent,
@@ -125,24 +128,22 @@ export default {
   "en": {
     "animeList": "MyAnimeList",
     "refreshMAL": "Refresh MAL",
-    "allAnime": "All Anime",
-    "airing": "Airing Anime",
-    "completed": "Completed Anime",
-    "onHold": "On Hold Anime",
-    "canceled": "Canceled Anime",
-    "planned": "Planned Anime",
-    "searchAnime": "Search Anime..."
+    "airing": "Airing",
+    "completed": "Completed",
+    "onHold": "On Hold",
+    "canceled": "Canceled",
+    "planned": "Planned",
+    "searchAnime": "Search..."
   },
   "de": {
     "animeList": "MyAnimeList",
     "refreshMAL": "MAL aktualisieren",
-    "allAnime": "Alle Anime",
-    "airing": "Laufende Anime",
-    "completed": "Beendete Anime",
-    "onHold": "Pausierte Anime",
-    "canceled": "Abgebrochene Anime",
-    "planned": "Geplante Anime",
-    "searchAnime": "Anime suchen ..."
+    "airing": "Laufend",
+    "completed": "Beendet",
+    "onHold": "Pausiert",
+    "canceled": "Abgebrochen",
+    "planned": "Geplant",
+    "searchAnime": "Suchen ..."
   }
 }
 </i18n>

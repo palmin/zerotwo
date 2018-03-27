@@ -1,6 +1,5 @@
 <template>
   <table class="ui compact single line selectable celled table">
-    <info-box :ref="infoBox" :data="infoData" />
     <thead>
       <tr>
         <th class="collapsing"></th>
@@ -42,7 +41,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import InfoBox from '@/components/InformationModal';
 
 export default {
@@ -58,25 +57,10 @@ export default {
     score: value => (value <= 0 ? '-' : value),
   },
 
-  data() {
-    return {
-      infoBox: 'informationModal',
-      infoData: {
-        title: { text: '' },
-        synopsis: { text: '' },
-      },
-    };
-  },
-
   methods: {
+    ...mapMutations('myAnimeList', ['setInformation']),
     openInformation(name) {
-      this.$http.findAnime(name, this.auth)
-        .then((data) => {
-          if (data !== null) {
-            this.infoData = data;
-            this.$refs[this.infoBox].show();
-          }
-        });
+      this.setInformation(name);
     },
 
     getSeason(date) {

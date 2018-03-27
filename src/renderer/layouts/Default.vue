@@ -1,6 +1,6 @@
 <template>
   <div class="ui fluid container">
-    <div class="ui dimmer" :class="{ active: loading }">
+    <div class="ui dimmer" :class="{ active: !isReady }">
       <div class="ui text loader">
         {{ $t('loading') }}
       </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapMutations } from 'vuex';
 import MainMenu from '@/components/Menu';
 import Settings from '@/components/Settings';
 import InfoBox from '@/components/InformationModal';
@@ -27,6 +27,7 @@ export default {
     InfoBox,
   },
   computed: {
+    ...mapState(['isReady']),
     ...mapState('myAnimeList', ['malData', 'auth', 'information']),
   },
   watch: {
@@ -40,14 +41,17 @@ export default {
   },
   methods: {
     ...mapActions('myAnimeList', ['detectAndSetMALData']),
+    ...mapMutations(['setReady']),
     openSettings() {
       this.$refs[this.event].show();
     },
-    refreshMAL() {
-      this.detectAndSetMALData();
+    async refreshMAL() {
+      await this.setReady(false);
+      await this.detectAndSetMALData();
+      await this.setReady(true);
     },
     openInformation(name) {
-      this.loading = true;
+      this.setReady(false);
       this.$http.findAnime(name, this.auth)
         .then((data) => {
           if (data !== null) {
@@ -56,14 +60,13 @@ export default {
           }
         })
         .finally(() => {
-          this.loading = false;
+          this.setReady(true);
         });
     },
   },
   name: 'app',
   data() {
     return {
-      loading: false,
       event: 'showSettings',
       infoBox: 'infoBox',
       infoData: {

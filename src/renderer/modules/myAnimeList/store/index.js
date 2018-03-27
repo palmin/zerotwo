@@ -9,5 +9,7 @@ export default {
     malData: null,
     auth: null,
     information: null,
+    refreshRate: 15, // set a default refreshRate of 15 minutes
+    timeUntilNextRefresh: null,
   },
 };

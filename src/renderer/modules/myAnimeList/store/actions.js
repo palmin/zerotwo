@@ -27,4 +27,10 @@ export default {
     commit('setLoginData', null);
     commit('setMALData', null);
   },
+  updateRefreshRate({ commit }, refreshRate) {
+    commit('setRefreshRate', refreshRate);
+  },
+  setTimeUntilNextRefresh({ commit }, time) {
+    commit('setTimeUntilNextRefresh', time);
+  },
 };

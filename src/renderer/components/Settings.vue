@@ -43,6 +43,21 @@
                 {{ $t('logout') }}
               </a>
             </div>
+            <div class="ui grid">
+              <div class="eight wide column">
+                <div class="ui form">
+                  <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
+                    <label>{{ $t('refreshRate') }}</label>
+                    <div class="ui action input">
+                      <input type="number" min="1" max="60" v-model="refreshRateValue" :disabled="!refreshRateEditMode" @input="$v.refreshRateValue.$touch()" />
+                      <button class="ui button" @click="editRefreshRate">
+                        {{ $t('edit') }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="ui basic tab segment" data-tab="restoreFactoryData">
@@ -64,13 +79,22 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { validationMixin } from 'vuelidate';
+import { required, between } from 'vuelidate/lib/validators';
 
 export default {
+  mixins: [validationMixin],
   props: ['event'],
   computed: {
-    ...mapState('myAnimeList', ['auth']),
+    ...mapState('myAnimeList', ['auth', 'refreshRate']),
     loggedIn() {
       return !!this.auth;
+    },
+  },
+  validations: {
+    refreshRateValue: {
+      required,
+      between: between(0, 60),
     },
   },
   data() {
@@ -78,13 +102,16 @@ export default {
       username: '',
       password: '',
       myAnimeListForm: 'myAnimeListForm',
+      refreshRateValue: 0,
+      refreshRateEditMode: false,
     };
   },
   mounted() {
     $('.ui.fluid.secondary.vertical.menu .item').tab();
+    this.refreshRateValue = this.refreshRate;
   },
   methods: {
-    ...mapActions('myAnimeList', ['login', 'logout', 'detectAndSetMALData']),
+    ...mapActions('myAnimeList', ['login', 'logout', 'detectAndSetMALData', 'updateRefreshRate']),
     restoreFactoryData() {
       // Logout currently covers all essential data
       this.logout();
@@ -96,6 +123,9 @@ export default {
       this.username = this.password = '';
     },
     close() {
+      this.refreshRateValue = this.refreshRate;
+      this.refreshRateEditMode = false;
+
       $(this.$el)
         .modal('hide');
     },
@@ -107,6 +137,16 @@ export default {
         })
         .modal('show');
     },
+    editRefreshRate() {
+      if (this.refreshRateEditMode) {
+        if (this.$v.refreshRateValue.$error) {
+          return;
+        }
+        this.updateRefreshRate(this.refreshRateValue);
+      }
+
+      this.refreshRateEditMode = !this.refreshRateEditMode;
+    },
   },
 };
 </script>
@@ -116,6 +156,7 @@ export default {
   "en": {
     "settings": "Settings",
     "save": "Save",
+    "edit": "Edit",
     "cancel": "Cancel",
     "close": "Close",
     "login": "Login",
@@ -125,11 +166,13 @@ export default {
     "accountSettings": "Account Settings",
     "username": "Username",
     "password": "Password",
-    "restoreFactoryData": "Restore Factory Data"
+    "restoreFactoryData": "Restore Factory Data",
+    "refreshRate": "Refresh interval for MAL (in minutes)"
   },
   "de": {
     "settings": "Einstellungen",
     "save": "Sichern",
+    "edit": "Bearbeiten",
     "cancel": "Abbrechen",
     "close": "Schließen",
     "login": "Einloggen",
@@ -139,7 +182,8 @@ export default {
     "accountSettings": "Kontoeinstellungen",
     "username": "Benutzername",
     "password": "Passwort",
-    "restoreFactoryData": "Werkszustand wiederherstellen"
+    "restoreFactoryData": "Werkszustand wiederherstellen",
+    "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)"
   }
 }
 </i18n>

@@ -111,14 +111,3 @@ export default {
   },
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "pleaseSelect": "Please select..."
-  },
-  "de": {
-    "pleaseSelect": "Bitte wählen..."
-  }
-}
-</i18n>

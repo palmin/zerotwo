@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import VueNotification from 'vue-notification';
 import 'semantic-ui/dist/semantic.min.css';
 import 'semantic-ui/dist/semantic.min';
 import api from '@/modules/api';
@@ -13,6 +14,7 @@ Vue.http = Vue.prototype.$http = api;
 Vue.config.productionTip = false;
 
 Vue.use(VueI18n);
+Vue.use(VueNotification);
 Vue.use(getDate);
 
 const i18n = new VueI18n({

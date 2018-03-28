@@ -10,7 +10,4 @@ npm-debug.log.*
 thumbs.db
 !.gitkeep
 /bower_components
-semantic/gulpfile.js
-semantic/src
-semantic/tasks
-semantic/dist/*
+assets/semantic/*

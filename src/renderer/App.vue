@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notification />
     <div class="layout" :is="layout">
       <router-view />
     </div>
@@ -9,11 +10,13 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import DefaultLayout from '@/layouts/Default';
+import Notification from '@/components/Notification';
 import malTimer from '@/mixins/malTimer';
 
 export default {
   name: 'app',
   mixins: [malTimer],
+  components: { Notification },
 
   created() {
     this.setLocale(this.$electron.remote.app.getLocale());
@@ -52,7 +55,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

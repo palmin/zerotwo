@@ -7,7 +7,7 @@
     </div>
     <main-menu :openSettings="openSettings" :refreshMAL="refreshMAL" :malData="malData" :openInformation="openInformation" />
     <settings :ref="event" />
-    <info-box :ref="infoBox" :data="infoData" />
+    <info-box :ref="infoBox" :data="infoData" @refresh="detectAndSetMALData" />
     <transition name="fade" mode="out-in">
       <slot/>
     </transition>

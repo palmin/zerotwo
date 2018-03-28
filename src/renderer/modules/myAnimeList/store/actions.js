@@ -23,14 +23,19 @@ export default {
       .then(() => Promise.resolve())
       .catch(() => Promise.reject());
   },
-  logout({ commit }) {
-    commit('setLoginData', null);
-    commit('setMALData', null);
-  },
   updateRefreshRate({ commit }, refreshRate) {
     commit('setRefreshRate', refreshRate);
   },
   setTimeUntilNextRefresh({ commit }, time) {
     commit('setTimeUntilNextRefresh', time);
+  },
+  setTimerRunning({ commit }, status) {
+    commit('setTimerRunning', status);
+  },
+  resetState({ commit }) {
+    commit('resetState');
+  },
+  logout({ commit }) {
+    commit('resetState');
   },
 };

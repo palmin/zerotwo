@@ -33,17 +33,17 @@
                   <input type="password" v-model="password" />
                 </div>
               </div>
-              <button class="ui primary button" type="submit">{{ $t('login') }}</button>
+              <button class="ui right floated primary button" type="submit">{{ $t('login') }}</button>
             </form>
             <div class="ui blue labels" v-else>
               <div class="ui label">
                 {{ $t('loggedInAs') }} {{ auth.username }}
               </div>
-              <a class="ui label" @click="logout">
+              <a class="ui label" @click="logMeOut">
                 {{ $t('logout') }}
               </a>
             </div>
-            <div class="ui grid">
+            <div class="ui grid" v-if="this.auth">
               <div class="eight wide column">
                 <div class="ui form">
                   <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
@@ -124,8 +124,19 @@ export default {
     submit() {
       $(this.$refs[this.myAnimeListForm]).addClass('loading');
       this.login({ username: this.username, password: this.password })
-        .then(() => this.detectAndSetMALData());
+        .then(() => this.detectAndSetMALData())
+        .catch((error) => {
+          this.$notify({
+            type: 'error',
+            title: this.$t('credentialsCouldNotBeVerified'),
+            text: error,
+          });
+        });
       this.username = this.password = '';
+    },
+    logMeOut() {
+      this.logout();
+      this.close();
     },
     close() {
       this.refreshRateValue = this.refreshRate;
@@ -172,7 +183,8 @@ export default {
     "username": "Username",
     "password": "Password",
     "restoreFactoryData": "Restore Factory Data",
-    "refreshRate": "Refresh interval for MAL (in minutes)"
+    "refreshRate": "Refresh interval for MAL (in minutes)",
+    "credentialsCouldNotBeVerified": "Your credentials are incorrect and could not be verified."
   },
   "de": {
     "settings": "Einstellungen",
@@ -188,7 +200,8 @@ export default {
     "username": "Benutzername",
     "password": "Passwort",
     "restoreFactoryData": "Werkszustand wiederherstellen",
-    "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)"
+    "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
+    "credentialsCouldNotBeVerified": "Ihre Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!"
   }
 }
 </i18n>

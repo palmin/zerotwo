@@ -49,7 +49,7 @@
                 <div class="ui right floated primary button" @click="submitChanges">
                   {{ $t('submitChanges') }}
                 </div>
-                <div class="ui right floated secondary button">
+                <div class="ui right floated secondary button" @click="resetChanges">
                   {{ $t('resetChanges') }}
                 </div>
               </div>
@@ -74,8 +74,8 @@
 </template>
 
 <script>
-import { Builder } from 'xml2js';
 import htmlEntities from 'he';
+import { Builder } from 'xml2js';
 import { mapState, mapMutations } from 'vuex';
 import { camelCase, find } from 'lodash';
 import Dropdown from './Dropdown';
@@ -229,6 +229,13 @@ export default {
   methods: {
     ...mapMutations('myAnimeList', ['setInformation']),
 
+    resetChanges() {
+      this.ownEpisodeProgressValue = this.currentAnime.my_watched_episodes;
+      this.ownStatusValue = this.currentAnime.my_status;
+      this.ratingValue = this.currentAnime.my_score;
+      this.updateOwnRating();
+    },
+
     submitChanges() {
       const builder = new Builder({ rootName: 'entry' });
       const entry = {
@@ -239,10 +246,24 @@ export default {
 
       const xml = builder.buildObject(entry);
 
-      // TODO: Add proper response handling
       this.$http.updateAnime(this.auth, { id: this.data.id, xml })
-        .then(console.log)
-        .catch(console.error);
+        .then((response) => {
+          if (response === 'Updated') {
+            this.$notify({
+              title: this.$t('updated.title'),
+              text: this.$t('updated.text'),
+            });
+            this.close();
+            this.$emit('refresh');
+          }
+        })
+        .catch((error) => {
+          this.$notify({
+            type: 'error',
+            title: this.$t('errorResponseTitle'),
+            text: error,
+          });
+        });
     },
 
     close() {
@@ -330,7 +351,12 @@ export default {
     "planned": "Planned",
     "dropdownPlaceholder": "Please select...",
     "submitChanges": "Submit",
-    "resetChanges": "Reset"
+    "resetChanges": "Reset",
+    "updated": {
+      "title": "Updated!",
+      "text": "Update was successful!"
+    },
+    "errorResponseTitle": "Update not successful!"
   },
   "de": {
     "close": "Schließen",
@@ -360,7 +386,12 @@ export default {
     "planned": "Geplant",
     "dropdownPlaceholder": "Bitte wählen...",
     "submitChanges": "Speichern",
-    "resetChanges": "Zurücksetzen"
+    "resetChanges": "Zurücksetzen",
+     "updated": {
+      "title": "Aktualisiert!",
+      "text": "Aktualisierung erfolgreich!"
+    },
+    "errorResponseTitle": "Aktualisierung nicht erfolgreich!"
   }
 }
 </i18n>

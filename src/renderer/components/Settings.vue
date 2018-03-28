@@ -85,6 +85,11 @@ import { required, between } from 'vuelidate/lib/validators';
 export default {
   mixins: [validationMixin],
   props: ['event'],
+  watch: {
+    refreshRate(value) {
+      this.refreshRateValue = value;
+    },
+  },
   computed: {
     ...mapState('myAnimeList', ['auth', 'refreshRate']),
     loggedIn() {

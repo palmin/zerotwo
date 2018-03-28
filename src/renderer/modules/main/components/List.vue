@@ -80,6 +80,10 @@ export default {
 </script>
 
 <style scoped>
+tr {
+  cursor: pointer;
+}
+
 progress[value] {
   -webkit-appearance: none;
   vertical-align: -webkit-baseline-middle;

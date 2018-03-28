@@ -2,6 +2,7 @@ import { Parser } from 'xml2js';
 import Promise from 'bluebird';
 import transformSingles from '@/utils/transformSingles';
 import _ from 'lodash';
+import qs from 'qs';
 
 const parser = new Parser();
 const parseString = Promise.promisify(parser.parseString);
@@ -44,5 +45,15 @@ export default axios => ({
       .then(response => response.data)
       .then(data => parseString(data))
       .then(data => transformSingles(data));
+  },
+  updateAnime(auth, { id, xml }) {
+    return axios
+      .post(`/api/animelist/update/${id}.xml`, qs.stringify({ data: xml }), {
+        auth,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      .then(response => response.data);
   },
 });

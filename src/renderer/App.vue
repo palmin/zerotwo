@@ -10,7 +10,6 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import DefaultLayout from '@/layouts/Default';
-import LoginLayout from '@/layouts/Login';
 import Notification from '@/components/Notification';
 import malTimer from '@/mixins/malTimer';
 
@@ -20,9 +19,8 @@ export default {
   components: { Notification },
 
   created() {
-    this.setLocale(this.$electron.remote.app.getLocale());
-    if (!this.auth) {
-      this.setLayout(LoginLayout);
+    if (!this.locale) {
+      this.setLocale(this.$electron.remote.app.getLocale());
     }
   },
 
@@ -34,7 +32,6 @@ export default {
 
   computed: {
     ...mapState('i18n', ['locale']),
-    ...mapState('myAnimeList', ['auth']),
   },
 
   watch: {
@@ -45,13 +42,6 @@ export default {
     },
     locale(locale) {
       this.$i18n.locale = locale;
-    },
-    auth(auth) {
-      if (!auth) {
-        this.setLayout(LoginLayout);
-      } else {
-        this.setLayout(DefaultLayout);
-      }
     },
   },
 

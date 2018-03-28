@@ -1,5 +1,5 @@
 <template>
-  <div class="ui container">
+  <div class="ui fluid container">
     <div class="ui dimmer" :class="{ active: !isReady }">
       <div class="ui text loader">
         {{ $t('loading') }}

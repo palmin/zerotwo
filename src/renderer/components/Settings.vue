@@ -125,11 +125,12 @@ export default {
       $(this.$refs[this.myAnimeListForm]).addClass('loading');
       this.login({ username: this.username, password: this.password })
         .then(() => this.detectAndSetMALData())
-        .catch((error) => {
+        .catch(() => {
           this.$notify({
             type: 'error',
-            title: this.$t('credentialsCouldNotBeVerified'),
-            text: error,
+            title: this.$t('credentialsWrongOrTooManyLoginAttempts'),
+            text: this.$t('credentialsCouldNotBeVerifiedOrTooManyLoginAttempts'),
+            duration: -1,
           });
         });
       this.username = this.password = '';
@@ -184,7 +185,8 @@ export default {
     "password": "Password",
     "restoreFactoryData": "Restore Factory Data",
     "refreshRate": "Refresh interval for MAL (in minutes)",
-    "credentialsCouldNotBeVerified": "Your credentials are incorrect and could not be verified."
+    "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>"
   },
   "de": {
     "settings": "Einstellungen",
@@ -201,7 +203,8 @@ export default {
     "password": "Passwort",
     "restoreFactoryData": "Werkszustand wiederherstellen",
     "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
-    "credentialsCouldNotBeVerified": "Ihre Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!"
+    "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
   }
 }
 </i18n>

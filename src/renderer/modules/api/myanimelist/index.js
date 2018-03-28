@@ -43,8 +43,7 @@ export default axios => ({
         },
       })
       .then(response => response.data)
-      .then(data => parseString(data))
-      .then(data => transformSingles(data));
+      .then(data => parseString(data));
   },
   updateAnime(auth, { id, xml }) {
     return axios

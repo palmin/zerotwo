@@ -76,10 +76,6 @@
       text-transform: uppercase;
       font-weight: bold;
     }
-
-    .zerotwo-style-text {
-      word-wrap: break-word !important;
-    }
   }
 }
 </style>

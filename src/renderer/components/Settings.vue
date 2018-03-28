@@ -122,6 +122,15 @@ export default {
       this.logout();
     },
     submit() {
+      if (!this.username || !this.password) {
+        this.$notify({
+          type: 'error',
+          title: this.$t('noCredentials'),
+          text: this.$t('enterCredentials'),
+        });
+
+        return;
+      }
       $(this.$refs[this.myAnimeListForm]).addClass('loading');
       this.login({ username: this.username, password: this.password })
         .then(() => this.detectAndSetMALData())
@@ -132,6 +141,7 @@ export default {
             text: this.$t('credentialsCouldNotBeVerifiedOrTooManyLoginAttempts'),
             duration: -1,
           });
+          $(this.$refs[this.myAnimeListForm]).removeClass('loading');
         });
       this.username = this.password = '';
     },
@@ -185,6 +195,8 @@ export default {
     "password": "Password",
     "restoreFactoryData": "Restore Factory Data",
     "refreshRate": "Refresh interval for MAL (in minutes)",
+    "noCredentials": "No credentials!",
+    "enterCredentials": "Please enter credentials to log in.",
     "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
     "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>"
   },
@@ -203,6 +215,8 @@ export default {
     "password": "Passwort",
     "restoreFactoryData": "Werkszustand wiederherstellen",
     "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
+    "noCredentials": "Keine Anmeldedaten!",
+    "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
     "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
     "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
   }

@@ -34,6 +34,23 @@ export default axios => ({
         return transformSingles(_.first(data.anime.entry));
       });
   },
+  findAnimes(query, auth) {
+    return axios
+      .get(`/api/anime/search.xml?q=${encodeURI(query)}`, { auth })
+      .then(response => response.data)
+      .then(data => parseString(data))
+      .then((data) => {
+        if (!data) {
+          return null;
+        }
+
+        if (data.anime.entry.length > 1) {
+          return _.map(data.anime.entry, entry => transformSingles(entry));
+        }
+
+        return transformSingles(_.first(data.anime.entry));
+      });
+  },
   login({ username, password }) {
     return axios
       .get('/api/account/verify_credentials.xml', {
@@ -44,6 +61,16 @@ export default axios => ({
       })
       .then(response => response.data)
       .then(data => parseString(data));
+  },
+  addAnime(auth, { id, xml }) {
+    return axios
+      .post(`/api/animelist/add/${id}.xml`, qs.stringify({ data: xml }), {
+        auth,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      .then(response => response.data);
   },
   updateAnime(auth, { id, xml }) {
     return axios

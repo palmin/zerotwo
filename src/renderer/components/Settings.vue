@@ -116,7 +116,7 @@ export default {
     this.refreshRateValue = this.refreshRate;
   },
   methods: {
-    ...mapActions('myAnimeList', ['login', 'logout', 'detectAndSetMALData', 'updateRefreshRate']),
+    ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
     restoreFactoryData() {
       // Logout currently covers all essential data
       this.logout();
@@ -133,7 +133,7 @@ export default {
       }
       $(this.$refs[this.myAnimeListForm]).addClass('loading');
       this.login({ username: this.username, password: this.password })
-        .then(() => this.detectAndSetMALData())
+        .then(() => this.setTimerRunning(true))
         .catch(() => {
           this.$notify({
             type: 'error',

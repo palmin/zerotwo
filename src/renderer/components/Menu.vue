@@ -40,6 +40,11 @@ import { mapState } from 'vuex';
 
 export default {
   props: ['openSettings', 'refreshMAL', 'malData', 'openInformation'],
+  data() {
+    return {
+      searchContent: [],
+    };
+  },
   computed: {
     ...mapState(['isReady']),
     ...mapState('myAnimeList', ['timeUntilNextRefresh', 'auth']),
@@ -50,26 +55,22 @@ export default {
 
       return `(${this.$getMoment(this.timeUntilNextRefresh).format('mm:ss')})`;
     },
-    searchContent() {
-      return _.map(this.malData, item => ({
-        category: this.getStatus(item.my_status),
-        title: item.series_title,
-      }));
-    },
   },
-  watch: {
-    searchContent() {
+  methods: {
+    mountSearch() {
       $('.ui.search', this.$el)
         .search({
           type: 'category',
+          searchFields: ['title', 'synonyms', 'english'],
           source: this.searchContent,
-          searchFields: ['title'],
           onSelect: this.onSelectSearchResult,
+          onResults: this.onResults,
+          searchDelay: 500,
+          maxResults: 10,
           fullTextSearch: false,
+          cache: false,
         });
     },
-  },
-  methods: {
     getStatus(status) {
       let statusText = '';
       switch (+status) {
@@ -97,26 +98,62 @@ export default {
     onSelectSearchResult(result) {
       this.openInformation(result.title);
     },
+    onResults() {
+      const currentSearchValue = $('.ui.search', this.$el).search('get value');
+      this.$http.findAnimes(currentSearchValue, this.auth)
+        .then((results) => {
+          if (!results) {
+            return [];
+          }
+
+          if (_.isArray(results)) {
+            return _.map(results, (result) => {
+              const element = _.find(this.malData, dataInMalData =>
+                dataInMalData.series_title === result.title);
+
+              if (element !== undefined) {
+                result.category = this.getStatus(element.my_status);
+              } else {
+                result.category = this.$t('notInList');
+              }
+
+              return {
+                title: result.title,
+                english: result.english,
+                synonyms: result.synonyms,
+                category: result.category,
+              };
+            });
+          }
+
+          const element = _.find(this.malData, dataInMalData =>
+            dataInMalData.series_title === results.title);
+
+          if (element !== undefined) {
+            results.category = this.getStatus(element.my_status);
+          } else {
+            results.category = this.$t('notInList');
+          }
+
+          return [{
+            title: results.title,
+            category: results.category,
+            synonyms: results.synonyms,
+            english: results.english,
+          }];
+        })
+        .then((results) => {
+          this.searchContent = results;
+          this.mountSearch();
+        })
+        .catch(() => {});
+    },
   },
   mounted() {
-    $('.ui.search', this.$el)
-      .search({
-        type: 'category',
-        source: this.searchContent,
-        searchFields: ['title'],
-        onSelect: this.onSelectSearchResult,
-        fullTextSearch: false,
-      });
+    this.mountSearch();
   },
   updated() {
-    $('.ui.search', this.$el)
-      .search({
-        type: 'category',
-        source: this.searchContent,
-        searchFields: ['title'],
-        onSelect: this.onSelectSearchResult,
-        fullTextSearch: false,
-      });
+    this.mountSearch();
   },
 };
 </script>
@@ -137,7 +174,9 @@ export default {
     "onHold": "On Hold",
     "canceled": "Canceled",
     "planned": "Planned",
-    "searchAnime": "Search..."
+    "notInList": "Not in your list",
+    "searchAnime": "Search...",
+    "noResults": "No results could be found"
   },
   "de": {
     "animeList": "MyAnimeList",
@@ -147,7 +186,9 @@ export default {
     "onHold": "Pausiert",
     "canceled": "Abgebrochen",
     "planned": "Geplant",
-    "searchAnime": "Suchen ..."
+    "notInList": "Nicht in deiner Liste",
+    "searchAnime": "Suchen ...",
+    "noResults": "Es wurden keine Ergebnisse gefunden"
   }
 }
 </i18n>

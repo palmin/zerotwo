@@ -44,14 +44,21 @@
                 </div>
                 <div class="field">
                   <label>{{ $t('ownRating') }}</label>
-                  <div id="ownRating" class="ui star rating"></div> ({{ ratingValue }})
+                  <div id="ownRating" class="ui star rating"></div> ({{ ratingValue }}) <a class="ui secondary label" @click="clearRating">Clear</a>
                 </div>
-                <div class="ui right floated primary button" @click="submitChanges">
-                  {{ $t('submitChanges') }}
-                </div>
-                <div class="ui right floated secondary button" @click="resetChanges">
-                  {{ $t('resetChanges') }}
-                </div>
+                <template v-if="currentAnime">
+                  <div class="ui right floated primary button" @click="submitChanges">
+                    {{ $t('submitChanges') }}
+                  </div>
+                  <div class="ui right floated secondary button" @click="resetChanges">
+                    {{ $t('resetChanges') }}
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="ui right floated secondary button" @click="addToList">
+                    {{ $t('addToList') }}
+                  </div>
+                </template>
               </div>
             </div>
           </div>
@@ -229,6 +236,42 @@ export default {
   methods: {
     ...mapMutations('myAnimeList', ['setInformation']),
 
+    addToList() {
+      const id = this.data.id;
+      const builder = new Builder({ rootName: 'entry' });
+      const entry = {
+        episode: this.ownEpisodeProgressValue,
+        status: this.ownStatusValue,
+        score: this.ratingValue,
+      };
+
+      const xml = builder.buildObject(entry);
+
+      this.$http.addAnime(this.auth, { id, xml })
+        .then((response) => {
+          if (response === 'Created') {
+            this.$notify({
+              title: this.$t('created.title'),
+              text: this.$t('created.text'),
+            });
+            this.close();
+            this.$emit('refresh');
+          }
+        })
+        .catch((error) => {
+          this.$notify({
+            type: 'error',
+            title: this.$t('errorResponseTitle'),
+            text: error,
+          });
+        });
+    },
+
+    clearRating() {
+      this.ratingValue = 0;
+      this.updateOwnRating();
+    },
+
     resetChanges() {
       this.ownEpisodeProgressValue = this.currentAnime.my_watched_episodes;
       this.ownStatusValue = this.currentAnime.my_status;
@@ -282,6 +325,7 @@ export default {
           autofocus: false,
         })
         .modal('show');
+      this.updateOwnRating();
     },
     updateRatingValue(value) {
       this.ratingValue = value;
@@ -300,7 +344,7 @@ export default {
     updateOwnRating() {
       $('#ownRating')
         .rating({
-          initialRating: this.ownRating,
+          initialRating: this.ratingValue,
           maxRating: 10,
           clearable: false,
           onRate: this.updateRatingValue,
@@ -352,9 +396,14 @@ export default {
     "dropdownPlaceholder": "Please select...",
     "submitChanges": "Submit",
     "resetChanges": "Reset",
+    "addToList": "Add to List",
     "updated": {
       "title": "Updated!",
       "text": "Update was successful!"
+    },
+    "created": {
+      "title": "Created!",
+      "text": "Create was successful!"
     },
     "errorResponseTitle": "Update not successful!"
   },
@@ -387,9 +436,14 @@ export default {
     "dropdownPlaceholder": "Bitte wählen...",
     "submitChanges": "Speichern",
     "resetChanges": "Zurücksetzen",
-     "updated": {
+    "addToList": "Zur Liste hinzufügen",
+    "updated": {
       "title": "Aktualisiert!",
       "text": "Aktualisierung erfolgreich!"
+    },
+    "created": {
+      "title": "Hinzugefügt!",
+      "text": "Hinzufügen erfolgreich!"
     },
     "errorResponseTitle": "Aktualisierung nicht erfolgreich!"
   }

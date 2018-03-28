@@ -33,17 +33,17 @@
                   <input type="password" v-model="password" />
                 </div>
               </div>
-              <button class="ui primary button" type="submit">{{ $t('login') }}</button>
+              <button class="ui right floated primary button" type="submit">{{ $t('login') }}</button>
             </form>
             <div class="ui blue labels" v-else>
               <div class="ui label">
                 {{ $t('loggedInAs') }} {{ auth.username }}
               </div>
-              <a class="ui label" @click="logout">
+              <a class="ui label" @click="logMeOut">
                 {{ $t('logout') }}
               </a>
             </div>
-            <div class="ui grid">
+            <div class="ui grid" v-if="this.auth">
               <div class="eight wide column">
                 <div class="ui form">
                   <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
@@ -122,10 +122,32 @@ export default {
       this.logout();
     },
     submit() {
+      if (!this.username || !this.password) {
+        this.$notify({
+          type: 'error',
+          title: this.$t('noCredentials'),
+          text: this.$t('enterCredentials'),
+        });
+
+        return;
+      }
       $(this.$refs[this.myAnimeListForm]).addClass('loading');
       this.login({ username: this.username, password: this.password })
-        .then(() => this.detectAndSetMALData());
+        .then(() => this.detectAndSetMALData())
+        .catch(() => {
+          this.$notify({
+            type: 'error',
+            title: this.$t('credentialsWrongOrTooManyLoginAttempts'),
+            text: this.$t('credentialsCouldNotBeVerifiedOrTooManyLoginAttempts'),
+            duration: -1,
+          });
+          $(this.$refs[this.myAnimeListForm]).removeClass('loading');
+        });
       this.username = this.password = '';
+    },
+    logMeOut() {
+      this.logout();
+      this.close();
     },
     close() {
       this.refreshRateValue = this.refreshRate;
@@ -172,7 +194,11 @@ export default {
     "username": "Username",
     "password": "Password",
     "restoreFactoryData": "Restore Factory Data",
-    "refreshRate": "Refresh interval for MAL (in minutes)"
+    "refreshRate": "Refresh interval for MAL (in minutes)",
+    "noCredentials": "No credentials!",
+    "enterCredentials": "Please enter credentials to log in.",
+    "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>"
   },
   "de": {
     "settings": "Einstellungen",
@@ -188,7 +214,11 @@ export default {
     "username": "Benutzername",
     "password": "Passwort",
     "restoreFactoryData": "Werkszustand wiederherstellen",
-    "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)"
+    "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
+    "noCredentials": "Keine Anmeldedaten!",
+    "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
+    "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
   }
 }
 </i18n>

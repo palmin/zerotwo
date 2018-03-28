@@ -19,7 +19,9 @@ export default {
   components: { Notification },
 
   created() {
-    this.setLocale(this.$electron.remote.app.getLocale());
+    if (!this.locale) {
+      this.setLocale(this.$electron.remote.app.getLocale());
+    }
   },
 
   data() {

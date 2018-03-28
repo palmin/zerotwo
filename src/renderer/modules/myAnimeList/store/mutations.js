@@ -14,4 +14,15 @@ export default {
   setTimeUntilNextRefresh(state, payload) {
     state.timeUntilNextRefresh = payload;
   },
+  setTimerRunning(state, payload) {
+    state.timerRunning = payload;
+  },
+  resetState(state) {
+    state.malData = null;
+    state.auth = null;
+    state.information = null;
+    state.refreshRate = 15;
+    state.timeUntilNextRefresh = null;
+    state.timerRunning = false;
+  },
 };

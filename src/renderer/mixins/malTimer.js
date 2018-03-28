@@ -5,9 +5,14 @@ export default {
     clearInterval(this.timer);
   },
   computed: {
-    ...mapState('myAnimeList', ['refreshRate', 'timeUntilNextRefresh']),
+    ...mapState('myAnimeList', ['auth', 'refreshRate', 'timeUntilNextRefresh', 'timerRunning']),
   },
-  mounted() {
+  async mounted() {
+    if (!this.auth) {
+      await this.setTimerRunning(false);
+      return;
+    }
+
     this.refreshTimer();
   },
   data() {
@@ -16,7 +21,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('myAnimeList', ['detectAndSetMALData', 'setTimeUntilNextRefresh']),
+    ...mapActions('myAnimeList', ['detectAndSetMALData', 'setTimeUntilNextRefresh', 'setTimerRunning']),
     async timerAction() {
       await this.setTimeUntilNextRefresh(this.timeUntilNextRefresh - 1000);
       if (this.timeUntilNextRefresh <= 0) {
@@ -25,8 +30,8 @@ export default {
       }
     },
     async refreshTimer() {
-      if (this.timer) {
-        clearInterval(this.timer);
+      if (!this.auth) {
+        return;
       }
 
       const refreshInterval = this.refreshRate * 60 * 1000;
@@ -39,6 +44,15 @@ export default {
   watch: {
     refreshRate() {
       this.refreshTimer();
+    },
+    timerRunning(running) {
+      if (!running && this.timer) {
+        clearInterval(this.timer);
+      }
+
+      if (running) {
+        this.refreshTimer();
+      }
     },
   },
 };

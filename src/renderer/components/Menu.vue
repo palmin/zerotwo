@@ -23,9 +23,9 @@
         </div>
         <div class="results"></div>
       </div>
-      <a class="ui item" @click="refreshMAL">
+      <a class="ui item" :class="{ disabled: !this.auth }" @click="refreshMAL">
         <i class="refresh icon" :class="{ loading: !isReady }"></i>
-        {{ $t('refreshMAL') }} ({{ readableTimeUntilNextRefresh }})
+        {{ $t('refreshMAL') }} {{ readableTimeUntilNextRefresh }}
       </a>
       <a class="ui item" @click="openSettings">
         <i class="settings icon"></i>
@@ -42,9 +42,13 @@ export default {
   props: ['openSettings', 'refreshMAL', 'malData', 'openInformation'],
   computed: {
     ...mapState(['isReady']),
-    ...mapState('myAnimeList', ['timeUntilNextRefresh']),
+    ...mapState('myAnimeList', ['timeUntilNextRefresh', 'auth']),
     readableTimeUntilNextRefresh() {
-      return this.$getMoment(this.timeUntilNextRefresh).format('mm:ss');
+      if (!this.timeUntilNextRefresh) {
+        return '';
+      }
+
+      return `(${this.$getMoment(this.timeUntilNextRefresh).format('mm:ss')})`;
     },
     searchContent() {
       return _.map(this.malData, item => ({

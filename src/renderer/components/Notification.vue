@@ -70,7 +70,7 @@
   }
 
   .zerotwo-style-content {
-    flex: 1 0 auto;
+    font-size: 12px;
 
     .zerotwo-style-title {
       text-transform: uppercase;
@@ -79,4 +79,3 @@
   }
 }
 </style>
-

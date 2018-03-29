@@ -72,6 +72,16 @@ export default axios => ({
       })
       .then(response => response.data);
   },
+  deleteAnime(auth, { id }) {
+    return axios
+      .delete(`/api/animelist/delete/${id}.xml`, {
+        auth,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      .then(response => response.data);
+  },
   updateAnime(auth, { id, xml }) {
     return axios
       .post(`/api/animelist/update/${id}.xml`, qs.stringify({ data: xml }), {

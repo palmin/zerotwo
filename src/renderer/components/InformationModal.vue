@@ -53,6 +53,16 @@
                   <div class="ui right floated secondary button" @click="resetChanges">
                     {{ $t('resetChanges') }}
                   </div>
+                  <div class="ui right floated red button" @click="deleteFromList">
+                    {{ $t('deleteFromList') }}
+                  </div>
+                  <delete-modal
+                    :ref="deleteModalRef"
+                    :submitHandler="submitDelete"
+                    :cancelHandler="cancelDelete"
+                    :header="$t('deleteModalHeader')"
+                    :content="deleteModalContent"
+                  />
                 </template>
                 <template v-else>
                   <div class="ui right floated secondary button" @click="addToList">
@@ -86,14 +96,16 @@ import { Builder } from 'xml2js';
 import { mapState, mapMutations } from 'vuex';
 import { camelCase, find } from 'lodash';
 import Dropdown from './Dropdown';
+import DeleteModal from './DeleteModal';
 
 export default {
   props: ['data'],
 
-  components: { Dropdown },
+  components: { Dropdown, DeleteModal },
 
   data() {
     return {
+      deleteModalRef: 'informationDeleteModal',
       ownEpisodeProgressValue: 0,
       ownStatusValue: 0,
       ratingValue: 0,
@@ -215,6 +227,10 @@ export default {
 
       return time;
     },
+
+    deleteModalContent() {
+      return this.$t('doYouReallyWantToDelete', { title: this.header });
+    },
   },
 
   watch: {
@@ -235,6 +251,37 @@ export default {
 
   methods: {
     ...mapMutations('myAnimeList', ['setInformation']),
+
+    deleteFromList() {
+      this.$refs[this.deleteModalRef].show();
+    },
+
+    submitDelete() {
+      this.cancelDelete();
+      this.show();
+      this.$http.deleteAnime(this.auth, { id: this.data.id })
+        .then((response) => {
+          if (response === 'Deleted') {
+            this.$notify({
+              title: this.$t('deleted.title'),
+              text: this.$t('deleted.text'),
+            });
+            this.close();
+            this.$emit('refresh');
+          }
+        })
+        .catch((error) => {
+          this.$notify({
+            type: 'error',
+            title: this.$t('errorResponseTitle'),
+            text: error,
+          });
+        });
+    },
+
+    cancelDelete() {
+      this.$refs[this.deleteModalRef].hide();
+    },
 
     addToList() {
       const id = this.data.id;
@@ -397,6 +444,7 @@ export default {
     "submitChanges": "Submit",
     "resetChanges": "Reset",
     "addToList": "Add to List",
+    "deleteFromList": "Delete from List",
     "updated": {
       "title": "Updated!",
       "text": "Update was successful!"
@@ -405,7 +453,13 @@ export default {
       "title": "Created!",
       "text": "Create was successful!"
     },
-    "errorResponseTitle": "Update not successful!"
+    "deleted": {
+      "title": "Deleted!",
+      "text": "Delete was successful!"
+    },
+    "errorResponseTitle": "Update not successful!",
+    "deleteModalHeader": "Confirm delete?",
+    "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?"
   },
   "de": {
     "close": "Schließen",
@@ -436,7 +490,8 @@ export default {
     "dropdownPlaceholder": "Bitte wählen...",
     "submitChanges": "Speichern",
     "resetChanges": "Zurücksetzen",
-    "addToList": "Zur Liste hinzufügen",
+    "addToList": "Hinzufügen",
+    "deleteFromList": "Entfernen",
     "updated": {
       "title": "Aktualisiert!",
       "text": "Aktualisierung erfolgreich!"
@@ -445,7 +500,13 @@ export default {
       "title": "Hinzugefügt!",
       "text": "Hinzufügen erfolgreich!"
     },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!"
+    "deleted": {
+      "title": "Gelöscht!",
+      "text": "Löschung erfolgreich!"
+    },
+    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
+    "deleteModalHeader": "Wirklich löschen?",
+    "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?"
   }
 }
 </i18n>

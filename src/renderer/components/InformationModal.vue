@@ -130,6 +130,7 @@ export default {
 
   computed: {
     ...mapState('myAnimeList', ['auth', 'malData']),
+    ...mapState('i18n', ['locale']),
     currentAnime() {
       const current = find(this.malData, item => item.series_animedb_id === this.data.id);
       if (current === undefined) {
@@ -246,6 +247,24 @@ export default {
     },
     ownStatus(newValue) {
       this.ownStatusValue = newValue;
+    },
+    locale() {
+      this.statuses = [{
+        value: '1',
+        name: this.$t('airing'),
+      }, {
+        value: '2',
+        name: this.$t('finished'),
+      }, {
+        value: '3',
+        name: this.$t('onHold'),
+      }, {
+        value: '4',
+        name: this.$t('canceled'),
+      }, {
+        value: '6',
+        name: this.$t('planned'),
+      }];
     },
   },
 

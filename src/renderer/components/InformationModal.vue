@@ -507,6 +507,53 @@ export default {
     "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
     "deleteModalHeader": "Wirklich löschen?",
     "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?"
+  },
+  "ja": {
+    "close": "クローズ",
+    "description": "デスクリプション",
+    "seriesInformation": "シリーズについて",
+    "malDataInformation": "自分のMyAnimeList",
+    "episodes": "エピソード",
+    "rating": "評価",
+    "type": "タイプ",
+    "synonyms": "シノニム",
+    "noSynonyms": "シノニムがありません",
+    "airingTime": "放送時間",
+    "englishName": "英語名",
+    "seriesStatus": "シリーズのステータス",
+    "dateFormat": "YYYY[年]MM[月]DD[日]",
+    "unknownDate": "日付不明",
+    "finishedAiring": "放送終了",
+    "currentlyAiring": "放送中",
+    "notYetAired": "まだ放送していない",
+    "ownRating": "自分の評価",
+    "ownStatus": "自分のステータス",
+    "watchedEpisodes": "見たエピソード",
+    "airing": "見る",
+    "finished": "終了",
+    "onHold": "中止",
+    "canceled": "止めました",
+    "planned": "見るつもり",
+    "dropdownPlaceholder": "選んでください・・・",
+    "submitChanges": "保存",
+    "resetChanges": "リセット",
+    "addToList": "追加",
+    "deleteFromList": "削除",
+    "updated": {
+      "title": "アップデートしました！",
+      "text": "アップデートはシンクロしました！"
+    },
+    "created": {
+      "title": "追加しました！",
+      "text": "追加はシンクロしました！"
+    },
+    "deleted": {
+      "title": "削除しました！",
+      "text": "削除はシンクロしました！"
+    },
+    "errorResponseTitle": "シンクロは出来ませんでした！",
+    "deleteModalHeader": "本当に削除しますか？",
+    "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？"
   }
 }
 </i18n>

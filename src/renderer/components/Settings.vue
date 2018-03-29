@@ -5,7 +5,10 @@
       <div class="ui grid">
         <div class="four wide column">
           <div class="ui fluid secondary vertical menu">
-            <a class="active item" data-tab="myAnimeList">
+            <a class="active item" data-tab="appSettings">
+              {{ $t('appSettings') }}
+            </a>
+            <a class="item" data-tab="myAnimeList">
               {{ $t('myAnimeList') }}
             </a>
             <a class="item" data-tab="restoreFactoryData">
@@ -15,7 +18,19 @@
         </div>
 
         <div class="twelve wide column">
-          <div class="ui active basic tab segment" data-tab="myAnimeList">
+          <div class="ui active basic tab segment" data-tab="appSettings">
+            <h2 class="ui header">
+              {{ $t('setAppLanguage') }}
+            </h2>
+            <dropdown
+              :items="languages"
+              :placeholder="$t('chooseLanguage')"
+              v-model="localeSetting"
+              />
+            <button class="ui primary button" @click="submitLanguageChange">{{ $t('changeLanguage') }}</button>
+          </div>
+
+          <div class="ui basic tab segment" data-tab="myAnimeList">
             <h2 class="ui header">
               {{ $t('myAnimeList') }}
               <div class="sub header">
@@ -78,12 +93,14 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, between } from 'vuelidate/lib/validators';
+import Dropdown from './Dropdown';
 
 export default {
   mixins: [validationMixin],
+  components: { Dropdown },
   props: ['event'],
   watch: {
     refreshRate(value) {
@@ -92,6 +109,7 @@ export default {
   },
   computed: {
     ...mapState('myAnimeList', ['auth', 'refreshRate']),
+    ...mapState('i18n', ['locale']),
     loggedIn() {
       return !!this.auth;
     },
@@ -109,6 +127,17 @@ export default {
       myAnimeListForm: 'myAnimeListForm',
       refreshRateValue: 0,
       refreshRateEditMode: false,
+      localeSetting: '',
+      languages: [{
+        name: 'English',
+        value: 'en',
+      }, {
+        name: 'Deutsch',
+        value: 'de',
+      }, {
+        name: '日本語',
+        value: 'ja',
+      }],
     };
   },
   mounted() {
@@ -117,6 +146,10 @@ export default {
   },
   methods: {
     ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
+    ...mapMutations('i18n', ['setLocale']),
+    submitLanguageChange() {
+      this.setLocale(this.localeSetting);
+    },
     restoreFactoryData() {
       // Logout currently covers all essential data
       this.logout();
@@ -161,8 +194,10 @@ export default {
         .modal({
           closable: false,
           centered: false,
+          autofocus: false,
         })
         .modal('show');
+      this.localeSetting = this.locale;
     },
     editRefreshRate() {
       if (this.refreshRateEditMode) {
@@ -188,6 +223,10 @@ export default {
     "close": "Close",
     "login": "Login",
     "logout": "Logout",
+    "appSettings": "App Settings",
+    "setAppLanguage": "Set app's language",
+    "chooseLanguage": "Choose language",
+    "changeLanguage": "Change language",
     "loggedInAs": "Logged in as",
     "myAnimeList": "MyAnimeList",
     "accountSettings": "Account Settings",
@@ -208,6 +247,10 @@ export default {
     "close": "Schließen",
     "login": "Einloggen",
     "logout": "Ausloggen",
+    "appSettings": "App-Einstellungen",
+    "setAppLanguage": "Ändere App-Sprache",
+    "chooseLanguage": "Sprache wählen",
+    "changeLanguage": "Sprache ändern",
     "loggedInAs": "Eingeloggt als",
     "myAnimeList": "MyAnimeList",
     "accountSettings": "Kontoeinstellungen",
@@ -219,6 +262,30 @@ export default {
     "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
     "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
     "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
+  },
+  "ja": {
+    "settings": "設定",
+    "save": "保存",
+    "edit": "編集",
+    "cancel": "キャンセル",
+    "close": "クローズ",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "appSettings": "アプリ設定",
+    "setAppLanguage": "アプリ言語を編集",
+    "chooseLanguage": "言語を選択する",
+    "changeLanguage": "言語を設定する",
+    "loggedInAs": "ログインしたアカウント",
+    "myAnimeList": "MyAnimeList",
+    "accountSettings": "アカウント設定",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "restoreFactoryData": "ファクトリー設定に戻る",
+    "refreshRate": "MALの更新間（分で）",
+    "noCredentials": "ログインデータは入力しませんでした！",
+    "enterCredentials": "ログインデータを入力してください！",
+    "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>"
   }
 }
 </i18n>

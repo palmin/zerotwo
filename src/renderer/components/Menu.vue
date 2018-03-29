@@ -189,6 +189,18 @@ export default {
     "notInList": "Nicht in deiner Liste",
     "searchAnime": "Suchen ...",
     "noResults": "Es wurden keine Ergebnisse gefunden"
+  },
+  "ja": {
+    "animeList": "MyAnimeList",
+    "refreshMAL": "MALを更新",
+    "airing": "見る",
+    "completed": "終了",
+    "onHold": "中止",
+    "canceled": "止めました",
+    "planned": "見るつもり",
+    "notInList": "リストにはありません",
+    "searchAnime": "検索 ...",
+    "noResults": "結果は見つかりませんでした。"
   }
 }
 </i18n>

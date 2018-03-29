@@ -85,6 +85,9 @@ export default {
   },
   "de": {
     "loading": "Lädt..."
+  },
+  "ja": {
+    "loading": "通信中・・・"
   }
 }
 </i18n>

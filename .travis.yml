@@ -1,40 +1,21 @@
-osx_image: xcode8.3
 sudo: required
 dist: trusty
-language: c
-matrix:
-  include:
-  - os: osx
-  - os: linux
-    env: CC=clang CXX=clang++ npm_config_clang=1
-    compiler: clang
-cache:
-  directories:
-  - node_modules
-  - "$HOME/.electron"
-  - "$HOME/.cache"
-addons:
-  apt:
-    packages:
-    - libgnome-keyring-dev
-    - icnsutils
-before_install:
-- mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v1.2.1/git-lfs-$([
-  "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-1.2.1.tar.gz
-  | tar -xz -C /tmp/git-lfs --strip-components 1 && /tmp/git-lfs/git-lfs pull
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install --no-install-recommends
-  -y icnsutils graphicsmagick xz-utils; fi
+language: node_js
+node_js:
+  - "8"
 install:
-- nvm install 8
-- npm install -g xvfb-maybe
+  - npm install
 script:
-- travis_wait 60 npm run build
+  - npm run build:clean
+  - travis_wait 30 npm run build
 deploy:
   provider: releases
   api_key:
     secure: JgTBr84/mPhTUAA8rHIGVN750hV2m/HnSSwuGxYHlKzt6NrhLXU28w7efjEfN6X6zpjrW00FWqrELFx/MqaHqvOJ8WE4fB4CVvXYCAclDClcv7ZgVf0DPHarImXjUe5clQ3ssFAhvHrtDarjVvXtSefot2iMevujbEIE7rtvRQijMPJvzXbO2KsR19fZw+XiJIKSNRdXPmlFKJukTpMlGZLj9yzAppffbr0g8zf3YlyFKeod6O5yQ4kT5v3LFLJTFtAro83DxIU0+uQWw7fedjpeb4Fb2RtV07WucXCJrfkZDI8Qsa7MRwR94SaJBKD0yaIWUDgg43yHgZo5tInBdpz9Yl7L0JerpiZhmVk+utk1ON0fA6AixKVBtX/yRpxpDZob/utVxmGH76EjiWpxaeJOqZLdEhllIgAKEB4Rhoh26LTNdk0TnV3PSXlSIL53HpDGiIineG+pcl6Bs0R+akNqwSnpv2H3gvH6MA+MzwAhRRwyrQvtrjgcfhK3TKrfxSn9nC/+lWKYODQvMVUOdjjEJw9wkFlfYFODuOuLMKNRn4gIXZf0of4JCrNmQcY4sV4v/fn8QbCj988jM7IIswBMs6gAkhDhZHLwbv2JZ0hPwS6WS4Yv/kxpeJLZMlZ46zTQMvBJ7SpXeLWQeS7o2f8Cv80XMkhVY1J7CAmBpZI=
-  file: build/*
   file_glob: true
+  file:
+    - "build/*.zip"
+    - "build/*.dmg"
   on:
     repo: NicoAiko/zerotwo
 branches:

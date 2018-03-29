@@ -3,9 +3,23 @@ import moment from 'moment';
 const MyPlugin = {
   install(Vue) {
     Vue.mixin({
+      computed: {
+        momentLocale() {
+          if (!this.$i18n) {
+            return this.locale;
+          }
+
+          return this.$i18n.locale;
+        },
+      },
       beforeMount() {
-        const locale = this.$i18n.locale || this.locale;
-        moment.locale(locale);
+        // const locale = this.$i18n.locale || this.locale;
+        moment.locale(this.momentLocale);
+      },
+      watch: {
+        momentLocale(locale) {
+          moment.locale(locale);
+        },
       },
     });
     Vue.prototype.$getMoment = (...args) => moment(...args);

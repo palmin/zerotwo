@@ -31,6 +31,7 @@ deploy:
   - build/*.dmg
   on:
     repo: NicoAiko/zerotwo
+    tags: true
 branches:
   only:
   - master

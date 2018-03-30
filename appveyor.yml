@@ -1,41 +1,33 @@
-version: 0.1.{build}
-
 branches:
   only:
     - master
 
-image: Visual Studio 2017
 platform:
   - x64
 
 cache:
   - node_modules
-  - '%APPDATA%\npm-cache'
-  - '%USERPROFILE%\.electron'
-
-init:
-  - git config --global core.autocrlf input
+  - '%APPDATA%/npm-cache'
+  - '%USERPROFILE%/.electron'
 
 install:
   - ps: Install-Product node 8 x64
-  - git reset --hard HEAD
   - npm install
 
 build_script:
+  - npm run build:clean
   - npm run build
 
 test: off
 
 deploy:
-  release: zerotwo-v0.1.0
-  tag: "v0.1.0"
-  description: 'Finished build'
   provider: GitHub
-  auth_token:
-    secure: fU/ojGR4grE9pO35D4bDruLE/93FrWPzmg6ifQRNky8VFI4L9GV26YFfcnJ+nez7 # your encrypted token from GitHub
-  artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
-  draft: true
   prerelease: true
+  force_update: true
+  repository: NicoAiko/zerotwo
+  description: ''
+  release: ZeroTwo-v0.$(appveyor_build_version)
+  auth_token:
+    secure: 7YWkBvHOxRb7TmxwBrOYd2c20Ht86u6aNq9TbZfMeLxcdAqVg2P6V0ZRvPmqyLIs
   on:
-    branch: master                 # release from master branch only
-    appveyor_repo_tag: false        # deploy on tag push only
+    branch: master

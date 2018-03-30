@@ -3,6 +3,10 @@ Electron - Vue.js Anime Tracker
 
 > Taiga alternative
 
+#### Build status
+
+[![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
+
 #### Build Setup
 
 ``` bash
@@ -30,4 +34,3 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 GNU General Public License v3.0
 
 Read more here: [License](LICENSE)
-

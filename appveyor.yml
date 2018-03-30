@@ -27,6 +27,8 @@ deploy:
   repository: NicoAiko/zerotwo
   description: ''
   release: ZeroTwo-v0.$(appveyor_build_version)
+  artifacts:
+    - build/*.exe
   auth_token:
     secure: 7YWkBvHOxRb7TmxwBrOYd2c20Ht86u6aNq9TbZfMeLxcdAqVg2P6V0ZRvPmqyLIs
   on:

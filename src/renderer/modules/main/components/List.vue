@@ -25,7 +25,7 @@
         </td>
         <td>{{ data.series_title }}</td>
         <td class="collapsing">
-          <progress :value="data.my_watched_episodes" :max="data.series_episodes" />
+          <progress :value="data.my_watched_episodes" :max="progressMaxEpisodes(data)" />
           {{ data.my_watched_episodes }} / {{ data.series_episodes | episode }}
         </td>
         <td class="collapsing center aligned">
@@ -62,6 +62,14 @@ export default {
     ...mapMutations('myAnimeList', ['setInformation']),
     openInformation(name) {
       this.setInformation(name);
+    },
+
+    progressMaxEpisodes(data) {
+      if (data.series_episodes <= 0) {
+        return +data.my_watched_episodes + +(+data.my_watched_episodes * 0.2);
+      }
+
+      return data.series_episodes;
     },
 
     getSeason(date) {

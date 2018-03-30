@@ -28,7 +28,7 @@ deploy:
   description: ''
   release: ZeroTwo-v0.$(appveyor_build_version)
   artifacts:
-    - path: 'build\*.exe'
+    - path: "build\\*.exe"
       name: '*.exe'
       type: File
   auth_token:

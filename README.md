@@ -3,19 +3,31 @@ Electron - Vue.js Anime Tracker
 
 > Taiga alternative
 
-### Get the latest release here!
-[Click here for the latest Releases!](https://github.com/NicoAiko/zerotwo/releases)
-
 #### Build status
 
 [![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
 [![Build status](https://ci.appveyor.com/api/projects/status/goacd72jf5oopi47?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
-#### Discord Server
+---
+
+## What is ZeroTwo?
+
+> Welcome to ZeroTwo, the whole new experience of managing the MyAnimeList!
+
+> With this program you will easily add, update or delete Anime from your list!
+
+> You only have to login to MyAnimeList and the fun can begin!",
+
+### Get the latest release here!
+[Click here for the latest Releases!](https://github.com/NicoAiko/zerotwo/releases)
+
+## Discord Server
 
 ##### Join the ZeroTwo Discord Server!
 
-[<img src="https://www.grischabock.ch/media/36-discord-banner-png/" width="250">](https://discord.gg/sTpR4Gw)
+[<img src="https://discordapp.com/assets/e4923594e694a21542a489471ecffa50.svg" width="350">](https://discord.gg/sTpR4Gw)
+
+---
 
 #### Build Setup
 
@@ -36,8 +48,6 @@ npm run lint
 ```
 
 ---
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[1c165f7](https://github.com/SimulatedGREG/electron-vue/tree/1c165f7c5e56edaf48be0fbb70838a1af26bb015) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
 
 # LICENSE
 

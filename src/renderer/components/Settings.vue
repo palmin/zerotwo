@@ -88,12 +88,12 @@
           </div>
 
           <div class="ui basic tab segment" data-tab="aboutZeroTwo">
-            <h2 class="ui header">
+            <h2 class="ui center aligned header">
               {{ $t('aboutZeroTwo') }}
             </h2>
             <div class="ui grid">
-              <div class="four wide column">
-                <div class="ui statistic">
+              <div class="center aligned sixteen wide column">
+                <div class="ui huge statistic">
                   <div class="label">
                     {{ $t('version') }}
                   </div>
@@ -103,18 +103,22 @@
                 </div>
               </div>
 
-              <div class="twelve wide column">
-                <div class="ui small statistic">
-                  <div class="label">
-                    GitHub
+              <div class="center aligned eight wide column">
+                <a href="#" class="ui huge icon header" @click="openPage(githubPage)">
+                  <i class="github icon"></i>
+                  <div class="content">
+                    <img src="~/../assets/logos/github-logo.png" style="padding: 0 25px; margin-top: -14px;" class="ui medium image" alt="GitHub" />
                   </div>
-                  <div class="value">
-                    <a href="#" @click="openGithubPage">
-                      <i class="github icon"></i>
-                      {{ $t('link') }}
-                    </a>
+                </a>
+              </div>
+
+              <div class="center aligned eight wide column">
+                <a href="#" class="ui huge icon header" @click="openPage(discordPage)">
+                  <i class="blurple discord icon"></i>
+                  <div class="content">
+                    <img src="~/../assets/logos/discord-blurple-logo.png" class="ui medium image" alt="Discord" />
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -126,6 +130,12 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.blurple {
+  color: #7289DA
+}
+</style>
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -160,6 +170,8 @@ export default {
   },
   data() {
     return {
+      githubPage: 'https://github.com/nicoaiko/zerotwo',
+      discordPage: 'https://discord.gg/sTpR4Gw',
       username: '',
       password: '',
       myAnimeListForm: 'myAnimeListForm',
@@ -185,8 +197,12 @@ export default {
   methods: {
     ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
     ...mapMutations('i18n', ['setLocale']),
-    openGithubPage() {
-      shell.openExternal('https://github.com/nicoaiko/zerotwo');
+    openPage(page) {
+      if (page !== this.githubPage && page !== this.discordPage) {
+        return;
+      }
+
+      shell.openExternal(page);
     },
     submitLanguageChange() {
       this.setLocale(this.localeSetting);

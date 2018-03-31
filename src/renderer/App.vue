@@ -58,8 +58,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/override";
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 </style>

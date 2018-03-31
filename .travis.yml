@@ -36,4 +36,5 @@ deploy:
     branch: master
 branches:
   only:
+  - master
   - "/v\\d+\\.\\d+\\.\\d+\\-?[a-z]*/"

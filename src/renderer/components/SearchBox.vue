@@ -1,30 +1,40 @@
 <template lang="html">
   <div class="ui right aligned item">
     <div class="ui transparent icon input" :class="{ loading: searchTimer }">
-      <input type="text" :placeholder="$t('search')" v-model="searchValue" @input="searching = true" @keyup="searching = false" @change="triggerSearch" @blur="hideResultPopup" @focus="triggerResultPopup" />
+      <input type="text"
+            :placeholder="$t('search')"
+            v-model="searchValue"
+            @input="searching = true"
+            @keyup="searching = false"
+            @focus="triggerResultPopup"
+            @blur="toggleResultPopup"
+            @change="triggerSearch"
+          />
       <i class="search icon"></i>
     </div>
-    <div class="ui special popup">
-      <div class="ui middle aligned selection list">
-        <div class="item" v-for="result in searchResults" :key="result.title" @click="openSearchResult(result)">
-          <div class="category">
-            {{ result.category }}
-          </div>
-          <div class="content">
-            <div class="header">{{ result.title }}</div>
-          </div>
+    <div class="results transition hidden" id="transitionContainer">
+      <div class="category" v-for="result in searchResults">
+        <div class="name">{{ result.category }}</div>
+        <div class="results">
+          <a class="result" @click="openSearchResult(result)">
+            <div class="content">
+              <div class="title">
+                {{ result.title }}
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </template>
 
+
 <script>
 import _ from 'lodash';
 import { mapState } from 'vuex';
 
 export default {
-  props: ['openInformation'],
   computed: {
     ...mapState('myAnimeList', ['auth', 'malData']),
   },
@@ -36,8 +46,6 @@ export default {
       searchInterval: 500,
       searchResults: [],
       lastSearch: '',
-
-      resultsPresented: false,
     };
   },
   watch: {
@@ -52,14 +60,14 @@ export default {
   },
   methods: {
     openSearchResult(result) {
-      this.hideResultPopup();
-      this.openInformation(result.title);
+      this.$emit('openInformation', result);
+      this.toggleResultPopup();
     },
 
     triggerSearch() {
       if (this.searchValue.length < 3) {
         this.searchResults = [];
-        this.hideResultPopup();
+        this.toggleResultPopup('hide');
         return;
       }
 
@@ -67,30 +75,22 @@ export default {
     },
 
     triggerResultPopup() {
-      if (this.resultsPresented || _.isEmpty(this.searchResults)) {
+      if (_.isEmpty(this.searchResults)) {
         return;
       }
 
-      $(this.$el)
-        .popup({
-          popup: '.special.popup',
-          on: 'manual',
-          addTouchEvents: false,
-        })
-        .popup('show');
-      this.resultsPresented = true;
+      this.toggleResultPopup();
     },
 
-    hideResultPopup() {
-      $(this.$el)
-        .popup('hide');
-      this.resultsPresented = false;
+    toggleResultPopup(transition = 'toggle') {
+      $('#transitionContainer', this.$el)
+        .transition(transition);
     },
 
     beginSearching() {
       if (this.searchValue.length < 3) {
         this.searchResults = [];
-        this.hideResultPopup();
+        this.toggleResultPopup('hide');
         return;
       }
 
@@ -152,7 +152,7 @@ export default {
         })
         .then((results) => {
           if (_.isEmpty(results)) {
-            this.hideResultPopup();
+            this.toggleResultPopup('hide');
             return;
           }
 
@@ -169,7 +169,7 @@ export default {
       let statusText = '';
       switch (+status) {
         case 1:
-          statusText = this.$t('airing');
+          statusText = this.$t('watching');
           break;
         case 2:
           statusText = this.$t('completed');
@@ -193,11 +193,104 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+
+.item > .results {
+  position: absolute;
+  top: 100%;
+  left: -75%;
+  transform-origin: center;
+  white-space: normal;
+  background: #fff;
+  margin-top: .5em;
+  width: 28em;
+  border-radius: .28571429rem;
+  box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15);
+  border: 1px solid #d4d4d5;
+  z-index: 998;
+
+  & > :first-child {
+    border-radius: .28571429rem .28571429rem 0 0;
+  }
+
+  & > :last-child {
+    border-radius: .28571429rem .28571429rem 0 0;
+  }
+
+  .category {
+    display: table-row;
+    box-shadow: none;
+    background: #f3f4f5;
+    transition: background .1s ease,border-color .1s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .name {
+      display: table-cell;
+      text-overflow: ellipsis;
+      width: 100px;
+      white-space: nowrap;
+      background: 0 0;
+      font-size: 1em;
+      padding: .4em 1em;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid rgba(34,36,38,.1);
+    }
+
+    .results {
+      display: table-cell;
+      background: #fff;
+      border-left: 1px solid rgba(34,36,38,.15);
+      border-bottom: 1px solid rgba(34,36,38,.1);
+
+      .result {
+        cursor: pointer;
+        display: block;
+        overflow: hidden;
+        font-size: 1em;
+        padding: .85714286em 1.14285714em;
+        color: rgba(0,0,0,.87);
+        line-height: 1.33;
+        border-bottom: 1px solid rgba(34,36,38,.1);
+        -webkit-transition: background .1s ease,border-color .1s ease;
+        transition: background .1s ease,border-color .1s ease;
+
+        &:hover {
+          background: #f9fafb;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .title {
+          margin: -.14285714em 0 0;
+          font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+          font-weight: 700;
+          font-size: 1em;
+          color: rgba(0,0,0,.85);
+        }
+
+        .description {
+          margin-top: 0;
+          font-size: .92857143em;
+          color: rgba(0,0,0,.4);
+        }
+      }
+    }
+  }
+}
+
+</style>
+
 <i18n>
 {
   "en": {
     "search": "Search...",
-    "airing": "Airing",
+    "watching": "Watching",
     "completed": "Completed",
     "onHold": "On Hold",
     "canceled": "Canceled",
@@ -206,7 +299,7 @@ export default {
   },
   "de": {
     "search": "Suchen...",
-    "airing": "Laufend",
+    "watching": "Laufend",
     "completed": "Beendet",
     "onHold": "Pausiert",
     "canceled": "Abgebrochen",
@@ -215,7 +308,7 @@ export default {
   },
   "ja": {
     "search": "検索・・・",
-    "airing": "見る",
+    "watching": "見る",
     "completed": "終了",
     "onHold": "中止",
     "canceled": "止めました",

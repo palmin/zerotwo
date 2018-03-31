@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-component :listItems="airingAnime" />
+    <list-component :listItems="watchingAnime" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 
   computed: {
     ...mapState('myAnimeList', ['malData']),
-    airingAnime() {
+    watchingAnime() {
       return _.chain(this.malData)
         .filter(item => Number(item.my_status) === 1)
         .sortBy(item => item.series_title.toLowerCase())

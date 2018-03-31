@@ -1,7 +1,7 @@
 <template>
   <div class="ui top fixed menu">
-    <router-link class="item" tag="a" :to="{ name: 'Airing' }" active-class="active" exact>
-      {{ $t('airing') }}
+    <router-link class="item" tag="a" :to="{ name: 'Watching' }" active-class="active" exact>
+      {{ $t('watching') }}
     </router-link>
     <router-link class="item" tag="a" :to="{ name: 'Finished' }" active-class="active" exact>
       {{ $t('completed') }}
@@ -16,7 +16,7 @@
       {{ $t('planned') }}
     </router-link>
     <div class="right menu">
-      <search-box :openInformation="openInformation" />
+      <search-box @openInformation="openInformationWindow" />
       <a class="ui item" :class="{ disabled: !this.auth }" @click="refreshMAL">
         <i class="refresh icon" :class="{ loading: !isReady }"></i>
         {{ $t('refreshMAL') }} {{ readableTimeUntilNextRefresh }}
@@ -46,6 +46,11 @@ export default {
       return `(${this.$getMoment(this.timeUntilNextRefresh).format('mm:ss')})`;
     },
   },
+  methods: {
+    openInformationWindow(result) {
+      this.openInformation(result.title);
+    },
+  },
 };
 </script>
 
@@ -60,7 +65,7 @@ export default {
   "en": {
     "animeList": "MyAnimeList",
     "refreshMAL": "Refresh MAL",
-    "airing": "Airing",
+    "watching": "Watching",
     "completed": "Completed",
     "onHold": "On Hold",
     "canceled": "Canceled",
@@ -72,7 +77,7 @@ export default {
   "de": {
     "animeList": "MyAnimeList",
     "refreshMAL": "MAL aktualisieren",
-    "airing": "Laufend",
+    "watching": "Laufend",
     "completed": "Beendet",
     "onHold": "Pausiert",
     "canceled": "Abgebrochen",
@@ -84,7 +89,7 @@ export default {
   "ja": {
     "animeList": "MyAnimeList",
     "refreshMAL": "MALを更新",
-    "airing": "見る",
+    "watching": "見る",
     "completed": "終了",
     "onHold": "中止",
     "canceled": "止めました",

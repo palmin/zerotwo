@@ -5,7 +5,7 @@ export default [
   ...Main,
   {
     path: '*',
-    redirect: '/airing',
+    redirect: '/watching',
     meta: {
       layout: Default,
     },

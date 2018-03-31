@@ -111,7 +111,7 @@ export default {
       ratingValue: 0,
       statuses: [{
         value: '1',
-        name: this.$t('airing'),
+        name: this.$t('watching'),
       }, {
         value: '2',
         name: this.$t('finished'),
@@ -251,7 +251,7 @@ export default {
     locale() {
       this.statuses = [{
         value: '1',
-        name: this.$t('airing'),
+        name: this.$t('watching'),
       }, {
         value: '2',
         name: this.$t('finished'),
@@ -454,7 +454,7 @@ export default {
     "ownRating": "Own Rating",
     "ownStatus": "Own Status",
     "watchedEpisodes": "Watched Episodes",
-    "airing": "Airing",
+    "watching": "Watching",
     "finished": "Finished",
     "onHold": "On Hold",
     "canceled": "Canceled",
@@ -501,7 +501,7 @@ export default {
     "ownRating": "Eigene Bewertung",
     "ownStatus": "Eigener Status",
     "watchedEpisodes": "Episoden geschaut",
-    "airing": "Laufend",
+    "watching": "Laufend",
     "finished": "Beendet",
     "onHold": "Pausiert",
     "canceled": "Abgebrochen",
@@ -548,7 +548,7 @@ export default {
     "ownRating": "自分の評価",
     "ownStatus": "自分のステータス",
     "watchedEpisodes": "見たエピソード",
-    "airing": "見る",
+    "watching": "見る",
     "finished": "終了",
     "onHold": "中止",
     "canceled": "止めました",

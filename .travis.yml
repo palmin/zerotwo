@@ -35,4 +35,4 @@ deploy:
     repo: NicoAiko/zerotwo
 branches:
   only:
-  - "/v\\d+\\.\\d+\\.\\d+\\-?[a-z]*/"
+  - /v\d+\.\d+\.\d+\-?[a-z]*/

@@ -20,14 +20,16 @@ script:
 - travis_wait 30 npm run build
 deploy:
   skip_cleanup: true
+  prerelease: true
+  draft: false
+  tag_name: $TRAVIS_TAG
+  name: ZeroTwo $TRAVIS_TAG
   provider: releases
   api_key:
     secure: nDu3E4PQfsbbqUU0/qOadiwQE1he0mWmDsYhhcziYM0swwMc0ScHhK43cQ2MuomP81p1Sm1xgb2AMiKVeUg0m3qk3uXwAmjNebHKmrWH7sgIID3tCXXLnfn1X6gsuN/74xeFQcXiyeb/qEwTMwzernTu40TCwwG+IfGUteqRv54BzXY8fR4qPHT5q7UjOdnXJhc+0Pl0DD4wphv7AwQxMI+VjofJ7z236SnsG5S2k/d0Z6m25qHRlh0PfzocWfv6AerHKqwTV4RPVR640oMPQXFWwNmGWdlmXn7D748ZndTLDhMvU3aygGtRNFe2az27Fu8lg9Eie1vEojfXrlRJXc5sb1PfRWapdyBqYF1hOde99OL0T4HV3t5mRYcJJs2QwMk+BlnTVMiz7qPMGjuO6G7xbgoOSrow/kgTV9qqX7AymxTFZHL5K/WIJT6UTGMnbW96JvDzpxVCqfjHY1XhMgfDj97LI2w1Nev5mEFlh7C53XekGvpXjFOX8hNvq2M1Z1Nd8MJ1+D31bhJxo+qbL4nDcojPsKi6xGYj+WMO4ZJd7JvLiHibhaMImad+pzcExS/UsmJQ0J1xHbcTLs0XZJiAnDJnSs/l0iJUjmI3MoJwqZrgccpH+3MnZf/hCxqC5aY18T0ljntki/X9zLdZLkMKxO/e2lpBx6V7+f+AWZ4=
   file_glob: true
   file:
-  - build/*.AppImage
   - build/*.deb
-  - build/*.snap
   - build/*.dmg
   on:
     repo: NicoAiko/zerotwo

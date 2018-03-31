@@ -3,16 +3,19 @@ Electron - Vue.js Anime Tracker
 
 > Taiga alternative
 
+### Get the latest release here!
+[Click here for the latest Releases!](https://github.com/NicoAiko/zerotwo/releases)
+
 #### Build status
 
-[![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
+[![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=v0.4.4-beta)](https://travis-ci.org/NicoAiko/zerotwo)
 [![Build status](https://ci.appveyor.com/api/projects/status/goacd72jf5oopi47?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
 #### Discord Server
 
 ##### Join the ZeroTwo Discord Server!
 
-[https://discord.gg/sTpR4Gw](https://discord.gg/sTpR4Gw)
+[<img src="https://www.grischabock.ch/media/36-discord-banner-png/" width="250">](https://discord.gg/sTpR4Gw)
 
 #### Build Setup
 

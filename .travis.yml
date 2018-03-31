@@ -8,6 +8,10 @@ matrix:
   - os: linux
     env: CC=clang CXX=clang++ npm_config_clang=1
     compiler: clang
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+\.\d+\-?[a-z]*$/
 cache:
   directories:
   - node_modules
@@ -34,8 +38,3 @@ deploy:
   on:
     tags: true
     repo: NicoAiko/zerotwo
-    all_branches: true
-
-# branches:
-#   only:
-    # - /v\d+\.\d+\.\d+\-?[a-z]*/

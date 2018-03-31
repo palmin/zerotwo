@@ -35,5 +35,3 @@ deploy:
 branches:
   only:
   - master
-after_success:
-- sh set_tags.sh

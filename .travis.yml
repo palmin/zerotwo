@@ -19,20 +19,19 @@ script:
 - npm run build:clean
 - travis_wait 30 npm run build
 deploy:
-  prerelease: true
-  draft: false
-  tag_name: "$TRAVIS_TAG"
-  name: ZeroTwo $TRAVIS_TAG
   provider: releases
   api_key:
-    secure: "TSevvhgfiRZLG/SDB9k9AUbjL4kN4YwmUB2dwKOEos8proJa7cZZuqj8IrxtDBaSaVpOY/93ycBGrokKqc3tO1Ze88RayZX5CNon7kEwFRZ8h2MXUWdB5PxJEdHrGY6WT5ZhWifCxP9zD5KhvMVwgvawpdxSfy+WeNO5IvbyrXsRAs8vJYq3udJplmfB4X0n3A8rtxOCz3hv97ueZDbtFsJuomSOAJHR02UdF03vafGS7MpIvGzF9RAaVivi1JX2It6Q2bmPHS4W5XBgDIhd8+ivjWOHal0TEFPadYFZ3Cxsh1BwdOif3gqXfQxJOd+UTSbW3CJ3bCn3T80i6KgP7tSukA6kUmSt00jZ7k1WmTCv8CMpMnXhBVfzNA03bU9Mj4y2ZB4hHMxIn97A2iIVf0zgJy1F6qqVTu/O69A69OMsFotOSiIbVTLn9TzY/yUorhRtBOArBI9Ahs7ePTcvPR31knwBYz6TI1AWxecYcQGOzJn3qaHfRjObmCuQ2J6TwT9W421JZToah63tAlkH3qZYm5UPlgk5YAcmHKIbbgrhZ2N3SJSanoyfxsR1WSfh4S4UrgsczxOqcSgqwCF29poP4RVmE4B62PUiCvvVQPBUqI2E1+h1K4Mom+xPrHqcP5cgwxRFBnOPmWUiaNdb6vN+5JnTgDEmhI3DYutC1CY="
+    secure: rU1Y9lKjqH7wtgr04qdSTNrfKRVUxu4zYjTvPa6pNp6NTRwAuPBqwQRWEZQg/tHoY+Jh6to1q8QW4fzQ6prz4r7gOrbKtHn+t6p8SlZ7H3KAi3kek2CRF3dKR/TDXVbWaFCOhewQ5eoEOz7JvNlNcM+Lq3QG3VxkPZrek3ZDAsMdiZddoxvBfaxSAQA/CLKupOD5wpw30gufTTaRaA0SIFeDTU74q2j661UOyySYaAf1XFnFwRa9DS0Wtg4zmZoL4Ib9R6y8Pr3RVoHGFVyG5pWuBFCbx8VxAX0B37iv1/w7ce9pnVdw2jrkxxzzxGUNxlOfr+SLX3UarZ1py+cBGMDXZUi9FnhW9dhdjgHQHhpgGhE4npUbJ2LYcIbSzFM/aeMFsrNGPDXlPARHNiCcc0t1xH7ypjoHYDRpvHz/JLq7v4rmyqGWapOz1H4Y5gnD6MkMML05siRpA6Xh5k0iCaAApzPUv6+vZOzsobK4Ww8M0bGNiQzST5XY/yHG2Ioo7GXr+HV8CTYGkpJndMldqANyr/LVrl2Tke1TSeSYnd5E/ObSNXQ2g/0RGS/tS3CgrWg+bCKcksEw5td+YaXDdz1u+eMFxEFNjhk3/jZrlhcx4l/2WPm1HeMBsqWYUBdXK2vn41P+DVfSyhx+voKGQsmNc+iXkICyb5vKCyZD6VQ=
   file_glob: true
   file:
   - build/*.deb
   - build/*.dmg
+  prerelease: true
+  draft: false
+  tag_name: "$TRAVIS_TAG"
+  name: ZeroTwo $TRAVIS_TAG
   on:
     repo: NicoAiko/zerotwo
-    tags: true
 branches:
   only:
   - "/v\\d+\\.\\d+\\.\\d+\\-?[a-z]*/"

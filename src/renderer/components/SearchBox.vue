@@ -6,8 +6,6 @@
             v-model="searchValue"
             @input="searching = true"
             @keyup="searching = false"
-            @focus="triggerResultPopup"
-            @blur="toggleResultPopup"
             @change="triggerSearch"
           />
       <i class="search icon"></i>
@@ -20,6 +18,9 @@
             <div class="content">
               <div class="title">
                 {{ result.title }}
+              </div>
+              <div class="description" v-if="result.english">
+                {{ result.english }}
               </div>
             </div>
           </a>
@@ -74,16 +75,18 @@ export default {
       this.search();
     },
 
-    triggerResultPopup() {
-      if (_.isEmpty(this.searchResults)) {
+    toggleResultPopup(transition = 'show') {
+      const element = $('#transitionContainer', this.$el);
+      if ((_.isEmpty(this.searchResults) && transition !== 'hide') || element.transition('is animating')) {
         return;
       }
 
-      this.toggleResultPopup();
-    },
+      if (transition === 'hide' || transition === 'show') {
+        setTimeout(() => { element.transition(transition); }, 100);
+        return;
+      }
 
-    toggleResultPopup(transition = 'toggle') {
-      $('#transitionContainer', this.$el)
+      element
         .transition(transition);
     },
 
@@ -160,7 +163,7 @@ export default {
             .sortBy(['category', 'title'])
             .take(10)
             .value();
-          this.triggerResultPopup();
+          this.toggleResultPopup();
         })
         .catch(() => {});
     },
@@ -195,7 +198,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.item > .results {
+#transitionContainer {
   position: absolute;
   top: 100%;
   left: -75%;
@@ -209,10 +212,7 @@ export default {
   border: 1px solid #d4d4d5;
   z-index: 998;
 
-  & > :first-child {
-    border-radius: .28571429rem .28571429rem 0 0;
-  }
-
+  & > :first-child,
   & > :last-child {
     border-radius: .28571429rem .28571429rem 0 0;
   }

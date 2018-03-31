@@ -32,5 +32,10 @@ deploy:
   tag_name: "$TRAVIS_TAG"
   name: ZeroTwo $TRAVIS_TAG
   on:
+    tags: true
     repo: NicoAiko/zerotwo
-    branch: /v\d+\.\d+\.\d+\-?[a-z]*/
+    all_branches: true
+
+# branches:
+#   only:
+    # - /v\d+\.\d+\.\d+\-?[a-z]*/

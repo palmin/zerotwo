@@ -6,6 +6,7 @@ Electron - Vue.js Anime Tracker
 #### Build status
 
 [![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
+[![Build status](https://ci.appveyor.com/api/projects/status/goacd72jf5oopi47?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
 #### Build Setup
 

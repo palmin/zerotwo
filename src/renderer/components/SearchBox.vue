@@ -206,7 +206,7 @@ export default {
   white-space: normal;
   background: #fff;
   margin-top: .5em;
-  width: 28em;
+  width: 40em;
   border-radius: .28571429rem;
   box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15);
   border: 1px solid #d4d4d5;
@@ -230,7 +230,6 @@ export default {
     .name {
       display: table-cell;
       text-overflow: ellipsis;
-      width: 100px;
       white-space: nowrap;
       background: 0 0;
       font-size: 1em;
@@ -245,6 +244,7 @@ export default {
       background: #fff;
       border-left: 1px solid rgba(34,36,38,.15);
       border-bottom: 1px solid rgba(34,36,38,.1);
+      width: 100%;
 
       .result {
         cursor: pointer;

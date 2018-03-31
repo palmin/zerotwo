@@ -1,4 +1,4 @@
-import Airing from './pages/Airing';
+import Watching from './pages/Watching';
 import Canceled from './pages/Canceled';
 import Finished from './pages/Finished';
 import OnHold from './pages/OnHold';
@@ -6,9 +6,9 @@ import Planned from './pages/Planned';
 
 export default [
   {
-    path: '/airing',
-    name: 'Airing',
-    component: Airing,
+    path: '/watching',
+    name: 'Watching',
+    component: Watching,
   },
   {
     path: '/canceled',

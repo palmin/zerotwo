@@ -33,6 +33,7 @@ deploy:
   name: ZeroTwo $TRAVIS_TAG
   on:
     repo: NicoAiko/zerotwo
+    branch: master
 branches:
   only:
   - "/v\\d+\\.\\d+\\.\\d+\\-?[a-z]*/"

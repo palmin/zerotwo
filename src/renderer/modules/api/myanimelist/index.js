@@ -16,8 +16,9 @@ export default axios => ({
       .then(data => _.map(data.myanimelist.anime, entry => transformSingles(entry)));
   },
   findAnime(query, auth) {
+    const searchValue = query.replace(/[&/\\#,+()$~%.'":*?<>{}\s]/g, '_');
     return axios
-      .get(`/api/anime/search.xml?q=${encodeURI(query)}`, { auth })
+      .get(`/api/anime/search.xml?q=${encodeURI(searchValue)}`, { auth })
       .then(response => response.data)
       .then(data => parseString(data))
       .then((data) => {

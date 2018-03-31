@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "Noto Sans";
+    font-weight: bold;
+    font-style: normal;
+    src: url("assets/fonts/NotoSansCJKjp-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    font-weight: normal;
+    font-style: normal;
+    src: url("assets/fonts/NotoSansCJKjp-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    font-weight: 400;
+    font-style: normal;
+    src: url("assets/fonts/NotoSansCJKjp-DemiLight.otf") format("opentype");
+}
+
+*:not(.icon) {
+    font-family: 'Noto Sans', Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+}

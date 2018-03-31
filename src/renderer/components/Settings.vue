@@ -14,6 +14,9 @@
             <a class="item" data-tab="restoreFactoryData">
               {{ $t('restoreFactoryData') }}
             </a>
+            <a class="item" data-tab="aboutZeroTwo">
+              {{ $t('aboutZeroTwo') }}
+            </a>
           </div>
         </div>
 
@@ -83,6 +86,38 @@
               {{ $t('restoreFactoryData') }}
             </div>
           </div>
+
+          <div class="ui basic tab segment" data-tab="aboutZeroTwo">
+            <h2 class="ui header">
+              {{ $t('aboutZeroTwo') }}
+            </h2>
+            <div class="ui grid">
+              <div class="four wide column">
+                <div class="ui statistic">
+                  <div class="label">
+                    {{ $t('version') }}
+                  </div>
+                  <div class="value">
+                    {{ currentAppVersion }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="twelve wide column">
+                <div class="ui small statistic">
+                  <div class="label">
+                    GitHub
+                  </div>
+                  <div class="value">
+                    <a href="#" @click="openGithubPage">
+                      <i class="github icon"></i>
+                      {{ $t('link') }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -93,6 +128,8 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { shell } from 'electron';
 import { mapState, mapActions, mapMutations } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, between } from 'vuelidate/lib/validators';
@@ -110,6 +147,7 @@ export default {
   computed: {
     ...mapState('myAnimeList', ['auth', 'refreshRate']),
     ...mapState('i18n', ['locale']),
+    ...mapState(['currentAppVersion']),
     loggedIn() {
       return !!this.auth;
     },
@@ -147,6 +185,9 @@ export default {
   methods: {
     ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
     ...mapMutations('i18n', ['setLocale']),
+    openGithubPage() {
+      shell.openExternal('https://github.com/nicoaiko/zerotwo');
+    },
     submitLanguageChange() {
       this.setLocale(this.localeSetting);
     },
@@ -237,7 +278,10 @@ export default {
     "noCredentials": "No credentials!",
     "enterCredentials": "Please enter credentials to log in.",
     "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>"
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>",
+    "aboutZeroTwo": "About ZeroTwo",
+    "version": "Version",
+    "link": "Click Me"
   },
   "de": {
     "settings": "Einstellungen",
@@ -261,7 +305,10 @@ export default {
     "noCredentials": "Keine Anmeldedaten!",
     "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
     "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>",
+    "aboutZeroTwo": "Über ZeroTwo",
+    "version": "Version",
+    "link": "Klick mich"
   },
   "ja": {
     "settings": "設定",
@@ -285,7 +332,10 @@ export default {
     "noCredentials": "ログインデータは入力しませんでした！",
     "enterCredentials": "ログインデータを入力してください！",
     "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>"
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>",
+    "aboutZeroTwo": "ZeroTwoについて",
+    "version": "バージョン",
+    "link": "クリックして"
   }
 }
 </i18n>

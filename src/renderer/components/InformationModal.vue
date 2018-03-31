@@ -31,7 +31,7 @@
               <div class="ui form">
                 <div class="field">
                   <label>{{ $t('ownStatus') }}</label>
-                  <dropdown :placeholder="$t('dropdownPlaceholder')" :items="statuses" :value="ownStatus" v-model="ownStatusValue" />
+                  <dropdown :placeholder="dropdownPlaceholder" :items="statuses" :value="ownStatus" v-model="ownStatusValue" />
                 </div>
                 <div class="field">
                   <label>{{ $t('watchedEpisodes') }}</label>
@@ -44,7 +44,11 @@
                 </div>
                 <div class="field">
                   <label>{{ $t('ownRating') }}</label>
-                  <div id="ownRating" class="ui star rating"></div> ({{ ratingValue }}) <a class="ui secondary label" @click="clearRating">Clear</a>
+                  <div id="ownRating" class="ui star rating"></div>
+                  ({{ ratingValue }})&nbsp;
+                  <a class="ui secondary label" @click="clearRating">
+                    {{ $t('clear') }}
+                  </a>
                 </div>
                 <template v-if="currentAnime">
                   <div class="ui right floated primary button" @click="submitChanges">
@@ -231,6 +235,10 @@ export default {
 
     deleteModalContent() {
       return this.$t('doYouReallyWantToDelete', { title: this.header });
+    },
+
+    dropdownPlaceholder() {
+      return this.$t('dropdownPlaceholder');
     },
   },
 
@@ -478,7 +486,8 @@ export default {
     },
     "errorResponseTitle": "Update not successful!",
     "deleteModalHeader": "Confirm delete?",
-    "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?"
+    "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
+    "clear": "Set to 0 stars"
   },
   "de": {
     "close": "Schließen",
@@ -525,7 +534,8 @@ export default {
     },
     "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
     "deleteModalHeader": "Wirklich löschen?",
-    "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?"
+    "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
+    "clear": "Auf 0 Sterne setzen"
   },
   "ja": {
     "close": "クローズ",
@@ -572,7 +582,8 @@ export default {
     },
     "errorResponseTitle": "シンクロは出来ませんでした！",
     "deleteModalHeader": "本当に削除しますか？",
-    "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？"
+    "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
+    "clear": "０☆にセット"
   }
 }
 </i18n>

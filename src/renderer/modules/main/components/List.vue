@@ -13,15 +13,26 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in listItems" :key="index">
-        <td>
-          <i class="stop icon" :class="{
-            green: Number(data.my_status) === 1,
-            blue: Number(data.my_status) === 2,
-            yellow: Number(data.my_status) === 3,
-            red: Number(data.my_status) === 4,
-            black: Number(data.my_status) === 6
-          }"></i>
+      <tr v-for="(data, index) in listItems" :key="data.series_animedb_id">
+        <td class="collapsing center aligned">
+          <div class="ui inline dropdown">
+            <div class="text">
+              <i class="stop icon" :class="{
+                green: Number(data.my_status) === 1,
+                blue: Number(data.my_status) === 2,
+                yellow: Number(data.my_status) === 3,
+                red: Number(data.my_status) === 4,
+                black: Number(data.my_status) === 6
+              }"></i>
+            </div>
+            <div class="menu">
+              <div class="item" :data-value="1" :data-id="data.series_animedb_id"><i class="green stop icon"></i></div>
+              <div class="item" :data-value="2" :data-id="data.series_animedb_id"><i class="blue stop icon"></i></div>
+              <div class="item" :data-value="3" :data-id="data.series_animedb_id"><i class="yellow stop icon"></i></div>
+              <div class="item" :data-value="4" :data-id="data.series_animedb_id"><i class="red stop icon"></i></div>
+              <div class="item" :data-value="6" :data-id="data.series_animedb_id"><i class="black stop icon"></i></div>
+            </div>
+          </div>
         </td>
         <td @click="openInformation(data.series_title)">{{ data.series_title }}</td>
         <td class="collapsing center aligned episodeRow">
@@ -51,12 +62,23 @@
 
 <script>
 import _ from 'lodash';
+import Promise from 'bluebird';
 import { Builder } from 'xml2js';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import InfoBox from '@/components/InformationModal';
 
 export default {
   props: ['listItems'],
+
+  watch: {
+    listItems(list) {
+      if (!list) {
+        return;
+      }
+
+      this.setReady(true);
+    },
+  },
 
   components: { InfoBox },
 
@@ -69,18 +91,57 @@ export default {
     episode: value => (+value <= 0 ? '?' : +value),
   },
 
+  mounted() {
+    $('.ui.dropdown', this.$el).dropdown({
+      onChange: this.changeAnimeStatus,
+    });
+  },
+
+  updated() {
+    $('.ui.dropdown', this.$el).dropdown({
+      onChange: this.changeAnimeStatus,
+    });
+  },
+
   data() {
     return {
       updateTimer: null,
-      updateTimeoutInterval: 1000,
+      updateTimeoutInterval: 250,
       updatePayload: [],
+      episodeChanged: false,
+      statusChanged: false,
+      scoreChanged: false,
     };
   },
 
   methods: {
+    ...mapActions('myAnimeList', ['detectAndSetMALData']),
     ...mapMutations('myAnimeList', ['setInformation']),
+    ...mapMutations(['setReady']),
     openInformation(name) {
       this.setInformation(name);
+    },
+
+    changeAnimeStatus(value, text, $selectedItem) {
+      const id = $($selectedItem).attr('data-id');
+
+      _.map(this.listItems, (item) => {
+        if (+item.series_animedb_id !== +id) {
+          return item;
+        }
+
+        const entry = {
+          series_animedb_id: item.series_animedb_id,
+          series_title: item.series_title,
+          my_watched_episodes: item.my_watched_episodes,
+          my_status: value,
+          my_score: item.my_score,
+        };
+
+        this.startUpdateTimer(entry);
+        this.statusChanged = true;
+        return item;
+      });
     },
 
     decreaseOneEpisode(data) {
@@ -89,6 +150,7 @@ export default {
       }
 
       data.my_watched_episodes = +data.my_watched_episodes - 1;
+      this.episodeChanged = true;
       this.startUpdateTimer(data);
     },
 
@@ -102,6 +164,7 @@ export default {
       }
 
       data.my_watched_episodes = +data.my_watched_episodes + 1;
+      this.episodeChanged = true;
       this.startUpdateTimer(data);
     },
 
@@ -124,9 +187,13 @@ export default {
       this.updateTimer = setTimeout(this.updateChanges, this.updateTimeoutInterval);
     },
 
-    updateChanges() {
+    async updateChanges() {
       if (_.isEmpty(this.updatePayload)) {
         return;
+      }
+
+      if (this.statusChanged) {
+        this.setReady(false);
       }
 
       // Group entries by their ID and reduce to the latest change
@@ -138,11 +205,11 @@ export default {
         .value();
 
       const builder = new Builder({ rootName: 'entry' });
-      _.forEach(entries, (entry) => {
+      await Promise.each(entries, async (entry) => {
         const { id, title } = entry;
 
         const xml = builder.buildObject(entry);
-        this.$http.updateAnime(this.auth, { id, xml })
+        return this.$http.updateAnime(this.auth, { id, xml })
           .then((response) => {
             if (response === 'Updated') {
               this.$notify({
@@ -158,7 +225,16 @@ export default {
               text: error,
             });
           });
-      });
+      })
+        .finally(() => {
+          if (this.statusChanged) {
+            this.$emit('refresh');
+          }
+          this.updatePayload = [];
+          this.statusChanged = false;
+          this.episodeChanged = false;
+          this.scoreChanged = false;
+        });
     },
 
     progressMaxEpisodes(data) {
@@ -185,7 +261,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+td > .ui.dropdown > .text > i.stop.icon,
+td > .ui.dropdown > .menu > .item > i.stop.icon {
+  margin-right: 0;
+}
+
 td.episodeRow {
   position: relative;
 
@@ -260,7 +341,12 @@ progress[value]::-webkit-progress-value {
       "title": "Anime updated!",
       "text": "{title} was successfully updated!"
     },
-    "errorResponseTitle": "Update not successful!"
+    "errorResponseTitle": "Update not successful!",
+    "watching": "Watching",
+    "finished": "Finished",
+    "onHold": "On Hold",
+    "canceled": "Canceled",
+    "planned": "Planned"
   },
   "de": {
     "animeTitle": "Animetitel",
@@ -278,7 +364,12 @@ progress[value]::-webkit-progress-value {
       "title": "Anime aktualisiert!",
       "text": "{title} wurde erfolgreich aktualisiert!"
     },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!"
+    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
+    "watching": "Laufend",
+    "finished": "Beendet",
+    "onHold": "Pausiert",
+    "canceled": "Abgebrochen",
+    "planned": "Geplant"
   },
   "ja": {
     "animeTitle": "アニメのタイトル",
@@ -296,7 +387,12 @@ progress[value]::-webkit-progress-value {
       "title": "更新成功！",
       "text": "「{title}」の更新は成功しました！"
     },
-    "errorResponseTitle": "シンクロは出来ませんでした！"
+    "errorResponseTitle": "シンクロは出来ませんでした！",
+    "watching": "見る",
+    "finished": "終了",
+    "onHold": "中止",
+    "canceled": "止めました",
+    "planned": "見るつもり"
   }
 }
 </i18n>

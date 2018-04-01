@@ -1,25 +1,48 @@
 <template>
   <div>
-    <list-component :listItems="completedAnime" />
+    <list-component :listItems="anime" @refresh="refreshData" />
   </div>
 </template>
 
 <script>
 import _ from 'lodash';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import ListComponent from '../components/List';
 
 export default {
   components: { ListComponent },
 
-  computed: {
-    ...mapState('myAnimeList', ['malData']),
-    completedAnime() {
+  methods: {
+    ...mapActions('myAnimeList', ['detectAndSetMALData']),
+    getAnime() {
       return _.chain(this.malData)
         .filter(item => Number(item.my_status) === 2)
         .sortBy(item => item.series_title.toLowerCase())
         .value();
     },
+
+    refreshData() {
+      this.detectAndSetMALData()
+        .then(() => this.populateAnime());
+    },
+
+    populateAnime() {
+      this.anime = this.getAnime();
+    },
+  },
+
+  data() {
+    return {
+      anime: [],
+    };
+  },
+
+  mounted() {
+    this.populateAnime();
+  },
+
+  computed: {
+    ...mapState('myAnimeList', ['malData']),
   },
 };
 </script>

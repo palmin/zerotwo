@@ -48,8 +48,14 @@
             }"
             @click="increaseOneEpisode(data)" />
         </td>
-        <td class="collapsing center aligned">
+        <td class="collapsing center aligned scoreRow">
           {{ data.my_score | score }}
+          <i class="small red minus icon"
+            :class="{ disabled: +data.my_score === 0 }"
+            @click="decreaseOneStar(data)" />
+          <i class="small green plus icon"
+            :class="{ disabled: !!+data.my_score && +data.my_score === 10 }"
+            @click="increaseOneStar(data)" />
         </td>
         <td class="collapsing center aligned">
           {{ getSeason(data.series_start) }}
@@ -106,7 +112,7 @@ export default {
   data() {
     return {
       updateTimer: null,
-      updateTimeoutInterval: 250,
+      updateTimeoutInterval: 500,
       updatePayload: [],
       episodeChanged: false,
       statusChanged: false,
@@ -164,7 +170,31 @@ export default {
       }
 
       data.my_watched_episodes = +data.my_watched_episodes + 1;
+      if (+data.my_watched_episodes === +data.series_episodes) {
+        data.my_status = 2;
+        this.statusChanged = true;
+      }
       this.episodeChanged = true;
+      this.startUpdateTimer(data);
+    },
+
+    decreaseOneStar(data) {
+      if (!data || +data.my_score === 0) {
+        return;
+      }
+
+      data.my_score = +data.my_score - 1;
+      this.scoreChanged = true;
+      this.startUpdateTimer(data);
+    },
+
+    increaseOneStar(data) {
+      if (!data || (!!+data.my_score && +data.my_score === 10)) {
+        return;
+      }
+
+      data.my_score = +data.my_score + 1;
+      this.scoreChanged = true;
       this.startUpdateTimer(data);
     },
 
@@ -267,7 +297,8 @@ td > .ui.dropdown > .menu > .item > i.stop.icon {
   margin-right: 0;
 }
 
-td.episodeRow {
+td.episodeRow,
+td.scoreRow {
   position: relative;
 
   &:hover > i.icon:not(.disabled) {

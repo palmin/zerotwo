@@ -226,15 +226,8 @@ export default {
           return item;
         }
 
-        const entry = {
-          series_animedb_id: item.series_animedb_id,
-          series_title: item.series_title,
-          my_watched_episodes: item.my_watched_episodes,
-          my_status: value,
-          my_score: item.my_score,
-        };
-
-        this.startUpdateTimer(entry);
+        item.my_status = value;
+        this.startUpdateTimer(item);
         this.statusChanged = true;
         return item;
       });
@@ -312,6 +305,9 @@ export default {
         return;
       }
 
+      // As the whole list has to be re-rendered partially,
+      // the user should not be able to do something during
+      // that session of re-fetching data.
       if (this.statusChanged) {
         this.setReady(false);
       }
@@ -347,6 +343,9 @@ export default {
           });
       })
         .finally(() => {
+          // Since we only need to re-render
+          // when the status has changed
+          // we only trigger the refresh then.
           if (this.statusChanged) {
             this.$emit('refresh');
           }

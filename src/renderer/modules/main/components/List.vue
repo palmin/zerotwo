@@ -1,19 +1,47 @@
 <template>
-  <table class="ui compact single line selectable celled table">
+  <table class="ui compact single line selectable sortable celled table">
     <thead>
       <tr>
         <th class="collapsing"></th>
-        <th>{{ $t('animeTitle') }}</th>
-        <th class="collapsing center aligned">{{ $t('progress') }}</th>
-        <th class="collapsing center aligned">
-          {{ $t('score') }}
+
+        <th @click="orderTable('series_title')">
+          {{ $t('animeTitle') }}
+          <i class="sort alphabet icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'series_title'"
+          ></i>
         </th>
-        <th class="collapsing center aligned">{{ $t('season') }}</th>
+
+        <th @click="orderTable('progress')" class="collapsing center aligned">
+          {{ $t('progress') }}
+          <i class="sort icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'progress'"
+          ></i>
+        </th>
+
+        <th @click="orderTable('my_score')" class="collapsing center aligned">
+          {{ $t('score') }}
+          <i class="sort numeric icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'my_score'"
+          ></i>
+        </th>
+
+        <th @click="orderTable('series_start')" class="collapsing center aligned">
+          {{ $t('season') }}
+          <i class="sort icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'series_start'"
+          ></i>
+        </th>
+
         <th class="collapsing right aligned">{{ $t('lastUpdated') }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in listItems" :key="data.series_animedb_id">
+      <tr v-for="data in list" :key="data.series_animedb_id">
+
         <td class="collapsing center aligned">
           <div class="ui inline dropdown">
             <div class="text">
@@ -35,7 +63,8 @@
           </div>
         </td>
         <td @click="openInformation(data.series_title)">{{ data.series_title }}</td>
-        <td class="collapsing center aligned episodeRow">
+
+        <td class="collapsing episodeRow">
           <progress :value="data.my_watched_episodes" :max="progressMaxEpisodes(data)" />
           {{ data.my_watched_episodes }} / {{ data.series_episodes | episode }}
           <i class="small red minus icon"
@@ -48,6 +77,7 @@
             }"
             @click="increaseOneEpisode(data)" />
         </td>
+
         <td class="collapsing center aligned scoreRow">
           {{ data.my_score | score }}
           <i class="small red minus icon"
@@ -57,9 +87,11 @@
             :class="{ disabled: !!+data.my_score && +data.my_score === 10 }"
             @click="increaseOneStar(data)" />
         </td>
+
         <td class="collapsing center aligned">
           {{ getSeason(data.series_start) }}
         </td>
+
         <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated * 1000).fromNow() }}</td>
       </tr>
     </tbody>
@@ -90,6 +122,42 @@ export default {
 
   computed: {
     ...mapState('myAnimeList', ['auth']),
+    list() {
+      if (this.currentSort.field === null) {
+        return this.listItems;
+      }
+
+      return _.orderBy(this.listItems, [(item) => {
+        if (this.currentSort.field === 'my_score') {
+          // We need to return it as a number
+          // because otherwise lodash compares it as a string
+          // which would make 10's < 2's
+          return Number(item.my_score);
+        }
+
+        if (this.currentSort.field === 'progress') {
+          if (+item.my_watched_episodes === 0) {
+            // Early return here to prevent the case
+            // that if it still has no ending episode amount
+            // it returns 4/5 even though no episode has been watched yet.
+            // tl;dr: Not yet watched? It's 0% then.
+            return 0;
+          }
+          if (+item.series_episodes <= 0) {
+            // The progress bar is 4/5 full at anime that have no ending episode amount
+            // To keep the overview understandable, it'll be there even if there are
+            // not that much episodes that have been watched
+            return 0.8;
+          }
+
+          const percent = item.my_watched_episodes / item.series_episodes;
+          // JavaScript is not trustworthy...
+          return Number(percent);
+        }
+
+        return item[this.currentSort.field];
+      }], [this.currentSort.direction]);
+    },
   },
 
   filters: {
@@ -117,6 +185,11 @@ export default {
       episodeChanged: false,
       statusChanged: false,
       scoreChanged: false,
+
+      currentSort: {
+        field: null,
+        direction: null,
+      },
     };
   },
 
@@ -124,6 +197,23 @@ export default {
     ...mapActions('myAnimeList', ['detectAndSetMALData']),
     ...mapMutations('myAnimeList', ['setInformation']),
     ...mapMutations(['setReady']),
+    orderTable(field) {
+      // Easy order:
+      // null -> asc -> desc -> null
+      if (this.currentSort.field === field) {
+        if (this.currentSort.direction === 'asc') {
+          this.currentSort.direction = 'desc';
+        } else {
+          this.currentSort.field = null;
+          this.currentSort.direction = null;
+        }
+        return;
+      }
+
+      this.currentSort.field = field;
+      this.currentSort.direction = 'asc';
+    },
+
     openInformation(name) {
       this.setInformation(name);
     },

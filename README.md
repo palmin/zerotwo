@@ -13,13 +13,12 @@ Electron - Vue.js Anime Tracker
 ## What is ZeroTwo?
 
 > Welcome to ZeroTwo, the whole new experience of managing the MyAnimeList!
-
+>
 > With this program you will easily add, update or delete Anime from your list!
-
+> 
 > You only have to login to MyAnimeList and the fun can begin!",
 
-### Get the latest release here!
-[Click here for the latest Releases!](https://github.com/NicoAiko/zerotwo/releases)
+## [Get the latest release here!](https://github.com/NicoAiko/zerotwo/releases)
 
 ## Discord Server
 
@@ -29,7 +28,9 @@ Electron - Vue.js Anime Tracker
 
 ---
 
-#### Build Setup
+## [Documentation](https://github.com/NicoAiko/zerotwo/wiki)
+
+#### Short Build Setup
 
 ``` bash
 # install dependencies
@@ -49,8 +50,6 @@ npm run lint
 
 ---
 
-# LICENSE
+# [LICENSE](LICENSE)
 
 GNU General Public License v3.0
-
-Read more here: [License](LICENSE)

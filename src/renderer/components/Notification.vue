@@ -1,5 +1,5 @@
 <template>
-  <notifications classes="zerotwo-style" position="bottom right">
+  <notifications classes="zerotwo-style" position="top center">
     <template slot="body" slot-scope="props">
       <div class="zerotwo-style" :class="props.item.type">
         <div class="zerotwo-style-icon">

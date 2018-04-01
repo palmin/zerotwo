@@ -31,7 +31,7 @@
               <div class="ui form">
                 <div class="field">
                   <label>{{ $t('ownStatus') }}</label>
-                  <dropdown :placeholder="dropdownPlaceholder" :items="statuses" :value="ownStatus" v-model="ownStatusValue" />
+                  <dropdown :placeholder="dropdownPlaceholder" :items="statuses" :value="ownStatus" v-model="ownStatusValue" @change="checkChangedAnimeStatus" />
                 </div>
                 <div class="field">
                   <label>{{ $t('watchedEpisodes') }}</label>
@@ -278,6 +278,17 @@ export default {
 
   methods: {
     ...mapMutations('myAnimeList', ['setInformation']),
+
+    checkChangedAnimeStatus(status) {
+      // When status was set to finished
+      if (status === '2') {
+        if (!+this.data.episodes) {
+          return;
+        }
+
+        this.ownEpisodeProgressValue = +this.data.episodes;
+      }
+    },
 
     deleteFromList() {
       this.$refs[this.deleteModalRef].show();

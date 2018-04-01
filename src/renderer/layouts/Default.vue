@@ -5,7 +5,7 @@
         {{ $t('loading') }}
       </div>
     </div>
-    <main-menu :openSettings="openSettings" :refreshMAL="refreshMAL" :malData="malData" :openInformation="openInformation" />
+    <main-menu :openSettings="openSettings" :refreshMAL="refreshMAL" :openInformation="openInformation" />
     <settings :ref="event" />
     <info-box :ref="infoBox" :data="infoData" @refresh="detectAndSetMALData" />
     <transition name="fade" mode="out-in">

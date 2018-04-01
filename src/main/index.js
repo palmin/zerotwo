@@ -29,6 +29,10 @@ function createWindow() {
     },
   });
 
+  mainWindow.webContents.on('will-navigate', (event) => {
+    event.preventDefault();
+  });
+
   mainWindow.loadURL(winURL);
 
   mainWindow.on('closed', () => {

@@ -282,11 +282,11 @@ export default {
     checkChangedAnimeStatus(status) {
       // When status was set to finished
       if (status === '2') {
-        if (!Number(this.data.episodes)) {
+        if (!+this.data.episodes) {
           return;
         }
 
-        this.ownEpisodeProgressValue = Number(this.data.episodes);
+        this.ownEpisodeProgressValue = +this.data.episodes;
       }
     },
 

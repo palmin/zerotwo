@@ -1,5 +1,7 @@
-import { app, BrowserWindow } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, Menu } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
 import { autoUpdater } from 'electron-updater';
+// import fs from 'fs';
+// import path from 'path';
 
 /**
  * Set `__static` path to static files in production
@@ -8,6 +10,46 @@ import { autoUpdater } from 'electron-updater';
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
+
+// function exists(file) {
+//   return new Promise((resolve) => {
+//     fs.exists(file, (result) => {
+//       resolve(result);
+//     });
+//   });
+// }
+
+// function readFile(file) {
+//   return new Promise((resolve, reject) => {
+//     fs.readFile(file, 'utf8', (err, data) => {
+//       if (err) {
+//         reject(err);
+//         return;
+//       }
+//       resolve(data);
+//     });
+//   });
+// }
+
+// function getUserDefinedLocale() {
+//   const userData = app.getPath('userData');
+//   const settingsConfig = path.join(userData, 'settings.json');
+//   return exists(settingsConfig).then((result) => {
+//     if (result) {
+//       return readFile(settingsConfig).then((content) => {
+//         try {
+//           const value = JSON.parse(content).locale;
+//           return value && typeof value === 'string' ? value.toLowerCase() : undefined;
+//         } catch (e) {
+//           return undefined;
+//         }
+//       });
+//     }
+//     return undefined;
+//   });
+// }
+
+// const userDefinedLocale = getUserDefinedLocale();
 
 let mainWindow;
 const winURL = process.env.NODE_ENV === 'development'
@@ -38,6 +80,51 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // const locale = userDefinedLocale === undefined ? 'en' : userDefinedLocale;
+
+  // Menu
+  // Check if we are on a Mac
+  if (process.platform === 'darwin') {
+    // Create our menu entries so that we can use MAC shortcuts
+    Menu.setApplicationMenu(Menu.buildFromTemplate([
+      {
+        label: app.getName(),
+        submenu: [
+          { role: 'about' },
+          { type: 'separator' },
+          { role: 'hide' },
+          { role: 'hideothers' },
+          { role: 'unhide' },
+          { type: 'separator' },
+          { role: 'quit' },
+        ],
+      },
+      {
+        label: 'Edit',
+        submenu: [
+          { role: 'undo' },
+          { role: 'redo' },
+          { type: 'separator' },
+          { role: 'cut' },
+          { role: 'copy' },
+          { role: 'paste' },
+          { role: 'delete' },
+          { role: 'selectall' },
+        ],
+      },
+      {
+        label: 'Window',
+        submenu: [
+          { role: 'close' },
+          { role: 'minimize' },
+          { role: 'zoom' },
+          { type: 'separator' },
+          { role: 'front' },
+        ],
+      },
+    ]));
+  }
 }
 
 app.on('ready', createWindow);

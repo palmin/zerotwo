@@ -329,10 +329,10 @@ export default {
 
         // When changed to Complete,
         // episodes should be the series's.
-        if (value === 2) {
+        if (+value === 2) {
           item.my_watched_episodes = +item.series_episodes <= 0
-            ? item.my_watched_episodes
-            : item.series_episodes;
+            ? +item.my_watched_episodes
+            : +item.series_episodes;
           this.episodeChanged = true;
         }
 

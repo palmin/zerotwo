@@ -40,10 +40,16 @@
       </tr>
     </thead>
     <tbody>
+      <tr v-if="currentOffset !== 0">
+        <td class="center aligned" colspan="6" @click="scrollUpInfinite">
+          {{ $t('loadMore') }}
+        </td>
+      </tr>
+
       <tr v-for="data in list" :key="data.series_animedb_id">
 
         <td class="collapsing center aligned">
-          <div class="ui inline dropdown">
+          <div class="ui status inline dropdown">
             <div class="text">
               <i class="stop icon" :class="{
                 green: Number(data.my_status) === 1,
@@ -67,25 +73,57 @@
         <td class="collapsing episodeRow">
           <progress :value="data.my_watched_episodes" :max="progressMaxEpisodes(data)" />
           {{ data.my_watched_episodes }} / {{ data.series_episodes | episode }}
-          <i class="small red minus icon"
-            :class="{ disabled: +data.my_watched_episodes === 0 }"
-            @click="decreaseOneEpisode(data)" />
-          <i class="small green plus icon"
-            :class="{
-              disabled: !!+data.series_episodes &&
-              +data.my_watched_episodes === +data.series_episodes
-            }"
-            @click="increaseOneEpisode(data)" />
+          <div class="controlIcons">
+            <span class="red" @click="decreaseOneEpisode(data)" v-if="+data.my_watched_episodes !== 0">
+              <div class="preview">
+                <span class="episode-arrow" v-if="+data.my_watched_episodes !== 0">
+                  {{ +data.my_watched_episodes - 1 }}
+                  <i class="inverted left arrow icon" />
+                  {{ +data.my_watched_episodes }}
+                </span>
+              </div>
+              <i class="inverted minus icon"
+                :class="{ disabled: +data.my_watched_episodes === 0 }" />
+            </span>
+
+            <span class="green" @click="increaseOneEpisode(data)">
+              <i class="inverted plus icon"
+                :class="{
+                  disabled: !!+data.series_episodes &&
+                  +data.my_watched_episodes === +data.series_episodes
+                }" />
+              <div class="preview">
+                <span class="episode-arrow" v-if="(+data.series_episodes > 0 && +data.my_watched_episodes < +data.series_episodes) || +data.series_episodes <= 0">
+                  {{ +data.my_watched_episodes }}
+                  <i class="inverted right arrow icon" />
+                  {{ +data.my_watched_episodes + 1 }}
+                </span>
+                <span class="new-status" v-if="(+data.series_episodes > 0 && +data.my_watched_episodes + 1 === +data.series_episodes)">
+                  {{ $t('toFinished') }}
+                </span>
+              </div>
+            </span>
+          </div>
         </td>
 
         <td class="collapsing center aligned scoreRow">
-          {{ data.my_score | score }}
-          <i class="small red minus icon"
-            :class="{ disabled: +data.my_score === 0 }"
-            @click="decreaseOneStar(data)" />
-          <i class="small green plus icon"
-            :class="{ disabled: !!+data.my_score && +data.my_score === 10 }"
-            @click="increaseOneStar(data)" />
+          <div class="ui score scrolling compact dropdown">
+            <input type="hidden" name="score" :value="data.my_score">
+            <div class="default text">-</div>
+            <div class="menu">
+              <div class="item" :data-value="0" :data-id="data.series_animedb_id">-</div>
+              <div class="item" :data-value="1" :data-id="data.series_animedb_id">1</div>
+              <div class="item" :data-value="2" :data-id="data.series_animedb_id">2</div>
+              <div class="item" :data-value="3" :data-id="data.series_animedb_id">3</div>
+              <div class="item" :data-value="4" :data-id="data.series_animedb_id">4</div>
+              <div class="item" :data-value="5" :data-id="data.series_animedb_id">5</div>
+              <div class="item" :data-value="6" :data-id="data.series_animedb_id">6</div>
+              <div class="item" :data-value="7" :data-id="data.series_animedb_id">7</div>
+              <div class="item" :data-value="8" :data-id="data.series_animedb_id">8</div>
+              <div class="item" :data-value="9" :data-id="data.series_animedb_id">9</div>
+              <div class="item" :data-value="10" :data-id="data.series_animedb_id">10</div>
+            </div>
+          </div>
         </td>
 
         <td class="collapsing center aligned">
@@ -93,6 +131,12 @@
         </td>
 
         <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated * 1000).fromNow() }}</td>
+      </tr>
+
+      <tr v-if="itemsAvailable">
+        <td class="center aligned" colspan="6" @click="scrollDownInfinite">
+          {{ $t('loadMore') }}
+        </td>
       </tr>
     </tbody>
   </table>
@@ -115,19 +159,25 @@ export default {
       }
 
       this.setReady(true);
+      this.$forceUpdate();
     },
   },
 
-  components: { InfoBox },
+  components: {
+    InfoBox,
+  },
 
   computed: {
     ...mapState('myAnimeList', ['auth']),
+    itemsAvailable() {
+      return (this.currentOffset + this.listLimit) < this.listItems.length;
+    },
     list() {
       if (this.currentSort.field === null) {
-        return this.listItems;
+        return _.slice(this.listItems, this.currentOffset, (this.currentOffset + this.listLimit));
       }
 
-      return _.orderBy(this.listItems, [(item) => {
+      const orderedListItems = _.orderBy(this.listItems, [(item) => {
         if (this.currentSort.field === 'my_score') {
           // We need to return it as a number
           // because otherwise lodash compares it as a string
@@ -157,6 +207,8 @@ export default {
 
         return item[this.currentSort.field];
       }], [this.currentSort.direction]);
+
+      return _.slice(orderedListItems, this.currentOffset, (this.currentOffset + this.listLimit));
     },
   },
 
@@ -166,14 +218,20 @@ export default {
   },
 
   mounted() {
-    $('.ui.dropdown', this.$el).dropdown({
+    $('.ui.status.dropdown', this.$el).dropdown({
       onChange: this.changeAnimeStatus,
+    });
+    $('.ui.score.dropdown', this.$el).dropdown({
+      onChange: this.changeScore,
     });
   },
 
   updated() {
-    $('.ui.dropdown', this.$el).dropdown({
+    $('.ui.status.dropdown', this.$el).dropdown({
       onChange: this.changeAnimeStatus,
+    });
+    $('.ui.score.dropdown', this.$el).dropdown({
+      onChange: this.changeScore,
     });
   },
 
@@ -190,6 +248,8 @@ export default {
         field: null,
         direction: null,
       },
+      currentOffset: 0,
+      listLimit: 100,
     };
   },
 
@@ -197,6 +257,26 @@ export default {
     ...mapActions('myAnimeList', ['detectAndSetMALData']),
     ...mapMutations('myAnimeList', ['setInformation']),
     ...mapMutations(['setReady']),
+    scrollUpInfinite() {
+      if (this.currentOffset === 0) {
+        return;
+      }
+
+      this.currentOffset -= this.listLimit;
+
+      // To continue at the next anime
+      window.scrollTo(0, document.body.scrollHeight);
+    },
+    scrollDownInfinite() {
+      if (!this.itemsAvailable) {
+        return;
+      }
+
+      // To continue at the next anime
+      window.scrollTo(0, 0);
+
+      this.currentOffset += this.listLimit;
+    },
     orderTable(field) {
       // Easy order:
       // null -> asc -> desc -> null
@@ -218,6 +298,25 @@ export default {
       this.setInformation(name);
     },
 
+    changeScore(value, text, $selectedItem) {
+      const id = $($selectedItem).attr('data-id');
+
+      _.map(this.listItems, (item) => {
+        if (+item.series_animedb_id !== +id) {
+          return item;
+        }
+
+        if (value === '-') {
+          value = 0;
+        }
+
+        item.my_score = value;
+        this.startUpdateTimer(item);
+        this.scoreChanged = true;
+        return item;
+      });
+    },
+
     changeAnimeStatus(value, text, $selectedItem) {
       const id = $($selectedItem).attr('data-id');
 
@@ -227,6 +326,16 @@ export default {
         }
 
         item.my_status = value;
+
+        // When changed to Complete,
+        // episodes should be the series's.
+        if (value === 2) {
+          item.my_watched_episodes = +item.series_episodes <= 0
+            ? item.my_watched_episodes
+            : item.series_episodes;
+          this.episodeChanged = true;
+        }
+
         this.startUpdateTimer(item);
         this.statusChanged = true;
         return item;
@@ -390,30 +499,78 @@ td.episodeRow,
 td.scoreRow {
   position: relative;
 
-  &:hover > i.icon:not(.disabled) {
-    opacity: 1!important;
-  }
-
-  &:hover > i.icon.disabled {
-    opacity: .45!important;
-  }
-
-  & > i.icon {
+  & > .controlIcons {
     position: absolute;
-    margin-top: .125rem;
     top: 0;
-    opacity: 0!important;
-    transition: opacity .25s ease-out;
-    text-shadow: 0px 0px 2px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
 
-    &.red.minus {
-      left: 0;
-      margin-left: .125rem;
-    }
+    & > span {
+      opacity: 0;
+      width: 50%;
+      height: 100%;
+      margin: auto;
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      transition: opacity .25s ease-out;
 
-    &.green.plus {
-      right: 0;
-      margin-right: .125rem;
+      &:hover {
+        opacity: 1;
+      }
+
+      & > i.icon {
+        margin: auto;
+        height: 100%;
+        flex: 1 0 1;
+      }
+
+      & > div.preview {
+        color: white;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 2;
+        height: 100%;
+
+        & > span {
+          &.episode-arrow {
+            margin-bottom: -2px;
+          }
+
+          &.new-status {
+            margin-top: -2px;
+          }
+
+          & > i.icon {
+            height: initial;
+            margin-right: 0;
+          }
+        }
+      }
+
+      &.red {
+        background-color: rgb(219, 40, 40);
+
+        & > div.preview {
+          padding-left: 5px;
+        }
+      }
+
+      &.green {
+        right: 0;
+        background-color: rgb(33, 186, 69);
+
+        & > div.preview {
+          padding-right: 5px;
+          text-align: right;
+        }
+      }
     }
   }
 }
@@ -466,7 +623,9 @@ progress[value]::-webkit-progress-value {
     "finished": "Finished",
     "onHold": "On Hold",
     "canceled": "Canceled",
-    "planned": "Planned"
+    "planned": "Planned",
+    "toFinished": "Finish",
+    "loadMore": "Load more..."
   },
   "de": {
     "animeTitle": "Animetitel",
@@ -489,7 +648,9 @@ progress[value]::-webkit-progress-value {
     "finished": "Beendet",
     "onHold": "Pausiert",
     "canceled": "Abgebrochen",
-    "planned": "Geplant"
+    "planned": "Geplant",
+    "toFinished": "Beendet",
+    "loadMore": "Mehr Elemente laden..."
   },
   "ja": {
     "animeTitle": "アニメのタイトル",
@@ -512,7 +673,9 @@ progress[value]::-webkit-progress-value {
     "finished": "終了",
     "onHold": "中止",
     "canceled": "止めました",
-    "planned": "見るつもり"
+    "planned": "見るつもり",
+    "toFinished": "終了",
+    "loadMore": "次のリストデータ・・・"
   }
 }
 </i18n>

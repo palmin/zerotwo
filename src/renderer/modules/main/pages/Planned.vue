@@ -37,6 +37,12 @@ export default {
     };
   },
 
+  watch: {
+    malData() {
+      this.populateAnime();
+    },
+  },
+
   mounted() {
     this.populateAnime();
   },

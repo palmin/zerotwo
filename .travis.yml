@@ -31,6 +31,8 @@ deploy:
   file:
   - build/*.deb
   - build/*.dmg
+  - build/*.snap
+  - build/*.tar.gz
   prerelease: true
   draft: false
   tag_name: "$TRAVIS_TAG"

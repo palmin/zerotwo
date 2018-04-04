@@ -70,7 +70,6 @@
         "AppImage",
         "deb",
         "snap",
-        "pacman",
         "tar.gz"
       ]
     }

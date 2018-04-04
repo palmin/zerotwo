@@ -2,8 +2,7 @@ branches:
   only:
   - master
 
-platform:
-  - x64
+platform: Any CPU
 
 init:
   - git config --global core.autocrlf input

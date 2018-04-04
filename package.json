@@ -53,10 +53,16 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/icon.ico",
+      "target": "nsis",
+      "arch": [
+        "x64",
+        "ia32"
+      ]
     },
     "linux": {
       "icon": "build/icons",
+      "arch": ["x64"],
       "target": [
         "AppImage",
         "deb"

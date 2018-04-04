@@ -18,9 +18,9 @@ cache:
 install:
   - ps: Install-Product node 8
   - npm install
+  - npm rebuild node-sass --force
 
 build_script:
-  - npm run build:clean
   - npm run build
 
 test: off

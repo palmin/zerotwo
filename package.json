@@ -54,18 +54,24 @@
     },
     "win": {
       "icon": "build/icons/icon.ico",
-      "target": "nsis",
-      "arch": [
-        "x64",
-        "ia32"
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
       ]
     },
     "linux": {
       "icon": "build/icons",
-      "arch": ["x64"],
       "target": [
         "AppImage",
-        "deb"
+        "deb",
+        "snap",
+        "pacman",
+        "tar.gz"
       ]
     }
   },

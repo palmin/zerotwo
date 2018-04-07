@@ -181,7 +181,7 @@ export default {
           statusText = this.$t('onHold');
           break;
         case 4:
-          statusText = this.$t('canceled');
+          statusText = this.$t('dropped');
           break;
         case 6:
           statusText = this.$t('planned');
@@ -293,7 +293,7 @@ export default {
     "watching": "Watching",
     "completed": "Completed",
     "onHold": "On Hold",
-    "canceled": "Canceled",
+    "dropped": "Dropped",
     "planned": "Planned",
     "notInList": "Not in your list"
   },
@@ -302,7 +302,7 @@ export default {
     "watching": "Laufend",
     "completed": "Beendet",
     "onHold": "Pausiert",
-    "canceled": "Abgebrochen",
+    "dropped": "Abgebrochen",
     "planned": "Geplant",
     "notInList": "Nicht in deiner Liste"
   },
@@ -311,7 +311,7 @@ export default {
     "watching": "見る",
     "completed": "終了",
     "onHold": "中止",
-    "canceled": "止めました",
+    "dropped": "止めました",
     "planned": "見るつもり",
     "notInList": "リストにはありません"
   }

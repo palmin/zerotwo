@@ -11,3 +11,4 @@ const router = new Router({ routes });
 applyStoreReadyHook(router);
 
 export default router;
+export { default as store } from './store';

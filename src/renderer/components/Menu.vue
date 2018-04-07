@@ -1,18 +1,18 @@
 <template>
   <div class="ui top fixed menu">
-    <router-link class="item" tag="a" :to="{ name: 'Watching' }" active-class="active" exact>
+    <router-link class="item" tag="a" :to="{ name: 'MAL-Watching' }" active-class="active" exact>
       {{ $t('watching') }}
     </router-link>
-    <router-link class="item" tag="a" :to="{ name: 'Finished' }" active-class="active" exact>
+    <router-link class="item" tag="a" :to="{ name: 'MAL-Finished' }" active-class="active" exact>
       {{ $t('completed') }}
     </router-link>
-    <router-link class="item" tag="a" :to="{ name: 'OnHold' }" active-class="active" exact>
+    <router-link class="item" tag="a" :to="{ name: 'MAL-OnHold' }" active-class="active" exact>
       {{ $t('onHold') }}
     </router-link>
-    <router-link class="item" tag="a" :to="{ name: 'Canceled' }" active-class="active" exact>
-      {{ $t('canceled') }}
+    <router-link class="item" tag="a" :to="{ name: 'MAL-Dropped' }" active-class="active" exact>
+      {{ $t('dropped') }}
     </router-link>
-    <router-link class="item" tag="a" :to="{ name: 'Planned' }" active-class="active" exact>
+    <router-link class="item" tag="a" :to="{ name: 'MAL-Planned' }" active-class="active" exact>
       {{ $t('planned') }}
     </router-link>
     <div class="right menu">
@@ -68,7 +68,7 @@ export default {
     "watching": "Watching",
     "completed": "Completed",
     "onHold": "On Hold",
-    "canceled": "Canceled",
+    "dropped": "Dropped",
     "planned": "Planned",
     "notInList": "Not in your list",
     "searchAnime": "Search...",
@@ -80,7 +80,7 @@ export default {
     "watching": "Laufend",
     "completed": "Beendet",
     "onHold": "Pausiert",
-    "canceled": "Abgebrochen",
+    "dropped": "Abgebrochen",
     "planned": "Geplant",
     "notInList": "Nicht in deiner Liste",
     "searchAnime": "Suchen ...",
@@ -92,7 +92,7 @@ export default {
     "watching": "見る",
     "completed": "終了",
     "onHold": "中止",
-    "canceled": "止めました",
+    "dropped": "止めました",
     "planned": "見るつもり",
     "notInList": "リストにはありません",
     "searchAnime": "検索 ...",

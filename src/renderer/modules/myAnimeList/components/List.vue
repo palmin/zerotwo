@@ -622,7 +622,7 @@ progress[value]::-webkit-progress-value {
     "watching": "Watching",
     "finished": "Finished",
     "onHold": "On Hold",
-    "canceled": "Canceled",
+    "dropped": "Dropped",
     "planned": "Planned",
     "toFinished": "Finish",
     "loadMore": "Load more..."
@@ -647,7 +647,7 @@ progress[value]::-webkit-progress-value {
     "watching": "Laufend",
     "finished": "Beendet",
     "onHold": "Pausiert",
-    "canceled": "Abgebrochen",
+    "dropped": "Abgebrochen",
     "planned": "Geplant",
     "toFinished": "Beendet",
     "loadMore": "Mehr Elemente laden..."
@@ -672,7 +672,7 @@ progress[value]::-webkit-progress-value {
     "watching": "見る",
     "finished": "終了",
     "onHold": "中止",
-    "canceled": "止めました",
+    "dropped": "止めました",
     "planned": "見るつもり",
     "toFinished": "終了",
     "loadMore": "次のリストデータ・・・"

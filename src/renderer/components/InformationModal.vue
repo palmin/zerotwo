@@ -124,7 +124,7 @@ export default {
         name: this.$t('onHold'),
       }, {
         value: '4',
-        name: this.$t('canceled'),
+        name: this.$t('dropped'),
       }, {
         value: '6',
         name: this.$t('planned'),
@@ -268,7 +268,7 @@ export default {
         name: this.$t('onHold'),
       }, {
         value: '4',
-        name: this.$t('canceled'),
+        name: this.$t('dropped'),
       }, {
         value: '6',
         name: this.$t('planned'),
@@ -476,7 +476,7 @@ export default {
     "watching": "Watching",
     "finished": "Finished",
     "onHold": "On Hold",
-    "canceled": "Canceled",
+    "dropped": "Dropped",
     "planned": "Planned",
     "dropdownPlaceholder": "Please select...",
     "submitChanges": "Submit",
@@ -524,7 +524,7 @@ export default {
     "watching": "Laufend",
     "finished": "Beendet",
     "onHold": "Pausiert",
-    "canceled": "Abgebrochen",
+    "dropped": "Abgebrochen",
     "planned": "Geplant",
     "dropdownPlaceholder": "Bitte wählen...",
     "submitChanges": "Speichern",
@@ -572,7 +572,7 @@ export default {
     "watching": "見る",
     "finished": "終了",
     "onHold": "中止",
-    "canceled": "止めました",
+    "dropped": "止めました",
     "planned": "見るつもり",
     "dropdownPlaceholder": "選んでください・・・",
     "submitChanges": "保存",

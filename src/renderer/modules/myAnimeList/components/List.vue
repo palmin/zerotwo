@@ -68,7 +68,8 @@
             </div>
           </div>
         </td>
-        <td @click="openInformation(data.series_title)">{{ data.series_title }}</td>
+
+        <td @click="openInformation(data.series_title)" :class="{ blue: +data.series_status === 2 && finishedHighlight }">{{ data.series_title }}</td>
 
         <td class="collapsing episodeRow">
           <progress :value="data.my_watched_episodes" :max="progressMaxEpisodes(data)" />
@@ -86,7 +87,7 @@
                 :class="{ disabled: +data.my_watched_episodes === 0 }" />
             </span>
 
-            <span class="green" @click="increaseOneEpisode(data)">
+            <span class="green" @click="increaseOneEpisode(data)" v-if="+data.my_watched_episodes !== +data.series_episodes">
               <i class="inverted plus icon"
                 :class="{
                   disabled: !!+data.series_episodes &&
@@ -158,6 +159,7 @@ export default {
         return;
       }
 
+      this.finishedHighlight = +list[0].my_status === 1;
       this.setReady(true);
       this.$forceUpdate();
     },
@@ -250,6 +252,8 @@ export default {
       },
       currentOffset: 0,
       listLimit: 100,
+
+      finishedHighlight: false,
     };
   },
 
@@ -490,6 +494,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+td.blue {
+  color: rgb(0, 122, 170);
+}
+
 td > .ui.dropdown > .text > i.stop.icon,
 td > .ui.dropdown > .menu > .item > i.stop.icon {
   margin-right: 0;

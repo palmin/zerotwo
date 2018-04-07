@@ -91,7 +91,7 @@
             <h2 class="ui center aligned header">
               {{ $t('aboutZeroTwo') }}
             </h2>
-            <div class="ui grid">
+            <div class="ui equal width grid">
               <div class="center aligned sixteen wide column">
                 <div class="ui huge statistic">
                   <div class="label">
@@ -103,7 +103,7 @@
                 </div>
               </div>
 
-              <div class="center aligned eight wide column">
+              <div class="center aligned column">
                 <a href="#" class="ui huge icon header" @click="openPage(githubPage)">
                   <i class="github icon"></i>
                   <div class="content">
@@ -112,11 +112,19 @@
                 </a>
               </div>
 
-              <div class="center aligned eight wide column">
+              <div class="center aligned column">
                 <a href="#" class="ui huge icon header" @click="openPage(discordPage)">
                   <i class="blurple discord icon"></i>
                   <div class="content">
                     <img src="~/../assets/logos/discord-blurple-logo.png" class="ui medium image" alt="Discord" />
+                  </div>
+                </a>
+              </div>
+
+              <div class="center aligned column">
+                <a href="#" class="ui huge header" @click="openPage(zeroTwoPage)">
+                  <div class="content">
+                    <img src="~/../assets/logos/ZeroTwoAppIcon_1024.png" class="ui small image" title="ZeroTwo Website" alt="ZeroTwo Website" />
                   </div>
                 </a>
               </div>
@@ -172,6 +180,7 @@ export default {
     return {
       githubPage: 'https://github.com/nicoaiko/zerotwo',
       discordPage: 'https://discord.gg/sTpR4Gw',
+      zeroTwoPage: 'https://www.zerotwo.org',
       username: '',
       password: '',
       myAnimeListForm: 'myAnimeListForm',
@@ -198,7 +207,7 @@ export default {
     ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
     ...mapMutations('i18n', ['setLocale']),
     openPage(page) {
-      if (page !== this.githubPage && page !== this.discordPage) {
+      if (page !== this.githubPage && page !== this.discordPage && page !== this.zeroTwoPage) {
         return;
       }
 

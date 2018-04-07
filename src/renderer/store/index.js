@@ -33,7 +33,7 @@ export default new Vuex.Store({
   plugins,
   state: {
     isReady: false,
-    currentAppVersion: '0.5.3',
+    currentAppVersion: '0.6.0',
   },
   mutations: {
     hydrateState(state, payload) {

@@ -1,7 +1,7 @@
 {
   "name": "zerotwo-ui",
   "productName": "ZeroTwo",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "author": "NicoAiko <nicochan95.anime@gmail.com>",
   "description": "Taiga alternative",
   "license": "GPL-3.0",
@@ -50,10 +50,10 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/ZeroTwo.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico",
+      "icon": "build/icons/ZeroTwo.ico",
       "target": [
         {
           "target": "nsis",

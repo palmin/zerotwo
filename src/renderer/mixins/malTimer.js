@@ -2,6 +2,7 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   beforeDestroy() {
+    this.setTimerRunning(false);
     clearInterval(this.timer);
   },
   computed: {

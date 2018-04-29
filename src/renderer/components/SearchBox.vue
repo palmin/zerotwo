@@ -7,6 +7,8 @@
             @input="searching = true"
             @keyup="searching = false"
             @change="triggerSearch"
+            @focus="toggleResultPopup()"
+            @blur="toggleResultPopup('hide')"
           />
       <i class="search icon"></i>
     </div>

@@ -6,7 +6,6 @@
             v-model="searchValue"
             @input="searching = true"
             @keyup="searching = false"
-            @change="triggerSearch"
             @focus="toggleResultPopup()"
             @blur="toggleResultPopup('hide')"
           />
@@ -64,7 +63,7 @@ export default {
   methods: {
     openSearchResult(result) {
       this.$emit('openInformation', result);
-      this.toggleResultPopup();
+      this.toggleResultPopup('hide');
     },
 
     triggerSearch() {
@@ -84,7 +83,7 @@ export default {
       }
 
       if (transition === 'hide' || transition === 'show') {
-        setTimeout(() => { element.transition(transition); }, 100);
+        setTimeout(() => { element.transition(transition); }, 250);
         return;
       }
 

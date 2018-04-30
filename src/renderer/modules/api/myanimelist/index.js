@@ -1,11 +1,13 @@
 import { Parser } from 'xml2js';
-import Promise from 'bluebird';
-import transformSingles from '@/utils/transformSingles';
-import _ from 'lodash';
+import map from 'lodash/map';
+import find from 'lodash/find';
+import first from 'lodash/first';
 import qs from 'qs';
+import util from 'util';
+import transformSingles from '@/utils/transformSingles';
 
 const parser = new Parser();
-const parseString = Promise.promisify(parser.parseString);
+const parseString = util.promisify(parser.parseString);
 
 export default axios => ({
   getAnimeList(user) {
@@ -13,7 +15,7 @@ export default axios => ({
       .get(`/malappinfo.php?u=${user}&status=all&type=anime`)
       .then(response => response.data)
       .then(data => parseString(data))
-      .then(data => _.map(data.myanimelist.anime, entry => transformSingles(entry)));
+      .then(data => map(data.myanimelist.anime, entry => transformSingles(entry)));
   },
   findAnime(query, auth) {
     const searchValue = query.replace(/[&/\\#,+()$~%.'":*?<>{}\s]/g, '_');
@@ -23,8 +25,8 @@ export default axios => ({
       .then(data => parseString(data))
       .then((data) => {
         if (data.anime.entry.length > 1) {
-          data.anime.entry = _.map(data.anime.entry, entry => transformSingles(entry));
-          const entry = _.find(data.anime.entry, item => item.title === query);
+          data.anime.entry = map(data.anime.entry, entry => transformSingles(entry));
+          const entry = find(data.anime.entry, item => item.title === query);
           if (entry === undefined) {
             return null;
           }
@@ -32,7 +34,7 @@ export default axios => ({
           return entry;
         }
 
-        return transformSingles(_.first(data.anime.entry));
+        return transformSingles(first(data.anime.entry));
       });
   },
   findAnimes(query, auth) {
@@ -46,10 +48,10 @@ export default axios => ({
         }
 
         if (data.anime.entry.length > 1) {
-          return _.map(data.anime.entry, entry => transformSingles(entry));
+          return map(data.anime.entry, entry => transformSingles(entry));
         }
 
-        return transformSingles(_.first(data.anime.entry));
+        return transformSingles(first(data.anime.entry));
       });
   },
   login({ username, password }) {

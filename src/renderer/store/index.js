@@ -6,6 +6,8 @@ import { store as myAnimeList } from '@/modules/myAnimeList';
 import { store as router } from '@/router';
 
 import createLocalForageState from './plugins/local-forage';
+import { version } from '../../../package.json';
+
 
 const strict = process.env.NODE_ENV === 'production';
 const plugins = [
@@ -36,7 +38,7 @@ export default new Vuex.Store({
   plugins,
   state: {
     isReady: false,
-    currentAppVersion: '0.6.0',
+    currentAppVersion: version,
   },
   mutations: {
     hydrateState(state, payload) {

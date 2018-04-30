@@ -159,7 +159,7 @@ export default {
         return;
       }
 
-      this.finishedHighlight = +list[0].my_status === 1;
+      this.finishedHighlight = +list[0].my_status !== 2;
       this.setReady(true);
       this.$forceUpdate();
     },
@@ -484,7 +484,12 @@ export default {
       const season = seasons[dateMonth];
 
       if (isNaN(dateYear) || season === undefined) {
-        return date.split('-')[0];
+        const year = date.split('-')[0];
+        if (Number(year) === 0 || isNaN(year) || !year) {
+          return this.$t('unknown');
+        }
+
+        return year;
       }
 
       return `${season} ${dateYear}`;
@@ -620,6 +625,7 @@ progress[value]::-webkit-progress-value {
     "spring": "Spring",
     "summer": "Summer",
     "autumn": "Autumn",
+    "unknown": "Unknown",
     "dateFormat": "MMM DD YYYY",
     "loading": "Loading",
     "updated": {
@@ -645,6 +651,7 @@ progress[value]::-webkit-progress-value {
     "spring": "Frühling",
     "summer": "Sommer",
     "autumn": "Herbst",
+    "unknown": "Unbekannt",
     "dateFormat": "DD[.] MMM YYYY",
     "loading": "Lädt",
     "updated": {
@@ -670,6 +677,7 @@ progress[value]::-webkit-progress-value {
     "spring": "春",
     "summer": "夏",
     "autumn": "秋",
+    "unknown": "未知",
     "dateFormat": "MMM DD YYYY",
     "loading": "通信中",
     "updated": {

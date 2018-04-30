@@ -1,19 +1,19 @@
 <template>
   <div class="ui top fixed menu">
     <router-link class="item" tag="a" :to="{ name: 'MAL-Watching' }" active-class="active" exact>
-      {{ $t('watching') }}
+      {{ getMALTabLabel('watching', 'user_watching') }}
     </router-link>
     <router-link class="item" tag="a" :to="{ name: 'MAL-Finished' }" active-class="active" exact>
-      {{ $t('completed') }}
+      {{ getMALTabLabel('completed', 'user_completed') }}
     </router-link>
     <router-link class="item" tag="a" :to="{ name: 'MAL-OnHold' }" active-class="active" exact>
-      {{ $t('onHold') }}
+      {{ getMALTabLabel('onHold', 'user_onhold') }}
     </router-link>
     <router-link class="item" tag="a" :to="{ name: 'MAL-Dropped' }" active-class="active" exact>
-      {{ $t('dropped') }}
+      {{ getMALTabLabel('dropped', 'user_dropped') }}
     </router-link>
     <router-link class="item" tag="a" :to="{ name: 'MAL-Planned' }" active-class="active" exact>
-      {{ $t('planned') }}
+      {{ getMALTabLabel('planned', 'user_plantowatch') }}
     </router-link>
     <div class="right menu">
       <search-box @openInformation="openInformationWindow" />
@@ -37,7 +37,7 @@ export default {
   components: { SearchBox },
   computed: {
     ...mapState(['isReady']),
-    ...mapState('myAnimeList', ['timeUntilNextRefresh', 'auth']),
+    ...mapState('myAnimeList', ['timeUntilNextRefresh', 'auth', 'userData']),
     readableTimeUntilNextRefresh() {
       if (!this.timeUntilNextRefresh) {
         return '';
@@ -49,6 +49,13 @@ export default {
   methods: {
     openInformationWindow(result) {
       this.openInformation(result.title);
+    },
+    getMALTabLabel(i18nKey, userDataKey) {
+      if (!this.userData) {
+        return this.$t(i18nKey);
+      }
+
+      return `${this.$t(i18nKey)} (${this.userData[userDataKey]})`;
     },
   },
 };

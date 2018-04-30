@@ -15,7 +15,10 @@ export default axios => ({
       .get(`/malappinfo.php?u=${user}&status=all&type=anime`)
       .then(response => response.data)
       .then(data => parseString(data))
-      .then(data => map(data.myanimelist.anime, entry => transformSingles(entry)));
+      .then(data => ({
+        anime: map(data.myanimelist.anime, entry => transformSingles(entry)),
+        user: map(data.myanimelist.myinfo, entry => transformSingles(entry)),
+      }));
   },
   findAnime(query, auth) {
     const searchValue = query.replace(/[&/\\#,+()$~%.'":*?<>{}\s]/g, '_');

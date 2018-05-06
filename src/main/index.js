@@ -1,5 +1,7 @@
-import { app, BrowserWindow, Menu } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, Menu, shell } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
 import { autoUpdater } from 'electron-updater';
+import os from 'os';
+import { version } from '../../package.json';
 // import fs from 'fs';
 // import path from 'path';
 
@@ -121,6 +123,33 @@ function createWindow() {
           { role: 'zoom' },
           { type: 'separator' },
           { role: 'front' },
+        ],
+      },
+      {
+        label: 'Help',
+        submenu: [
+          {
+            label: 'GitHub Issue Tracker',
+            click() {
+              // eslint-disable-next-line import/no-extraneous-dependencies
+              shell.openExternal('https://github.com/NicoAiko/zerotwo/issues');
+            },
+          },
+          {
+            label: 'Create a Bug Issue on GitHub',
+            click() {
+              const content = encodeURIComponent(`# BUG REPORT\n\n*Please specify the bug you want to report.*\n\n___\n\nZeroTwo v${version}\n\n${os.platform()} ${os.release()}`);
+              const url = `https://github.com/NicoAiko/zerotwo/issues/new?labels=bug🐞&body=${content}`;
+              shell.openExternal(url);
+            },
+          },
+          {
+            label: 'ZeroTwo Homepage',
+            click() {
+              // eslint-disable-next-line import/no-extraneous-dependencies
+              shell.openExternal('https://www.zerotwo.org');
+            },
+          },
         ],
       },
     ]));

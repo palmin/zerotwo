@@ -10,7 +10,6 @@ init:
   - git config --global core.autocrlf input
 
 cache:
-  - node_modules
   - '%APPDATA%/npm-cache'
   - '%USERPROFILE%/.electron'
 

@@ -64,6 +64,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
+    "discord-rpc": "^3.0.0-beta.10",
     "electron-oauth2": "^3.0.0",
     "he": "^1.1.1",
     "jquery": "^3.3.1",
@@ -110,6 +111,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-vue": "^4.5.0",
     "file-loader": "^1.1.11",
+    "graphql-import-loader": "^0.2.1",
     "html-webpack-plugin": "^3.2.0",
     "inject-loader": "^4.0.1",
     "less": "^2.7.3",
@@ -133,7 +135,7 @@
   },
   "main": "./dist/electron/main.js",
   "scripts": {
-    "build": "node vue-electron/build.js && electron-builder --publish never",
+    "build": "node vue-electron/build.js && ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true electron-builder --publish never",
     "build:pack": "npm run pack && electron-builder --publish never",
     "build:dir": "npm run pack && electron-builder --dir",
     "build:linux": "npm run pack && electron-builder --linux",

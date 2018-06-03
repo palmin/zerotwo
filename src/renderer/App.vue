@@ -19,7 +19,7 @@ export default {
   name: 'app',
   mixins: [
     // malTimer,
-    discord,
+    // discord,
     aniListTimer,
   ],
   components: { Notification },

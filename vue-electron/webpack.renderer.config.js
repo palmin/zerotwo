@@ -80,11 +80,6 @@ const rendererConfig = {
         use: '@kazupon/vue-i18n-loader',
       },
       {
-        exclude: /node_modules/,
-        test: /\.graphql$/,
-        use: [{ loader: 'graphql-import-loader' }],
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: {
           loader: 'url-loader',

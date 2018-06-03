@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="ui right aligned item">
     <div class="ui transparent icon input" :class="{ loading: searchTimer }">
       <input type="text"
@@ -12,7 +12,7 @@
       <i class="search icon"></i>
     </div>
     <div class="results transition hidden" id="transitionContainer">
-      <div class="category" v-for="result in searchResults">
+      <div class="category" v-for="result in searchResults" :key="result.id">
         <div class="name">{{ result.category }}</div>
         <div class="results">
           <a class="result" @click="openSearchResult(result)">
@@ -38,7 +38,25 @@ import { mapState } from 'vuex';
 
 export default {
   computed: {
-    ...mapState('myAnimeList', ['auth', 'malData']),
+    ...mapState('aniList', ['aniData']),
+    watchingData() {
+      return _.find(this.aniData.lists, list => list.status === 'CURRENT').entries;
+    },
+    completedData() {
+      return _.find(this.aniData.lists, list => list.status === 'COMPLETED').entries;
+    },
+    pausedData() {
+      return _.find(this.aniData.lists, list => list.status === 'PAUSED').entries;
+    },
+    droppedData() {
+      return _.find(this.aniData.lists, list => list.status === 'DROPPED').entries;
+    },
+    planningData() {
+      return _.find(this.aniData.lists, list => list.status === 'PLANNING').entries;
+    },
+    repeatingData() {
+      return _.find(this.aniData.lists, list => list.status === 'REPEATING').entries;
+    },
   },
   data() {
     return {
@@ -47,7 +65,7 @@ export default {
       searchTimer: null,
       searchInterval: 500,
       searchResults: [],
-      lastSearch: '',
+      lastSearch: null,
     };
   },
   watch: {
@@ -76,9 +94,11 @@ export default {
       this.search();
     },
 
+    /* eslint-disable */
     toggleResultPopup(transition = 'show') {
       const element = $('#transitionContainer', this.$el);
-      if ((_.isEmpty(this.searchResults) && transition !== 'hide') || element.transition('is animating')) {
+      if ((_.isEmpty(this.searchResults) && transition !== 'hide')
+      || element.transition('is animating')) {
         return;
       }
 
@@ -90,6 +110,7 @@ export default {
       element
         .transition(transition);
     },
+    /* eslint-enable */
 
     beginSearching() {
       if (this.searchValue.length < 3) {
@@ -98,7 +119,7 @@ export default {
         return;
       }
 
-      if (this.searchValue === this.lastSearch && this.resultsPresented) {
+      if (this.searchValue === this.lastSearch) {
         return;
       }
 
@@ -109,50 +130,70 @@ export default {
       clearTimeout(this.searchTimer);
     },
 
+    findInData(title) {
+      let needle = null;
+
+      needle = _.find(this.watchingData, haystack => haystack.media.title.userPreferred === title);
+      if (needle !== undefined) {
+        return needle;
+      }
+
+      try {
+        needle = _.find(
+          this.repeatingData,
+          haystack => haystack.media.title.userPreferred === title,
+        );
+        if (needle !== undefined) {
+          return needle;
+        }
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+
+      needle = _.find(this.completedData, haystack => haystack.media.title.userPreferred === title);
+      if (needle !== undefined) {
+        return needle;
+      }
+
+      needle = _.find(this.pausedData, haystack => haystack.media.title.userPreferred === title);
+      if (needle !== undefined) {
+        return needle;
+      }
+
+      needle = _.find(this.droppedData, haystack => haystack.media.title.userPreferred === title);
+      if (needle !== undefined) {
+        return needle;
+      }
+
+      needle = _.find(this.planningData, haystack => haystack.media.title.userPreferred === title);
+      if (needle !== undefined) {
+        return needle;
+      }
+
+      return null;
+    },
+
     search() {
       this.searchTimer = null;
       this.lastSearch = this.searchValue;
-      this.$http.findAnimes(this.searchValue, this.auth)
+      this.$http.searchAnime(this.searchValue)
         .then((results) => {
           if (!results) {
             return [];
           }
 
-          if (_.isArray(results)) {
-            return _.map(results, (result) => {
-              const element = _.find(this.malData, dataInMalData =>
-                dataInMalData.series_title === result.title);
+          return _.map(results, (result) => {
+            const element = this.findInData(result.title.userPreferred);
+            result.category = !element ? this.$t('notInList') : this.getStatus(element.status);
 
-              if (element !== undefined) {
-                result.category = this.getStatus(element.my_status);
-              } else {
-                result.category = this.$t('notInList');
-              }
-
-              return {
-                title: result.title,
-                english: result.english,
-                synonyms: result.synonyms,
-                category: result.category,
-              };
-            });
-          }
-
-          const element = _.find(this.malData, dataInMalData =>
-            dataInMalData.series_title === results.title);
-
-          if (element !== undefined) {
-            results.category = this.getStatus(element.my_status);
-          } else {
-            results.category = this.$t('notInList');
-          }
-
-          return [{
-            title: results.title,
-            category: results.category,
-            synonyms: results.synonyms,
-            english: results.english,
-          }];
+            return {
+              id: result.id,
+              title: result.title.userPreferred,
+              english: result.title.english,
+              category: result.category,
+            };
+          });
         })
         .then((results) => {
           if (_.isEmpty(results)) {
@@ -171,20 +212,21 @@ export default {
 
     getStatus(status) {
       let statusText = '';
-      switch (+status) {
-        case 1:
+      switch (status) {
+        case 'CURRENT':
+        case 'REPEATING':
           statusText = this.$t('watching');
           break;
-        case 2:
+        case 'COMPLETED':
           statusText = this.$t('completed');
           break;
-        case 3:
+        case 'PAUSED':
           statusText = this.$t('onHold');
           break;
-        case 4:
+        case 'DROPPED':
           statusText = this.$t('dropped');
           break;
-        case 6:
+        case 'PLANNING':
           statusText = this.$t('planned');
           break;
         default:

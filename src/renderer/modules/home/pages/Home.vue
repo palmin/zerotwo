@@ -6,14 +6,11 @@
 </template>
 
 <script>
-import os from 'os';
-
 export default {
-  computed: {
-    escaped() {
-      const content = `# BUG REPORT\n\n*Please specify the bug you want to report.*\n\n___\n\nZeroTwo v0.6.0\n\n${os.platform()} ${os.release()}`;
-      return content;
-    },
+  data() {
+    return {
+      escaped: 'unauthorized',
+    };
   },
 };
 </script>

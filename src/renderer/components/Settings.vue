@@ -8,8 +8,11 @@
             <a class="active item" data-tab="appSettings">
               {{ $t('appSettings') }}
             </a>
-            <a class="item" data-tab="myAnimeList">
+            <a class="item" data-tab="myAnimeList" v-if="myAnimeListActivated">
               {{ $t('myAnimeList') }}
+            </a>
+            <a class="item" data-tab="aniList">
+              {{ $t('aniList') }}
             </a>
             <a class="item" data-tab="restoreFactoryData">
               {{ $t('restoreFactoryData') }}
@@ -30,10 +33,14 @@
               :placeholder="$t('chooseLanguage')"
               v-model="localeSetting"
               />
-            <button class="ui primary button" @click="submitLanguageChange">{{ $t('changeLanguage') }}</button>
+            <button
+            class="ui primary button"
+            @click="submitLanguageChange">
+              {{ $t('changeLanguage') }}
+            </button>
           </div>
 
-          <div class="ui basic tab segment" data-tab="myAnimeList">
+          <div class="ui basic tab segment" data-tab="myAnimeList" v-if="myAnimeListActivated">
             <h2 class="ui header">
               {{ $t('myAnimeList') }}
               <div class="sub header">
@@ -51,7 +58,9 @@
                   <input type="password" v-model="password" />
                 </div>
               </div>
-              <button class="ui right floated primary button" type="submit">{{ $t('login') }}</button>
+              <button
+              class="ui right floated primary button"
+              type="submit">{{ $t('login') }}</button>
             </form>
             <div class="ui blue labels" v-else>
               <div class="ui label">
@@ -67,7 +76,56 @@
                   <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
                     <label>{{ $t('refreshRate') }}</label>
                     <div class="ui action input">
-                      <input type="number" min="1" max="60" v-model="refreshRateValue" :disabled="!refreshRateEditMode" @input="$v.refreshRateValue.$touch()" />
+                      <input
+                      type="number"
+                      min="1"
+                      max="60"
+                      v-model="refreshRateValue"
+                      :disabled="!refreshRateEditMode"
+                      @input="$v.refreshRateValue.$touch()" />
+                      <button class="ui button" @click="editRefreshRate">
+                        {{ $t('edit') }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui basic tab segment" data-tab="aniList">
+            <h2 class="ui header">
+              {{ $t('aniList') }}
+              <div class="sub header">
+                {{ $t('accountSettings') }}
+              </div>
+            </h2>
+            <div class="ui container" v-if="!isAuthenticated">
+              <button
+              class="ui fluid primary button"
+              @click="loginToAniList">{{ $t('login') }}</button>
+            </div>
+            <div class="ui blue labels" v-else>
+              <div class="ui label">
+                {{ $t('loggedInAs') }} {{ getUserName }}
+              </div>
+              <a class="ui label" @click="logMeOut">
+                {{ $t('logout') }}
+              </a>
+            </div>
+            <div class="ui grid" v-if="isAuthenticated">
+              <div class="eight wide column">
+                <div class="ui form">
+                  <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
+                    <label>{{ $t('aniListRefreshRate') }}</label>
+                    <div class="ui action input">
+                      <input
+                      type="number"
+                      min="1"
+                      max="60"
+                      v-model="refreshRateValue"
+                      :disabled="!refreshRateEditMode"
+                      @input="$v.refreshRateValue.$touch()" />
                       <button class="ui button" @click="editRefreshRate">
                         {{ $t('edit') }}
                       </button>
@@ -107,7 +165,11 @@
                 <a href="#" class="ui huge icon header" @click="openPage(githubPage)">
                   <i class="github icon"></i>
                   <div class="content">
-                    <img src="~/../assets/logos/github-logo.png" style="padding: 0 25px; margin-top: -14px;" class="ui medium image" alt="GitHub" />
+                    <img
+                    src="~/../assets/logos/github-logo.png"
+                    style="padding: 0 25px; margin-top: -14px;"
+                    class="ui medium image"
+                    alt="GitHub" />
                   </div>
                 </a>
               </div>
@@ -116,7 +178,10 @@
                 <a href="#" class="ui huge icon header" @click="openPage(discordPage)">
                   <i class="blurple discord icon"></i>
                   <div class="content">
-                    <img src="~/../assets/logos/discord-blurple-logo.png" class="ui medium image" alt="Discord" />
+                    <img
+                    src="~/../assets/logos/discord-blurple-logo.png"
+                    class="ui medium image"
+                    alt="Discord" />
                   </div>
                 </a>
               </div>
@@ -124,7 +189,11 @@
               <div class="center aligned column">
                 <a href="#" class="ui huge header" @click="openPage(zeroTwoPage)">
                   <div class="content">
-                    <img src="~/../assets/logos/ZeroTwoAppIcon_1024.png" class="ui small image" title="ZeroTwo Website" alt="ZeroTwo Website" />
+                    <img
+                    src="~/../assets/logos/ZeroTwoAppIcon_1024.png"
+                    class="ui small image"
+                    title="ZeroTwo Website"
+                    alt="ZeroTwo Website" />
                   </div>
                 </a>
               </div>
@@ -145,35 +214,47 @@
 }
 </style>
 
+<style lang="scss">
+.b-tabs .tab-content,
+.modal-card,
+.modal-card-body {
+    overflow: visible;
+    width: 100%;
+}
+.modal .animation-content {
+  width: 100%;
+}
+</style>
+
+
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { shell } from 'electron';
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { shell, ipcRenderer } from 'electron';
+import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, between } from 'vuelidate/lib/validators';
-import Dropdown from './Dropdown';
+import find from 'lodash/find';
+import Dropdown from '@/components/Dropdown';
 
 export default {
   mixins: [validationMixin],
-  components: { Dropdown },
   props: ['event'],
+  components: { Dropdown },
   watch: {
     refreshRate(value) {
       this.refreshRateValue = value;
     },
   },
   computed: {
-    ...mapState('myAnimeList', ['auth', 'refreshRate']),
+    ...mapGetters('aniList', ['isAuthenticated', 'getUserName', 'refreshRate']),
+    // ...mapState('myAnimeList', ['auth', 'refreshRate']),
     ...mapState('i18n', ['locale']),
     ...mapState(['currentAppVersion']),
-    loggedIn() {
-      return !!this.auth;
-    },
   },
   validations: {
     refreshRateValue: {
       required,
-      between: between(0, 60),
+      between: between(1, 60),
     },
   },
   data() {
@@ -181,6 +262,7 @@ export default {
       githubPage: 'https://github.com/nicoaiko/zerotwo',
       discordPage: 'https://discord.gg/sTpR4Gw',
       zeroTwoPage: 'https://www.zerotwo.org',
+      myAnimeListActivated: false,
       username: '',
       password: '',
       myAnimeListForm: 'myAnimeListForm',
@@ -189,12 +271,15 @@ export default {
       localeSetting: '',
       languages: [{
         name: 'English',
+        englishName: 'English',
         value: 'en',
       }, {
         name: 'Deutsch',
+        englishName: 'German',
         value: 'de',
       }, {
         name: '日本語',
+        englishName: 'Japanese',
         value: 'ja',
       }],
     };
@@ -204,8 +289,18 @@ export default {
     this.refreshRateValue = this.refreshRate;
   },
   methods: {
-    ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
+    // ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
+    ...mapActions('aniList', ['logout', 'updateRefreshRate', 'setTimerRunning']),
     ...mapMutations('i18n', ['setLocale']),
+    getLanguageByCode(code) {
+      const language = find(this.languages, language => language.value === code);
+
+      if (language === undefined) {
+        return 'ERROR';
+      }
+
+      return language.name;
+    },
     openPage(page) {
       if (page !== this.githubPage && page !== this.discordPage && page !== this.zeroTwoPage) {
         return;
@@ -230,19 +325,24 @@ export default {
 
         return;
       }
-      $(this.$refs[this.myAnimeListForm]).addClass('loading');
-      this.login({ username: this.username, password: this.password })
-        .then(() => this.setTimerRunning(true))
-        .catch(() => {
-          this.$notify({
-            type: 'error',
-            title: this.$t('credentialsWrongOrTooManyLoginAttempts'),
-            text: this.$t('credentialsCouldNotBeVerifiedOrTooManyLoginAttempts'),
-            duration: -1,
-          });
-          $(this.$refs[this.myAnimeListForm]).removeClass('loading');
-        });
+      // $(this.$refs[this.myAnimeListForm]).addClass('loading');
+      // this.login({ username: this.username, password: this.password })
+      //   .then(() => this.setTimerRunning(true))
+      //   .catch(() => {
+      //     this.$notify({
+      //       type: 'error',
+      //       title: this.$t('credentialsWrongOrTooManyLoginAttempts'),
+      //       text: this.$t('credentialsCouldNotBeVerifiedOrTooManyLoginAttempts'),
+      //       duration: -1,
+      //     });
+      //     $(this.$refs[this.myAnimeListForm]).removeClass('loading');
+      //   });
       this.username = this.password = '';
+    },
+    loginToAniList() {
+      if (!this.isAuthenticated) {
+        ipcRenderer.send('aniList-oauth', 'getToken');
+      }
     },
     logMeOut() {
       this.logout();
@@ -295,11 +395,14 @@ export default {
     "changeLanguage": "Change language",
     "loggedInAs": "Logged in as",
     "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
     "accountSettings": "Account Settings",
+    "loginData": "Login Data",
     "username": "Username",
     "password": "Password",
     "restoreFactoryData": "Restore Factory Data",
     "refreshRate": "Refresh interval for MAL (in minutes)",
+    "aniListRefreshRate": "Refresh interval for AniList (in minutes)",
     "noCredentials": "No credentials!",
     "enterCredentials": "Please enter credentials to log in.",
     "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
@@ -322,11 +425,14 @@ export default {
     "changeLanguage": "Sprache ändern",
     "loggedInAs": "Eingeloggt als",
     "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
     "accountSettings": "Kontoeinstellungen",
+    "loginData": "Logindaten",
     "username": "Benutzername",
     "password": "Passwort",
     "restoreFactoryData": "Werkszustand wiederherstellen",
     "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
+    "aniListRefreshRate": "AniList-Aktualisierungsintervall (in Minuten)",
     "noCredentials": "Keine Anmeldedaten!",
     "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
     "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
@@ -349,11 +455,14 @@ export default {
     "changeLanguage": "言語を設定する",
     "loggedInAs": "ログインしたアカウント",
     "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
     "accountSettings": "アカウント設定",
+    "loginData": "ログインデータ",
     "username": "ユーザー名",
     "password": "パスワード",
     "restoreFactoryData": "ファクトリー設定に戻る",
     "refreshRate": "MALの更新間（分で）",
+    "aniListRefreshRate": "AniListの更新間（分で）",
     "noCredentials": "ログインデータは入力しませんでした！",
     "enterCredentials": "ログインデータを入力してください！",
     "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",

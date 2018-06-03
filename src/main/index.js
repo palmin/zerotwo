@@ -1,62 +1,91 @@
-import { app, BrowserWindow, Menu, shell } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
-import { autoUpdater } from 'electron-updater';
+/* eslint-disable */
+import { app, BrowserWindow, ipcMain, Menu, MenuItem, shell } from 'electron'
 import os from 'os';
+import electronOauth2 from 'electron-oauth2';
 import { version } from '../../package.json';
-// import fs from 'fs';
-// import path from 'path';
+/* eslint-enable */
 
-/**
- * Set `__static` path to static files in production
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
- */
-if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
-}
+import { oauth as oauthConfig } from './config';
+const windowParams = {
+  alwaysOnTop: true,
+  autoHideMenuBar: true,
+  webPreferences: {
+    nodeIntegration: false,
+  },
+};
+const aniListOAuth = electronOauth2(oauthConfig, windowParams);
 
-// function exists(file) {
-//   return new Promise((resolve) => {
-//     fs.exists(file, (result) => {
-//       resolve(result);
-//     });
-//   });
-// }
+ipcMain.on('aniList-oauth', (event, action, refreshToken) => {
+  if (action === 'getToken') {
+    aniListOAuth.getAccessToken({})
+      .then((token) => {
+        aniListOAuth.getAuthorizationCode()
+          .then((authToken) => {
+            event.sender.send('aniList-oauth-reply', token, authToken);
+          }, (err) => {
+            // eslint-disable-next-line no-console
+            console.log('Error while getting token', err);
+          });
+      }, (err) => {
+        // eslint-disable-next-line no-console
+        console.log('Error while getting token', err);
+      });
+  } else if (action === 'refreshToken') {
+    aniListOAuth.refreshToken(refreshToken)
+      .then((newToken) => {
+        event.sender.send('aniList-oauth-refresh', newToken);
+      }, (err) => {
+        // eslint-disable-next-line no-console
+        console.log('Error while getting token', err);
+      });
+  } else if (action === 'authorizationToken') {
+    aniListOAuth.getAuthorizationCode()
+      .then((token) => {
+        event.sender.send('aniList-oauth-authorize', token);
+      }, (err) => {
+        // eslint-disable-next-line no-console
+        console.log('Error while getting token', err);
+      });
+  }
+});
 
-// function readFile(file) {
-//   return new Promise((resolve, reject) => {
-//     fs.readFile(file, 'utf8', (err, data) => {
-//       if (err) {
-//         reject(err);
-//         return;
-//       }
-//       resolve(data);
-//     });
-//   });
-// }
-
-// function getUserDefinedLocale() {
-//   const userData = app.getPath('userData');
-//   const settingsConfig = path.join(userData, 'settings.json');
-//   return exists(settingsConfig).then((result) => {
-//     if (result) {
-//       return readFile(settingsConfig).then((content) => {
-//         try {
-//           const value = JSON.parse(content).locale;
-//           return value && typeof value === 'string' ? value.toLowerCase() : undefined;
-//         } catch (e) {
-//           return undefined;
-//         }
-//       });
-//     }
-//     return undefined;
-//   });
-// }
-
-// const userDefinedLocale = getUserDefinedLocale();
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
 
 let mainWindow;
-const winURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:9080'
-  : `file://${__dirname}/index.html`;
+let winURL = 'http://localhost:9080';
+
+if (process.env.NODE_ENV === 'development') {
+  try {
+    // eslint-disable-next-line
+    require('electron-debug')({
+      showDevTools: true,
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('Failed to install `electron-debug`: Please set `NODE_ENV=production` before build to avoid installing debugging packages. ');
+  }
+} else {
+  winURL = `file://${__dirname}/index.html`;
+
+  /**
+   * Set `__static` path to static files in production
+   * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
+   */
+  // eslint-disable-next-line
+  global.__static = require('path')
+    .join(__dirname, '/static')
+    .replace(/\\/g, '\\\\') // eslint-disable-line
+}
+
+function installDevTools() {
+  try {
+    require('devtron').install() //eslint-disable-line
+    require('vue-devtools').install() //eslint-disable-line
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('Failed to install `devtron` & `vue-devtools`: Please set `NODE_ENV=production` before build to avoid installing debugging packages. ');
+  }
+}
 
 function createWindow() {
   /**
@@ -68,22 +97,33 @@ function createWindow() {
     useContentSize: true,
     width: 1280,
     minWidth: 1280,
+    // backgroundColor: '#fff',
     webPreferences: {
+      nodeIntegrationInWorker: true,
       webSecurity: false,
     },
+    show: false,
   });
 
-  mainWindow.webContents.on('will-navigate', (event) => {
-    event.preventDefault();
-  });
-
+  // mainWindow.setMenu(null)
   mainWindow.loadURL(winURL);
+
+  // Show when loaded
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show();
+    mainWindow.focus();
+
+    if (
+      process.env.ELECTRON_ENV === 'development' ||
+      process.argv.indexOf('--debug') !== -1
+    ) {
+      mainWindow.webContents.openDevTools();
+    }
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  // const locale = userDefinedLocale === undefined ? 'en' : userDefinedLocale;
 
   // Menu
   // Check if we are on a Mac
@@ -131,7 +171,6 @@ function createWindow() {
           {
             label: 'GitHub Issue Tracker',
             click() {
-              // eslint-disable-next-line import/no-extraneous-dependencies
               shell.openExternal('https://github.com/NicoAiko/zerotwo/issues');
             },
           },
@@ -146,7 +185,6 @@ function createWindow() {
           {
             label: 'ZeroTwo Homepage',
             click() {
-              // eslint-disable-next-line import/no-extraneous-dependencies
               shell.openExternal('https://www.zerotwo.org');
             },
           },
@@ -156,7 +194,13 @@ function createWindow() {
   }
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+
+  if (process.env.NODE_ENV === 'development') {
+    installDevTools();
+  }
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -178,13 +222,14 @@ app.on('activate', () => {
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
 
+/*
+import { autoUpdater } from 'electron-updater'
 
 autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall();
-});
+  autoUpdater.quitAndInstall()
+})
 
 app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') {
-    autoUpdater.checkForUpdates();
-  }
-});
+  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
+})
+ */

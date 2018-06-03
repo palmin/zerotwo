@@ -60,22 +60,52 @@
               }"></i>
             </div>
             <div class="menu">
-              <div class="item" :data-value="1" :data-id="data.series_animedb_id"><i class="green stop icon"></i></div>
-              <div class="item" :data-value="2" :data-id="data.series_animedb_id"><i class="blue stop icon"></i></div>
-              <div class="item" :data-value="3" :data-id="data.series_animedb_id"><i class="yellow stop icon"></i></div>
-              <div class="item" :data-value="4" :data-id="data.series_animedb_id"><i class="red stop icon"></i></div>
-              <div class="item" :data-value="6" :data-id="data.series_animedb_id"><i class="black stop icon"></i></div>
+              <div class="item"
+              :data-value="1"
+              :data-id="data.series_animedb_id">
+                <i class="green stop icon"></i>
+              </div>
+
+              <div class="item"
+              :data-value="2"
+              :data-id="data.series_animedb_id">
+                <i class="blue stop icon"></i>
+              </div>
+
+              <div class="item"
+              :data-value="3"
+              :data-id="data.series_animedb_id">
+                <i class="yellow stop icon"></i>
+              </div>
+
+              <div class="item"
+              :data-value="4"
+              :data-id="data.series_animedb_id">
+                <i class="red stop icon"></i>
+              </div>
+
+              <div class="item"
+              :data-value="6"
+              :data-id="data.series_animedb_id">
+                <i class="black stop icon"></i>
+              </div>
             </div>
           </div>
         </td>
 
-        <td @click="openInformation(data.series_title)" :class="{ blue: +data.series_status === 2 && finishedHighlight }">{{ data.series_title }}</td>
+        <td @click="openInformation(data.series_title)"
+        :class="{ blue: +data.series_status === 2
+        && finishedHighlight }">
+          {{ data.series_title }}
+        </td>
 
         <td class="collapsing episodeRow">
           <progress :value="data.my_watched_episodes" :max="progressMaxEpisodes(data)" />
           {{ data.my_watched_episodes }} / {{ data.series_episodes | episode }}
           <div class="controlIcons">
-            <span class="red" @click="decreaseOneEpisode(data)" v-if="+data.my_watched_episodes !== 0">
+            <span class="red"
+            @click="decreaseOneEpisode(data)"
+            v-if="+data.my_watched_episodes !== 0">
               <div class="preview">
                 <span class="episode-arrow" v-if="+data.my_watched_episodes !== 0">
                   {{ +data.my_watched_episodes - 1 }}
@@ -87,19 +117,26 @@
                 :class="{ disabled: +data.my_watched_episodes === 0 }" />
             </span>
 
-            <span class="green" @click="increaseOneEpisode(data)" v-if="+data.my_watched_episodes !== +data.series_episodes">
+            <span class="green"
+            @click="increaseOneEpisode(data)"
+            v-if="+data.my_watched_episodes !== +data.series_episodes">
               <i class="inverted plus icon"
                 :class="{
                   disabled: !!+data.series_episodes &&
                   +data.my_watched_episodes === +data.series_episodes
                 }" />
               <div class="preview">
-                <span class="episode-arrow" v-if="(+data.series_episodes > 0 && +data.my_watched_episodes < +data.series_episodes) || +data.series_episodes <= 0">
+                <span class="episode-arrow"
+                v-if="(+data.series_episodes > 0
+                && +data.my_watched_episodes < +data.series_episodes)
+                || +data.series_episodes <= 0">
                   {{ +data.my_watched_episodes }}
                   <i class="inverted right arrow icon" />
                   {{ +data.my_watched_episodes + 1 }}
                 </span>
-                <span class="new-status" v-if="(+data.series_episodes > 0 && +data.my_watched_episodes + 1 === +data.series_episodes)">
+                <span class="new-status"
+                v-if="(+data.series_episodes > 0
+                && +data.my_watched_episodes + 1 === +data.series_episodes)">
                   {{ $t('toFinished') }}
                 </span>
               </div>
@@ -131,7 +168,9 @@
           {{ getSeason(data.series_start) }}
         </td>
 
-        <td class="collapsing right aligned">{{ $getMoment(+data.my_last_updated * 1000).fromNow() }}</td>
+        <td class="collapsing right aligned">
+          {{ $getMoment(+data.my_last_updated * 1000).fromNow() }}
+        </td>
       </tr>
 
       <tr v-if="itemsAvailable">
@@ -155,7 +194,7 @@ export default {
 
   watch: {
     listItems(list) {
-      if (!list) {
+      if (!list || _.isEmpty(list)) {
         return;
       }
 
@@ -254,6 +293,29 @@ export default {
       listLimit: 100,
 
       finishedHighlight: false,
+
+      currentPage: 1,
+      perPage: 50,
+      defaultSortDirection: 'asc',
+      columns: [{
+        field: 'my_status',
+        label: '',
+      }, {
+        field: 'series_title',
+        label: this.$t('animeTitle'),
+      }, {
+        field: 'progress',
+        label: this.$t('progress'),
+      }, {
+        field: 'my_score',
+        label: this.$t('score'),
+      }, {
+        field: 'series_start',
+        label: this.$t('season'),
+      }, {
+        field: 'my_last_updated',
+        label: this.$t('lastUpdated'),
+      }],
     };
   },
 
@@ -483,6 +545,7 @@ export default {
       const dateYear = new Date(date).getFullYear();
       const season = seasons[dateMonth];
 
+      /* eslint-disable no-restricted-globals */
       if (isNaN(dateYear) || season === undefined) {
         const year = date.split('-')[0];
         if (Number(year) === 0 || isNaN(year) || !year) {
@@ -491,6 +554,7 @@ export default {
 
         return year;
       }
+      /* eslint-enable no-restricted-globals */
 
       return `${season} ${dateYear}`;
     },

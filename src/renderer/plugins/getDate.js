@@ -22,6 +22,7 @@ const MyPlugin = {
         },
       },
     });
+    Vue.prototype.$moment = (...args) => moment(...args);
     Vue.prototype.$getMoment = (...args) => moment(...args);
     Vue.prototype.$getDate = (value, format) => moment(value).format(format);
   },

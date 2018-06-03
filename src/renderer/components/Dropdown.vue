@@ -108,6 +108,10 @@ export default {
       if (!this.$el) return;
       $(this.$el).dropdown('remove loading');
     },
+    clear() {
+      if (!this.$el) return;
+      $(this.$el).dropdown('clear');
+    },
   },
 };
 </script>

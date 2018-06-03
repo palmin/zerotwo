@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { Parser } from 'xml2js';
 import map from 'lodash/map';
 import find from 'lodash/find';
@@ -9,7 +10,17 @@ import transformSingles from '@/utils/transformSingles';
 const parser = new Parser();
 const parseString = util.promisify(parser.parseString);
 
-export default axios => ({
+const axios = Axios.create({
+  baseURL: 'https://myanimelist.net/',
+  timeout: 5000,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    // 'User-Agent': '',
+  },
+  withCredentials: true,
+});
+
+export default () => ({
   getAnimeList(user) {
     return axios
       .get(`/malappinfo.php?u=${user}&status=all&type=anime`)

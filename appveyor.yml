@@ -11,7 +11,7 @@ init:
 
 install:
   - ps: Install-Product node 8
-  - npm install --no-optional
+  - npm install --no-optional --no-audit --production
   - npm rebuild node-sass --force
 
 build_script:

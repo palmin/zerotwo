@@ -15,7 +15,7 @@ branches:
 node_js:
 - '8'
 install:
-- npm install
+- npm install --no-audit
 script:
 - npm run build
 deploy:

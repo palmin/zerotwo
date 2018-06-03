@@ -150,6 +150,7 @@
     "pack:main": "webpack --mode production --hide-modules --config vue-electron/webpack.main.config.js",
     "pack:renderer": "webpack --mode production --hide-modules --config vue-electron/webpack.renderer.config.js",
     "rebuild-electron": "./node_modules/.bin/electron-rebuild",
+    "postinstall": "npm rebuild node-sass --force",
     "release": "build"
   }
 }

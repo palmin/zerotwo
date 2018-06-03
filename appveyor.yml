@@ -11,11 +11,10 @@ init:
 
 install:
   - ps: Install-Product node 8
-  - npm install --no-optional --no-audit --production
-  - npm rebuild node-sass --force
+  - yarn
 
 build_script:
-  - npm run build:win
+  - yarn build
 
 test: off
 

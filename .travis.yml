@@ -15,9 +15,9 @@ branches:
 node_js:
 - '8'
 install:
-- npm install --no-audit
+- yarn
 script:
-- npm run build
+- yarn build
 deploy:
   skip_cleanup: true
   provider: releases

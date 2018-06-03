@@ -11,10 +11,10 @@ init:
 
 install:
   - ps: Install-Product node 8
-  - yarn
+  - npm install
 
 build_script:
-  - yarn build
+  - npm run build
 
 test: off
 

@@ -14,10 +14,13 @@
                 {{ $t('seriesInformation') }}
               </h2>
               <p>{{ $t('episodes') }}: {{ episodes }}</p>
-              <p>{{ $t('rating') }}: <span id="malRating" class="ui star rating"></span> ({{ rating }})</p>
+              <p>{{ $t('rating') }}:
+                <span id="malRating" class="ui star rating"></span> ({{ rating }})
+              </p>
               <p>{{ $t('type') }}: {{ type }}</p>
               <p>{{ $t('synonyms') }}: {{ synonyms }}</p>
               <p>{{ $t('englishName') }}: {{ englishName }}</p>
+              <p>{{ $t('japaneseName') }}: {{ japaneseName }}</p>
               <p>{{ $t('airingTime') }}: {{ airingTime }}</p>
               <p>{{ $t('seriesStatus') }}: {{ seriesStatus }}</p>
             </div>
@@ -26,12 +29,18 @@
           <div class="six wide column">
             <div class="ui basic segment">
               <h2 class="ui header">
-                {{ $t('malDataInformation') }}
+                {{ $t('dataInformation') }}
               </h2>
               <div class="ui form">
                 <div class="field">
                   <label>{{ $t('ownStatus') }}</label>
-                  <dropdown :placeholder="dropdownPlaceholder" :items="statuses" :value="ownStatus" v-model="ownStatusValue" @change="checkChangedAnimeStatus" />
+                  <dropdown
+                  ref="informationModalStatusDropdown"
+                  :placeholder="dropdownPlaceholder"
+                  :items="statuses"
+                  :value="ownStatus"
+                  v-model="ownStatusValue"
+                  @change="checkChangedAnimeStatus" />
                 </div>
                 <div class="field">
                   <label>{{ $t('watchedEpisodes') }}</label>
@@ -43,14 +52,15 @@
                   </div>
                 </div>
                 <div class="field">
-                  <label>{{ $t('ownRating') }}</label>
-                  <div id="ownRating" class="ui star rating"></div>
-                  ({{ ratingValue }})&nbsp;
-                  <a class="ui secondary label" @click="clearRating">
-                    {{ $t('clear') }}
-                  </a>
+                  <label>{{ $t('ownRating') }} (0 - 100)</label>
+                  <div class="ui right labeled input">
+                    <input type="number" min="0" max="100" v-model="ratingValue" />
+                    <div class="ui basic label">
+                      <i class="yellow star icon"></i>
+                    </div>
+                  </div>
                 </div>
-                <template v-if="currentAnime">
+                <template v-if="isInOwnList">
                   <div class="ui right floated primary button" @click="submitChanges">
                     {{ $t('submitChanges') }}
                   </div>
@@ -84,7 +94,7 @@
           <h3 class="ui header">
             {{ $t('description') }}
           </h3>
-          {{ description }}
+          <div v-html="description"></div>
         </div>
       </div>
     </div>
@@ -96,73 +106,102 @@
 
 <script>
 import htmlEntities from 'he';
-import { Builder } from 'xml2js';
 import { mapState, mapMutations } from 'vuex';
-import { camelCase, find } from 'lodash';
+import _, { camelCase, find } from 'lodash';
+import VueSlider from 'vue-slider-component';
+import EventBus from '@/plugins/eventBus';
 import Dropdown from './Dropdown';
 import DeleteModal from './DeleteModal';
 
 export default {
-  props: ['data'],
+  props: ['aniData'],
 
-  components: { Dropdown, DeleteModal },
+  components: { Dropdown, DeleteModal, VueSlider },
 
   data() {
     return {
+      data: null,
       deleteModalRef: 'informationDeleteModal',
       ownEpisodeProgressValue: 0,
-      ownStatusValue: 0,
+      ownStatusValue: null,
       ratingValue: 0,
-      statuses: [{
-        value: '1',
-        name: this.$t('watching'),
-      }, {
-        value: '2',
-        name: this.$t('finished'),
-      }, {
-        value: '3',
-        name: this.$t('onHold'),
-      }, {
-        value: '4',
-        name: this.$t('canceled'),
-      }, {
-        value: '6',
-        name: this.$t('planned'),
-      }],
     };
   },
 
   computed: {
-    ...mapState('myAnimeList', ['auth', 'malData']),
     ...mapState('i18n', ['locale']),
-    currentAnime() {
-      const current = find(this.malData, item => item.series_animedb_id === this.data.id);
-      if (current === undefined) {
+    ...mapState('aniList', ['session']),
+
+    // ratingMax() {
+    //   if (!this.session.user || !this.session.user.mediaListOptions) {
+    //     return 100;
+    //   }
+
+    //   const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
+    //   switch (scoringSystem) {
+    //     case 'POINT_100':
+    //     default:
+    //       return 100;
+    //     case 'POINT_10_DECIMAL':
+    //     case 'POINT_10':
+    //       return 10;
+    //     case 'POINT_5':
+    //       return 5;
+    //     case 'POINT_3':
+    //       return 3;
+    //   }
+    // },
+
+    statuses() {
+      return [{
+        value: 'CURRENT',
+        name: this.$t('watching'),
+      }, {
+        value: 'REPEATING',
+        name: this.$t('repeating'),
+      }, {
+        value: 'COMPLETED',
+        name: this.$t('finished'),
+      }, {
+        value: 'PAUSED',
+        name: this.$t('onHold'),
+      }, {
+        value: 'DROPPED',
+        name: this.$t('dropped'),
+      }, {
+        value: 'PLANNING',
+        name: this.$t('planned'),
+      }];
+    },
+
+    isInOwnList() {
+      if (!this.data || !this.data.mediaListEntry) {
+        return false;
+      }
+
+      return true;
+    },
+
+    ownRating() {
+      if (!this.data || !this.data.mediaListEntry) {
         return null;
       }
 
-      return current;
-    },
-    ownRating() {
-      if (!this.currentAnime) {
-        return 0;
-      }
-
-      return this.currentAnime.my_score;
+      return this.data.mediaListEntry.score;
     },
     ownStatus() {
-      if (!this.currentAnime) {
-        return 0;
+      if (!this.data || !this.data.mediaListEntry) {
+        return null;
       }
 
-      return this.currentAnime.my_status;
+      return this.data.mediaListEntry.status;
     },
     watchedEpisodes() {
-      if (!this.currentAnime) {
-        return 0;
+      if (!this.data || !this.data.mediaListEntry) {
+        return null;
       }
 
-      return this.currentAnime.my_watched_episodes;
+      return this.data.mediaListEntry.progress;
     },
 
     header() {
@@ -170,7 +209,7 @@ export default {
         return '';
       }
 
-      return this.data.title;
+      return this.data.title.userPreferred;
     },
 
     description() {
@@ -178,59 +217,99 @@ export default {
         return '';
       }
 
-      const replacedString = this.data.synopsis
-        .replace(/((<br\s*\/?>)\s*){2,}/gi, '<br>')
-        .replace(/<br\s*\/?>/gi, '\n');
-
-      return htmlEntities.decode(replacedString);
+      return this.data.description;
     },
 
     image() {
-      return this.data.image;
+      if (!this.data) {
+        return '';
+      }
+
+      return this.data.coverImage.large;
     },
 
     episodes() {
-      return !Number(this.data.episodes) ? '?' : this.data.episodes;
+      if (!this.data) {
+        return '';
+      }
+
+      return !this.data.episodes ? '?' : this.data.episodes;
     },
 
     rating() {
-      return this.data.score;
+      if (!this.data) {
+        return '';
+      }
+
+      return this.data.averageScore;
     },
 
     synonyms() {
-      return this.data.synonyms || this.$t('noSynonyms');
+      if (!this.data) {
+        return '';
+      }
+
+      return this.data.synonyms.join(', ') || this.$t('noSynonyms');
     },
 
     type() {
-      return this.data.type;
+      if (!this.data) {
+        return '';
+      }
+
+      return this.$t(this.data.type.toLowerCase());
     },
 
     englishName() {
-      return this.data.english;
+      if (!this.data) {
+        return '';
+      }
+
+      return this.data.title.english || this.$t('noEnglishName');
+    },
+
+    japaneseName() {
+      if (!this.data) {
+        return '';
+      }
+
+      return this.data.title.native || this.$t('noJapaneseName');
     },
 
     seriesStatus() {
+      if (!this.data) {
+        return '';
+      }
+
       return this.$t(camelCase(this.data.status));
     },
 
     airingTime() {
-      let time = '?';
-      const start = this.$getDate(this.data.start_date, this.$t('dateFormat'));
-      const end = this.$getDate(this.data.end_date, this.$t('dateFormat'));
-
-      if (this.$getMoment(this.data.start_date).isValid()) {
-        time = `${start}`;
+      if (!this.data) {
+        return '';
       }
 
-      if (this.$getMoment(this.data.end_date).isValid()) {
-        time = `${time} ~ ${end}`;
+      const start = this.$getMoment({
+        year: this.data.startDate.year,
+        month: this.data.startDate.month - 1,
+        day: this.data.startDate.day,
+      });
+
+      const end = this.$getMoment({
+        year: this.data.endDate.year,
+        month: this.data.endDate.month - 1,
+        day: this.data.endDate.day,
+      });
+
+      if (start.isSame(end) && start.isValid()) {
+        return `${start.format(this.$t('dateFormat'))}`;
+      } else if (!start.isSame(end) && start.isValid() && end.isValid()) {
+        return `${start.format(this.$t('dateFormat'))} ~ ${end.format(this.$t('dateFormat'))}`;
+      } else if (start.isValid() && !end.isValid()) {
+        return this.$t('sinceDate', { date: start.format(this.$t('dateFormat')) });
       }
 
-      if (this.$getMoment(this.data.start_date).isSame(this.data.end_date)) {
-        time = start;
-      }
-
-      return time;
+      return '?';
     },
 
     deleteModalContent() {
@@ -244,49 +323,70 @@ export default {
 
   watch: {
     watchedEpisodes(value) {
+      if (!this.data) {
+        return;
+      }
+
       this.ownEpisodeProgressValue = value;
     },
     rating() {
+      if (!this.data) {
+        return;
+      }
+
       this.updateMALRating();
     },
     ownRating(value) {
+      if (!this.data) {
+        return;
+      }
+
       this.ratingValue = value;
       this.updateOwnRating();
     },
     ownStatus(newValue) {
+      if (!this.data) {
+        return;
+      }
+
       this.ownStatusValue = newValue;
     },
     locale() {
+      if (!this.data) {
+        return;
+      }
+
       this.statuses = [{
-        value: '1',
+        value: 'CURRENT',
         name: this.$t('watching'),
       }, {
-        value: '2',
+        value: 'REPEATING',
+        name: this.$t('repeating'),
+      }, {
+        value: 'COMPLETED',
         name: this.$t('finished'),
       }, {
-        value: '3',
+        value: 'PAUSED',
         name: this.$t('onHold'),
       }, {
-        value: '4',
-        name: this.$t('canceled'),
+        value: 'DROPPED',
+        name: this.$t('dropped'),
       }, {
-        value: '6',
+        value: 'PLANNING',
         name: this.$t('planned'),
       }];
     },
   },
 
   methods: {
-    ...mapMutations('myAnimeList', ['setInformation']),
-
     checkChangedAnimeStatus(status) {
       // When status was set to finished
-      if (status === '2') {
-        if (!+this.data.episodes) {
+      if (status === 'COMPLETED') {
+        if (!this.data.episodes) {
           return;
         }
 
-        this.ownEpisodeProgressValue = +this.data.episodes;
+        this.ownEpisodeProgressValue = this.data.episodes;
       }
     },
 
@@ -295,11 +395,13 @@ export default {
     },
 
     submitDelete() {
+      const { id } = this.data.mediaListEntry;
       this.cancelDelete();
       this.show();
-      this.$http.deleteAnime(this.auth, { id: this.data.id })
+
+      this.$http.deleteAnimeFromList(id, this.session.access_token)
         .then((response) => {
-          if (response === 'Deleted') {
+          if (response.data.DeleteMediaListEntry.deleted) {
             this.$notify({
               title: this.$t('deleted.title'),
               text: this.$t('deleted.text'),
@@ -311,7 +413,7 @@ export default {
         .catch((error) => {
           this.$notify({
             type: 'error',
-            title: this.$t('errorResponseTitle'),
+            title: 'ERROR',
             text: error,
           });
         });
@@ -322,19 +424,37 @@ export default {
     },
 
     addToList() {
-      const id = this.data.id;
-      const builder = new Builder({ rootName: 'entry' });
-      const entry = {
-        episode: this.ownEpisodeProgressValue,
-        status: this.ownStatusValue,
-        score: this.ratingValue,
-      };
+      const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
+      let score;
 
-      const xml = builder.buildObject(entry);
+      const progress = this.ownEpisodeProgressValue;
+      const status = this.ownStatusValue;
+      const mediaId = this.data.id;
 
-      this.$http.addAnime(this.auth, { id, xml })
+      switch (scoringSystem) {
+        case 'POINT_10_DECIMAL':
+          score = this.ratingValue / 10;
+          break;
+        case 'POINT_10':
+          score = Math.floor(this.ratingValue / 10);
+          break;
+        case 'POINT_5':
+          score = Math.floor(this.ratingValue / 20);
+          break;
+        case 'POINT_3':
+          score = Math.floor(Math.floor(this.ratingValue / 10) / 3);
+          break;
+        case 'POINT_100':
+        default:
+          score = this.ratingValue;
+          break;
+      }
+
+      this.$http.addAnimeToList({
+        mediaId, score, status, progress,
+      }, this.session.access_token)
         .then((response) => {
-          if (response === 'Created') {
+          if (response.data.SaveMediaListEntry.id) {
             this.$notify({
               title: this.$t('created.title'),
               text: this.$t('created.text'),
@@ -346,7 +466,7 @@ export default {
         .catch((error) => {
           this.$notify({
             type: 'error',
-            title: this.$t('errorResponseTitle'),
+            title: 'ERROR',
             text: error,
           });
         });
@@ -358,25 +478,45 @@ export default {
     },
 
     resetChanges() {
-      this.ownEpisodeProgressValue = this.currentAnime.my_watched_episodes;
-      this.ownStatusValue = this.currentAnime.my_status;
-      this.ratingValue = this.currentAnime.my_score;
+      this.ownEpisodeProgressValue = this.data.mediaListEntry.progress;
+      this.ownStatusValue = this.data.mediaListEntry.status;
+      this.ratingValue = this.data.mediaListEntry.score;
       this.updateOwnRating();
     },
 
     submitChanges() {
-      const builder = new Builder({ rootName: 'entry' });
-      const entry = {
-        episode: this.ownEpisodeProgressValue,
-        status: this.ownStatusValue,
-        score: this.ratingValue,
-      };
+      const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
+      let score;
 
-      const xml = builder.buildObject(entry);
+      const progress = this.ownEpisodeProgressValue;
+      const status = this.ownStatusValue;
+      const { id } = this.data.mediaListEntry;
+      const token = this.session.access_token;
 
-      this.$http.updateAnime(this.auth, { id: this.data.id, xml })
+      switch (scoringSystem) {
+        case 'POINT_10_DECIMAL':
+          score = this.ratingValue / 10;
+          break;
+        case 'POINT_10':
+          score = Math.floor(this.ratingValue / 10);
+          break;
+        case 'POINT_5':
+          score = Math.floor(this.ratingValue / 20);
+          break;
+        case 'POINT_3':
+          score = Math.floor(Math.floor(this.ratingValue / 10) / 3);
+          break;
+        case 'POINT_100':
+        default:
+          score = this.ratingValue;
+          break;
+      }
+
+      this.$http.updateAnimeInList({
+        id, progress, status, score,
+      }, token)
         .then((response) => {
-          if (response === 'Updated') {
+          if (response.data.SaveMediaListEntry.id) {
             this.$notify({
               title: this.$t('updated.title'),
               text: this.$t('updated.text'),
@@ -395,13 +535,22 @@ export default {
     },
 
     close() {
-      this.setInformation(null);
+      this.data = null;
+      this.ownEpisodeProgressValue = 0;
+      this.ratingValue = 0;
+      this.ownStatusValue = null;
+      this.$refs.informationModalStatusDropdown.clear();
+      EventBus.$emit('setOpenInformationId', null);
+      EventBus.$emit('setInformation', null);
+
       $(this.$el).modal('hide');
     },
-    show() {
-      if (!this.data) {
+    show(data) {
+      if (!data) {
         return;
       }
+
+      this.data = data;
 
       $(this.$el)
         .modal({
@@ -417,7 +566,7 @@ export default {
     },
     updateMALRating() {
       // eslint-disable-next-line no-bitwise
-      const score = Number(this.data.score) | 0;
+      const score = Math.floor(this.data.averageScore / 10) | 0;
       $('#malRating', this.$el)
         .rating({
           initialRating: score,
@@ -447,16 +596,21 @@ export default {
 .ui.basic.segment * {
   white-space: initial;
 }
+i.yellow.star.icon {
+  margin-right: 0;
+}
 </style>
 
 
 <i18n>
 {
   "en": {
+    "anime": "Anime",
+    "manga": "Manga",
     "close": "Close",
     "description": "Description",
     "seriesInformation": "Series Information",
-    "malDataInformation": "Information of your MyAnimeList",
+    "dataInformation": "Information of your List",
     "episodes": "Episodes",
     "rating": "Rating",
     "type": "Type of Series",
@@ -464,7 +618,11 @@ export default {
     "noSynonyms": "No Synonyms",
     "airingTime": "Airing Time",
     "englishName": "English Name",
+    "noEnglishName": "No English Name",
+    "japaneseName": "Japanese Name",
+    "noJapaneseName": "No Japanese Name",
     "seriesStatus": "Status of Series",
+    "sinceDate": "Since {date}",
     "dateFormat": "MMM DD YYYY",
     "unknownDate": "Date unknown",
     "finishedAiring": "Finished Airing",
@@ -473,11 +631,19 @@ export default {
     "ownRating": "Own Rating",
     "ownStatus": "Own Status",
     "watchedEpisodes": "Watched Episodes",
+    "current": "Watching",
     "watching": "Watching",
+    "repeating": "Repeating",
     "finished": "Finished",
+    "completed": "Completed",
+    "paused": "Paused",
     "onHold": "On Hold",
-    "canceled": "Canceled",
+    "dropped": "Dropped",
     "planned": "Planned",
+    "planning": "Planning",
+    "releasing": "Releasing",
+    "not_yet_released": "Not yet released",
+    "cancelled": "Cancelled",
     "dropdownPlaceholder": "Please select...",
     "submitChanges": "Submit",
     "resetChanges": "Reset",
@@ -501,10 +667,12 @@ export default {
     "clear": "Set to 0 stars"
   },
   "de": {
+    "anime": "Anime",
+    "manga": "Manga",
     "close": "Schließen",
     "description": "Beschreibung",
     "seriesInformation": "Serieninformationen",
-    "malDataInformation": "Informationen deiner MyAnimeList",
+    "dataInformation": "Informationen deiner Liste",
     "episodes": "Episoden",
     "rating": "Bewertung",
     "type": "Serientyp",
@@ -512,7 +680,11 @@ export default {
     "noSynonyms": "Keine Synonyme",
     "airingTime": "Ausstrahlung",
     "englishName": "Englischer Name",
+    "noEnglishName": "Kein englischer Name vorhanden",
+    "japaneseName": "Japanischer Name",
+    "noJapaneseName": "Kein japanischer Name vorhanden",
     "seriesStatus": "Serienstatus",
+    "sinceDate": "Seit {date}",
     "dateFormat": "DD. MMM YYYY",
     "unknownDate": "Datum unbekannt",
     "finishedAiring": "Ausstrahlung beendet",
@@ -521,11 +693,19 @@ export default {
     "ownRating": "Eigene Bewertung",
     "ownStatus": "Eigener Status",
     "watchedEpisodes": "Episoden geschaut",
+    "current": "Laufend",
     "watching": "Laufend",
+    "repeating": "Wiederholung",
     "finished": "Beendet",
+    "completed": "Beendet",
+    "paused": "Pausiert",
     "onHold": "Pausiert",
-    "canceled": "Abgebrochen",
+    "dropped": "Abgebrochen",
     "planned": "Geplant",
+    "planning": "Geplant",
+    "releasing": "Wird ausgestrahlt",
+    "not_yet_released": "Ausstrahlung geplant",
+    "cancelled": "Abgebrochen",
     "dropdownPlaceholder": "Bitte wählen...",
     "submitChanges": "Speichern",
     "resetChanges": "Zurücksetzen",
@@ -549,10 +729,12 @@ export default {
     "clear": "Auf 0 Sterne setzen"
   },
   "ja": {
+    "anime": "アニメ",
+    "manga": "漫画",
     "close": "クローズ",
     "description": "デスクリプション",
     "seriesInformation": "シリーズについて",
-    "malDataInformation": "自分のMyAnimeList",
+    "dataInformation": "自分のリスト情報",
     "episodes": "エピソード",
     "rating": "評価",
     "type": "タイプ",
@@ -560,7 +742,11 @@ export default {
     "noSynonyms": "シノニムがありません",
     "airingTime": "放送時間",
     "englishName": "英語名",
+    "noEnglishName": "英語名がありません",
+    "japaneseName": "日本語名",
+    "noJapaneseName": "日本語名がありません",
     "seriesStatus": "シリーズのステータス",
+    "sinceDate": "{date}から放送中",
     "dateFormat": "YYYY[年]MM[月]DD[日]",
     "unknownDate": "日付不明",
     "finishedAiring": "放送終了",
@@ -570,10 +756,18 @@ export default {
     "ownStatus": "自分のステータス",
     "watchedEpisodes": "見たエピソード",
     "watching": "見る",
+    "current": "見る",
+    "repeating": "見直す",
     "finished": "終了",
+    "completed": "終了",
+    "paused": "中止",
     "onHold": "中止",
-    "canceled": "止めました",
+    "dropped": "止めました",
     "planned": "見るつもり",
+    "planning": "見るつもり",
+    "releasing": "放送中",
+    "not_yet_released": "放送予定",
+    "cancelled": "中止された",
     "dropdownPlaceholder": "選んでください・・・",
     "submitChanges": "保存",
     "resetChanges": "リセット",

@@ -10,4 +10,4 @@ npm-debug.log.*
 thumbs.db
 !.gitkeep
 /bower_components
-src/renderer/assets/semantic/*
+src/renderer/assets/style/semantic/*

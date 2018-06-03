@@ -11,11 +11,17 @@
 import { mapState, mapMutations } from 'vuex';
 import DefaultLayout from '@/layouts/Default';
 import Notification from '@/components/Notification';
-import malTimer from '@/mixins/malTimer';
+// import malTimer from '@/mixins/malTimer';
+import discord from '@/mixins/discord';
+import aniListTimer from '@/mixins/aniListTimer';
 
 export default {
   name: 'app',
-  mixins: [malTimer],
+  mixins: [
+    // malTimer,
+    discord,
+    aniListTimer,
+  ],
   components: { Notification },
 
   created() {

@@ -2,6 +2,9 @@ export default {
   setMALData(state, payload) {
     state.malData = payload;
   },
+  setUserData(state, payload) {
+    state.userData = payload;
+  },
   setLoginData(state, payload) {
     state.auth = payload;
   },
@@ -19,6 +22,7 @@ export default {
   },
   resetState(state) {
     state.malData = null;
+    state.userData = null;
     state.auth = null;
     state.information = null;
     state.refreshRate = 15;

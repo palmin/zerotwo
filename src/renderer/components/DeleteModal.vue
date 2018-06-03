@@ -1,5 +1,5 @@
 <template>
-  <div class="ui basic modal">
+  <div class="ui modal">
     <div class="ui icon header">
       <i class="trash icon"></i>
       {{ header }}
@@ -63,8 +63,7 @@ export default {
         .modal('show');
     },
     hide() {
-      $(this.$el)
-        .modal('hide');
+      $(this.$el).modal('hide');
     },
   },
 };

@@ -9,11 +9,6 @@ image: Visual Studio 2017
 init:
   - git config --global core.autocrlf input
 
-cache:
-  - '%APPDATA%/npm-cache'
-  - '%USERPROFILE%/.electron'
-
-
 install:
   - ps: Install-Product node 8
   - npm install

@@ -108,7 +108,6 @@
 import htmlEntities from 'he';
 import { mapState, mapMutations } from 'vuex';
 import _, { camelCase, find } from 'lodash';
-import VueSlider from 'vue-slider-component';
 import EventBus from '@/plugins/eventBus';
 import Dropdown from './Dropdown';
 import DeleteModal from './DeleteModal';
@@ -116,7 +115,7 @@ import DeleteModal from './DeleteModal';
 export default {
   props: ['aniData'],
 
-  components: { Dropdown, DeleteModal, VueSlider },
+  components: { Dropdown, DeleteModal },
 
   data() {
     return {

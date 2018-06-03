@@ -11,11 +11,11 @@ init:
 
 install:
   - ps: Install-Product node 8
-  - npm install
+  - npm install --no-optional
   - npm rebuild node-sass --force
 
 build_script:
-  - npm run build
+  - npm run build:win
 
 test: off
 

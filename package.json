@@ -140,7 +140,7 @@
     "build:dir": "npm run pack && electron-builder --dir",
     "build:linux": "npm run pack && electron-builder --linux",
     "build:mac": "npm run pack && electron-builder --mac",
-    "build:win": "npm run pack && electron-builder --win",
+    "build:win": "node vue-electron/build.js && electron-builder --publish never",
     "build:win-app": "npm run pack && electron-builder",
     "clean": "cross-env BUILD_TARGET=clean node vue-electron/build.js",
     "dev": "cross-env NODE_ENV=development node vue-electron/dev-runner.js",

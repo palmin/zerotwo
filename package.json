@@ -148,7 +148,6 @@
     "pack": "cross-env NODE_ENV=production npm run pack:main && npm run pack:renderer",
     "pack:main": "webpack --mode production --hide-modules --config vue-electron/webpack.main.config.js",
     "pack:renderer": "webpack --mode production --hide-modules --config vue-electron/webpack.renderer.config.js",
-    "postinstall": "electron-builder install-app-deps && npm rebuild node-sass",
     "rebuild-electron": "./node_modules/.bin/electron-rebuild",
     "release": "build"
   }

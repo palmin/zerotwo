@@ -133,7 +133,7 @@
   },
   "main": "./dist/electron/main.js",
   "scripts": {
-    "build": "node vue-electron/build.js && electron-builder --publish never",
+    "build": "npm run pack && electron-builder --publish never",
     "build:pack": "npm run pack && electron-builder --publish never",
     "build:dir": "npm run pack && electron-builder --dir",
     "build:linux": "npm run pack && electron-builder --linux",
@@ -148,7 +148,7 @@
     "pack:main": "webpack --mode production --hide-modules --config vue-electron/webpack.main.config.js",
     "pack:renderer": "webpack --mode production --hide-modules --config vue-electron/webpack.renderer.config.js",
     "rebuild-electron": "./node_modules/.bin/electron-rebuild",
-    "postinstall": "npm rebuild node-sass --force",
+    "postinstall": "electron-builder install-app-deps && npm rebuild node-sass",
     "release": "build"
   }
 }

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   sources: {
     repoUrl: 'https://github.com/NicoAiko/zerotwo',

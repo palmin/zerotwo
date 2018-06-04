@@ -11,3 +11,4 @@ thumbs.db
 !.gitkeep
 /bower_components
 src/renderer/assets/style/semantic/*
+.env

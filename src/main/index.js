@@ -2,10 +2,9 @@
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, shell } from 'electron'
 import os from 'os';
 import electronOauth2 from 'electron-oauth2';
+import { oauth as oauthConfig } from './config';
 import { version } from '../../package.json';
 /* eslint-enable */
-
-import { oauth as oauthConfig } from './config';
 const windowParams = {
   alwaysOnTop: true,
   autoHideMenuBar: true,

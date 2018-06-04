@@ -17,6 +17,7 @@ node_js:
 install:
 - npm install
 script:
+- echo "CLIENT_SECRET=$CLIENT_SECRET" > .env
 - npm run build
 deploy:
   skip_cleanup: true

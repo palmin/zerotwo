@@ -144,7 +144,7 @@
     "build:win": "node vue-electron/build.js && electron-builder --publish never",
     "build:win-app": "npm run pack && electron-builder",
     "clean": "cross-env BUILD_TARGET=clean node vue-electron/build.js",
-    "dev": "cross-env NODE_ENV=development node vue-electron/dev-runner.js",
+    "dev": "env-cmd .env node vue-electron/dev-runner.js",
     "lint": "eslint --ext .js,.vue src test",
     "lint:fix": "eslint --ext .js,.vue --fix src test",
     "pack": "env-cmd .env npm run pack:main && npm run pack:renderer",

@@ -11,7 +11,7 @@ init:
 
 install:
   - ps: Install-Product node 8
-  - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET" > .env
+  - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
   - npm install
 
 build_script:

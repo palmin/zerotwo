@@ -6,11 +6,6 @@ platform: Any CPU
 
 image: Visual Studio 2017
 
-environment:
-  NODE_ENV: production
-  CLIENT_SECRET:
-    secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
-
 init:
   - git config --global core.autocrlf input
 
@@ -18,6 +13,11 @@ install:
   - ps: Install-Product node 8
   - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
   - npm install
+
+environment:
+  NODE_ENV: production
+  CLIENT_SECRET:
+    secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
 
 build_script:
   - npm run build

@@ -12,7 +12,7 @@ init:
 install:
   - ps: Install-Product node 8
   - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
-  - npm install
+  - ps: npm install
 
 environment:
   NODE_ENV: production
@@ -20,7 +20,7 @@ environment:
     secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
 
 build_script:
-  - npm run build
+  - ps: npm run build
 
 test: off
 

@@ -12,16 +12,14 @@ init:
 install:
   - ps: Install-Product node 8
   - npm install
-  - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
 
 environment:
-  # NODE_ENV: production
   CLIENT_SECRET:
     secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
 
 before_build:
-  - ps: echo $env:NODE_ENV
   - ps: $env:NODE_ENV="production"
+  - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
 
 build_script:
   - npm run build

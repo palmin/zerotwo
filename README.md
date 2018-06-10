@@ -1,66 +1,55 @@
-# Vue-Electron-Template
+# ZeroTwo
+Electron - Vue.js Anime Tracker
 
-[![Build status](https://ci.appveyor.com/api/projects/status/cjua6pdhjp9rqa1o?svg=true)](https://ci.appveyor.com/project/mubaidr/vue-electron-template)
-[![Build Status](https://travis-ci.org/mubaidr/vue-electron-template.svg?branch=master)](https://travis-ci.org/mubaidr/vue-electron-template)
+> Taiga alternative
 
-The boilerplate for making electron applications using vue.js
+#### Build status
 
-## Overview
+[![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
+[![Build status](https://ci.appveyor.com/api/projects/status/goacd72jf5oopi47?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
-The aim of this template is to remove the need of manually setting up electron apps using vue. `vue-electron` takes advantage of `webpack-4` with `vue-loader`, `electron-builder`, and some of the most used plugins like `vue-router`, `vuex` and so much more to provide an easy to use development and building enviroment.
+---
 
-### What does it offer?
+## What is ZeroTwo?
 
-* Basic project structure with a **single** `package.json` setup
-* Ready to use Vue plugins \([vue-router](https://github.com/vuejs/vue-router), [vuex](https://github.com/vuejs/vuex), [vue-electron](https://github.com/SimulatedGREG/vue-electron)\)
-* Installed [vue-devtools](https://github.com/vuejs/vue-devtools) and [devtron](https://github.com/electron/devtron) tools for development
-* [Bulma](https://bulma.io) and [Font-awesomse-5](https://fontawesome.com) installed.
-* Ability to easily package your electron app using [electron-builder](https://github.com/electron-userland/electron-builder)
-* `DEV` & `BUILD` NPM scripts using [webpack-4](https://github.com/webpack/webpack) and [vue-loader](https://github.com/vuejs/vue-loader) with Hot Module Replacement enabled
-* Process restarting when working in main process
-* CSS/JS pre-processor support with [vue-loader](https://github.com/vuejs/vue-loader/)
-* ES6 with [`stage-0`](https://babeljs.io/docs/plugins/preset-stage-0/) by default
-* ESLint configured
+> Welcome to ZeroTwo, the whole new experience of managing the MyAnimeList!
+>
+> With this program you will easily add, update or delete Anime from your list!
+> 
+> You only have to login to MyAnimeList and the fun can begin!",
 
-### Getting Started
+## [Get the latest release here!](https://github.com/NicoAiko/zerotwo/releases)
 
-Clone this repository, install dependencies and run using either `dev` or `build` command.
+## Discord Server
 
-```bash
-# Clone this repository
-git clone https://github.com/mubaidr/vue-electron
+##### Join the ZeroTwo Discord Server!
 
-# change directory to cloned path
-cd vue-electron
+[<img src="https://discordapp.com/assets/e4923594e694a21542a489471ecffa50.svg" width="350">](https://discord.gg/sTpR4Gw)
 
-# Install dependencies
+---
+
+## [Documentation](https://github.com/NicoAiko/zerotwo/wiki)
+
+#### Short Build Setup
+
+``` bash
+# install dependencies
 npm install
 
-# Run in `DEV` mode
+# serve with hot reload at localhost:9080
 npm run dev
 
-# Build installer for this app
+# build electron application for production
 npm run build
 
-# Build directory for this app with executeable
-npm run build:dir
 
-# Lint all source files using ESLINT
+# lint all JS/Vue component files in `src/`
 npm run lint
+
 ```
 
-### Project structure
+---
 
-`src` contains all the source files.
+# [LICENSE](LICENSE)
 
-`src/main` contains electron main script.
-
-`src/renderer` contains vue-js application.
-
-`vue-electron` directory contains dev and build scripts
-
-#### Credits
-
-All credits to authors of packages and tools used in the project.
-
-\* This template is inspired by [electron-vue](https://github.com/SimulatedGREG/electron-vue)
+GNU General Public License v3.0

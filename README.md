@@ -12,11 +12,11 @@ Electron - Vue.js Anime Tracker
 
 ## What is ZeroTwo?
 
-> Welcome to ZeroTwo, the whole new experience of managing the MyAnimeList!
+> Welcome to ZeroTwo, the whole new experience of managing the ~~MyAnimeList~~ AniList!
 >
 > With this program you will easily add, update or delete Anime from your list!
 > 
-> You only have to login to MyAnimeList and the fun can begin!",
+> You only have to login to ~~MyAnimeList~~ AniList and the fun can begin!",
 
 ## [Get the latest release here!](https://github.com/NicoAiko/zerotwo/releases)
 

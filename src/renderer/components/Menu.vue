@@ -128,6 +128,20 @@ export default {
     "searchAnime": "検索 ...",
     "settings": "環境設定",
     "noResults": "結果は見つかりませんでした。"
+  },
+  "zh-cn": {
+    "animeList": "MyAnimeList",
+    "refreshMAL": "刷新MAL",
+    "refreshAniList": "刷新AniList",
+    "watching": "观看中",
+    "completed": "已看完",
+    "onHold": "搁置中",
+    "dropped": "已弃坑",
+    "planned": "计划中",
+    "notInList": "不在你的列表中",
+    "searchAnime": "搜索……",
+    "settings": "设置",
+    "noResults": "未找到结果"
   }
 }
 </i18n>

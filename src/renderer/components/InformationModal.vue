@@ -788,6 +788,68 @@ i.yellow.star.icon {
     "deleteModalHeader": "本当に削除しますか？",
     "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
     "clear": "０☆にセット"
+  },
+  "zh-cn": {
+    "anime": "动画",
+    "manga": "漫画",
+    "close": "关闭",
+    "description": "说明",
+    "seriesInformation": "剧集信息",
+    "dataInformation": "你的列表信息",
+    "episodes": "总集数",
+    "rating": "评分",
+    "type": "剧集类型",
+    "synonyms": "别名",
+    "noSynonyms": "无别名",
+    "airingTime": "放送时间",
+    "englishName": "英文名",
+    "noEnglishName": "无英文名",
+    "japaneseName": "日文名",
+    "noJapaneseName": "无日文名",
+    "seriesStatus": "剧集状态",
+    "sinceDate": "从{date}开始",
+    "dateFormat": "YYYY/M/D",
+    "unknownDate": "日期不详",
+    "finishedAiring": "放送完毕",
+    "currentlyAiring": "正在放送",
+    "notYetAired": "尚未放送",
+    "ownRating": "个人评分",
+    "ownStatus": "个人状态",
+    "watchedEpisodes": "已看集数",
+    "current": "观看中",
+    "watching": "观看中",
+    "repeating": "回顾中",
+    "finished": "已看完",
+    "completed": "已看完",
+    "paused": "搁置中",
+    "onHold": "搁置中",
+    "dropped": "已弃坑",
+    "planned": "计划中",
+    "planning": "计划中",
+    "releasing": "上映中",
+    "not_yet_released": "尚未上映",
+    "cancelled": "已弃坑",
+    "dropdownPlaceholder": "请选择……",
+    "submitChanges": "提交",
+    "resetChanges": "重置",
+    "addToList": "添加到列表",
+    "deleteFromList": "从列表中删除",
+    "updated": {
+      "title": "更新！",
+      "text": "更新成功！"
+    },
+    "created": {
+      "title": "创建！",
+      "text": "创建成功！"
+    },
+    "deleted": {
+      "title": "删除！",
+      "text": "删除成功！"
+    },
+    "errorResponseTitle": "更新失败！",
+    "deleteModalHeader": "确认删除？",
+    "doYouReallyWantToDelete": "你真的确定要把 {title} 从你的列表中删除？",
+    "clear": "星数归零"
   }
 }
 </i18n>

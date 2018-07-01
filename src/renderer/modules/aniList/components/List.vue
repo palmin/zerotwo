@@ -795,6 +795,33 @@ progress[value]::-webkit-progress-value {
     "planned": "見るつもり",
     "toFinished": "終了",
     "loadMore": "次のリストデータ・・・"
+  },
+  "zh-cn": {
+    "animeTitle": "动画标题",
+    "progress": "进度",
+    "score": "分数",
+    "season": "季度",
+    "lastUpdated": "最后更新",
+    "winter": "冬",
+    "spring": "春",
+    "summer": "夏",
+    "autumn": "秋",
+    "fall": "秋",
+    "unknown": "不详",
+    "dateFormat": "YYYY/M/D",
+    "loading": "加载中",
+    "updated": {
+      "title": "动画更新！",
+      "text": "{title} 更新成功！"
+    },
+    "errorResponseTitle": "更新失败！",
+    "watching": "观看中",
+    "finished": "已看完",
+    "onHold": "搁置中",
+    "dropped": "已弃坑",
+    "planned": "计划中",
+    "toFinished": "完结",
+    "loadMore": "加载更多内容……"
   }
 }
 </i18n>

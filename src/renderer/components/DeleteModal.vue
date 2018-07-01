@@ -82,6 +82,10 @@ export default {
   "ja": {
     "cancel": "キャンセル",
     "submit": "削除"
+  },
+  "zh-cn": {
+    "cancel": "取消",
+    "submit": "删除"
   }
 }
 </i18n>

@@ -357,6 +357,15 @@ export default {
     "dropped": "止めました",
     "planned": "見るつもり",
     "notInList": "リストにはありません"
+  },
+  "zh-cn": {
+    "search": "搜索……",
+    "watching": "观看中",
+    "completed": "已看完",
+    "onHold": "搁置中",
+    "dropped": "已弃坑",
+    "planned": "计划中",
+    "notInList": "不在你的列表中"
   }
 }
 </i18n>

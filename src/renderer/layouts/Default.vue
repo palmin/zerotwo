@@ -114,6 +114,9 @@ export default {
   },
   "ja": {
     "loading": "通信中・・・"
+  },
+  "zh-cn": {
+    "loading": "加载中……"
   }
 }
 </i18n>

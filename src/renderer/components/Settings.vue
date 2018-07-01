@@ -28,16 +28,28 @@
             <h2 class="ui header">
               {{ $t('setAppLanguage') }}
             </h2>
-            <dropdown
-              :items="languages"
-              :placeholder="$t('chooseLanguage')"
-              v-model="localeSetting"
-              />
-            <button
-            class="ui primary button"
-            @click="submitLanguageChange">
-              {{ $t('changeLanguage') }}
-            </button>
+            <div class="ui grid">
+              <div class="seven wide column">
+                <div class="ui fluid selection dropdown">
+                  <input type="hidden">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">{{ $t('chooseLanguage') }}</div>
+                  <div class="menu">
+                    <div class="item" v-for="language in languages" :key="language.value" :data-value="language.value">
+                      <span class="description">{{ language.englishName }}</span>
+                      <span class="text">{{ language.name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="four wide column">
+                <button
+                class="ui fluid primary button"
+                @click="submitLanguageChange">
+                  {{ $t('changeLanguage') }}
+                </button>
+              </div>
+            </div>
           </div>
 
           <div class="ui basic tab segment" data-tab="myAnimeList" v-if="myAnimeListActivated">
@@ -234,12 +246,10 @@ import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, between } from 'vuelidate/lib/validators';
 import find from 'lodash/find';
-import Dropdown from '@/components/Dropdown';
 
 export default {
   mixins: [validationMixin],
   props: ['event'],
-  components: { Dropdown },
   watch: {
     refreshRate(value) {
       this.refreshRateValue = value;
@@ -281,6 +291,10 @@ export default {
         name: '日本語',
         englishName: 'Japanese',
         value: 'ja',
+      }, {
+        name: '简体中文',
+        englishName: 'Simplified Chinese',
+        value: 'zh-cn',
       }],
     };
   },
@@ -292,6 +306,9 @@ export default {
     // ...mapActions('myAnimeList', ['login', 'logout', 'setTimerRunning', 'updateRefreshRate']),
     ...mapActions('aniList', ['logout', 'updateRefreshRate', 'setTimerRunning']),
     ...mapMutations('i18n', ['setLocale']),
+    changeLanguageValue(value) {
+      this.localeSetting = value;
+    },
     getLanguageByCode(code) {
       const language = find(this.languages, language => language.value === code);
 
@@ -363,6 +380,11 @@ export default {
           autofocus: false,
         })
         .modal('show');
+      $('.ui.selection.dropdown', this.$el)
+        .dropdown({
+          onChange: this.changeLanguageValue,
+        })
+        .dropdown('set selected', this.locale);
       this.localeSetting = this.locale;
     },
     editRefreshRate() {
@@ -470,6 +492,36 @@ export default {
     "aboutZeroTwo": "ZeroTwoについて",
     "version": "バージョン",
     "link": "クリックして"
+  },
+  "zh-cn": {
+    "settings": "设置",
+    "save": "保存",
+    "edit": "编辑",
+    "cancel": "取消",
+    "close": "关闭",
+    "login": "登录",
+    "logout": "登出",
+    "appSettings": "软件设置",
+    "setAppLanguage": "设置软件语言",
+    "chooseLanguage": "选择语言",
+    "changeLanguage": "更改语言",
+    "loggedInAs": "登录为",
+    "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
+    "accountSettings": "账户设置",
+    "loginData": "登录数据",
+    "username": "用户名",
+    "password": "密码",
+    "restoreFactoryData": "恢复出厂数据",
+    "refreshRate": "MAL刷新间隔（分钟）",
+    "aniListRefreshRate": "AniList刷新间隔（分钟）",
+    "noCredentials": "没有登录信息！",
+    "enterCredentials": "请输入登录信息以用于登录。",
+    "credentialsWrongOrTooManyLoginAttempts": "登录信息错误或登录尝试次数过多！",
+    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>你的登录信息有误，无法通过验证。</p><p>如果你确定你的登录信息准确无误，那么可能是因为你进行了过多次的登录尝试！</p><p>如果你遇到的情况属于后者，请等1~6个小时后再进行尝试……</p>",
+    "aboutZeroTwo": "关于ZeroTwo",
+    "version": "版本号",
+    "link": "点击我"
   }
 }
 </i18n>

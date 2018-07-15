@@ -25,12 +25,15 @@ export default {
   methods: {
     ...mapActions('aniList', ['detectAndSetAniData', 'setTimeUntilNextRefresh', 'setTimerRunning', 'getUser']),
     ...mapMutations('aniList', ['SET_USER']),
+    ...mapMutations(['setReady']),
     async timerAction() {
       await this.setTimeUntilNextRefresh(this.timeUntilNextRefresh - 1000);
       if (this.timeUntilNextRefresh <= 0) {
         const refreshInterval = this.refreshRate * 60 * 1000;
+        await this.setReady(false);
         await this.detectAndSetAniData();
         await this.setTimeUntilNextRefresh(refreshInterval);
+        await this.setReady(true);
       }
     },
     async refreshTimer() {

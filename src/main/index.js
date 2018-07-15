@@ -97,12 +97,11 @@ function createWindow() {
     width: 1280,
     minWidth: 1280,
     vibrancy: 'ultra-dark',
-    // backgroundColor: '#fff',
+    show: false,
     webPreferences: {
       nodeIntegrationInWorker: true,
       webSecurity: false,
     },
-    show: false,
   });
 
   // mainWindow.setMenu(null)

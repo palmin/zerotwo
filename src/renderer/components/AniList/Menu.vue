@@ -22,9 +22,14 @@
     </router-link>
     <div class="right menu">
       <search-box @openInformation="openInformationWindow" />
-      <a class="item" :class="{ disabled: !this.isAuthenticated }" @click="refreshAniList">
-        <i class="refresh icon" :class="{ loading: !isReady }"></i>
-        {{ readableTimeUntilNextRefresh }}
+      <a class="relative item" :class="{ disabled: !this.isAuthenticated }" @click="refreshAniList">
+        <div class="refreshTimerBar" :class="{
+          green: refreshTimePercentage >= 50,
+          yellow: refreshTimePercentage < 50 && refreshTimePercentage >= 15,
+          red: refreshTimePercentage < 15
+        }" :style="`height: ${refreshTimePercentage}% !important;`">
+        </div>
+        <i class="marginless refresh icon" :class="{ loading: !isReady }"></i>
       </a>
       <a class="item" @click="openSettings">
         <i class="marginless settings icon"></i>
@@ -57,8 +62,17 @@ export default {
   components: { SearchBox },
   computed: {
     ...mapState(['isReady']),
-    ...mapState('aniList', ['timeUntilNextRefresh', 'aniData']),
+    ...mapState('aniList', ['timeUntilNextRefresh', 'refreshRate', 'aniData']),
     ...mapGetters('aniList', ['isAuthenticated']),
+    refreshTimePercentage() {
+      if (!this.refreshRate) {
+        return 100;
+      }
+
+      const refreshRateInMilliseconds = this.refreshRate * 60000;
+
+      return Math.floor((100 / refreshRateInMilliseconds) * this.timeUntilNextRefresh);
+    },
     readableTimeUntilNextRefresh() {
       if (!this.timeUntilNextRefresh) {
         return '';
@@ -140,6 +154,31 @@ export default {
 
 .icon.marginless {
   margin: 0 !important;
+}
+
+.relative.item {
+  position: relative;
+}
+
+.refreshTimerBar {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  vertical-align: bottom;
+  font-size: 1em;
+}
+
+.red.refreshTimerBar {
+  background-color: rgba(208, 57, 54, 0.5)
+}
+
+.yellow.refreshTimerBar {
+  background-color: rgba(253, 190, 65, 0.5);
+}
+
+.green.refreshTimerBar {
+  background-color: rgba(53, 205, 76, 0.5);
 }
 
 .draggable {

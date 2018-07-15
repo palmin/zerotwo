@@ -142,6 +142,7 @@
       "currentlyAiring": "正在放送",
       "notYetAired": "尚未放送",
       "releasing": "上映中",
+      "finished": "放送完毕",
       "notYetReleased": "尚未上映",
       "cancelled": "已弃坑"
     },

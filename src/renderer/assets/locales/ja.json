@@ -142,6 +142,7 @@
       "currentlyAiring": "放送中",
       "notYetAired": "まだ放送していない",
       "releasing": "放送中",
+      "finished": "放送終了",
       "notYetReleased": "放送予定",
       "cancelled": "中止された"
     },

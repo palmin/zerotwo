@@ -142,6 +142,7 @@
       "currentlyAiring": "Currently Airing",
       "notYetAired": "Not yet aired",
       "releasing": "Releasing",
+      "finished": "Finished Airing",
       "notYetReleased": "Not yet released",
       "cancelled": "Cancelled"
     },

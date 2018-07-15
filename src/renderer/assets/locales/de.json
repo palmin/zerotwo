@@ -141,6 +141,7 @@
       "currentlyAiring": "Ausstrahlung läuft",
       "notYetAired": "Noch nicht ausgestrahlt",
       "releasing": "Wird ausgestrahlt",
+      "finished": "Ausstrahlung beendet",
       "notYetReleased": "Ausstrahlung geplant",
       "cancelled": "Abgebrochen"
     },

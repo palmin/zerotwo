@@ -131,7 +131,7 @@ export default {
 <style scoped>
 .ui.menu {
   /* margin: 0; */
-  position: sticky;
+  position: sticky !important;
 }
 
 .menu.with.right.aligned.items > .item {

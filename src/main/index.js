@@ -2,8 +2,6 @@
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, shell } from 'electron'
 import os from 'os';
 import electronOauth2 from 'electron-oauth2';
-import updateElectronApp from 'update-electron-app';
-import electronLog from 'electron-log';
 import { oauth as oauthConfig } from './config';
 import { version } from '../../package.json';
 /* eslint-enable */
@@ -66,12 +64,6 @@ if (process.env.NODE_ENV === 'development') {
     console.log('Failed to install `electron-debug`: Please set `NODE_ENV=production` before build to avoid installing debugging packages. ');
   }
 } else {
-  updateElectronApp({
-    repo: 'NicoAiko/zerotwo',
-    updateInterval: '1 hour',
-    logger: electronLog,
-  });
-
   winURL = `file://${__dirname}/index.html`;
 
   /**

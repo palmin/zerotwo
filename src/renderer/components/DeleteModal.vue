@@ -46,10 +46,10 @@ export default {
   },
   computed: {
     cancelText() {
-      return !this.cancelButtonText ? this.$t('cancel') : this.cancelButtonText;
+      return !this.cancelButtonText ? this.$t('system.actions.cancel') : this.cancelButtonText;
     },
     submitText() {
-      return !this.submitButtonText ? this.$t('submit') : this.submitButtonText;
+      return !this.submitButtonText ? this.$t('system.actions.delete') : this.submitButtonText;
     },
   },
   methods: {
@@ -68,24 +68,3 @@ export default {
   },
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "cancel": "Cancel",
-    "submit": "Delete"
-  },
-  "de": {
-    "cancel": "Abbrechen",
-    "submit": "Löschen"
-  },
-  "ja": {
-    "cancel": "キャンセル",
-    "submit": "削除"
-  },
-  "zh-cn": {
-    "cancel": "取消",
-    "submit": "删除"
-  }
-}
-</i18n>

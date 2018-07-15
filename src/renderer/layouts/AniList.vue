@@ -2,20 +2,18 @@
   <div class="ui fluid container">
     <div class="ui dimmer" :class="{ active: !isReady }">
       <div class="ui text loader">
-        {{ $t('loading') }}
+        {{ $t('system.constants.loading') }}
       </div>
     </div>
 
     <main-menu
     :openSettings="openSettings"
-    :refreshMAL="refreshMAL"
     :refreshAniList="refreshAniList"
     :openInformation="openInformation" />
 
     <settings :ref="event" />
-    <info-box :ref="infoBox" :aniData="aniData"
-    @refresh="refreshAniList"
-    />
+    <info-box :ref="infoBox" :aniData="aniData" @refresh="refreshAniList" />
+
     <transition name="fade" mode="out-in">
       <slot/>
     </transition>
@@ -25,7 +23,7 @@
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex';
 import EventBus from '@/plugins/eventBus';
-import MainMenu from '@/components/Menu';
+import MainMenu from '@/components/AniList/Menu';
 import Settings from '@/components/Settings';
 import InfoBox from '@/components/InformationModal';
 
@@ -37,7 +35,6 @@ export default {
   },
   computed: {
     ...mapState(['isReady']),
-    // ...mapState('myAnimeList', ['malData', 'auth', 'information']),
     ...mapState('aniList', ['aniData', 'session']),
   },
 
@@ -58,16 +55,10 @@ export default {
     });
   },
   methods: {
-    // ...mapActions('myAnimeList', ['detectAndSetMALData']),
     ...mapActions('aniList', ['detectAndSetAniData']),
     ...mapMutations(['setReady']),
     openSettings() {
       this.$refs[this.event].show();
-    },
-    async refreshMAL() {
-      await this.setReady(false);
-      // await this.detectAndSetMALData();
-      await this.setReady(true);
     },
     async refreshAniList() {
       await this.setReady(false);
@@ -103,23 +94,6 @@ export default {
   },
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "loading": "Loading..."
-  },
-  "de": {
-    "loading": "Lädt..."
-  },
-  "ja": {
-    "loading": "通信中・・・"
-  },
-  "zh-cn": {
-    "loading": "加载中……"
-  }
-}
-</i18n>
 
 <style scoped>
 .ui.dimmer {

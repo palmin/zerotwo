@@ -2,7 +2,7 @@
   <div class="ui right aligned item">
     <div class="ui transparent icon input" :class="{ loading: searchTimer }">
       <input type="text"
-            :placeholder="$t('search')"
+            :placeholder="$t('system.menu.search.search')"
             v-model="searchValue"
             @input="searching = true"
             @keyup="searching = false"
@@ -185,7 +185,7 @@ export default {
 
           return _.map(results, (result) => {
             const element = this.findInData(result.title.userPreferred);
-            result.category = !element ? this.$t('notInList') : this.getStatus(element.status);
+            result.category = !element ? this.$t('system.menu.search.notInList') : this.getStatus(element.status);
 
             return {
               id: result.id,
@@ -215,19 +215,19 @@ export default {
       switch (status) {
         case 'CURRENT':
         case 'REPEATING':
-          statusText = this.$t('watching');
+          statusText = this.$t('system.listStatus.watching');
           break;
         case 'COMPLETED':
-          statusText = this.$t('completed');
+          statusText = this.$t('system.listStatus.completed');
           break;
         case 'PAUSED':
-          statusText = this.$t('onHold');
+          statusText = this.$t('system.listStatus.onHold');
           break;
         case 'DROPPED':
-          statusText = this.$t('dropped');
+          statusText = this.$t('system.listStatus.dropped');
           break;
         case 'PLANNING':
-          statusText = this.$t('planned');
+          statusText = this.$t('system.listStatus.planned');
           break;
         default:
           break;
@@ -328,44 +328,3 @@ export default {
 }
 
 </style>
-
-<i18n>
-{
-  "en": {
-    "search": "Search...",
-    "watching": "Watching",
-    "completed": "Completed",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "notInList": "Not in your list"
-  },
-  "de": {
-    "search": "Suchen...",
-    "watching": "Laufend",
-    "completed": "Beendet",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "notInList": "Nicht in deiner Liste"
-  },
-  "ja": {
-    "search": "検索・・・",
-    "watching": "見る",
-    "completed": "終了",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "notInList": "リストにはありません"
-  },
-  "zh-cn": {
-    "search": "搜索……",
-    "watching": "观看中",
-    "completed": "已看完",
-    "onHold": "搁置中",
-    "dropped": "已弃坑",
-    "planned": "计划中",
-    "notInList": "不在你的列表中"
-  }
-}
-</i18n>

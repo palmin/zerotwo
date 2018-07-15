@@ -1,0 +1,157 @@
+{
+  "system": {
+    "constants": {
+      "loading": "通信中...",
+      "animeTitle": "アニメのタイトル",
+      "progress": "進行",
+      "score": "評価",
+      "season": "シーズン",
+      "lastUpdated": "最新更新",
+      "winter": "冬",
+      "spring": "春",
+      "summer": "夏",
+      "autumn": "秋",
+      "fall": "秋",
+      "unknown": "未知",
+      "dateFormat": "MMM DD YYYY",
+      "updated": {
+        "title": "更新成功！",
+        "text": "「{title}」の更新は成功しました！"
+      },
+      "errorResponseTitle": "シンクロは出来ませんでした！",
+      "toFinished": "終了",
+      "loadMore": "次のリストデータ・・・"
+    },
+    "listStatus": {
+      "watching": "見る",
+      "repeating": "再見",
+      "completed": "終了",
+      "onHold": "中止",
+      "dropped": "停止",
+      "planned": "予定"
+    },
+    "modules": {
+      "aniList": "AniList",
+      "myAnimeList": "MyAnimeList",
+      "torrents": "Torrents"
+    },
+    "settings": {
+      "title": "設定",
+      "appSettings": "アプリ設定",
+      "setAppLanguage": "アプリ言語を編集",
+      "chooseLanguage": "言語を選択する",
+      "changeLanguage": "言語を設定する",
+      "loggedInAs": "ログインしたアカウント",
+      "accountSettings": "アカウント設定",
+      "loginData": "ログインデータ",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "restoreFactoryData": "ファクトリー設定に戻る",
+      "malRefreshRate": "MALの更新間（分で）",
+      "aniListRefreshRate": "AniListの更新間（分で）",
+      "noCredentials": "ログインデータは入力しませんでした！",
+      "enterCredentials": "ログインデータを入力してください！",
+      "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",
+      "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>",
+      "aboutZeroTwo": "ZeroTwoについて",
+      "version": "バージョン",
+      "link": "クリックして"
+    },
+    "menu": {
+      "search": {
+        "notInList": "リストにはありません",
+        "search": "検索・・・",
+        "noResults": "結果は見つかりませんでした。"
+      },
+      "listStatus": {
+        "watching": "見る",
+        "repeating": "再見",
+        "completed": "終了",
+        "onHold": "中止",
+        "dropped": "停止",
+        "planned": "予定"
+      }
+    },
+    "informationModal": {
+      "anime": "アニメ",
+      "manga": "漫画",
+      "description": "デスクリプション",
+      "seriesInformation": "シリーズについて",
+      "dataInformation": "自分のリスト情報",
+      "episodes": "エピソード",
+      "rating": "評価",
+      "type": "タイプ",
+      "synonyms": "シノニム",
+      "noSynonyms": "シノニムがありません",
+      "airingTime": "放送時間",
+      "englishName": "英語名",
+      "noEnglishName": "英語名がありません",
+      "japaneseName": "日本語名",
+      "noJapaneseName": "日本語名がありません",
+      "seriesStatus": "シリーズのステータス",
+      "sinceDate": "{date}から放送中",
+      "dateFormat": "YYYY[年]MM[月]DD[日]",
+      "unknownDate": "日付不明",
+      "ownRating": "自分の評価",
+      "ownStatus": "自分のステータス",
+      "watchedEpisodes": "見たエピソード",
+      "dropdownPlaceholder": "選んでください・・・",
+      "updated": {
+        "title": "アップデートしました！",
+        "text": "アップデートはシンクロしました！"
+      },
+      "created": {
+        "title": "追加しました！",
+        "text": "追加はシンクロしました！"
+      },
+      "deleted": {
+        "title": "削除しました！",
+        "text": "削除はシンクロしました！"
+      },
+      "errorResponseTitle": "シンクロは出来ませんでした！",
+      "deleteModalHeader": "本当に削除しますか？",
+      "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
+      "clear": "０☆にセット"
+    },
+    "actions": {
+      "refreshMAL": "MALを更新",
+      "refreshAniList": "AniListを更新",
+      "refreshTorrents": "Torrentを更新",
+      "cancel": "キャンセル",
+      "edit": "編集",
+      "delete": "削除",
+      "close": "クローズ",
+      "save": "保存",
+      "reset": "リセット",
+      "add": "追加",
+      "remove": "削除",
+      "login": "ログイン",
+      "logout": "ログアウト"
+    }
+  },
+  "myAnimeList": {
+    "watching": "見る",
+    "completed": "終了",
+    "onHold": "中止",
+    "dropped": "停止",
+    "planned": "予定"
+  },
+  "aniList": {
+    "mediaInformation": {
+      "finishedAiring": "放送終了",
+      "currentlyAiring": "放送中",
+      "notYetAired": "まだ放送していない",
+      "releasing": "放送中",
+      "notYetReleased": "放送予定",
+      "cancelled": "中止された"
+    },
+    "listStatus": {
+      "current": "見る",
+      "repeating": "再見",
+      "finished": "終了",
+      "paused": "中止",
+      "dropped": "停止",
+      "planning": "予定"
+    }
+  }
+}

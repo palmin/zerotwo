@@ -9,7 +9,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import DefaultLayout from '@/layouts/Default';
+import AniListLayout from '@/layouts/AniList';
 import Notification from '@/components/Notification';
 // import malTimer from '@/mixins/malTimer';
 // import discord from '@/mixins/discord';
@@ -32,7 +32,7 @@ export default {
 
   data() {
     return {
-      layout: DefaultLayout,
+      layout: AniListLayout,
     };
   },
 
@@ -54,7 +54,7 @@ export default {
   methods: {
     ...mapMutations(['setReady']),
     setLayout(layout) {
-      this.layout = layout || DefaultLayout;
+      this.layout = layout || AniListLayout;
     },
     setLocale(locale) {
       this.$i18n.locale = locale || 'en';

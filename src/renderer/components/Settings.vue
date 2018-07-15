@@ -1,24 +1,24 @@
 <template>
   <div class="ui fullscreen modal">
-    <div class="header">{{ $t('settings') }}</div>
+    <div class="header">{{ $t('system.settings.title') }}</div>
     <div class="content">
       <div class="ui grid">
         <div class="four wide column">
           <div class="ui fluid secondary vertical menu">
             <a class="active item" data-tab="appSettings">
-              {{ $t('appSettings') }}
+              {{ $t('system.settings.appSettings') }}
             </a>
             <a class="item" data-tab="myAnimeList" v-if="myAnimeListActivated">
-              {{ $t('myAnimeList') }}
+              {{ $t('system.settings.myAnimeList') }}
             </a>
             <a class="item" data-tab="aniList">
-              {{ $t('aniList') }}
+              {{ $t('system.modules.aniList') }}
             </a>
             <a class="item" data-tab="restoreFactoryData">
-              {{ $t('restoreFactoryData') }}
+              {{ $t('system.settings.restoreFactoryData') }}
             </a>
             <a class="item" data-tab="aboutZeroTwo">
-              {{ $t('aboutZeroTwo') }}
+              {{ $t('system.settings.aboutZeroTwo') }}
             </a>
           </div>
         </div>
@@ -26,14 +26,14 @@
         <div class="twelve wide column">
           <div class="ui active basic tab segment" data-tab="appSettings">
             <h2 class="ui header">
-              {{ $t('setAppLanguage') }}
+              {{ $t('system.settings.setAppLanguage') }}
             </h2>
             <div class="ui grid">
               <div class="seven wide column">
                 <div class="ui fluid selection dropdown">
                   <input type="hidden">
                   <i class="dropdown icon"></i>
-                  <div class="default text">{{ $t('chooseLanguage') }}</div>
+                  <div class="default text">{{ $t('system.settings.chooseLanguage') }}</div>
                   <div class="menu">
                     <div class="item" v-for="language in languages" :key="language.value" :data-value="language.value">
                       <span class="description">{{ language.englishName }}</span>
@@ -46,7 +46,7 @@
                 <button
                 class="ui fluid primary button"
                 @click="submitLanguageChange">
-                  {{ $t('changeLanguage') }}
+                  {{ $t('system.settings.changeLanguage') }}
                 </button>
               </div>
             </div>
@@ -54,39 +54,39 @@
 
           <div class="ui basic tab segment" data-tab="myAnimeList" v-if="myAnimeListActivated">
             <h2 class="ui header">
-              {{ $t('myAnimeList') }}
+              {{ $t('system.settings.myAnimeList') }}
               <div class="sub header">
-                {{ $t('accountSettings') }}
+                {{ $t('system.settings.accountSettings') }}
               </div>
             </h2>
             <form class="ui form" :ref="myAnimeListForm" v-if="!loggedIn" @submit.prevent="submit">
               <div class="two fields">
                 <div class="field">
-                  <label>{{ $t('username') }}</label>
+                  <label>{{ $t('system.settings.username') }}</label>
                   <input type="text" v-model="username" />
                 </div>
                 <div class="field">
-                  <label>{{ $t('password') }}</label>
+                  <label>{{ $t('system.settings.password') }}</label>
                   <input type="password" v-model="password" />
                 </div>
               </div>
               <button
               class="ui right floated primary button"
-              type="submit">{{ $t('login') }}</button>
+              type="submit">{{ $t('system.actions.login') }}</button>
             </form>
             <div class="ui blue labels" v-else>
               <div class="ui label">
-                {{ $t('loggedInAs') }} {{ auth.username }}
+                {{ $t('system.settings.loggedInAs') }} {{ auth.username }}
               </div>
               <a class="ui label" @click="logMeOut">
-                {{ $t('logout') }}
+                {{ $t('system.actions.logout') }}
               </a>
             </div>
             <div class="ui grid" v-if="this.auth">
               <div class="eight wide column">
                 <div class="ui form">
                   <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
-                    <label>{{ $t('refreshRate') }}</label>
+                    <label>{{ $t('system.settings.malRefreshRate') }}</label>
                     <div class="ui action input">
                       <input
                       type="number"
@@ -96,7 +96,7 @@
                       :disabled="!refreshRateEditMode"
                       @input="$v.refreshRateValue.$touch()" />
                       <button class="ui button" @click="editRefreshRate">
-                        {{ $t('edit') }}
+                        {{ $t('system.actions.edit') }}
                       </button>
                     </div>
                   </div>
@@ -107,29 +107,29 @@
 
           <div class="ui basic tab segment" data-tab="aniList">
             <h2 class="ui header">
-              {{ $t('aniList') }}
+              {{ $t('system.modules.aniList') }}
               <div class="sub header">
-                {{ $t('accountSettings') }}
+                {{ $t('system.settings.accountSettings') }}
               </div>
             </h2>
             <div class="ui container" v-if="!isAuthenticated">
               <button
               class="ui fluid primary button"
-              @click="loginToAniList">{{ $t('login') }}</button>
+              @click="loginToAniList">{{ $t('system.actions.login') }}</button>
             </div>
             <div class="ui blue labels" v-else>
               <div class="ui label">
-                {{ $t('loggedInAs') }} {{ getUserName }}
+                {{ $t('system.settings.loggedInAs') }} {{ getUserName }}
               </div>
               <a class="ui label" @click="logMeOut">
-                {{ $t('logout') }}
+                {{ $t('system.actions.logout') }}
               </a>
             </div>
             <div class="ui grid" v-if="isAuthenticated">
               <div class="eight wide column">
                 <div class="ui form">
                   <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
-                    <label>{{ $t('aniListRefreshRate') }}</label>
+                    <label>{{ $t('system.settings.aniListRefreshRate') }}</label>
                     <div class="ui action input">
                       <input
                       type="number"
@@ -139,7 +139,7 @@
                       :disabled="!refreshRateEditMode"
                       @input="$v.refreshRateValue.$touch()" />
                       <button class="ui button" @click="editRefreshRate">
-                        {{ $t('edit') }}
+                        {{ $t('system.actions.edit') }}
                       </button>
                     </div>
                   </div>
@@ -150,22 +150,22 @@
 
           <div class="ui basic tab segment" data-tab="restoreFactoryData">
             <h2 class="ui header">
-              {{ $t('restoreFactoryData') }}
+              {{ $t('system.settings.restoreFactoryData') }}
             </h2>
             <div class="ui fluid primary button" @click="restoreFactoryData">
-              {{ $t('restoreFactoryData') }}
+              {{ $t('system.settings.restoreFactoryData') }}
             </div>
           </div>
 
           <div class="ui basic tab segment" data-tab="aboutZeroTwo">
             <h2 class="ui center aligned header">
-              {{ $t('aboutZeroTwo') }}
+              {{ $t('system.settings.aboutZeroTwo') }}
             </h2>
             <div class="ui equal width grid">
               <div class="center aligned sixteen wide column">
                 <div class="ui huge statistic">
                   <div class="label">
-                    {{ $t('version') }}
+                    {{ $t('system.settings.version') }}
                   </div>
                   <div class="value">
                     {{ currentAppVersion }}
@@ -215,7 +215,7 @@
       </div>
     </div>
     <div class="actions">
-      <div class="ui button" @click="close">{{ $t('close') }}</div>
+      <div class="ui button" @click="close">{{ $t('system.actions.close') }}</div>
     </div>
   </div>
 </template>
@@ -400,128 +400,3 @@ export default {
   },
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "settings": "Settings",
-    "save": "Save",
-    "edit": "Edit",
-    "cancel": "Cancel",
-    "close": "Close",
-    "login": "Login",
-    "logout": "Logout",
-    "appSettings": "App Settings",
-    "setAppLanguage": "Set app's language",
-    "chooseLanguage": "Choose language",
-    "changeLanguage": "Change language",
-    "loggedInAs": "Logged in as",
-    "myAnimeList": "MyAnimeList",
-    "aniList": "AniList",
-    "accountSettings": "Account Settings",
-    "loginData": "Login Data",
-    "username": "Username",
-    "password": "Password",
-    "restoreFactoryData": "Restore Factory Data",
-    "refreshRate": "Refresh interval for MAL (in minutes)",
-    "aniListRefreshRate": "Refresh interval for AniList (in minutes)",
-    "noCredentials": "No credentials!",
-    "enterCredentials": "Please enter credentials to log in.",
-    "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>",
-    "aboutZeroTwo": "About ZeroTwo",
-    "version": "Version",
-    "link": "Click Me"
-  },
-  "de": {
-    "settings": "Einstellungen",
-    "save": "Sichern",
-    "edit": "Bearbeiten",
-    "cancel": "Abbrechen",
-    "close": "Schließen",
-    "login": "Einloggen",
-    "logout": "Ausloggen",
-    "appSettings": "App-Einstellungen",
-    "setAppLanguage": "Ändere App-Sprache",
-    "chooseLanguage": "Sprache wählen",
-    "changeLanguage": "Sprache ändern",
-    "loggedInAs": "Eingeloggt als",
-    "myAnimeList": "MyAnimeList",
-    "aniList": "AniList",
-    "accountSettings": "Kontoeinstellungen",
-    "loginData": "Logindaten",
-    "username": "Benutzername",
-    "password": "Passwort",
-    "restoreFactoryData": "Werkszustand wiederherstellen",
-    "refreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
-    "aniListRefreshRate": "AniList-Aktualisierungsintervall (in Minuten)",
-    "noCredentials": "Keine Anmeldedaten!",
-    "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
-    "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>",
-    "aboutZeroTwo": "Über ZeroTwo",
-    "version": "Version",
-    "link": "Klick mich"
-  },
-  "ja": {
-    "settings": "設定",
-    "save": "保存",
-    "edit": "編集",
-    "cancel": "キャンセル",
-    "close": "クローズ",
-    "login": "ログイン",
-    "logout": "ログアウト",
-    "appSettings": "アプリ設定",
-    "setAppLanguage": "アプリ言語を編集",
-    "chooseLanguage": "言語を選択する",
-    "changeLanguage": "言語を設定する",
-    "loggedInAs": "ログインしたアカウント",
-    "myAnimeList": "MyAnimeList",
-    "aniList": "AniList",
-    "accountSettings": "アカウント設定",
-    "loginData": "ログインデータ",
-    "username": "ユーザー名",
-    "password": "パスワード",
-    "restoreFactoryData": "ファクトリー設定に戻る",
-    "refreshRate": "MALの更新間（分で）",
-    "aniListRefreshRate": "AniListの更新間（分で）",
-    "noCredentials": "ログインデータは入力しませんでした！",
-    "enterCredentials": "ログインデータを入力してください！",
-    "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>",
-    "aboutZeroTwo": "ZeroTwoについて",
-    "version": "バージョン",
-    "link": "クリックして"
-  },
-  "zh-cn": {
-    "settings": "设置",
-    "save": "保存",
-    "edit": "编辑",
-    "cancel": "取消",
-    "close": "关闭",
-    "login": "登录",
-    "logout": "登出",
-    "appSettings": "软件设置",
-    "setAppLanguage": "设置软件语言",
-    "chooseLanguage": "选择语言",
-    "changeLanguage": "更改语言",
-    "loggedInAs": "登录为",
-    "myAnimeList": "MyAnimeList",
-    "aniList": "AniList",
-    "accountSettings": "账户设置",
-    "loginData": "登录数据",
-    "username": "用户名",
-    "password": "密码",
-    "restoreFactoryData": "恢复出厂数据",
-    "refreshRate": "MAL刷新间隔（分钟）",
-    "aniListRefreshRate": "AniList刷新间隔（分钟）",
-    "noCredentials": "没有登录信息！",
-    "enterCredentials": "请输入登录信息以用于登录。",
-    "credentialsWrongOrTooManyLoginAttempts": "登录信息错误或登录尝试次数过多！",
-    "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>你的登录信息有误，无法通过验证。</p><p>如果你确定你的登录信息准确无误，那么可能是因为你进行了过多次的登录尝试！</p><p>如果你遇到的情况属于后者，请等1~6个小时后再进行尝试……</p>",
-    "aboutZeroTwo": "关于ZeroTwo",
-    "version": "版本号",
-    "link": "点击我"
-  }
-}
-</i18n>

@@ -75,11 +75,6 @@ const rendererConfig = {
         },
       },
       {
-        resourceQuery: /blockType=i18n/,
-        type: 'javascript/auto',
-        use: '@kazupon/vue-i18n-loader',
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: {
           loader: 'url-loader',

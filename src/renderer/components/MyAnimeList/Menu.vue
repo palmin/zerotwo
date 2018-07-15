@@ -1,10 +1,18 @@
 <template>
   <div class="ui top fixed menu">
-    <div class="item">
-      <strong>
-        <i class="angle double right icon"></i>
-        AniList
-      </strong>
+    <div class="ui simple dropdown item">
+      <i class="sidebar icon"></i>
+      <div class="menu">
+        <router-link class="item" tag="a" :to="{ name: 'Ani-Watching' }" active-class="active" exact>
+          {{ $t('aniList') }}
+        </router-link>
+        <router-link class="disabled item" tag="a" :to="{ name: 'Ani-Watching' }" active-class="active" exact>
+          {{ $t('myAnimeList') }}
+        </router-link>
+        <router-link class="disabled item" tag="a" :to="{ name: 'Ani-Watching' }" active-class="active" exact>
+          {{ $t('torrents') }}
+        </router-link>
+      </div>
     </div>
     <router-link class="item" tag="a" :to="{ name: 'Ani-Watching' }" active-class="active" exact>
       {{ getMALTabLabel('watching', 'user_watching') }}
@@ -80,6 +88,10 @@ export default {
   position: sticky;
 }
 
+.ui.menu > .item > .icon {
+  margin: 0;
+}
+
 .draggable {
   -webkit-app-region: drag;
 }
@@ -88,7 +100,9 @@ export default {
 <i18n>
 {
   "en": {
-    "animeList": "MyAnimeList",
+    "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
+    "torrents": "Torrents",
     "refreshMAL": "Refresh MAL",
     "refreshAniList": "Refresh AniList",
     "watching": "Watching",
@@ -102,7 +116,9 @@ export default {
     "noResults": "No results could be found"
   },
   "de": {
-    "animeList": "MyAnimeList",
+    "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
+    "torrents": "Torrents",
     "refreshMAL": "MAL aktualisieren",
     "refreshAniList": "AniList aktualisieren",
     "watching": "Laufend",
@@ -116,7 +132,9 @@ export default {
     "noResults": "Es wurden keine Ergebnisse gefunden"
   },
   "ja": {
-    "animeList": "MyAnimeList",
+    "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
+    "torrents": "Torrents",
     "refreshMAL": "MALを更新",
     "refreshAniList": "AniListを更新",
     "watching": "見る",
@@ -130,7 +148,9 @@ export default {
     "noResults": "結果は見つかりませんでした。"
   },
   "zh-cn": {
-    "animeList": "MyAnimeList",
+    "myAnimeList": "MyAnimeList",
+    "aniList": "AniList",
+    "torrents": "Torrents",
     "refreshMAL": "刷新MAL",
     "refreshAniList": "刷新AniList",
     "watching": "观看中",

@@ -2,6 +2,8 @@
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, shell } from 'electron'
 import os from 'os';
 import electronOauth2 from 'electron-oauth2';
+import updateElectronApp from 'update-electron-app';
+import electronLog from 'electron-log';
 import { oauth as oauthConfig } from './config';
 import { version } from '../../package.json';
 /* eslint-enable */
@@ -64,6 +66,12 @@ if (process.env.NODE_ENV === 'development') {
     console.log('Failed to install `electron-debug`: Please set `NODE_ENV=production` before build to avoid installing debugging packages. ');
   }
 } else {
+  updateElectronApp({
+    repo: 'NicoAiko/zerotwo',
+    updateInterval: '1 hour',
+    logger: electronLog,
+  });
+
   winURL = `file://${__dirname}/index.html`;
 
   /**
@@ -96,6 +104,7 @@ function createWindow() {
     useContentSize: true,
     width: 1280,
     minWidth: 1280,
+    vibrancy: 'ultra-dark',
     // backgroundColor: '#fff',
     webPreferences: {
       nodeIntegrationInWorker: true,
@@ -212,23 +221,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install `electron-updater` to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-/*
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
-})
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
- */

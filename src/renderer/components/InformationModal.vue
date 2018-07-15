@@ -11,29 +11,29 @@
           <div class="six wide column">
             <div class="ui basic segment">
               <h2 class="ui header">
-                {{ $t('seriesInformation') }}
+                {{ $t('system.informationModal.seriesInformation') }}
               </h2>
-              <p>{{ $t('episodes') }}: {{ episodes }}</p>
-              <p>{{ $t('rating') }}:
+              <p>{{ $t('system.informationModal.episodes') }}: {{ episodes }}</p>
+              <p>{{ $t('system.informationModal.rating') }}:
                 <span id="malRating" class="ui star rating"></span> ({{ rating }})
               </p>
-              <p>{{ $t('type') }}: {{ type }}</p>
-              <p>{{ $t('synonyms') }}: {{ synonyms }}</p>
-              <p>{{ $t('englishName') }}: {{ englishName }}</p>
-              <p>{{ $t('japaneseName') }}: {{ japaneseName }}</p>
-              <p>{{ $t('airingTime') }}: {{ airingTime }}</p>
-              <p>{{ $t('seriesStatus') }}: {{ seriesStatus }}</p>
+              <p>{{ $t('system.informationModal.type') }}: {{ type }}</p>
+              <p>{{ $t('system.informationModal.synonyms') }}: {{ synonyms }}</p>
+              <p>{{ $t('system.informationModal.englishName') }}: {{ englishName }}</p>
+              <p>{{ $t('system.informationModal.japaneseName') }}: {{ japaneseName }}</p>
+              <p>{{ $t('system.informationModal.airingTime') }}: {{ airingTime }}</p>
+              <p>{{ $t('system.informationModal.seriesStatus') }}: {{ seriesStatus }}</p>
             </div>
           </div>
 
           <div class="six wide column">
             <div class="ui basic segment">
               <h2 class="ui header">
-                {{ $t('dataInformation') }}
+                {{ $t('system.informationModal.dataInformation') }}
               </h2>
               <div class="ui form">
                 <div class="field">
-                  <label>{{ $t('ownStatus') }}</label>
+                  <label>{{ $t('system.informationModal.ownStatus') }}</label>
                   <dropdown
                   ref="informationModalStatusDropdown"
                   :placeholder="dropdownPlaceholder"
@@ -43,7 +43,7 @@
                   @change="checkChangedAnimeStatus" />
                 </div>
                 <div class="field">
-                  <label>{{ $t('watchedEpisodes') }}</label>
+                  <label>{{ $t('system.informationModal.watchedEpisodes') }}</label>
                   <div class="ui right labeled input">
                     <input type="number" v-model="ownEpisodeProgressValue" />
                     <div class="ui basic label">
@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <div class="field">
-                  <label>{{ $t('ownRating') }} (0 - 100)</label>
+                  <label>{{ $t('system.informationModal.ownRating') }} (0 - 100)</label>
                   <div class="ui right labeled input">
                     <input type="number" min="0" max="100" v-model="ratingValue" />
                     <div class="ui basic label">
@@ -62,25 +62,25 @@
                 </div>
                 <template v-if="isInOwnList">
                   <div class="ui right floated primary button" @click="submitChanges">
-                    {{ $t('submitChanges') }}
+                    {{ $t('system.actions.save') }}
                   </div>
                   <div class="ui right floated secondary button" @click="resetChanges">
-                    {{ $t('resetChanges') }}
+                    {{ $t('system.actions.reset') }}
                   </div>
                   <div class="ui right floated red button" @click="deleteFromList">
-                    {{ $t('deleteFromList') }}
+                    {{ $t('system.actions.remove') }}
                   </div>
                   <delete-modal
                     :ref="deleteModalRef"
                     :submitHandler="submitDelete"
                     :cancelHandler="cancelDelete"
-                    :header="$t('deleteModalHeader')"
+                    :header="$t('system.informationModal.deleteModalHeader')"
                     :content="deleteModalContent"
                   />
                 </template>
                 <template v-else>
                   <div class="ui right floated secondary button" @click="addToList">
-                    {{ $t('addToList') }}
+                    {{ $t('system.actions.add') }}
                   </div>
                 </template>
               </div>
@@ -92,14 +92,14 @@
       <div class="sixteen wide column">
         <div class="ui basic segment">
           <h3 class="ui header">
-            {{ $t('description') }}
+            {{ $t('system.informationModal.description') }}
           </h3>
           <div v-html="description"></div>
         </div>
       </div>
     </div>
     <div class="actions">
-      <div class="ui button" @click="close">{{ $t('close') }}</div>
+      <div class="ui button" @click="close">{{ $t('system.actions.close') }}</div>
     </div>
   </div>
 </template>
@@ -154,22 +154,22 @@ export default {
     statuses() {
       return [{
         value: 'CURRENT',
-        name: this.$t('watching'),
+        name: this.$t('system.listStatus.watching'),
       }, {
         value: 'REPEATING',
-        name: this.$t('repeating'),
+        name: this.$t('system.listStatus.repeating'),
       }, {
         value: 'COMPLETED',
-        name: this.$t('finished'),
+        name: this.$t('system.listStatus.completed'),
       }, {
         value: 'PAUSED',
-        name: this.$t('onHold'),
+        name: this.$t('system.listStatus.onHold'),
       }, {
         value: 'DROPPED',
-        name: this.$t('dropped'),
+        name: this.$t('system.listStatus.dropped'),
       }, {
         value: 'PLANNING',
-        name: this.$t('planned'),
+        name: this.$t('system.listStatus.planned'),
       }];
     },
 
@@ -248,7 +248,7 @@ export default {
         return '';
       }
 
-      return this.data.synonyms.join(', ') || this.$t('noSynonyms');
+      return this.data.synonyms.join(', ') || this.$t('system.informationModal.noSynonyms');
     },
 
     type() {
@@ -256,7 +256,7 @@ export default {
         return '';
       }
 
-      return this.$t(this.data.type.toLowerCase());
+      return this.$t(`system.informationModal.${this.data.type.toLowerCase()}`);
     },
 
     englishName() {
@@ -264,7 +264,7 @@ export default {
         return '';
       }
 
-      return this.data.title.english || this.$t('noEnglishName');
+      return this.data.title.english || this.$t('system.informationModal.noEnglishName');
     },
 
     japaneseName() {
@@ -272,7 +272,7 @@ export default {
         return '';
       }
 
-      return this.data.title.native || this.$t('noJapaneseName');
+      return this.data.title.native || this.$t('system.informationModal.noJapaneseName');
     },
 
     seriesStatus() {
@@ -280,7 +280,7 @@ export default {
         return '';
       }
 
-      return this.$t(camelCase(this.data.status));
+      return this.$t(`aniList.mediaInformation.${camelCase(this.data.status)}`);
     },
 
     airingTime() {
@@ -301,22 +301,22 @@ export default {
       });
 
       if (start.isSame(end) && start.isValid()) {
-        return `${start.format(this.$t('dateFormat'))}`;
+        return `${start.format(this.$t('system.informationModal.dateFormat'))}`;
       } else if (!start.isSame(end) && start.isValid() && end.isValid()) {
-        return `${start.format(this.$t('dateFormat'))} ~ ${end.format(this.$t('dateFormat'))}`;
+        return `${start.format(this.$t('system.informationModal.dateFormat'))} ~ ${end.format(this.$t('system.informationModal.dateFormat'))}`;
       } else if (start.isValid() && !end.isValid()) {
-        return this.$t('sinceDate', { date: start.format(this.$t('dateFormat')) });
+        return this.$t('system.informationModal.sinceDate', { date: start.format(this.$t('system.informationModal.dateFormat')) });
       }
 
       return '?';
     },
 
     deleteModalContent() {
-      return this.$t('doYouReallyWantToDelete', { title: this.header });
+      return this.$t('system.informationModal.doYouReallyWantToDelete', { title: this.header });
     },
 
     dropdownPlaceholder() {
-      return this.$t('dropdownPlaceholder');
+      return this.$t('system.informationModal.dropdownPlaceholder');
     },
   },
 
@@ -357,22 +357,22 @@ export default {
 
       this.statuses = [{
         value: 'CURRENT',
-        name: this.$t('watching'),
+        name: this.$t('system.listStatus.watching'),
       }, {
         value: 'REPEATING',
-        name: this.$t('repeating'),
+        name: this.$t('system.listStatus.repeating'),
       }, {
         value: 'COMPLETED',
-        name: this.$t('finished'),
+        name: this.$t('system.listStatus.completed'),
       }, {
         value: 'PAUSED',
-        name: this.$t('onHold'),
+        name: this.$t('system.listStatus.onHold'),
       }, {
         value: 'DROPPED',
-        name: this.$t('dropped'),
+        name: this.$t('system.listStatus.dropped'),
       }, {
         value: 'PLANNING',
-        name: this.$t('planned'),
+        name: this.$t('system.listStatus.planned'),
       }];
     },
   },
@@ -402,8 +402,8 @@ export default {
         .then((response) => {
           if (response.data.DeleteMediaListEntry.deleted) {
             this.$notify({
-              title: this.$t('deleted.title'),
-              text: this.$t('deleted.text'),
+              title: this.$t('system.informationModal.deleted.title'),
+              text: this.$t('system.informationModal.deleted.text'),
             });
             this.close();
             this.$emit('refresh');
@@ -455,8 +455,8 @@ export default {
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({
-              title: this.$t('created.title'),
-              text: this.$t('created.text'),
+              title: this.$t('system.informationModal.created.title'),
+              text: this.$t('system.informationModal.created.text'),
             });
             this.close();
             this.$emit('refresh');
@@ -517,8 +517,8 @@ export default {
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({
-              title: this.$t('updated.title'),
-              text: this.$t('updated.text'),
+              title: this.$t('system.informationModal.updated.title'),
+              text: this.$t('system.informationModal.updated.text'),
             });
             this.close();
             this.$emit('refresh');
@@ -527,7 +527,7 @@ export default {
         .catch((error) => {
           this.$notify({
             type: 'error',
-            title: this.$t('errorResponseTitle'),
+            title: this.$t('system.informationModal.errorResponseTitle'),
             text: error,
           });
         });
@@ -599,257 +599,3 @@ i.yellow.star.icon {
   margin-right: 0;
 }
 </style>
-
-
-<i18n>
-{
-  "en": {
-    "anime": "Anime",
-    "manga": "Manga",
-    "close": "Close",
-    "description": "Description",
-    "seriesInformation": "Series Information",
-    "dataInformation": "Information of your List",
-    "episodes": "Episodes",
-    "rating": "Rating",
-    "type": "Type of Series",
-    "synonyms": "Synonyms",
-    "noSynonyms": "No Synonyms",
-    "airingTime": "Airing Time",
-    "englishName": "English Name",
-    "noEnglishName": "No English Name",
-    "japaneseName": "Japanese Name",
-    "noJapaneseName": "No Japanese Name",
-    "seriesStatus": "Status of Series",
-    "sinceDate": "Since {date}",
-    "dateFormat": "MMM DD YYYY",
-    "unknownDate": "Date unknown",
-    "finishedAiring": "Finished Airing",
-    "currentlyAiring": "Currently Airing",
-    "notYetAired": "Not yet aired",
-    "ownRating": "Own Rating",
-    "ownStatus": "Own Status",
-    "watchedEpisodes": "Watched Episodes",
-    "current": "Watching",
-    "watching": "Watching",
-    "repeating": "Repeating",
-    "finished": "Finished",
-    "completed": "Completed",
-    "paused": "Paused",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "planning": "Planning",
-    "releasing": "Releasing",
-    "not_yet_released": "Not yet released",
-    "cancelled": "Cancelled",
-    "dropdownPlaceholder": "Please select...",
-    "submitChanges": "Submit",
-    "resetChanges": "Reset",
-    "addToList": "Add to List",
-    "deleteFromList": "Delete from List",
-    "updated": {
-      "title": "Updated!",
-      "text": "Update was successful!"
-    },
-    "created": {
-      "title": "Created!",
-      "text": "Create was successful!"
-    },
-    "deleted": {
-      "title": "Deleted!",
-      "text": "Delete was successful!"
-    },
-    "errorResponseTitle": "Update not successful!",
-    "deleteModalHeader": "Confirm delete?",
-    "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
-    "clear": "Set to 0 stars"
-  },
-  "de": {
-    "anime": "Anime",
-    "manga": "Manga",
-    "close": "Schließen",
-    "description": "Beschreibung",
-    "seriesInformation": "Serieninformationen",
-    "dataInformation": "Informationen deiner Liste",
-    "episodes": "Episoden",
-    "rating": "Bewertung",
-    "type": "Serientyp",
-    "synonyms": "Synonyme",
-    "noSynonyms": "Keine Synonyme",
-    "airingTime": "Ausstrahlung",
-    "englishName": "Englischer Name",
-    "noEnglishName": "Kein englischer Name vorhanden",
-    "japaneseName": "Japanischer Name",
-    "noJapaneseName": "Kein japanischer Name vorhanden",
-    "seriesStatus": "Serienstatus",
-    "sinceDate": "Seit {date}",
-    "dateFormat": "DD. MMM YYYY",
-    "unknownDate": "Datum unbekannt",
-    "finishedAiring": "Ausstrahlung beendet",
-    "currentlyAiring": "Ausstrahlung läuft",
-    "notYetAired": "Noch nicht ausgestrahlt",
-    "ownRating": "Eigene Bewertung",
-    "ownStatus": "Eigener Status",
-    "watchedEpisodes": "Episoden geschaut",
-    "current": "Laufend",
-    "watching": "Laufend",
-    "repeating": "Wiederholung",
-    "finished": "Beendet",
-    "completed": "Beendet",
-    "paused": "Pausiert",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "planning": "Geplant",
-    "releasing": "Wird ausgestrahlt",
-    "not_yet_released": "Ausstrahlung geplant",
-    "cancelled": "Abgebrochen",
-    "dropdownPlaceholder": "Bitte wählen...",
-    "submitChanges": "Speichern",
-    "resetChanges": "Zurücksetzen",
-    "addToList": "Hinzufügen",
-    "deleteFromList": "Entfernen",
-    "updated": {
-      "title": "Aktualisiert!",
-      "text": "Aktualisierung erfolgreich!"
-    },
-    "created": {
-      "title": "Hinzugefügt!",
-      "text": "Hinzufügen erfolgreich!"
-    },
-    "deleted": {
-      "title": "Gelöscht!",
-      "text": "Löschung erfolgreich!"
-    },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
-    "deleteModalHeader": "Wirklich löschen?",
-    "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
-    "clear": "Auf 0 Sterne setzen"
-  },
-  "ja": {
-    "anime": "アニメ",
-    "manga": "漫画",
-    "close": "クローズ",
-    "description": "デスクリプション",
-    "seriesInformation": "シリーズについて",
-    "dataInformation": "自分のリスト情報",
-    "episodes": "エピソード",
-    "rating": "評価",
-    "type": "タイプ",
-    "synonyms": "シノニム",
-    "noSynonyms": "シノニムがありません",
-    "airingTime": "放送時間",
-    "englishName": "英語名",
-    "noEnglishName": "英語名がありません",
-    "japaneseName": "日本語名",
-    "noJapaneseName": "日本語名がありません",
-    "seriesStatus": "シリーズのステータス",
-    "sinceDate": "{date}から放送中",
-    "dateFormat": "YYYY[年]MM[月]DD[日]",
-    "unknownDate": "日付不明",
-    "finishedAiring": "放送終了",
-    "currentlyAiring": "放送中",
-    "notYetAired": "まだ放送していない",
-    "ownRating": "自分の評価",
-    "ownStatus": "自分のステータス",
-    "watchedEpisodes": "見たエピソード",
-    "watching": "見る",
-    "current": "見る",
-    "repeating": "見直す",
-    "finished": "終了",
-    "completed": "終了",
-    "paused": "中止",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "planning": "見るつもり",
-    "releasing": "放送中",
-    "not_yet_released": "放送予定",
-    "cancelled": "中止された",
-    "dropdownPlaceholder": "選んでください・・・",
-    "submitChanges": "保存",
-    "resetChanges": "リセット",
-    "addToList": "追加",
-    "deleteFromList": "削除",
-    "updated": {
-      "title": "アップデートしました！",
-      "text": "アップデートはシンクロしました！"
-    },
-    "created": {
-      "title": "追加しました！",
-      "text": "追加はシンクロしました！"
-    },
-    "deleted": {
-      "title": "削除しました！",
-      "text": "削除はシンクロしました！"
-    },
-    "errorResponseTitle": "シンクロは出来ませんでした！",
-    "deleteModalHeader": "本当に削除しますか？",
-    "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
-    "clear": "０☆にセット"
-  },
-  "zh-cn": {
-    "anime": "动画",
-    "manga": "漫画",
-    "close": "关闭",
-    "description": "说明",
-    "seriesInformation": "剧集信息",
-    "dataInformation": "你的列表信息",
-    "episodes": "总集数",
-    "rating": "评分",
-    "type": "剧集类型",
-    "synonyms": "别名",
-    "noSynonyms": "无别名",
-    "airingTime": "放送时间",
-    "englishName": "英文名",
-    "noEnglishName": "无英文名",
-    "japaneseName": "日文名",
-    "noJapaneseName": "无日文名",
-    "seriesStatus": "剧集状态",
-    "sinceDate": "从{date}开始",
-    "dateFormat": "YYYY/M/D",
-    "unknownDate": "日期不详",
-    "finishedAiring": "放送完毕",
-    "currentlyAiring": "正在放送",
-    "notYetAired": "尚未放送",
-    "ownRating": "个人评分",
-    "ownStatus": "个人状态",
-    "watchedEpisodes": "已看集数",
-    "current": "观看中",
-    "watching": "观看中",
-    "repeating": "回顾中",
-    "finished": "已看完",
-    "completed": "已看完",
-    "paused": "搁置中",
-    "onHold": "搁置中",
-    "dropped": "已弃坑",
-    "planned": "计划中",
-    "planning": "计划中",
-    "releasing": "上映中",
-    "not_yet_released": "尚未上映",
-    "cancelled": "已弃坑",
-    "dropdownPlaceholder": "请选择……",
-    "submitChanges": "提交",
-    "resetChanges": "重置",
-    "addToList": "添加到列表",
-    "deleteFromList": "从列表中删除",
-    "updated": {
-      "title": "更新！",
-      "text": "更新成功！"
-    },
-    "created": {
-      "title": "创建！",
-      "text": "创建成功！"
-    },
-    "deleted": {
-      "title": "删除！",
-      "text": "删除成功！"
-    },
-    "errorResponseTitle": "更新失败！",
-    "deleteModalHeader": "确认删除？",
-    "doYouReallyWantToDelete": "你真的确定要把 {title} 从你的列表中删除？",
-    "clear": "星数归零"
-  }
-}
-</i18n>

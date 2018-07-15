@@ -5,7 +5,7 @@
         <th class="collapsing"></th>
 
         <th @click="orderTable('media.title.userPreferred')">
-          {{ $t('animeTitle') }}
+          {{ $t('system.constants.animeTitle') }}
           <i class="sort alphabet icon"
             :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
             v-if="currentSort.field === 'media.title.userPreferred'"
@@ -13,7 +13,7 @@
         </th>
 
         <th @click="orderTable('progress')" class="collapsing center aligned">
-          {{ $t('progress') }}
+          {{ $t('system.constants.progress') }}
           <i class="sort icon"
             :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
             v-if="currentSort.field === 'progress'"
@@ -21,7 +21,7 @@
         </th>
 
         <th @click="orderTable('score')" class="collapsing center aligned">
-          {{ $t('score') }}
+          {{ $t('system.constants.score') }}
           <i class="sort numeric icon"
             :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
             v-if="currentSort.field === 'score'"
@@ -29,20 +29,20 @@
         </th>
 
         <th @click="orderTable('season')" class="collapsing center aligned">
-          {{ $t('season') }}
+          {{ $t('system.constants.season') }}
           <i class="sort icon"
             :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
             v-if="currentSort.field === 'season'"
           ></i>
         </th>
 
-        <th class="collapsing right aligned">{{ $t('lastUpdated') }}</th>
+        <th class="collapsing right aligned">{{ $t('system.constants.lastUpdated') }}</th>
       </tr>
     </thead>
     <tbody>
       <tr v-if="currentOffset !== 0">
         <td class="center aligned" colspan="6" @click="scrollUpInfinite">
-          {{ $t('loadMore') }}
+          {{ $t('system.constants.loadMore') }}
         </td>
       </tr>
 
@@ -95,7 +95,7 @@
 
         <td
         @click="openInformation(data.media.id)"
-        :class="{ blue: data.media.status === 'COMPLETED' && finishedHighlight }">
+        :class="{ blue: data.media.status === 'FINISHED' && finishedHighlight }">
           {{ data.media.title.userPreferred }}
         </td>
 
@@ -146,23 +146,6 @@
 
         <td class="collapsing center aligned scoreRow">
           {{ data.score }}
-          <!-- <div class="ui score scrolling compact dropdown">
-            <input type="hidden" name="score" :value="data.score">
-            <div class="default text">-</div>
-            <div class="menu">
-              <div class="item" :data-value="0" :data-id="data.media.id">-</div>
-              <div class="item" :data-value="1" :data-id="data.media.id">1</div>
-              <div class="item" :data-value="2" :data-id="data.media.id">2</div>
-              <div class="item" :data-value="3" :data-id="data.media.id">3</div>
-              <div class="item" :data-value="4" :data-id="data.media.id">4</div>
-              <div class="item" :data-value="5" :data-id="data.media.id">5</div>
-              <div class="item" :data-value="6" :data-id="data.media.id">6</div>
-              <div class="item" :data-value="7" :data-id="data.media.id">7</div>
-              <div class="item" :data-value="8" :data-id="data.media.id">8</div>
-              <div class="item" :data-value="9" :data-id="data.media.id">9</div>
-              <div class="item" :data-value="10" :data-id="data.media.id">10</div>
-            </div>
-          </div> -->
         </td>
 
         <td class="collapsing center aligned">
@@ -174,7 +157,7 @@
 
       <tr v-if="itemsAvailable">
         <td class="center aligned" colspan="6" @click="scrollDownInfinite">
-          {{ $t('loadMore') }}
+          {{ $t('system.constants.loadMore') }}
         </td>
       </tr>
     </tbody>
@@ -199,7 +182,7 @@ export default {
 
       this.finishedHighlight = list.status !== 'COMPLETED';
       this.setReady(true);
-      this.$forceUpdate();
+      // this.$forceUpdate();
     },
   },
 
@@ -542,15 +525,15 @@ export default {
           .then((response) => {
             if (response.data.SaveMediaListEntry.id) {
               this.$notify({
-                title: this.$t('updated.title'),
-                text: this.$t('updated.text', { title }),
+                title: this.$t('system.constants.updated.title'),
+                text: this.$t('system.constants.updated.text', { title }),
               });
             }
           })
           .catch((error) => {
             this.$notify({
               type: 'error',
-              title: this.$t('errorResponseTitle'),
+              title: this.$t('system.constants.errorResponseTitle'),
               text: error,
             });
           });
@@ -583,7 +566,7 @@ export default {
       if (!season) {
         temp = '';
       } else {
-        temp = `${this.$t(season.toLowerCase())} `;
+        temp = `${this.$t(`system.constants.${season.toLowerCase()}`)} `;
       }
 
       if (!year) {
@@ -711,117 +694,3 @@ progress[value]::-webkit-progress-value {
   background-color: #00AAEE;
 }
 </style>
-
-
-<i18n>
-{
-  "en": {
-    "animeTitle": "Anime Title",
-    "progress": "Progress",
-    "score": "Score",
-    "season": "Season",
-    "lastUpdated": "Last Updated",
-    "winter": "Winter",
-    "spring": "Spring",
-    "summer": "Summer",
-    "autumn": "Autumn",
-    "fall": "Fall",
-    "unknown": "Unknown",
-    "dateFormat": "MMM DD YYYY",
-    "loading": "Loading",
-    "updated": {
-      "title": "Anime updated!",
-      "text": "{title} was successfully updated!"
-    },
-    "errorResponseTitle": "Update not successful!",
-    "watching": "Watching",
-    "finished": "Finished",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "toFinished": "Finish",
-    "loadMore": "Load more..."
-  },
-  "de": {
-    "animeTitle": "Animetitel",
-    "progress": "Fortschritt",
-    "score": "Bewertung",
-    "season": "Saison",
-    "lastUpdated": "Zuletzt aktualisiert",
-    "winter": "Winter",
-    "spring": "Frühling",
-    "summer": "Sommer",
-    "autumn": "Herbst",
-    "fall": "Herbst",
-    "unknown": "Unbekannt",
-    "dateFormat": "DD[.] MMM YYYY",
-    "loading": "Lädt",
-    "updated": {
-      "title": "Anime aktualisiert!",
-      "text": "{title} wurde erfolgreich aktualisiert!"
-    },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
-    "watching": "Laufend",
-    "finished": "Beendet",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "toFinished": "Beendet",
-    "loadMore": "Mehr Elemente laden..."
-  },
-  "ja": {
-    "animeTitle": "アニメのタイトル",
-    "progress": "進行",
-    "score": "評価",
-    "season": "シーズン",
-    "lastUpdated": "最新更新",
-    "winter": "冬",
-    "spring": "春",
-    "summer": "夏",
-    "autumn": "秋",
-    "fall": "秋",
-    "unknown": "未知",
-    "dateFormat": "MMM DD YYYY",
-    "loading": "通信中",
-    "updated": {
-      "title": "更新成功！",
-      "text": "「{title}」の更新は成功しました！"
-    },
-    "errorResponseTitle": "シンクロは出来ませんでした！",
-    "watching": "見る",
-    "finished": "終了",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "toFinished": "終了",
-    "loadMore": "次のリストデータ・・・"
-  },
-  "zh-cn": {
-    "animeTitle": "动画标题",
-    "progress": "进度",
-    "score": "分数",
-    "season": "季度",
-    "lastUpdated": "最后更新",
-    "winter": "冬",
-    "spring": "春",
-    "summer": "夏",
-    "autumn": "秋",
-    "fall": "秋",
-    "unknown": "不详",
-    "dateFormat": "YYYY/M/D",
-    "loading": "加载中",
-    "updated": {
-      "title": "动画更新！",
-      "text": "{title} 更新成功！"
-    },
-    "errorResponseTitle": "更新失败！",
-    "watching": "观看中",
-    "finished": "已看完",
-    "onHold": "搁置中",
-    "dropped": "已弃坑",
-    "planned": "计划中",
-    "toFinished": "完结",
-    "loadMore": "加载更多内容……"
-  }
-}
-</i18n>

@@ -22,6 +22,15 @@
       "toFinished": "Finish",
       "loadMore": "Load more..."
     },
+    "error": {
+      "titles": {
+        "notFound": "Not found!",
+        "fatalError": "Fatal error!"
+      },
+      "messages": {
+        "notFoundOrAdultContent": "If this is a medium considered adult content, please activate '18+ Content' in the settings on AniList.co!"
+      }
+    },
     "listStatus": {
       "watching": "Watching",
       "repeating": "Repeating",
@@ -37,25 +46,40 @@
     },
     "settings": {
       "title": "Settings",
-      "appSettings": "App Settings",
-      "setAppLanguage": "Set app's language",
-      "chooseLanguage": "Choose language",
-      "changeLanguage": "Change language",
-      "loggedInAs": "Logged in as",
-      "accountSettings": "Account Settings",
-      "loginData": "Login Data",
-      "username": "Username",
-      "password": "Password",
-      "restoreFactoryData": "Restore Factory Data",
-      "malRefreshRate": "Refresh interval for MAL (in minutes)",
-      "aniListRefreshRate": "Refresh interval for AniList (in minutes)",
-      "noCredentials": "No credentials!",
-      "enterCredentials": "Please enter credentials to log in.",
-      "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
-      "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>",
-      "aboutZeroTwo": "About ZeroTwo",
-      "version": "Version",
-      "link": "Click Me"
+      "menu": {
+        "appSettings": "App Settings",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList",
+        "restoreFactoryData": "Restore Factory Data",
+        "aboutZeroTwo": "About ZeroTwo",
+        "specialThanks": "Special Thanks"
+      },
+      "appSettings": {
+        "setAppLanguage": "Set app's language",
+        "chooseLanguage": "Choose language",
+        "changeLanguage": "Change language"
+      },
+      "myAnimeList": {
+        "loggedInAs": "Logged in as",
+        "accountSettings": "Account Settings",
+        "loginData": "Login Data",
+        "username": "Username",
+        "password": "Password",
+        "malRefreshRate": "Refresh interval (in minutes)",
+        "noCredentials": "No credentials!",
+        "enterCredentials": "Please enter credentials to log in.",
+        "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>"
+      },
+      "aniList": {
+        "loggedInAs": "Logged in as",
+        "accountSettings": "Account Settings",
+        "aniListRefreshRate": "Refresh interval (in minutes)"
+      },
+      "aboutZeroTwo": {
+        "version": "Version",
+        "link": "Click Me"
+      }
     },
     "menu": {
       "search": {

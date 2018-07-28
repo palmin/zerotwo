@@ -22,6 +22,15 @@
       "toFinished": "終了",
       "loadMore": "次のリストデータ・・・"
     },
+    "error": {
+      "titles": {
+        "notFound": "見つかりませんでした！",
+        "fatalError": "致命的なエラーが発生しました！"
+      },
+      "messages": {
+        "notFoundOrAdultContent": "１８斤コンテンツのであれば、Anilist.co に１８斤コンテンツ（18+ Content）の設定をチェックして下さい。"
+      }
+    },
     "listStatus": {
       "watching": "見る",
       "repeating": "再見",
@@ -37,25 +46,40 @@
     },
     "settings": {
       "title": "設定",
-      "appSettings": "アプリ設定",
-      "setAppLanguage": "アプリ言語を編集",
-      "chooseLanguage": "言語を選択する",
-      "changeLanguage": "言語を設定する",
-      "loggedInAs": "ログインしたアカウント",
-      "accountSettings": "アカウント設定",
-      "loginData": "ログインデータ",
-      "username": "ユーザー名",
-      "password": "パスワード",
-      "restoreFactoryData": "ファクトリー設定に戻る",
-      "malRefreshRate": "MALの更新間（分で）",
-      "aniListRefreshRate": "AniListの更新間（分で）",
-      "noCredentials": "ログインデータは入力しませんでした！",
-      "enterCredentials": "ログインデータを入力してください！",
-      "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",
-      "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>",
-      "aboutZeroTwo": "ZeroTwoについて",
-      "version": "バージョン",
-      "link": "クリックして"
+      "menu": {
+        "appSettings": "アプリ設定",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList",
+        "restoreFactoryData": "ファクトリー設定に戻る",
+        "aboutZeroTwo": "ZeroTwoについて",
+        "specialThanks": "特別感謝"
+      },
+      "appSettings": {
+        "setAppLanguage": "アプリ言語を編集",
+        "chooseLanguage": "言語を選択する",
+        "changeLanguage": "言語を設定する"
+      },
+      "myAnimeList": {
+        "loggedInAs": "ログインしたアカウント",
+        "accountSettings": "アカウント設定",
+        "loginData": "ログインデータ",
+        "username": "ユーザー名",
+        "password": "パスワード",
+        "malRefreshRate": "更新間（分で）",
+        "noCredentials": "ログインデータは入力しませんでした！",
+        "enterCredentials": "ログインデータを入力してください！",
+        "credentialsWrongOrTooManyLoginAttempts": "ログインデータは間違っています。もしくはログイン試し数は多いすぎます。",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>ログインデータは間違っていて、ログイン出来ませんでした。</p><p>ログインデータは間違っていない場合、ログイン試し数は多かったかもしれません。</p><p>ログインは短時間で試してください。</p>"
+      },
+      "aniList": {
+        "loggedInAs": "ログインしたアカウント",
+        "accountSettings": "アカウント設定",
+        "aniListRefreshRate": "更新間（分で）"
+      },
+      "aboutZeroTwo": {
+        "version": "バージョン",
+        "link": "クリックして"
+      }
     },
     "menu": {
       "search": {

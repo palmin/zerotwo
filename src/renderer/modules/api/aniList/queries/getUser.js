@@ -8,5 +8,8 @@ export default `query {
     mediaListOptions {
       scoreFormat
     }
+    options {
+      displayAdultContent
+    }
   }
 }`;

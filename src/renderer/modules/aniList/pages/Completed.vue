@@ -15,6 +15,10 @@ export default {
   methods: {
     ...mapActions('aniList', ['detectAndSetAniData']),
     getAnime() {
+      if (!this.aniData.lists) {
+        return [];
+      }
+      
       return _.chain(this.aniData.lists)
         .find(list => list.status === 'COMPLETED')
         .value();

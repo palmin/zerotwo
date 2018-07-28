@@ -22,6 +22,15 @@
       "toFinished": "完结",
       "loadMore": "加载更多内容…"
     },
+    "error": {
+      "titles": {
+        "notFound": "Not found!",
+        "fatalError": "Fatal error!"
+      },
+      "messages": {
+        "notFoundOrAdultContent": "If this is a medium considered adult content, please activate '18+ Content' in the settings on AniList.co!"
+      }
+    },
     "listStatus": {
       "watching": "观看中",
       "repeating": "回顾中",
@@ -37,25 +46,40 @@
     },
     "settings": {
       "title": "设置",
-      "appSettings": "软件设置",
-      "setAppLanguage": "设置软件语言",
-      "chooseLanguage": "选择语言",
-      "changeLanguage": "更改语言",
-      "loggedInAs": "登录为",
-      "accountSettings": "账户设置",
-      "loginData": "登录数据",
-      "username": "用户名",
-      "password": "密码",
-      "restoreFactoryData": "恢复出厂数据",
-      "malRefreshRate": "MAL刷新间隔（分钟）",
-      "aniListRefreshRate": "AniList刷新间隔（分钟）",
-      "noCredentials": "没有登录信息！",
-      "enterCredentials": "请输入登录信息以用于登录。",
-      "credentialsWrongOrTooManyLoginAttempts": "登录信息错误或登录尝试次数过多！",
-      "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>你的登录信息有误，无法通过验证。</p><p>如果你确定你的登录信息准确无误，那么可能是因为你进行了过多次的登录尝试！</p><p>如果你遇到的情况属于后者，请等1~6个小时后再进行尝试…</p>",
-      "aboutZeroTwo": "关于ZeroTwo",
-      "version": "版本号",
-      "link": "点击我"
+      "menu": {
+        "appSettings": "软件设置",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList",
+        "restoreFactoryData": "恢复出厂数据",
+        "aboutZeroTwo": "关于ZeroTwo",
+        "specialThanks": "Special Thanks"
+      },
+      "appSettings": {
+        "setAppLanguage": "设置软件语言",
+        "chooseLanguage": "选择语言",
+        "changeLanguage": "更改语言"
+      },
+      "myAnimeList": {
+        "loggedInAs": "登录为",
+        "accountSettings": "账户设置",
+        "loginData": "登录数据",
+        "username": "用户名",
+        "password": "密码",
+        "malRefreshRate": "刷新间隔（分钟）",
+        "noCredentials": "没有登录信息！",
+        "enterCredentials": "请输入登录信息以用于登录。",
+        "credentialsWrongOrTooManyLoginAttempts": "登录信息错误或登录尝试次数过多！",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>你的登录信息有误，无法通过验证。</p><p>如果你确定你的登录信息准确无误，那么可能是因为你进行了过多次的登录尝试！</p><p>如果你遇到的情况属于后者，请等1~6个小时后再进行尝试…</p>"
+      },
+      "aniList": {
+        "loggedInAs": "登录为",
+        "accountSettings": "账户设置",
+        "aniListRefreshRate": "刷新间隔（分钟）"
+      },
+      "aboutZeroTwo": {
+        "version": "版本号",
+        "link": "点击我"
+      }
     },
     "menu": {
       "search": {

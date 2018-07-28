@@ -1,5 +1,5 @@
 <template>
-  <table class="ui compact single line selectable sortable celled table">
+  <table class="ui compact selectable sortable table">
     <thead>
       <tr>
         <th class="collapsing"></th>
@@ -182,7 +182,6 @@ export default {
 
       this.finishedHighlight = list.status !== 'COMPLETED';
       this.setReady(true);
-      // this.$forceUpdate();
     },
   },
 
@@ -582,6 +581,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+table {
+  border: 0;
+}
 td.blue {
   color: rgb(0, 122, 170);
 }

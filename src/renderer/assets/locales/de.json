@@ -21,6 +21,15 @@
       "toFinished": "Beendet",
       "loadMore": "Mehr Elemente laden..."
     },
+    "error": {
+      "titles": {
+        "notFound": "Nicht gefunden!",
+        "fatalError": "Schwerwiegender Fehler"
+      },
+      "messages": {
+        "notFoundOrAdultContent": "Sollte es ein 18+ Medium sein, schalten Sie bitte in den Einstellungen auf AniList.co '18+ Content' ein!"
+      }
+    },
     "listStatus": {
       "watching": "Laufend",
       "repeating": "Wiederholung",
@@ -36,25 +45,40 @@
     },
     "settings": {
       "title": "Einstellungen",
-      "appSettings": "App-Einstellungen",
-      "setAppLanguage": "Ändere App-Sprache",
-      "chooseLanguage": "Sprache wählen",
-      "changeLanguage": "Sprache ändern",
-      "loggedInAs": "Eingeloggt als",
-      "accountSettings": "Kontoeinstellungen",
-      "loginData": "Logindaten",
-      "username": "Benutzername",
-      "password": "Passwort",
-      "restoreFactoryData": "Werkszustand wiederherstellen",
-      "malRefreshRate": "MAL-Aktualisierungsintervall (in Minuten)",
-      "aniListRefreshRate": "AniList-Aktualisierungsintervall (in Minuten)",
-      "noCredentials": "Keine Anmeldedaten!",
-      "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
-      "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
-      "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>",
-      "aboutZeroTwo": "Über ZeroTwo",
-      "version": "Version",
-      "link": "Klick mich"
+      "menu": {
+        "appSettings": "App-Einstellungen",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList",
+        "restoreFactoryData": "Werkszustand wiederherstellen",
+        "aboutZeroTwo": "Über ZeroTwo",
+        "specialThanks": "Spezielle Danksagungen"
+      },
+      "appSettings": {
+        "setAppLanguage": "Ändere App-Sprache",
+        "chooseLanguage": "Sprache wählen",
+        "changeLanguage": "Sprache ändern"
+      },
+      "myAnimeList": {
+        "loggedInAs": "Eingeloggt als",
+        "accountSettings": "Kontoeinstellungen",
+        "loginData": "Logindaten",
+        "username": "Benutzername",
+        "password": "Passwort",
+        "malRefreshRate": "Aktualisierungsintervall (in Minuten)",
+        "noCredentials": "Keine Anmeldedaten!",
+        "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
+        "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
+      },
+      "aniList": {
+        "loggedInAs": "Eingeloggt als",
+        "accountSettings": "Kontoeinstellungen",
+        "aniListRefreshRate": "Aktualisierungsintervall (in Minuten)"
+      },
+      "aboutZeroTwo": {
+        "version": "Version",
+        "link": "Klick mich"
+      }
     },
     "menu": {
       "search": {

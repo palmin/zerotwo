@@ -74,11 +74,22 @@ export default {
         EventBus.$emit('setInformation', data);
         this.$refs[this.infoBox].show();
       } catch (error) {
-        this.$notify({
-          type: 'error',
-          title: 'ERROR',
-          text: error,
-        });
+        const { status, message } = error.response.data.errors[0];
+        if (status === 404) {
+          this.$notify({
+            type: 'error',
+            title: this.$t('system.error.titles.notFound'),
+            text: this.$t('system.error.messages.notFoundOrAdultContent'),
+            duration: -1,
+          });
+        } else {
+          this.$notify({
+            type: 'error',
+            title: this.$t('system.error.titles.fatalError'),
+            text: message,
+            duration: -1,
+          });
+        }
       }
 
       await this.setReady(true);

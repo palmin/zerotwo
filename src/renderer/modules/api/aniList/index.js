@@ -8,7 +8,7 @@ import searchAnime from './queries/searchAnime';
 
 const axios = Axios.create({
   baseURL: 'https://graphql.anilist.co/',
-  timeout: 15000,
+  timeout: 60000,
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

@@ -14,8 +14,6 @@ export default [
   {
     path: '*',
     redirect: '/aniList/Watching',
-    meta: {
-      layout: AniListLayout,
-    },
+    meta: { layout: AniListLayout },
   },
 ];

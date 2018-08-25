@@ -8,9 +8,7 @@ import { version } from '../../package.json';
 const windowParams = {
   alwaysOnTop: true,
   autoHideMenuBar: true,
-  webPreferences: {
-    nodeIntegration: false,
-  },
+  webPreferences: { nodeIntegration: false },
 };
 const aniListOAuth = electronOauth2(oauthConfig, windowParams);
 
@@ -57,8 +55,7 @@ if (process.env.NODE_ENV === 'development') {
   try {
     // eslint-disable-next-line
     require('electron-debug')({
-      showDevTools: true,
-    });
+      showDevTools: true });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('Failed to install `electron-debug`: Please set `NODE_ENV=production` before build to avoid installing debugging packages. ');
@@ -113,8 +110,8 @@ function createWindow() {
     mainWindow.focus();
 
     if (
-      process.env.ELECTRON_ENV === 'development' ||
-      process.argv.indexOf('--debug') !== -1
+      process.env.ELECTRON_ENV === 'development'
+      || process.argv.indexOf('--debug') !== -1
     ) {
       mainWindow.webContents.openDevTools();
     }

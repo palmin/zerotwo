@@ -31,14 +31,10 @@ export default {
   },
 
   data() {
-    return {
-      layout: AniListLayout,
-    };
+    return { layout: AniListLayout };
   },
 
-  computed: {
-    ...mapState('i18n', ['locale']),
-  },
+  computed: { ...mapState('i18n', ['locale']) },
 
   watch: {
     $route(route) {

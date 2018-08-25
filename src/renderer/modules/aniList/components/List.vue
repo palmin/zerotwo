@@ -185,9 +185,7 @@ export default {
     },
   },
 
-  components: {
-    InfoBox,
-  },
+  components: { InfoBox },
 
   computed: {
     ...mapGetters('aniList', ['isAuthenticated']),
@@ -255,21 +253,13 @@ export default {
   },
 
   mounted() {
-    $('.ui.status.dropdown', this.$el).dropdown({
-      onChange: this.changeAnimeStatus,
-    });
-    $('.ui.score.dropdown', this.$el).dropdown({
-      onChange: this.changeScore,
-    });
+    $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
+    $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
   },
 
   updated() {
-    $('.ui.status.dropdown', this.$el).dropdown({
-      onChange: this.changeAnimeStatus,
-    });
-    $('.ui.score.dropdown', this.$el).dropdown({
-      onChange: this.changeScore,
-    });
+    $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
+    $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
   },
 
   data() {
@@ -509,18 +499,16 @@ export default {
       // that has all relevant changes
       const entries = _.chain(this.updatePayload)
         .groupBy(value => value.id)
-        .map(group => _.reduce(group, (accumulator, item) =>
-          (item.changeFrom > accumulator.changeFrom ? item : accumulator), { changeFrom: 0 }))
+        .map(group => _.reduce(group, (accumulator, item) => (
+          item.changeFrom > accumulator.changeFrom ? item : accumulator), { changeFrom: 0 }))
         .value();
 
       await Promise.each(entries, async (entry) => {
-        const {
-          id, title, status, progress, score,
-        } = entry;
+        const { id, title, status, progress, score } = entry;
 
-        return this.$http.updateAnimeInList({
-          id, status, progress, score,
-        }, this.session.access_token)
+        return this.$http.updateAnimeInList(
+          { id, status, progress, score }, this.session.access_token,
+        )
           .then((response) => {
             if (response.data.SaveMediaListEntry.id) {
               this.$notify({

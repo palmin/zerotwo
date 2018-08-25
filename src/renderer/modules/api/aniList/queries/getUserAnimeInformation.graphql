@@ -1,4 +1,4 @@
-export default `query GetById($mediaId: Int!) {
+query GetById($mediaId: Int!) {
   entry: Media(id: $mediaId) {
     mediaListEntry {
       id
@@ -53,4 +53,4 @@ export default `query GetById($mediaId: Int!) {
       site
     }
   }
-}`;
+}

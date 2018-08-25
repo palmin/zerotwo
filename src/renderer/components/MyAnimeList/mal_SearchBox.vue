@@ -37,9 +37,7 @@ import _ from 'lodash';
 import { mapState } from 'vuex';
 
 export default {
-  computed: {
-    ...mapState('myAnimeList', ['auth', 'malData']),
-  },
+  computed: { ...mapState('myAnimeList', ['auth', 'malData']) },
   data() {
     return {
       searchValue: '',
@@ -123,8 +121,8 @@ export default {
 
           if (_.isArray(results)) {
             return _.map(results, (result) => {
-              const element = _.find(this.malData, dataInMalData =>
-                dataInMalData.series_title === result.title);
+              const element = _.find(this.malData, dataInMalData => (
+                dataInMalData.series_title === result.title));
 
               if (element !== undefined) {
                 result.category = this.getStatus(element.my_status);
@@ -141,8 +139,8 @@ export default {
             });
           }
 
-          const element = _.find(this.malData, dataInMalData =>
-            dataInMalData.series_title === results.title);
+          const element = _.find(this.malData, dataInMalData => (
+            dataInMalData.series_title === results.title));
 
           if (element !== undefined) {
             results.category = this.getStatus(element.my_status);

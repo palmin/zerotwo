@@ -23,6 +23,12 @@ module.exports = {
     'import/extensions': 0,
     'import/newline-after-import': 0,
     'no-multi-assign': 0,
+    'object-curly-newline': ['error', {
+      'ObjectExpression': { 'multiline': true },
+      'ObjectPattern': { 'multiline': true },
+      'ImportDeclaration': 'never',
+      'ExportDeclaration': { 'multiline': true, 'minProperties': 3 }
+    }],
     // allow debugger during development
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,

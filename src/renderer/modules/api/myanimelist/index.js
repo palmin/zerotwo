@@ -83,9 +83,7 @@ export default () => ({
     return axios
       .post(`/api/animelist/add/${id}.xml`, qs.stringify({ data: xml }), {
         auth,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       })
       .then(response => response.data);
   },
@@ -93,9 +91,7 @@ export default () => ({
     return axios
       .delete(`/api/animelist/delete/${id}.xml`, {
         auth,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       })
       .then(response => response.data);
   },
@@ -103,9 +99,7 @@ export default () => ({
     return axios
       .post(`/api/animelist/update/${id}.xml`, qs.stringify({ data: xml }), {
         auth,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       })
       .then(response => response.data);
   },

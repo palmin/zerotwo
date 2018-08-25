@@ -1,4 +1,4 @@
-export default `query GetListByUsername($userName: String!, $type: MediaType!) {
+query GetListByUsername($userName: String!, $type: MediaType!) {
   list: MediaListCollection(userName: $userName, type: $type) {
     lists {
       status
@@ -57,4 +57,4 @@ export default `query GetListByUsername($userName: String!, $type: MediaType!) {
       }
     }
   }
-}`;
+}

@@ -1,4 +1,4 @@
-export default `query Search($query: String!, $page: Int, $perPage: Int) {
+query Search($query: String!, $page: Int, $perPage: Int) {
   results: Page(page: $page, perPage: $perPage) {
     media(search: $query, type: ANIME) {
       id
@@ -46,4 +46,4 @@ export default `query Search($query: String!, $page: Int, $perPage: Int) {
       }
     }
   }
-}`;
+}

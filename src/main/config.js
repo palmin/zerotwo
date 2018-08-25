@@ -1,9 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
-  sources: {
-    repoUrl: 'https://github.com/NicoAiko/zerotwo',
-  },
+  sources: { repoUrl: 'https://github.com/NicoAiko/zerotwo' },
   oauth: {
     clientId: process.env.CLIENT_ID || '533',
     clientSecret: process.env.CLIENT_SECRET || 'AND_HERE',

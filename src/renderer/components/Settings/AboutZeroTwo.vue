@@ -61,9 +61,7 @@ import { shell } from 'electron';
 import { mapState } from 'vuex';
 
 export default {
-  computed: {
-    ...mapState(['currentAppVersion']),
-  },
+  computed: { ...mapState(['currentAppVersion']) },
   data() {
     return {
       githubPage: 'https://github.com/nicoaiko/zerotwo',

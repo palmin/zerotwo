@@ -64,9 +64,7 @@ export default {
     },
   },
   data() {
-    return {
-      settingModalActive: false,
-    };
+    return { settingModalActive: false };
   },
   methods: {
     openInformationWindow(result) {

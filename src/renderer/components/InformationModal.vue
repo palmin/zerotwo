@@ -302,9 +302,13 @@ export default {
 
       if (start.isSame(end) && start.isValid()) {
         return `${start.format(this.$t('system.informationModal.dateFormat'))}`;
-      } else if (!start.isSame(end) && start.isValid() && end.isValid()) {
+      }
+
+      if (!start.isSame(end) && start.isValid() && end.isValid()) {
         return `${start.format(this.$t('system.informationModal.dateFormat'))} ~ ${end.format(this.$t('system.informationModal.dateFormat'))}`;
-      } else if (start.isValid() && !end.isValid()) {
+      }
+
+      if (start.isValid() && !end.isValid()) {
         return this.$t('system.informationModal.sinceDate', { date: start.format(this.$t('system.informationModal.dateFormat')) });
       }
 
@@ -449,9 +453,7 @@ export default {
           break;
       }
 
-      this.$http.addAnimeToList({
-        mediaId, score, status, progress,
-      }, this.session.access_token)
+      this.$http.addAnimeToList({ mediaId, score, status, progress }, this.session.access_token)
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({
@@ -511,9 +513,7 @@ export default {
           break;
       }
 
-      this.$http.updateAnimeInList({
-        id, progress, status, score,
-      }, token)
+      this.$http.updateAnimeInList({ id, progress, status, score }, token)
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({

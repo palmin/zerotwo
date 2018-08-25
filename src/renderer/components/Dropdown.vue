@@ -23,9 +23,7 @@ export default {
       default: () => [],
     },
     // Async items to populate select options from. Must return a promise.
-    asyncItems: {
-      type: Function,
-    },
+    asyncItems: { type: Function },
     // Item field to use a an option label
     displayField: {
       type: String,

@@ -11,7 +11,7 @@
     </div>
     <div class="ui blue labels" v-else>
       <div class="ui label">
-        {{ $t('system.settings.aniList.loggedInAs') }} {{ getUserName }}
+        {{ $t('system.settings.aniList.loggedInAs') }} {{ getUsername }}
       </div>
       <a class="ui label" @click="logMeOut">
         {{ $t('system.actions.logout') }}
@@ -51,9 +51,7 @@ export default {
       between: between(1, 60),
     },
   },
-  computed: {
-    ...mapGetters('aniList', ['isAuthenticated', 'getUserName', 'refreshRate']),
-  },
+  computed: { ...mapGetters('aniList', ['isAuthenticated', 'getUsername', 'refreshRate']) },
   methods: {
     ...mapActions('aniList', ['logout', 'updateRefreshRate', 'setTimerRunning']),
     editRefreshRate() {

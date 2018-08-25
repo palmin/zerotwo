@@ -30,9 +30,7 @@
 import { mapMutations, mapState } from 'vuex';
 
 export default {
-  computed: {
-    ...mapState('i18n', ['locale']),
-  },
+  computed: { ...mapState('i18n', ['locale']) },
   watch: {
     locale(locale) {
       this.localeSetting = locale;
@@ -42,9 +40,7 @@ export default {
   },
   mounted() {
     $('.ui.selection.dropdown', this.$el)
-      .dropdown({
-        onChange: this.changeLanguageValue,
-      });
+      .dropdown({ onChange: this.changeLanguageValue });
   },
   methods: {
     ...mapMutations('i18n', ['setLocale']),

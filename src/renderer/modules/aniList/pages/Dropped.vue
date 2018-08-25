@@ -18,7 +18,7 @@ export default {
       if (!this.aniData.lists) {
         return [];
       }
-      
+
       return _.chain(this.aniData.lists)
         .find(list => list.status === 'DROPPED')
         .value();
@@ -35,9 +35,7 @@ export default {
   },
 
   data() {
-    return {
-      anime: [],
-    };
+    return { anime: [] };
   },
 
   watch: {
@@ -50,8 +48,6 @@ export default {
     this.populateAnime();
   },
 
-  computed: {
-    ...mapState('aniList', ['aniData']),
-  },
+  computed: { ...mapState('aniList', ['aniData']) },
 };
 </script>

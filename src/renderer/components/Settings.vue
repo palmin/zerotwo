@@ -1,26 +1,32 @@
 <template>
-  <div class="ui fullscreen modal">
-    <div class="header">{{ $t('system.settings.title') }}</div>
-    <div class="content">
-      <div class="ui grid">
-        <div class="four wide column">
+  <v-dialog
+    v-model="dialog"
+    scrollable fullscreen
+    persistent :overlay="false"
+    transition="scale-transition"
+    origin="bottom center 0"
+  >
+    <v-btn dark flat icon slot="activator">
+      <v-icon>fas fa-cog</v-icon>
+    </v-btn>
+    <v-card>
+      <v-toolbar color="primary" dark>
+        <v-btn icon dark @click.native="dialog = false">
+          <v-icon>fas fa-times</v-icon>
+        </v-btn>
+        <v-toolbar-title>{{ $t('system.settings.title') }}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn dark flat @click.native="dialog = false">{{ $t('system.actions.save') }}</v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+      <v-card-text>
+        <v-navigation-drawer permanent dark>
           <tab-menu :malDisabled="malDisabled" />
-        </div>
-
-        <div class="twelve wide column">
-          <app-settings />
-          <my-anime-list v-if="!malDisabled" />
-          <ani-list />
-          <restore-factory-data />
-          <about-zero-two />
-          <special-thanks />
-        </div>
-      </div>
-    </div>
-    <div class="actions">
-      <div class="ui button" @click="close">{{ $t('system.actions.close') }}</div>
-    </div>
-  </div>
+        </v-navigation-drawer>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -43,24 +49,24 @@ export default {
     AboutZeroTwo,
   },
   data() {
-    return { malDisabled: true };
+    return { malDisabled: true, dialog: false };
   },
   mounted() {
-    $('.ui.fluid.secondary.vertical.menu .item').tab();
+    // $('.ui.fluid.secondary.vertical.menu .item').tab();
   },
   methods: {
     close() {
-      $(this.$el)
-        .modal('hide');
+      // $(this.$el)
+      //   .modal('hide');
     },
     show() {
-      $(this.$el)
-        .modal({
-          closable: false,
-          centered: false,
-          autofocus: false,
-        })
-        .modal('show');
+      // $(this.$el)
+      //   .modal({
+      //     closable: false,
+      //     centered: false,
+      //     autofocus: false,
+      //   })
+      //   .modal('show');
     },
   },
 };

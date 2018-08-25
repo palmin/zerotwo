@@ -1,24 +1,167 @@
 <template>
-  <v-layout child-flex>
-    <v-data-table
-      dark
-      :headers="headers"
-      :items="items"
-      :pagination.sync="pagination"
-      item-key="id"
-      must-sort
-      no-data-text="No data."
-      :rows-per-page-items="[pagination.rowsPerPage]"
-    >
-      <template slot="items" slot-scope="props">
-        <td @click="openInformation(props.item.id)">{{ props.item.title }}</td>
-        <td class="text-xs-center">{{ props.item.progress }} / {{ props.item.episodes | episode }}</td>
-        <td class="text-xs-center">{{ props.item.score }}</td>
-        <td class="text-xs-center">{{ props.item.season }}</td>
-        <td class="text-xs-right">{{ props.item.updated }}</td>
-      </template>
-    </v-data-table>
-  </v-layout>
+  <table class="ui compact selectable sortable table">
+    <thead>
+      <tr>
+        <th class="collapsing"></th>
+
+        <th @click="orderTable('media.title.userPreferred')">
+          {{ $t('system.constants.animeTitle') }}
+          <i class="sort alphabet icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'media.title.userPreferred'"
+          ></i>
+        </th>
+
+        <th @click="orderTable('progress')" class="collapsing center aligned">
+          {{ $t('system.constants.progress') }}
+          <i class="sort icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'progress'"
+          ></i>
+        </th>
+
+        <th @click="orderTable('score')" class="collapsing center aligned">
+          {{ $t('system.constants.score') }}
+          <i class="sort numeric icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'score'"
+          ></i>
+        </th>
+
+        <th @click="orderTable('season')" class="collapsing center aligned">
+          {{ $t('system.constants.season') }}
+          <i class="sort icon"
+            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
+            v-if="currentSort.field === 'season'"
+          ></i>
+        </th>
+
+        <th class="collapsing right aligned">{{ $t('system.constants.lastUpdated') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-if="currentOffset !== 0">
+        <td class="center aligned" colspan="6" @click="scrollUpInfinite">
+          {{ $t('system.constants.loadMore') }}
+        </td>
+      </tr>
+
+      <tr v-for="data in list" :key="data.media.id">
+
+        <td class="collapsing center aligned">
+          <div class="ui status inline dropdown">
+            <div class="text">
+              <i class="stop icon" :class="{
+                green: listStatus === 'CURRENT' || listStatus === 'REPEATING',
+                blue: listStatus === 'COMPLETED',
+                yellow: listStatus === 'PAUSED',
+                red: listStatus === 'DROPPED',
+                black: listStatus === 'PLANNING'
+              }"></i>
+            </div>
+            <div class="menu">
+              <div class="item"
+              data-value="CURRENT"
+              :data-id="data.media.id">
+                <i class="green stop icon"></i>
+              </div>
+
+              <div class="item"
+              data-value="COMPLETED"
+              :data-id="data.media.id">
+                <i class="blue stop icon"></i>
+              </div>
+
+              <div class="item"
+              data-value="PAUSED"
+              :data-id="data.media.id">
+                <i class="yellow stop icon"></i>
+              </div>
+
+              <div class="item"
+              data-value="DROPPED"
+              :data-id="data.media.id">
+                <i class="red stop icon"></i>
+              </div>
+
+              <div class="item"
+              data-value="PLANNING"
+              :data-id="data.media.id">
+                <i class="black stop icon"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+
+        <td
+        @click="openInformation(data.media.id)"
+        :class="{ blue: data.media.status === 'FINISHED' && finishedHighlight }">
+          {{ data.media.title.userPreferred }}
+        </td>
+
+        <td class="collapsing episodeRow">
+          <progress :value="data.progress" :max="progressMaxEpisodes(data)" />
+          {{ data.progress }} / {{ data.media.episodes | episode }}
+          <div class="controlIcons">
+            <span class="red" @click="decreaseOneEpisode(data)" v-if="data.progress !== 0">
+              <div class="preview">
+                <span class="episode-arrow" v-if="data.progress !== 0">
+                  {{ data.progress - 1 }}
+                  <i class="inverted left arrow icon" />
+                  {{ data.progress }}
+                </span>
+              </div>
+              <i class="inverted minus icon"
+                :class="{ disabled: data.progress === 0 }" />
+            </span>
+
+            <span
+            class="green"
+            @click="increaseOneEpisode(data)"
+            v-if="data.progress !== data.media.episodes">
+              <i class="inverted plus icon"
+                :class="{
+                  disabled: !!data.media.episodes &&
+                  data.progress === data.media.episodes
+                }" />
+              <div class="preview">
+                <span
+                class="episode-arrow"
+                v-if="(data.media.episodes > 0
+                && data.progress < data.media.episodes)
+                || data.media.episodes <= 0">
+                  {{ data.progress }}
+                  <i class="inverted right arrow icon" />
+                  {{ data.progress + 1 }}
+                </span>
+                <span
+                class="new-status"
+                v-if="(data.media.episodes > 0 && data.progress + 1 === data.media.episodes)">
+                  {{ $t('toFinished') }}
+                </span>
+              </div>
+            </span>
+          </div>
+        </td>
+
+        <td class="collapsing center aligned scoreRow">
+          {{ data.score }}
+        </td>
+
+        <td class="collapsing center aligned">
+          {{ getSeason(data.media.startDate.year, data.media.season) }}
+        </td>
+
+        <td class="collapsing right aligned">{{ getTimeByTimestamp(data.updatedAt) }}</td>
+      </tr>
+
+      <tr v-if="itemsAvailable">
+        <td class="center aligned" colspan="6" @click="scrollDownInfinite">
+          {{ $t('system.constants.loadMore') }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
@@ -47,9 +190,6 @@ export default {
   computed: {
     ...mapGetters('aniList', ['isAuthenticated']),
     ...mapState('aniList', ['session']),
-    pageText() {
-      return `${this.pagination.currentPage}`;
-    },
     listEntries() {
       return this.listItems.entries;
     },
@@ -58,19 +198,6 @@ export default {
     },
     itemsAvailable() {
       return (this.currentOffset + this.listLimit) < this.listEntries.length;
-    },
-    items() {
-      const items = this.list;
-
-      return _.map(items, item => ({
-        id: item.media.id,
-        title: item.media.title.userPreferred,
-        progress: item.progress,
-        episodes: item.media.episodes,
-        score: item.score,
-        season: this.getSeason(item.media.startDate.year, item.media.season),
-        updated: this.getTimeByTimestamp(item.updatedAt),
-      }));
     },
     list() {
       if (this.currentSort.field === null) {
@@ -126,13 +253,13 @@ export default {
   },
 
   mounted() {
-    // $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
-    // $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
+    $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
+    $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
   },
 
   updated() {
-    // $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
-    // $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
+    $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
+    $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
   },
 
   data() {
@@ -152,40 +279,6 @@ export default {
       listLimit: 100,
 
       finishedHighlight: false,
-
-      headers: [
-        {
-          text: this.$t('system.constants.animeTitle'),
-          align: 'left',
-          value: 'title',
-        },
-        {
-          text: this.$t('system.constants.progress'),
-          align: 'center',
-          value: 'episode',
-        },
-        {
-          text: this.$t('system.constants.score'),
-          align: 'center',
-          value: 'score',
-        },
-        {
-          text: this.$t('system.constants.season'),
-          align: 'center',
-          value: 'season',
-        },
-        {
-          text: this.$t('system.constants.lastUpdated'),
-          align: 'center',
-          value: 'updated',
-        },
-      ],
-
-      pagination: {
-        sortBy: 'name',
-        rowsPerPage: 100,
-        currentPage: 1,
-      },
 
       // scores: [{
       //   text: '-',

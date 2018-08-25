@@ -177,5 +177,19 @@
       "dropped": "Abgebrochen",
       "planning": "Geplant"
     }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "prevPage": "Vorherige Seite",
+      "nextPage": "Nächste Seite",
+      "pageText": "{0}-{1} von {2}",
+      "noResultsText": "Keine Ergebnisse vorhanden",
+      "rowsPerPageText": "Datensätze pro Seite",
+      "rowsPerPageAll": "Alle"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Zeilen pro Seite"
+    },
+    "noDataText": "Keine Daten vorhanden"
   }
 }

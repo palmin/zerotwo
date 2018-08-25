@@ -1,78 +1,65 @@
 <template>
-  <v-toolbar app fixed dark flat dense>
-    <v-toolbar-items>
-      <v-btn flat exact :to="{ name: 'Ani-Watching' }">
-        <v-icon color="green" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.watching') }} ({{ watchingAmount }})
-      </v-btn>
-
-      <v-btn flat exact :to="{ name: 'Ani-Completed' }">
-        <v-icon color="blue" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.completed') }} ({{ completedAmount }})
-      </v-btn>
-
-      <v-btn flat exact :to="{ name: 'Ani-Paused' }">
-        <v-icon color="yellow" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.onHold') }} ({{ pausedAmount }})
-      </v-btn>
-
-      <v-btn flat exact :to="{ name: 'Ani-Dropped' }">
-        <v-icon color="red" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.dropped') }} ({{ droppedAmount }})
-      </v-btn>
-
-      <v-btn flat exact :to="{ name: 'Ani-Planning' }">
-        <v-icon color="black" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.planned') }} ({{ planningAmount }})
-      </v-btn>
-    </v-toolbar-items>
-
-    <v-spacer></v-spacer>
-
-    <!-- <search-box @openInformation="openInformationWindow" /> -->
-
-    <v-btn flat icon :disabled="!this.isAuthenticated" @click="refreshAniList">
-      <!-- <div class="refreshTimerBar" :class="{
-        green: refreshTimePercentage >= 50,
-        yellow: refreshTimePercentage < 50 && refreshTimePercentage >= 15,
-        red: refreshTimePercentage < 15
-      }" :style="`height: ${refreshTimePercentage}% !important;`">
-      </div> -->
-      <v-icon dark color="success" :class="{ loading: !isReady }">fas fa-sync</v-icon>
-    </v-btn>
-
-    <!-- <v-btn flat icon dark @click="openSettings">
-      <v-icon>fas fa-cog</v-icon>
-    </v-btn> -->
-    <settings />
-
-    <v-menu offset-y>
-      <v-btn flat icon dark slot="activator">
-        <v-icon>fas fa-bars</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile @click="navigateTo('Ani-Watching')">
-          <v-list-tile-title>{{ $t('system.modules.aniList') }}</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="navigateTo('MAL-Watching')" disabled>
-          <v-list-tile-title>{{ $t('system.modules.myAnimeList') }}</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="navigateTo('Torrents-Main')" disabled>
-          <v-list-tile-title>{{ $t('system.modules.torrents') }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-  </v-toolbar>
+  <div class="ui top fixed menu">
+    <router-link class="item" tag="a" :to="{ name: 'Ani-Watching' }" active-class="active" exact>
+      <i class="green stop icon"></i>
+      {{ $t('system.menu.listStatus.watching') }} ({{ watchingAmount }})
+    </router-link>
+    <router-link class="item" tag="a" :to="{ name: 'Ani-Completed' }" active-class="active" exact>
+      <i class="blue stop icon"></i>
+      {{ $t('system.menu.listStatus.completed') }} ({{ completedAmount }})
+    </router-link>
+    <router-link class="item" tag="a" :to="{ name: 'Ani-Paused' }" active-class="active" exact>
+      <i class="yellow stop icon"></i>
+      {{ $t('system.menu.listStatus.onHold') }} ({{ pausedAmount }})
+    </router-link>
+    <router-link class="item" tag="a" :to="{ name: 'Ani-Dropped' }" active-class="active" exact>
+      <i class="red stop icon"></i>
+      {{ $t('system.menu.listStatus.dropped') }} ({{ droppedAmount }})
+    </router-link>
+    <router-link class="item" tag="a" :to="{ name: 'Ani-Planning' }" active-class="active" exact>
+      <i class="black stop icon"></i>
+      {{ $t('system.menu.listStatus.planned') }} ({{ planningAmount }})
+    </router-link>
+    <div class="right menu">
+      <search-box @openInformation="openInformationWindow" />
+      <a class="relative item" :class="{ disabled: !this.isAuthenticated }" @click="refreshAniList">
+        <div class="refreshTimerBar" :class="{
+          green: refreshTimePercentage >= 50,
+          yellow: refreshTimePercentage < 50 && refreshTimePercentage >= 15,
+          red: refreshTimePercentage < 15
+        }" :style="`height: ${refreshTimePercentage}% !important;`">
+        </div>
+        <i class="marginless refresh icon" :class="{ loading: !isReady }"></i>
+      </a>
+      <a class="item" @click="openSettings">
+        <i class="marginless settings icon"></i>
+      </a>
+      <div class="ui simple dropdown item">
+        <i class="marginless sidebar icon"></i>
+        <div class="menu with right aligned items">
+          <router-link class="item" tag="a" :to="{ name: 'Ani-Watching' }" active-class="active" exact>
+            {{ $t('system.modules.aniList') }}
+          </router-link>
+          <router-link class="disabled item" tag="a" :to="{ name: 'MAL-Watching' }" active-class="active" exact>
+            {{ $t('system.modules.myAnimeList') }}
+          </router-link>
+          <router-link class="disabled item" tag="a" :to="{ name: 'Torrents-Main' }" active-class="active" exact>
+            {{ $t('system.modules.torrents') }}
+          </router-link>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
 import SearchBox from '../SearchBox';
-import Settings from '../Settings';
+import SettingModal from '../Settings';
 
 export default {
   props: ['refreshAniList', 'openInformation', 'openSettings'],
-  components: { SearchBox, Settings },
+  components: { SearchBox },
   computed: {
     ...mapState(['isReady']),
     ...mapState('aniList', ['timeUntilNextRefresh', 'refreshRate', 'aniData']),
@@ -148,9 +135,6 @@ export default {
       const object = this.aniData.lists.find(item => item.status === status);
 
       return object === undefined ? null : object;
-    },
-    navigateTo(route) {
-      this.$router.push(route);
     },
   },
 };

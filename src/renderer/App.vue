@@ -1,15 +1,22 @@
 <template>
-  <div id="app">
-    <notification />
-    <div class="layout" :is="layout">
-      <router-view />
-    </div>
-  </div>
+  <v-app dark id="app">
+    <!-- <notification /> -->
+    <main-menu
+      :openSettings="openSettings"
+      :refreshAniList="refreshAniList"
+      :openInformation="openInformation" />
+    <main>
+      <v-content :is="layout">
+        <router-view />
+      </v-content>
+    </main>
+  </v-app>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import AniListLayout from '@/layouts/AniList';
+import MainMenu from '@/components/AniList/Menu';
 import Notification from '@/components/Notification';
 // import malTimer from '@/mixins/malTimer';
 // import discord from '@/mixins/discord';
@@ -22,7 +29,7 @@ export default {
     // discord,
     aniListTimer,
   ],
-  components: { Notification },
+  components: { Notification, MainMenu },
 
   created() {
     if (!this.locale) {
@@ -48,12 +55,50 @@ export default {
   },
 
   methods: {
+    ...mapActions('aniList', ['detectAndSetAniData']),
     ...mapMutations(['setReady']),
     setLayout(layout) {
       this.layout = layout || AniListLayout;
     },
     setLocale(locale) {
       this.$i18n.locale = locale || 'en';
+    },
+    openSettings() {
+      this.$refs[this.event].show();
+    },
+    async refreshAniList() {
+      await this.setReady(false);
+      await this.detectAndSetAniData();
+      await this.setReady(true);
+    },
+    async openInformation(mediaId) {
+      await this.setReady(false);
+
+      try {
+        const accessToken = this.session.access_token;
+        const data = await this.$http.openAnimeInformation(mediaId, accessToken);
+        // EventBus.$emit('setInformation', data);
+        this.$refs[this.infoBox].show();
+      } catch (error) {
+        const { status, message } = error.response.data.errors[0];
+        if (status === 404) {
+          this.$notify({
+            type: 'error',
+            title: this.$t('system.error.titles.notFound'),
+            text: this.$t('system.error.messages.notFoundOrAdultContent'),
+            duration: -1,
+          });
+        } else {
+          this.$notify({
+            type: 'error',
+            title: this.$t('system.error.titles.fatalError'),
+            text: message,
+            duration: -1,
+          });
+        }
+      }
+
+      await this.setReady(true);
     },
   },
 };

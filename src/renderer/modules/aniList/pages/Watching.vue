@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-content>
     <list-component :listItems="anime" @refresh="refreshData" />
-  </div>
+  </v-content>
 </template>
 
 <script>

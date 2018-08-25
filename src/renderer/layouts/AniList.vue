@@ -1,23 +1,20 @@
 <template>
-  <div class="ui fluid container">
-    <div class="ui dimmer" :class="{ active: !isReady }">
+  <v-layout fluid fill-height>
+  <!-- <div class="ui fluid container"> -->
+    <!-- <div class="ui dimmer" :class="{ active: !isReady }">
       <div class="ui text loader">
         {{ $t('system.constants.loading') }}
       </div>
-    </div>
+    </div> -->
 
-    <main-menu
-    :openSettings="openSettings"
-    :refreshAniList="refreshAniList"
-    :openInformation="openInformation" />
-
-    <settings :ref="event" />
-    <info-box :ref="infoBox" :aniData="aniData" @refresh="refreshAniList" />
+    <!-- <settings :ref="event" /> -->
+    <!-- <info-box :ref="infoBox" :aniData="aniData" @refresh="refreshAniList" /> -->
 
     <transition name="fade" mode="out-in">
       <slot/>
     </transition>
-  </div>
+  <!-- </div> -->
+  </v-layout>
 </template>
 
 <script>

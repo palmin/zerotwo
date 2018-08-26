@@ -83,6 +83,7 @@
     },
     "menu": {
       "search": {
+        "headline": "Search Window",
         "notInList": "Not in your list",
         "search": "Search ...",
         "noResults": "No results could be found"
@@ -135,7 +136,8 @@
       "errorResponseTitle": "Update not successful!",
       "deleteModalHeader": "Confirm delete?",
       "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
-      "clear": "Set to 0 stars"
+      "clear": "Set to 0 stars",
+      "inputRequired": "Input required!"
     },
     "actions": {
       "refreshMAL": "Refresh MAL",
@@ -178,5 +180,19 @@
       "dropped": "Dropped",
       "planning": "Planning"
     }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "prevPage": "Previous page",
+      "nextPage": "Next page",
+      "pageText": "{0}-{1} of {2}",
+      "noResultsText": "No results",
+      "rowsPerPageText": "Items per page",
+      "rowsPerPageAll": "All"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Items per page"
+    },
+    "noDataText": "No data"
   }
 }

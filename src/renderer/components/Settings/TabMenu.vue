@@ -1,24 +1,9 @@
 <template>
-  <div class="ui fluid secondary vertical menu">
-    <a class="active item" data-tab="appSettings">
-      {{ $t('system.settings.menu.appSettings') }}
-    </a>
-    <a class="item" :class="{ disabled: malDisabled }" data-tab="myAnimeList">
-      {{ $t('system.settings.menu.myAnimeList') }}
-    </a>
-    <a class="item" data-tab="aniList">
-      {{ $t('system.settings.menu.aniList') }}
-    </a>
-    <a class="item" data-tab="restoreFactoryData">
-      {{ $t('system.settings.menu.restoreFactoryData') }}
-    </a>
-    <a class="item" data-tab="aboutZeroTwo">
-      {{ $t('system.settings.menu.aboutZeroTwo') }}
-    </a>
-    <a class="item" data-tab="specialThanks">
-      {{ $t('system.settings.menu.specialThanks') }}
-    </a>
-  </div>
+  <v-tabs dark v-model="active">
+    <v-tab v-for="tab in tabs" :key="tab.key" ripple>
+      {{ tab.value }}
+    </v-tab>
+  </v-tabs>
 </template>
 
 <script>
@@ -30,6 +15,27 @@ export default {
       default: false,
     },
   },
+  data: ({
+    tabs: [{
+      key: 'appSettings',
+      value: this.$t('system.settings.menu.appSettings'),
+    }, {
+      key: 'myAnimeList',
+      value: this.$t('system.settings.menu.myAnimeList'),
+    }, {
+      key: 'aniList',
+      value: this.$t('system.settings.menu.aniList'),
+    }, {
+      key: 'restoreFactoryData',
+      value: this.$t('system.settings.menu.restoreFactoryData'),
+    }, {
+      key: 'aboutZeroTwo',
+      value: this.$t('system.settings.menu.aboutZeroTwo'),
+    }, {
+      key: 'specialThanks',
+      value: this.$t('system.settings.menu.specialThanks'),
+    }],
+  }),
 };
 </script>
 

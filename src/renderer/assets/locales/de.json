@@ -82,6 +82,7 @@
     },
     "menu": {
       "search": {
+        "headline": "Suchfenster",
         "notInList": "Nicht in deiner Liste",
         "search": "Suchen ...",
         "noResults": "Es wurden keine Ergebnisse gefunden"
@@ -134,7 +135,8 @@
       "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
       "deleteModalHeader": "Wirklich löschen?",
       "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
-      "clear": "Auf 0 Sterne setzen"
+      "clear": "Auf 0 Sterne setzen",
+      "inputRequired": "Eingabe erforderlich!"
     },
     "actions": {
       "refreshMAL": "MAL aktualisieren",

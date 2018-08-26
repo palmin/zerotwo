@@ -6,13 +6,17 @@
       :items="items"
       :pagination.sync="pagination"
       item-key="id"
-      must-sort
+      :must-sort="true"
       no-data-text="No data."
       :rows-per-page-items="[pagination.rowsPerPage]"
     >
       <template slot="items" slot-scope="props">
         <td @click="openInformation(props.item.id)">{{ props.item.title }}</td>
-        <td class="text-xs-center">{{ props.item.progress }} / {{ props.item.episodes | episode }}</td>
+        <td class="text-xs-left">
+          <span>{{ props.item.progress }} / {{ props.item.episodes | episode }}</span>
+          <v-progress-linear color="success" height="0.25em"
+          :value="props.item.progressInPercent"></v-progress-linear>
+        </td>
         <td class="text-xs-center">{{ props.item.score }}</td>
         <td class="text-xs-center">{{ props.item.season }}</td>
         <td class="text-xs-right">{{ props.item.updated }}</td>
@@ -47,6 +51,32 @@ export default {
   computed: {
     ...mapGetters('aniList', ['isAuthenticated']),
     ...mapState('aniList', ['session']),
+
+    headers() {
+      return [{
+        text: this.$t('system.constants.animeTitle'),
+        align: 'left',
+        value: 'title',
+      }, {
+        text: this.$t('system.constants.progress'),
+        align: 'center',
+        value: 'episode',
+      }, {
+        text: this.$t('system.constants.score'),
+        align: 'center',
+        value: 'score',
+      }, {
+        text: this.$t('system.constants.season'),
+        align: 'center',
+        value: 'season',
+      }, {
+        text: this.$t('system.constants.lastUpdated'),
+        align: 'center',
+        value: 'updated',
+        sortable: false,
+      }];
+    },
+
     pageText() {
       return `${this.pagination.currentPage}`;
     },
@@ -60,13 +90,15 @@ export default {
       return (this.currentOffset + this.listLimit) < this.listEntries.length;
     },
     items() {
-      const items = this.list;
+      const items = this.listEntries;
 
       return _.map(items, item => ({
         id: item.media.id,
         title: item.media.title.userPreferred,
         progress: item.progress,
         episodes: item.media.episodes,
+        progressInPercent: item.media.episodes <= 0
+          ? 80 : item.progress / item.media.episodes * 100,
         score: item.score,
         season: this.getSeason(item.media.startDate.year, item.media.season),
         updated: this.getTimeByTimestamp(item.updatedAt),
@@ -153,36 +185,8 @@ export default {
 
       finishedHighlight: false,
 
-      headers: [
-        {
-          text: this.$t('system.constants.animeTitle'),
-          align: 'left',
-          value: 'title',
-        },
-        {
-          text: this.$t('system.constants.progress'),
-          align: 'center',
-          value: 'episode',
-        },
-        {
-          text: this.$t('system.constants.score'),
-          align: 'center',
-          value: 'score',
-        },
-        {
-          text: this.$t('system.constants.season'),
-          align: 'center',
-          value: 'season',
-        },
-        {
-          text: this.$t('system.constants.lastUpdated'),
-          align: 'center',
-          value: 'updated',
-        },
-      ],
-
       pagination: {
-        sortBy: 'name',
+        sortBy: 'title',
         rowsPerPage: 100,
         currentPage: 1,
       },

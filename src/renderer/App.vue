@@ -1,8 +1,7 @@
 <template>
   <v-app dark id="app">
-    <!-- <notification /> -->
+    <notification />
     <main-menu
-      :openSettings="openSettings"
       :refreshAniList="refreshAniList"
       :openInformation="openInformation" />
     <main>
@@ -21,6 +20,7 @@ import Notification from '@/components/Notification';
 // import malTimer from '@/mixins/malTimer';
 // import discord from '@/mixins/discord';
 import aniListTimer from '@/mixins/aniListTimer';
+import EventBus from '@/plugins/eventBus';
 
 export default {
   name: 'app',
@@ -38,7 +38,10 @@ export default {
   },
 
   data() {
-    return { layout: AniListLayout };
+    return {
+      layout: AniListLayout,
+      infoBox: 'infoBox',
+    };
   },
 
   computed: { ...mapState('i18n', ['locale']) },
@@ -63,9 +66,6 @@ export default {
     setLocale(locale) {
       this.$i18n.locale = locale || 'en';
     },
-    openSettings() {
-      this.$refs[this.event].show();
-    },
     async refreshAniList() {
       await this.setReady(false);
       await this.detectAndSetAniData();
@@ -77,7 +77,7 @@ export default {
       try {
         const accessToken = this.session.access_token;
         const data = await this.$http.openAnimeInformation(mediaId, accessToken);
-        // EventBus.$emit('setInformation', data);
+        EventBus.$emit('setInformation', data);
         this.$refs[this.infoBox].show();
       } catch (error) {
         const { status, message } = error.response.data.errors[0];

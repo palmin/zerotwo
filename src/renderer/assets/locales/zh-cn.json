@@ -83,6 +83,7 @@
     },
     "menu": {
       "search": {
+        "headline": "Search Window",
         "notInList": "不在你的列表中",
         "search": "搜索…",
         "noResults": "未找到结果"
@@ -135,7 +136,8 @@
       "errorResponseTitle": "更新失败！",
       "deleteModalHeader": "确认删除？",
       "doYouReallyWantToDelete": "你真的确定要把 {title} 从你的列表中删除？",
-      "clear": "星数归零"
+      "clear": "星数归零",
+      "inputRequired": "Input required!"
     },
     "actions": {
       "refreshMAL": "刷新MAL",
@@ -178,5 +180,19 @@
       "dropped": "已弃坑",
       "planning": "计划中"
     }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "prevPage": "Previous page",
+      "nextPage": "Next page",
+      "pageText": "{0}-{1} of {2}",
+      "noResultsText": "No results",
+      "rowsPerPageText": "Items per page",
+      "rowsPerPageAll": "All"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Items per page"
+    },
+    "noDataText": "No data"
   }
 }

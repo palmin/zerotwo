@@ -29,21 +29,12 @@
 
     <v-spacer></v-spacer>
 
-    <!-- <search-box @openInformation="openInformationWindow" /> -->
+    <search-box @openInformation="openInformationWindow" />
 
-    <v-btn flat icon :disabled="!this.isAuthenticated" @click="refreshAniList">
-      <!-- <div class="refreshTimerBar" :class="{
-        green: refreshTimePercentage >= 50,
-        yellow: refreshTimePercentage < 50 && refreshTimePercentage >= 15,
-        red: refreshTimePercentage < 15
-      }" :style="`height: ${refreshTimePercentage}% !important;`">
-      </div> -->
-      <v-icon dark color="success" :class="{ loading: !isReady }">fas fa-sync</v-icon>
-    </v-btn>
+    <v-progress-circular :rotate="-90" :value="refreshTimePercentage" :color="progressCircleColor" :indeterminate="!isReady" size="32" :width="2">
+      <v-icon size="14" style="vertical-align: baseline;" :disabled="!this.isAuthenticated" @click="refreshAniList">fas fa-sync {{ !isReady ? 'fa-spin' : '' }}</v-icon>
+    </v-progress-circular>
 
-    <!-- <v-btn flat icon dark @click="openSettings">
-      <v-icon>fas fa-cog</v-icon>
-    </v-btn> -->
     <settings />
 
     <v-menu offset-y>
@@ -71,7 +62,7 @@ import SearchBox from '../SearchBox';
 import Settings from '../Settings';
 
 export default {
-  props: ['refreshAniList', 'openInformation', 'openSettings'],
+  props: ['refreshAniList', 'openInformation'],
   components: { SearchBox, Settings },
   computed: {
     ...mapState(['isReady']),
@@ -85,6 +76,17 @@ export default {
       const refreshRateInMilliseconds = this.refreshRate * 60000;
 
       return Math.floor((100 / refreshRateInMilliseconds) * this.timeUntilNextRefresh);
+    },
+    progressCircleColor() {
+      if (this.refreshTimePercentage >= 50) {
+        return 'success';
+      }
+
+      if (this.refreshTimePercentage < 50 && this.refreshTimePercentage >= 15) {
+        return 'warning';
+      }
+
+      return 'error';
     },
     readableTimeUntilNextRefresh() {
       if (!this.timeUntilNextRefresh) {

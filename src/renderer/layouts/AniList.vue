@@ -1,19 +1,10 @@
 <template>
   <v-layout fluid fill-height>
-  <!-- <div class="ui fluid container"> -->
-    <!-- <div class="ui dimmer" :class="{ active: !isReady }">
-      <div class="ui text loader">
-        {{ $t('system.constants.loading') }}
-      </div>
-    </div> -->
-
-    <!-- <settings :ref="event" /> -->
-    <!-- <info-box :ref="infoBox" :aniData="aniData" @refresh="refreshAniList" /> -->
+    <info-box :ref="infoBox" :aniData="aniData" @refresh="refreshAniList" />
 
     <transition name="fade" mode="out-in">
       <slot/>
     </transition>
-  <!-- </div> -->
   </v-layout>
 </template>
 

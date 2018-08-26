@@ -12,9 +12,6 @@ import store from './store';
 import App from './App';
 import router from './router';
 import getDate from './plugins/getDate';
-// import './assets/fontawesome/css/fontawesome-all.css';
-// import './assets/semantic.min.css';
-// import './assets/semantic.min';
 
 Vue.http = Vue.prototype.$http = api;
 Vue.config.productionTip = false;

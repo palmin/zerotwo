@@ -11,26 +11,31 @@
     </v-btn>
     <v-card>
       <v-toolbar color="primary" dark>
-        <v-btn icon dark @click.native="dialog = false">
+        <v-btn icon dark @click.native="close">
           <v-icon>fas fa-times</v-icon>
         </v-btn>
         <v-toolbar-title>{{ $t('system.settings.title') }}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items>
-          <v-btn dark flat @click.native="dialog = false">{{ $t('system.actions.save') }}</v-btn>
-        </v-toolbar-items>
       </v-toolbar>
       <v-card-text>
-        <v-navigation-drawer permanent dark>
-          <tab-menu :malDisabled="malDisabled" />
-        </v-navigation-drawer>
+        <v-tabs grow fluid dark>
+          <v-tab v-for="tab in tabs" :key="tab.key" ripple>
+            {{ tab.value }}
+          </v-tab>
+          <v-tabs-items>
+            <app-settings />
+            <!-- <my-anime-list v-if="!malDisabled" />
+            <ani-list />
+            <restore-factory-data />
+            <about-zero-two />
+            <special-thanks /> -->
+          </v-tabs-items>
+        </v-tabs>
       </v-card-text>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import TabMenu from './Settings/TabMenu';
 import AppSettings from './Settings/AppSettings';
 import MyAnimeList from './Settings/MyAnimeList';
 import RestoreFactoryData from './Settings/RestoreFactoryData';
@@ -40,7 +45,6 @@ import SpecialThanks from './Settings/SpecialThanks';
 
 export default {
   components: {
-    TabMenu,
     SpecialThanks,
     AppSettings,
     MyAnimeList,
@@ -48,25 +52,38 @@ export default {
     AniList,
     AboutZeroTwo,
   },
-  data() {
-    return { malDisabled: true, dialog: false };
+  computed: {
+    tabs() {
+      return [{
+        key: 'appSettings',
+        value: this.$t('system.settings.menu.appSettings'),
+      }, {
+        key: 'myAnimeList',
+        value: this.$t('system.settings.menu.myAnimeList'),
+      }, {
+        key: 'aniList',
+        value: this.$t('system.settings.menu.aniList'),
+      }, {
+        key: 'restoreFactoryData',
+        value: this.$t('system.settings.menu.restoreFactoryData'),
+      }, {
+        key: 'aboutZeroTwo',
+        value: this.$t('system.settings.menu.aboutZeroTwo'),
+      }, {
+        key: 'specialThanks',
+        value: this.$t('system.settings.menu.specialThanks'),
+      }];
+    },
   },
-  mounted() {
-    // $('.ui.fluid.secondary.vertical.menu .item').tab();
+  data() {
+    return {
+      malDisabled: true,
+      dialog: false,
+    };
   },
   methods: {
     close() {
-      // $(this.$el)
-      //   .modal('hide');
-    },
-    show() {
-      // $(this.$el)
-      //   .modal({
-      //     closable: false,
-      //     centered: false,
-      //     autofocus: false,
-      //   })
-      //   .modal('show');
+      this.dialog = false;
     },
   },
 };

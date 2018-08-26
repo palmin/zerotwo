@@ -83,6 +83,7 @@
     },
     "menu": {
       "search": {
+        "headline": "検索ウィンドー",
         "notInList": "リストにはありません",
         "search": "検索・・・",
         "noResults": "結果は見つかりませんでした。"
@@ -135,7 +136,8 @@
       "errorResponseTitle": "シンクロは出来ませんでした！",
       "deleteModalHeader": "本当に削除しますか？",
       "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
-      "clear": "０☆にセット"
+      "clear": "０☆にセット",
+      "inputRequired": "入力絶対必要！"
     },
     "actions": {
       "refreshMAL": "MALを更新",
@@ -178,5 +180,19 @@
       "dropped": "停止",
       "planning": "予定"
     }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "prevPage": "前のページ",
+      "nextPage": "次のページ",
+      "pageText": "{2} の {0}から{1}まで",
+      "noResultsText": "結果なし",
+      "rowsPerPageText": "ページのアイテム数",
+      "rowsPerPageAll": "全部"
+    },
+    "dataTable": {
+      "rowsPerPageText": "ページのアイテム数"
+    },
+    "noDataText": "データなし"
   }
 }

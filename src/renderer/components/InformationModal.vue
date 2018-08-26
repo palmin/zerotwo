@@ -1,31 +1,120 @@
 <template>
-  <div class="ui fullscreen modal">
-    <div class="header">{{ header }}</div>
-    <div class="scrolling content">
-      <div class="ui grid">
-        <div class="stretched row">
-          <div class="four wide column">
-            <img :src="image" :alt="header" class="ui fluid image" />
-          </div>
+  <v-dialog
+    v-model="dialog"
+    scrollable
+    lazy
+    :overlay="false"
+    transition="fade-transition"
+  >
+    <v-card>
+      <v-toolbar>
+        <v-btn icon dark @click.native="close">
+          <v-icon>fas fa-times</v-icon>
+        </v-btn>
+        <v-toolbar-title>{{ header }}</v-toolbar-title>
+      </v-toolbar>
+      <v-card-text>
+        <v-container grid-list-xs>
+          <v-layout wrap>
+            <v-flex xs3>
+              <img :src="image" :alt="header" />
+            </v-flex>
 
-          <div class="six wide column">
-            <div class="ui basic segment">
-              <h2 class="ui header">
-                {{ $t('system.informationModal.seriesInformation') }}
-              </h2>
-              <p>{{ $t('system.informationModal.episodes') }}: {{ episodes }}</p>
-              <p>{{ $t('system.informationModal.rating') }}:
-                <span id="malRating" class="ui star rating"></span> ({{ rating }})
-              </p>
-              <p>{{ $t('system.informationModal.type') }}: {{ type }}</p>
-              <p>{{ $t('system.informationModal.synonyms') }}: {{ synonyms }}</p>
-              <p>{{ $t('system.informationModal.englishName') }}: {{ englishName }}</p>
-              <p>{{ $t('system.informationModal.japaneseName') }}: {{ japaneseName }}</p>
-              <p>{{ $t('system.informationModal.airingTime') }}: {{ airingTime }}</p>
-              <p>{{ $t('system.informationModal.seriesStatus') }}: {{ seriesStatus }}</p>
-            </div>
-          </div>
+            <v-flex xs4>
+              <h2 class="headline mb-0">{{ $t('system.informationModal.seriesInformation') }}</h2>
+              <v-list>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.episodes') }}: {{ episodes }}
+                  </v-list-tile-content>
+                </v-list-tile>
 
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.rating') }}: {{ rating }}
+                  </v-list-tile-content>
+                </v-list-tile>
+
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.type') }}: {{ type }}
+                  </v-list-tile-content>
+                </v-list-tile>
+
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.synonyms') }}: {{ synonyms }}
+                  </v-list-tile-content>
+                </v-list-tile>
+
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.englishName') }}: {{ englishName }}
+                  </v-list-tile-content>
+                </v-list-tile>
+
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.japaneseName') }}: {{ japaneseName }}
+                  </v-list-tile-content>
+                </v-list-tile>
+
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.airingTime') }}: {{ airingTime }}
+                  </v-list-tile-content>
+                </v-list-tile>
+
+                <v-divider></v-divider>
+
+                <v-list-tile>
+                  <v-list-tile-content>
+                    {{ $t('system.informationModal.seriesStatus') }}: {{ seriesStatus }}
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            </v-flex>
+
+            <v-flex xs4 offset-xs1>
+              <h2 class="headline mb-0">{{ $t('system.informationModal.dataInformation') }}</h2>
+
+              <v-select
+                :placeholder="dropdownPlaceholder"
+                :items="statuses"
+                :label="$t('system.informationModal.ownStatus')"
+                item-text="name"
+                item-value="value"
+                v-model="ownStatusValue"
+                dark
+              ></v-select>
+
+              <v-text-field
+                type="number"
+                v-model="ownEpisodeProgressValue"
+                :label="$t('system.informationModal.watchedEpisodes')"
+                :suffix="`/ ${episodes}`"
+                dark
+                :rules="[value => !!value || $t('system.informationModal.inputRequired')]"
+              ></v-text-field>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
+  <!-- <div class="ui fullscreen modal">
           <div class="six wide column">
             <div class="ui basic segment">
               <h2 class="ui header">
@@ -101,7 +190,7 @@
     <div class="actions">
       <div class="ui button" @click="close">{{ $t('system.actions.close') }}</div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -119,6 +208,7 @@ export default {
 
   data() {
     return {
+      dialog: false,
       data: null,
       deleteModalRef: 'informationDeleteModal',
       ownEpisodeProgressValue: 0,
@@ -354,31 +444,31 @@ export default {
 
       this.ownStatusValue = newValue;
     },
-    locale() {
-      if (!this.data) {
-        return;
-      }
+    // locale() {
+    //   if (!this.data) {
+    //     return;
+    //   }
 
-      this.statuses = [{
-        value: 'CURRENT',
-        name: this.$t('system.listStatus.watching'),
-      }, {
-        value: 'REPEATING',
-        name: this.$t('system.listStatus.repeating'),
-      }, {
-        value: 'COMPLETED',
-        name: this.$t('system.listStatus.completed'),
-      }, {
-        value: 'PAUSED',
-        name: this.$t('system.listStatus.onHold'),
-      }, {
-        value: 'DROPPED',
-        name: this.$t('system.listStatus.dropped'),
-      }, {
-        value: 'PLANNING',
-        name: this.$t('system.listStatus.planned'),
-      }];
-    },
+    //   this.statuses = [{
+    //     value: 'CURRENT',
+    //     name: this.$t('system.listStatus.watching'),
+    //   }, {
+    //     value: 'REPEATING',
+    //     name: this.$t('system.listStatus.repeating'),
+    //   }, {
+    //     value: 'COMPLETED',
+    //     name: this.$t('system.listStatus.completed'),
+    //   }, {
+    //     value: 'PAUSED',
+    //     name: this.$t('system.listStatus.onHold'),
+    //   }, {
+    //     value: 'DROPPED',
+    //     name: this.$t('system.listStatus.dropped'),
+    //   }, {
+    //     value: 'PLANNING',
+    //     name: this.$t('system.listStatus.planned'),
+    //   }];
+    // },
   },
 
   methods: {
@@ -423,7 +513,7 @@ export default {
     },
 
     cancelDelete() {
-      this.$refs[this.deleteModalRef].hide();
+      // this.$refs[this.deleteModalRef].hide();
     },
 
     addToList() {
@@ -538,11 +628,12 @@ export default {
       this.ownEpisodeProgressValue = 0;
       this.ratingValue = 0;
       this.ownStatusValue = null;
-      this.$refs.informationModalStatusDropdown.clear();
+      // this.$refs.informationModalStatusDropdown.clear();
+      this.dialog = false;
       EventBus.$emit('setOpenInformationId', null);
       EventBus.$emit('setInformation', null);
 
-      $(this.$el).modal('hide');
+      // $(this.$el).modal('hide');
     },
     show(data) {
       if (!data) {
@@ -551,14 +642,15 @@ export default {
 
       this.data = data;
 
-      $(this.$el)
-        .modal({
-          closable: false,
-          centered: false,
-          autofocus: false,
-        })
-        .modal('show');
-      this.updateOwnRating();
+      // $(this.$el)
+      //   .modal({
+      //     closable: false,
+      //     centered: false,
+      //     autofocus: false,
+      //   })
+      //   .modal('show');
+      this.dialog = true;
+      // this.updateOwnRating();
     },
     updateRatingValue(value) {
       this.ratingValue = value;
@@ -566,23 +658,23 @@ export default {
     updateMALRating() {
       // eslint-disable-next-line no-bitwise
       const score = Math.floor(this.data.averageScore / 10) | 0;
-      $('#malRating', this.$el)
-        .rating({
-          initialRating: score,
-          maxRating: 10,
-          clearable: false,
-        })
-        .rating('disable');
+      // $('#malRating', this.$el)
+      //   .rating({
+      //     initialRating: score,
+      //     maxRating: 10,
+      //     clearable: false,
+      //   })
+      //   .rating('disable');
     },
     updateOwnRating() {
-      $('#ownRating')
-        .rating({
-          initialRating: this.ratingValue,
-          maxRating: 10,
-          clearable: false,
-          onRate: this.updateRatingValue,
-        })
-        .rating('enable');
+      // $('#ownRating')
+      //   .rating({
+      //     initialRating: this.ratingValue,
+      //     maxRating: 10,
+      //     clearable: false,
+      //     onRate: this.updateRatingValue,
+      //   })
+      //   .rating('enable');
     },
   },
 };

@@ -8,9 +8,7 @@
 <script>
 export default {
   data() {
-    return {
-      escaped: 'unauthorized',
-    };
+    return { escaped: 'unauthorized' };
   },
 };
 </script>

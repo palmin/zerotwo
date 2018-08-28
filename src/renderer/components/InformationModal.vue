@@ -6,7 +6,7 @@
     :overlay="false"
     transition="fade-transition"
   >
-    <v-card>
+    <v-card dark>
       <v-toolbar>
         <v-btn icon dark @click.native="close">
           <v-icon>fas fa-times</v-icon>
@@ -14,10 +14,23 @@
         <v-toolbar-title>{{ header }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
-        <v-container grid-list-xs>
-          <v-layout wrap>
+        <!-- <v-container> -->
+          <v-layout class="ma-2">
             <v-flex xs3>
-              <img :src="image" :alt="header" />
+              <v-img
+                :src="image"
+                :alt="header"
+                class="ma-4 grey lighten-2"
+              >
+                <v-layout
+                  slot="placeholder"
+                  fill-height
+                  align-center
+                  justify-center
+                  ma-0>
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-layout>
+              </v-img>
             </v-flex>
 
             <v-flex xs4>
@@ -110,7 +123,7 @@
               ></v-text-field>
             </v-flex>
           </v-layout>
-        </v-container>
+        <!-- </v-container> -->
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -505,7 +518,7 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: 'ERROR',
             text: error,
           });
@@ -556,7 +569,7 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: 'ERROR',
             text: error,
           });
@@ -616,7 +629,7 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: this.$t('system.informationModal.errorResponseTitle'),
             text: error,
           });

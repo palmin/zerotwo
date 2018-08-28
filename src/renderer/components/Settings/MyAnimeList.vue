@@ -1,5 +1,17 @@
 <template>
-  <div class="ui basic tab segment" data-tab="myAnimeList">
+  <v-tab-item key="myAnimeList">
+    <v-card flat>
+      <v-container fluid>
+        <v-layout
+          fill-height
+          justify-center
+          align-center>
+          <v-btn color="primary" disabled>Deactivated!</v-btn>
+        </v-layout>
+      </v-container>
+    </v-card>
+  </v-tab-item>
+  <!-- <div class="ui basic tab segment" data-tab="myAnimeList">
     <h2 class="ui header">
       {{ $t('system.settings.menu.myAnimeList') }}
       <div class="sub header">
@@ -43,7 +55,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -98,7 +110,7 @@ export default {
     submit() {
       if (!this.username || !this.password) {
         this.$notify({
-          type: 'error',
+          type: 'err',
           title: this.$t('system.settings.myAnimeList.noCredentials'),
           text: this.$t('system.settings.myAnimeList.enterCredentials'),
         });
@@ -111,7 +123,7 @@ export default {
         .then(() => this.setTimerRunning(true))
         .catch(() => {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: this.$t('system.settings.myAnimeList.credentialsWrongOrTooManyLoginAttempts'),
             text: this.$t('system.settings.myAnimeList.credentialsCouldNotBeVerifiedOrTooManyLoginAttempts'),
             duration: -1,

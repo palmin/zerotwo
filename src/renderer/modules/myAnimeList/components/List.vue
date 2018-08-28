@@ -501,7 +501,7 @@ export default {
           })
           .catch((error) => {
             this.$notify({
-              type: 'error',
+              type: 'err',
               title: this.$t('errorResponseTitle'),
               text: error,
             });

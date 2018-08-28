@@ -9,7 +9,7 @@
     <v-btn dark flat icon slot="activator">
       <v-icon>fas fa-search</v-icon>
     </v-btn>
-    <v-card>
+    <v-card dark>
       <v-toolbar color="primary" dark>
         <v-btn icon dark @click.native="close">
           <v-icon>fas fa-times</v-icon>

@@ -9,7 +9,7 @@
     <v-btn dark flat icon slot="activator">
       <v-icon>fas fa-cog</v-icon>
     </v-btn>
-    <v-card>
+    <v-card dark>
       <v-toolbar color="primary" dark>
         <v-btn icon dark @click.native="close">
           <v-icon>fas fa-times</v-icon>
@@ -23,9 +23,9 @@
           </v-tab>
           <v-tabs-items>
             <app-settings />
-            <!-- <my-anime-list v-if="!malDisabled" />
+            <my-anime-list />
             <ani-list />
-            <restore-factory-data />
+            <!--<restore-factory-data />
             <about-zero-two />
             <special-thanks /> -->
           </v-tabs-items>
@@ -60,6 +60,7 @@ export default {
       }, {
         key: 'myAnimeList',
         value: this.$t('system.settings.menu.myAnimeList'),
+        disabled: true,
       }, {
         key: 'aniList',
         value: this.$t('system.settings.menu.aniList'),

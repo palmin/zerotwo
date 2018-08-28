@@ -13,9 +13,19 @@
       <template slot="items" slot-scope="props">
         <td @click="openInformation(props.item.id)">{{ props.item.title }}</td>
         <td class="text-xs-left">
-          <span>{{ props.item.progress }} / {{ props.item.episodes | episode }}</span>
-          <v-progress-linear color="success" height="0.25em"
-          :value="props.item.progressInPercent"></v-progress-linear>
+          <!-- <span class="caption">
+            {{ props.item.progress }} / {{ props.item.episodes | episode }}
+          </span>
+          <v-progress-linear color="success" height="1" class="disable-progress-margin"
+          :value="props.item.progressInPercent">
+          </v-progress-linear> -->
+
+          <span class="caption">
+            {{ props.item.progress }} / {{ props.item.episodes | episode }}
+          </span>
+          <v-progress-linear color="success" height="2" class="disable-progress-margin"
+          :value="props.item.progressInPercent">
+          </v-progress-linear>
         </td>
         <td class="text-xs-center">{{ props.item.score }}</td>
         <td class="text-xs-center">{{ props.item.season }}</td>
@@ -184,6 +194,7 @@ export default {
       listLimit: 100,
 
       finishedHighlight: false,
+      fab: null,
 
       pagination: {
         sortBy: 'title',
@@ -430,7 +441,7 @@ export default {
           })
           .catch((error) => {
             this.$notify({
-              type: 'error',
+              type: 'err',
               title: this.$t('system.constants.errorResponseTitle'),
               text: error,
             });
@@ -480,6 +491,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.disable-progress-margin {
+  margin: 0;
+}
+
+
 table {
   border: 0;
 }

@@ -31,9 +31,12 @@
 
     <search-box @openInformation="openInformationWindow" />
 
-    <v-progress-circular :rotate="-90" :value="refreshTimePercentage" :color="progressCircleColor" :indeterminate="!isReady" size="32" :width="2">
-      <v-icon size="14" style="vertical-align: baseline;" :disabled="!this.isAuthenticated" @click="refreshAniList">fas fa-sync {{ !isReady ? 'fa-spin' : '' }}</v-icon>
-    </v-progress-circular>
+    <v-tooltip bottom>
+      <v-progress-circular :rotate="-90" :value="refreshTimePercentage" :color="progressCircleColor" :indeterminate="!isReady" size="32" :width="2" slot="activator">
+        <v-icon size="14" style="vertical-align: baseline;" :disabled="!this.isAuthenticated" @click="refreshAniList">fas fa-sync {{ !isReady ? 'fa-spin' : '' }}</v-icon>
+      </v-progress-circular>
+      <span>{{ readableTimeUntilNextRefresh }}</span>
+    </v-tooltip>
 
     <settings />
 

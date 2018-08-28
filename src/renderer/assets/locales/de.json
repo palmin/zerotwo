@@ -27,7 +27,8 @@
         "fatalError": "Schwerwiegender Fehler"
       },
       "messages": {
-        "notFoundOrAdultContent": "Sollte es ein 18+ Medium sein, schalten Sie bitte in den Einstellungen auf AniList.co '18+ Content' ein!"
+        "notFoundOrAdultContent": "Sollte es ein 18+ Medium sein, schalten Sie bitte in den Einstellungen auf AniList.co '18+ Content' ein!",
+        "numberInsufficient": "This number is not sufficient!"
       }
     },
     "listStatus": {
@@ -73,7 +74,8 @@
       "aniList": {
         "loggedInAs": "Eingeloggt als",
         "accountSettings": "Kontoeinstellungen",
-        "aniListRefreshRate": "Aktualisierungsintervall (in Minuten)"
+        "aniListRefreshRate": "Aktualisierungsintervall",
+        "minutes": "Minuten"
       },
       "aboutZeroTwo": {
         "version": "Version",
@@ -193,5 +195,13 @@
       "rowsPerPageText": "Zeilen pro Seite"
     },
     "noDataText": "Keine Daten vorhanden"
+  },
+  "$notify": {
+    "titles": {
+      "success": "Erfolgreich!"
+    },
+    "texts": {
+      "aniListRefreshRateUpdated": "Aktualisierungsintervall erfolgreich auf {refreshRate} Minuten aktualisiert!"
+    }
   }
 }

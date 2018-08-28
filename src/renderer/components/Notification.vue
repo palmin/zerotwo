@@ -5,7 +5,7 @@
         <div class="zerotwo-style-icon">
           <i class="icon"
             :class="{
-              exclamation: props.item.type === 'error',
+              exclamation: props.item.type === 'err',
               'exclamation triangle': props.item.type === 'warn',
               check: props.item.type === '' || props.item.type === 'success'
             }">
@@ -37,18 +37,18 @@
   margin-top: 0;
 
   &, &.success {
-    background: rgb(206, 255, 221);
+    background: rgb(40, 156, 75);
     border-left: 4px solid #42A85F;
   }
 
   &.warn {
-    background: rgb(252, 207, 139);
+    background: rgb(212, 148, 51);
     border-left: 4px solid #f48a06;
   }
 
-  &.error {
-    background: rgb(219, 67, 67);
-    border-left: 4px solid rgb(138, 14, 5);
+  &.err {
+    background: rgb(59, 1, 1);
+    border-left: 4px solid rgb(167, 26, 16);
     color: white;
   }
 

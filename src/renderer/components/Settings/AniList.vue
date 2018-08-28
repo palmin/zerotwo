@@ -1,39 +1,44 @@
 <template>
-  <div class="ui basic tab segment" data-tab="aniList">
-    <h2 class="ui header">
-      {{ $t('system.settings.menu.aniList') }}
-      <div class="sub header">
-        {{ $t('system.settings.aniList.accountSettings') }}
-      </div>
-    </h2>
-    <div class="ui container" v-if="!isAuthenticated">
-      <button class="ui fluid primary button" @click="loginToAniList">{{ $t('system.actions.login') }}</button>
-    </div>
-    <div class="ui blue labels" v-else>
-      <div class="ui label">
-        {{ $t('system.settings.aniList.loggedInAs') }} {{ getUsername }}
-      </div>
-      <a class="ui label" @click="logMeOut">
-        {{ $t('system.actions.logout') }}
-      </a>
-    </div>
-    <div class="ui grid" v-if="isAuthenticated">
-      <div class="eight wide column">
-        <div class="ui form">
-          <div class="required field" :class="{ error: $v.refreshRateValue.$error }">
-            <label>{{ $t('system.settings.aniList.aniListRefreshRate') }}</label>
-            <div class="ui action input">
-              <input type="number" min="1" max="60" v-model="refreshRateValue" :disabled="!refreshRateEditMode" @input="$v.refreshRateValue.$touch()"
-              />
-              <button class="ui button" @click="editRefreshRate">
-                {{ $t('system.actions.edit') }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-tab-item key="aniList">
+    <v-card flat>
+      <v-container fluid>
+        <v-layout
+          fill-height
+          justify-center
+          align-center
+          v-if="!isAuthenticated">
+          <v-btn color="primary" @click="loginToAniList">{{ $t('system.actions.login') }}</v-btn>
+        </v-layout>
+        <v-layout
+          fill-height
+          v-else>
+          <v-flex>
+            <h5 class="headline font-weight-light font-italic">{{ $t('system.settings.aniList.loggedInAs') }} {{ getUsername }}</h5>
+            <v-divider></v-divider>
+            <a class="font-weight-thin font-italic body-1 blue--text text--lighten-4" @click="logout">{{ $t('system.actions.logout') }}</a>
+            <v-container grid-list-xs>
+              <v-flex xs3>
+                <v-text-field
+                  v-model="refreshRateValue"
+                  :label="$t('system.settings.aniList.aniListRefreshRate')"
+                  @input="$v.refreshRateValue.$touch()"
+                  :suffix="$t('system.settings.aniList.minutes')"
+                  hint="1 - 60"
+                  :error="$v.refreshRateValue.$error"
+                  required
+                ></v-text-field>
+                <v-btn
+                  color="primary"
+                  @click.native="editRefreshRate">
+                  {{ $t('system.actions.save') }}
+                </v-btn>
+              </v-flex>
+            </v-container>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card>
+  </v-tab-item>
 </template>
 
 <script>
@@ -55,33 +60,33 @@ export default {
   methods: {
     ...mapActions('aniList', ['logout', 'updateRefreshRate', 'setTimerRunning']),
     editRefreshRate() {
-      if (this.refreshRateEditMode) {
-        if (this.$v.refreshRateValue.$error) {
-          return;
-        }
-        this.updateRefreshRate(this.refreshRateValue);
+      this.$v.refreshRateValue.$touch();
+      if (this.$v.refreshRateValue.$error) {
+        return;
       }
+      this.updateRefreshRate(this.refreshRateValue);
 
-      this.refreshRateEditMode = !this.refreshRateEditMode;
+      this.$notify({
+        title: this.$t('$notify.titles.success'),
+        text: this.$t('$notify.texts.aniListRefreshRateUpdated', { refreshRate: this.refreshRateValue }),
+      });
     },
     loginToAniList() {
       if (!this.isAuthenticated) {
         ipcRenderer.send('aniList-oauth', 'getToken');
       }
     },
-    logMeOut() {
-      this.logout();
-      this.close();
-    },
   },
   mounted() {
     this.refreshRateValue = this.refreshRate;
   },
   data() {
-    return {
-      refreshRateValue: 0,
-      refreshRateEditMode: false,
-    };
+    return { refreshRateValue: 0 };
+  },
+  watch: {
+    refreshRate(newValue) {
+      this.refreshRateValue = newValue;
+    },
   },
 };
 </script>

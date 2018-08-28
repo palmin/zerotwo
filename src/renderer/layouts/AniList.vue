@@ -65,14 +65,14 @@ export default {
         const { status, message } = error.response.data.errors[0];
         if (status === 404) {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: this.$t('system.error.titles.notFound'),
             text: this.$t('system.error.messages.notFoundOrAdultContent'),
             duration: -1,
           });
         } else {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: this.$t('system.error.titles.fatalError'),
             text: message,
             duration: -1,

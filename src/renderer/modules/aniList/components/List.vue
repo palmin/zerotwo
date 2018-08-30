@@ -12,20 +12,19 @@
     >
       <template slot="items" slot-scope="props">
         <td @click="openInformation(props.item.id)">{{ props.item.title }}</td>
-        <td class="text-xs-left">
-          <!-- <span class="caption">
-            {{ props.item.progress }} / {{ props.item.episodes | episode }}
-          </span>
-          <v-progress-linear color="success" height="1" class="disable-progress-margin"
-          :value="props.item.progressInPercent">
-          </v-progress-linear> -->
-
+        <td class="text-xs-left episode-row">
           <span class="caption">
             {{ props.item.progress }} / {{ props.item.episodes | episode }}
           </span>
-          <v-progress-linear color="success" height="2" class="disable-progress-margin"
-          :value="props.item.progressInPercent">
-          </v-progress-linear>
+
+          <div class="episode-action">
+            <v-progress-linear color="success" height="20" class="disable-progress-margin" :value="props.item.progressInPercent">
+            </v-progress-linear>
+
+            <v-btn small flat color="success" class="plus-action" @click="increaseOneEpisode(props.item.item)">
+              <v-icon small>fas fa-plus</v-icon>
+            </v-btn>
+          </div>
         </td>
         <td class="text-xs-center">{{ props.item.score }}</td>
         <td class="text-xs-center">{{ props.item.season }}</td>
@@ -112,6 +111,7 @@ export default {
         score: item.score,
         season: this.getSeason(item.media.startDate.year, item.media.season),
         updated: this.getTimeByTimestamp(item.updatedAt),
+        item,
       }));
     },
     list() {
@@ -495,119 +495,20 @@ export default {
   margin: 0;
 }
 
+.episode-row {
+  .episode-action {
+    position: relative;
 
-table {
-  border: 0;
-}
-td.blue {
-  color: rgb(0, 122, 170);
-}
-
-td > .ui.dropdown > .text > i.stop.icon,
-td > .ui.dropdown > .menu > .item > i.stop.icon {
-  margin-right: 0;
-}
-
-td.episodeRow,
-td.scoreRow {
-  position: relative;
-
-  & > .controlIcons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    cursor: pointer;
-
-    & > span {
-      opacity: 0;
-      width: 50%;
-      height: 100%;
-      margin: auto;
+    .plus-action {
       position: absolute;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      transition: opacity .25s ease-out;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      & > i.icon {
-        margin: auto;
-        height: 100%;
-        flex: 1 0 1;
-      }
-
-      & > div.preview {
-        color: white;
-        font-weight: bold;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 2;
-        height: 100%;
-
-        & > span {
-          &.episode-arrow {
-            margin-bottom: -2px;
-          }
-
-          &.new-status {
-            margin-top: -2px;
-          }
-
-          & > i.icon {
-            height: initial;
-            margin-right: 0;
-          }
-        }
-      }
-
-      &.red {
-        background-color: rgb(219, 40, 40);
-
-        & > div.preview {
-          padding-left: 5px;
-        }
-      }
-
-      &.green {
-        right: 0;
-        background-color: rgb(33, 186, 69);
-
-        & > div.preview {
-          padding-right: 5px;
-          text-align: right;
-        }
-      }
+      right: -30px;
+      bottom: 0;
+      line-height: 20px;
+      height: 20px;
+      min-width: 0;
+      max-width: 30px;
+      margin: 0;
     }
   }
-}
-
-tr {
-  cursor: pointer;
-}
-
-progress[value] {
-  -webkit-appearance: none;
-  vertical-align: -webkit-baseline-middle;
-}
-
-progress[value]::-webkit-progress-bar,
-progress[value]::-webkit-progress-value {
-  border-radius: 1em;
-  height: 5px;
-}
-
-progress[value]::-webkit-progress-bar {
-  background-color: #aaaaaa;
-}
-
-progress[value]::-webkit-progress-value {
-  background-color: #00AAEE;
 }
 </style>

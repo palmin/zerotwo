@@ -11,7 +11,7 @@
       :rows-per-page-items="[pagination.rowsPerPage]"
     >
       <template slot="items" slot-scope="props">
-        <td @click="openInformation(props.item.id)">{{ props.item.title }}</td>
+        <td @click="openInformation(props.item.id)" :class="{ 'finished-airing': props.item.finishedAiring }">{{ props.item.title }}</td>
         <td class="text-xs-left episode-row">
           <span class="caption">
             {{ props.item.progress }} / {{ props.item.episodes | episode }}
@@ -26,7 +26,12 @@
             </v-btn>
           </div>
         </td>
-        <td class="text-xs-center">{{ props.item.score }}</td>
+        <td class="text-xs-center">
+          <v-progress-circular :value="props.item.score * 10" size="40" :rotate="-90"
+            :color="(props.item.score >= 7 ? 'success' : (props.item.score < 7 && props.item.score >= 4 ? 'warning' : 'error'))">
+            {{ props.item.score * 10 }}
+          </v-progress-circular>
+        </td>
         <td class="text-xs-center">{{ props.item.season }}</td>
         <td class="text-xs-right">{{ props.item.updated }}</td>
       </template>
@@ -92,9 +97,6 @@ export default {
     listEntries() {
       return this.listItems.entries;
     },
-    listStatus() {
-      return this.listItems.status;
-    },
     itemsAvailable() {
       return (this.currentOffset + this.listLimit) < this.listEntries.length;
     },
@@ -111,6 +113,7 @@ export default {
         score: item.score,
         season: this.getSeason(item.media.startDate.year, item.media.season),
         updated: this.getTimeByTimestamp(item.updatedAt),
+        finishedAiring: item.media.status === 'FINISHED',
         item,
       }));
     },
@@ -167,16 +170,6 @@ export default {
     episode: value => (!value || value <= 0 ? '?' : value),
   },
 
-  mounted() {
-    // $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
-    // $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
-  },
-
-  updated() {
-    // $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
-    // $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
-  },
-
   data() {
     return {
       updateTimer: null,
@@ -201,41 +194,6 @@ export default {
         rowsPerPage: 100,
         currentPage: 1,
       },
-
-      // scores: [{
-      //   text: '-',
-      //   value: 0,
-      // }, {
-      //   text: '1',
-      //   value: 1,
-      // }, {
-      //   text: '2',
-      //   value: 2,
-      // }, {
-      //   text: '3',
-      //   value: 3,
-      // }, {
-      //   text: '4',
-      //   value: 4,
-      // }, {
-      //   text: '5',
-      //   value: 5,
-      // }, {
-      //   text: '6',
-      //   value: 6,
-      // }, {
-      //   text: '7',
-      //   value: 7,
-      // }, {
-      //   text: '8',
-      //   value: 8,
-      // }, {
-      //   text: '9',
-      //   value: 9,
-      // }, {
-      //   text: '10',
-      //   value: 10,
-      // }],
     };
   },
 
@@ -247,9 +205,6 @@ export default {
 
       return this.$moment(value, 'X').fromNow();
     },
-    // ...mapActions('myAnimeList', ['detectAndSetMALData']),
-    // ...mapMutations('myAnimeList', ['setInformation']),
-    // ...mapMutations('aniList', ['setInformation']),
     ...mapMutations(['setReady']),
     orderTable(field) {
       // Easy order:
@@ -268,49 +223,9 @@ export default {
       this.currentSort.direction = 'asc';
     },
 
-    scrollUpInfinite() {
-      if (this.currentOffset === 0) {
-        return;
-      }
-
-      this.currentOffset -= this.listLimit;
-
-      // To continue at the next anime
-      window.scrollTo(0, document.body.scrollHeight);
-    },
-    scrollDownInfinite() {
-      if (!this.itemsAvailable) {
-        return;
-      }
-
-      // To continue at the next anime
-      window.scrollTo(0, 0);
-
-      this.currentOffset += this.listLimit;
-    },
-
     openInformation(id) {
       EventBus.$emit('setOpenInformationId', id);
     },
-
-    // changeScore(value, text, $selectedItem) {
-    //   const id = $($selectedItem).attr('data-id');
-
-    //   _.map(this.listItems, (item) => {
-    //     if (+item.series_animedb_id !== +id) {
-    //       return item;
-    //     }
-
-    //     if (value === '-') {
-    //       value = 0;
-    //     }
-
-    //     item.my_score = value;
-    //     this.startUpdateTimer(item);
-    //     this.scoreChanged = true;
-    //     return item;
-    //   });
-    // },
 
     changeAnimeStatus(value, text, $selectedItem) {
       const id = $($selectedItem).attr('data-id');
@@ -337,16 +252,6 @@ export default {
       });
     },
 
-    decreaseOneEpisode(data) {
-      if (!data || data.progress === 0) {
-        return;
-      }
-
-      data.progress -= 1;
-      this.episodeChanged = true;
-      this.startUpdateTimer(data);
-    },
-
     increaseOneEpisode(data) {
       if
       (
@@ -364,26 +269,6 @@ export default {
       this.episodeChanged = true;
       this.startUpdateTimer(data);
     },
-
-    // decreaseOneStar(data) {
-    //   if (!data || +data.my_score === 0) {
-    //     return;
-    //   }
-
-    //   data.my_score = +data.my_score - 1;
-    //   this.scoreChanged = true;
-    //   this.startUpdateTimer(data);
-    // },
-
-    // increaseOneStar(data) {
-    //   if (!data || (!!+data.my_score && +data.my_score === 10)) {
-    //     return;
-    //   }
-
-    //   data.my_score = +data.my_score + 1;
-    //   this.scoreChanged = true;
-    //   this.startUpdateTimer(data);
-    // },
 
     startUpdateTimer(data) {
       if (this.updateTimer) {
@@ -495,6 +380,10 @@ export default {
   margin: 0;
 }
 
+.finished-airing {
+  color: #19bef0;
+}
+
 .episode-row {
   .episode-action {
     position: relative;
@@ -508,7 +397,12 @@ export default {
       min-width: 0;
       max-width: 30px;
       margin: 0;
+      display: none;
     }
+  }
+
+  &:hover .plus-action {
+    display: inline-flex;
   }
 }
 </style>

@@ -138,7 +138,8 @@
       "deleteModalHeader": "Wirklich löschen?",
       "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
       "clear": "Auf 0 Sterne setzen",
-      "inputRequired": "Eingabe erforderlich!"
+      "inputRequired": "Eingabe erforderlich!",
+      "ratingError": "Bewertung unter- oder überschreitet die Grenzwerte!"
     },
     "actions": {
       "refreshMAL": "MAL aktualisieren",

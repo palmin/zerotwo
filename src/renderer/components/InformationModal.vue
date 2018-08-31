@@ -14,7 +14,6 @@
         <v-toolbar-title>{{ header }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
-        <!-- <v-container> -->
           <v-layout class="ma-2">
             <v-flex xs3>
               <v-img
@@ -121,89 +120,40 @@
                 dark
                 :rules="[value => !!value || $t('system.informationModal.inputRequired')]"
               ></v-text-field>
+
+              <v-text-field
+                type="number"
+                v-model="ratingValue"
+                :label="$t('system.informationModal.ownRating')"
+                suffix="/ 100"
+                dark
+                :rules="[
+                  value => !!value || $t('system.informationModal.inputRequired'),
+                  value => value >= 0 && value <= 100 || $t('system.informationModal.ratingError'),
+                ]"
+              ></v-text-field>
+
+              <v-flex text-xs-center v-if="isInOwnList">
+                <v-btn color="success darken-1" small dark @click="submitChanges">
+                  {{ $t('system.actions.save') }}
+                </v-btn>
+                <v-btn color="warning darken-2" small dark @click="resetChanges">
+                  {{ $t('system.actions.reset') }}
+                </v-btn>
+                <v-btn color="error darken-1" small dark @click="deleteFromList">
+                  {{ $t('system.actions.remove') }}
+                </v-btn>
+              </v-flex>
+              <v-flex text-xs-center v-else>
+                <v-btn color="success darken-1" small dark @click="addToList">
+                  {{ $t('system.actions.add') }}
+                </v-btn>
+              </v-flex>
             </v-flex>
           </v-layout>
-        <!-- </v-container> -->
       </v-card-text>
     </v-card>
   </v-dialog>
-  <!-- <div class="ui fullscreen modal">
-          <div class="six wide column">
-            <div class="ui basic segment">
-              <h2 class="ui header">
-                {{ $t('system.informationModal.dataInformation') }}
-              </h2>
-              <div class="ui form">
-                <div class="field">
-                  <label>{{ $t('system.informationModal.ownStatus') }}</label>
-                  <dropdown
-                  ref="informationModalStatusDropdown"
-                  :placeholder="dropdownPlaceholder"
-                  :items="statuses"
-                  :value="ownStatus"
-                  v-model="ownStatusValue"
-                  @change="checkChangedAnimeStatus" />
-                </div>
-                <div class="field">
-                  <label>{{ $t('system.informationModal.watchedEpisodes') }}</label>
-                  <div class="ui right labeled input">
-                    <input type="number" v-model="ownEpisodeProgressValue" />
-                    <div class="ui basic label">
-                      / {{ episodes }}
-                    </div>
-                  </div>
-                </div>
-                <div class="field">
-                  <label>{{ $t('system.informationModal.ownRating') }} (0 - 100)</label>
-                  <div class="ui right labeled input">
-                    <input type="number" min="0" max="100" v-model="ratingValue" />
-                    <div class="ui basic label">
-                      <i class="yellow star icon"></i>
-                    </div>
-                  </div>
-                </div>
-                <template v-if="isInOwnList">
-                  <div class="ui right floated primary button" @click="submitChanges">
-                    {{ $t('system.actions.save') }}
-                  </div>
-                  <div class="ui right floated secondary button" @click="resetChanges">
-                    {{ $t('system.actions.reset') }}
-                  </div>
-                  <div class="ui right floated red button" @click="deleteFromList">
-                    {{ $t('system.actions.remove') }}
-                  </div>
-                  <delete-modal
-                    :ref="deleteModalRef"
-                    :submitHandler="submitDelete"
-                    :cancelHandler="cancelDelete"
-                    :header="$t('system.informationModal.deleteModalHeader')"
-                    :content="deleteModalContent"
-                  />
-                </template>
-                <template v-else>
-                  <div class="ui right floated secondary button" @click="addToList">
-                    {{ $t('system.actions.add') }}
-                  </div>
-                </template>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ui divider"></div>
-      <div class="sixteen wide column">
-        <div class="ui basic segment">
-          <h3 class="ui header">
-            {{ $t('system.informationModal.description') }}
-          </h3>
-          <div v-html="description"></div>
-        </div>
-      </div>
-    </div>
-    <div class="actions">
-      <div class="ui button" @click="close">{{ $t('system.actions.close') }}</div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -233,26 +183,6 @@ export default {
   computed: {
     ...mapState('i18n', ['locale']),
     ...mapState('aniList', ['session']),
-
-    // ratingMax() {
-    //   if (!this.session.user || !this.session.user.mediaListOptions) {
-    //     return 100;
-    //   }
-
-    //   const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
-    //   switch (scoringSystem) {
-    //     case 'POINT_100':
-    //     default:
-    //       return 100;
-    //     case 'POINT_10_DECIMAL':
-    //     case 'POINT_10':
-    //       return 10;
-    //     case 'POINT_5':
-    //       return 5;
-    //     case 'POINT_3':
-    //       return 3;
-    //   }
-    // },
 
     statuses() {
       return [{
@@ -457,31 +387,6 @@ export default {
 
       this.ownStatusValue = newValue;
     },
-    // locale() {
-    //   if (!this.data) {
-    //     return;
-    //   }
-
-    //   this.statuses = [{
-    //     value: 'CURRENT',
-    //     name: this.$t('system.listStatus.watching'),
-    //   }, {
-    //     value: 'REPEATING',
-    //     name: this.$t('system.listStatus.repeating'),
-    //   }, {
-    //     value: 'COMPLETED',
-    //     name: this.$t('system.listStatus.completed'),
-    //   }, {
-    //     value: 'PAUSED',
-    //     name: this.$t('system.listStatus.onHold'),
-    //   }, {
-    //     value: 'DROPPED',
-    //     name: this.$t('system.listStatus.dropped'),
-    //   }, {
-    //     value: 'PLANNING',
-    //     name: this.$t('system.listStatus.planned'),
-    //   }];
-    // },
   },
 
   methods: {
@@ -497,7 +402,7 @@ export default {
     },
 
     deleteFromList() {
-      this.$refs[this.deleteModalRef].show();
+      // this.$refs[this.deleteModalRef].show();
     },
 
     submitDelete() {
@@ -523,10 +428,6 @@ export default {
             text: error,
           });
         });
-    },
-
-    cancelDelete() {
-      // this.$refs[this.deleteModalRef].hide();
     },
 
     addToList() {
@@ -641,12 +542,9 @@ export default {
       this.ownEpisodeProgressValue = 0;
       this.ratingValue = 0;
       this.ownStatusValue = null;
-      // this.$refs.informationModalStatusDropdown.clear();
       this.dialog = false;
       EventBus.$emit('setOpenInformationId', null);
       EventBus.$emit('setInformation', null);
-
-      // $(this.$el).modal('hide');
     },
     show(data) {
       if (!data) {
@@ -654,40 +552,10 @@ export default {
       }
 
       this.data = data;
-
-      // $(this.$el)
-      //   .modal({
-      //     closable: false,
-      //     centered: false,
-      //     autofocus: false,
-      //   })
-      //   .modal('show');
       this.dialog = true;
-      // this.updateOwnRating();
     },
     updateRatingValue(value) {
       this.ratingValue = value;
-    },
-    updateMALRating() {
-      // eslint-disable-next-line no-bitwise
-      const score = Math.floor(this.data.averageScore / 10) | 0;
-      // $('#malRating', this.$el)
-      //   .rating({
-      //     initialRating: score,
-      //     maxRating: 10,
-      //     clearable: false,
-      //   })
-      //   .rating('disable');
-    },
-    updateOwnRating() {
-      // $('#ownRating')
-      //   .rating({
-      //     initialRating: this.ratingValue,
-      //     maxRating: 10,
-      //     clearable: false,
-      //     onRate: this.updateRatingValue,
-      //   })
-      //   .rating('enable');
     },
   },
 };

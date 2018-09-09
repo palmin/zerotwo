@@ -11,7 +11,15 @@
       :rows-per-page-items="[pagination.rowsPerPage]"
     >
       <template slot="items" slot-scope="props">
-        <td @click="openInformation(props.item.id)" :class="{ 'finished-airing': props.item.finishedAiring }">{{ props.item.title }}</td>
+        <td class="table-row" @click="openInformation(props.item.id)" :class="{ 'finished-airing': props.item.finishedAiring }">
+          {{ props.item.title }}
+          <div dark class="green--text text--accent-3" v-if="props.item.nextAiringEpisode">
+            {{ $t('system.constants.airingIn', {
+              episode: props.item.nextAiringEpisode.episode,
+              time: getTimeByTimestamp(props.item.nextAiringEpisode.airingAt),
+             }) }}
+          </div>
+        </td>
         <td class="text-xs-left episode-row">
           <span class="caption">
             {{ props.item.progress }} / {{ props.item.episodes | episode }}
@@ -114,6 +122,7 @@ export default {
         season: this.getSeason(item.media.startDate.year, item.media.season),
         updated: this.getTimeByTimestamp(item.updatedAt),
         finishedAiring: item.media.status === 'FINISHED',
+        nextAiringEpisode: item.media.nextAiringEpisode,
         item,
       }));
     },
@@ -382,6 +391,10 @@ export default {
 
 .finished-airing {
   color: #19bef0;
+}
+
+.table-row {
+  cursor: pointer;
 }
 
 .episode-row {

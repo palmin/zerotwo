@@ -6,7 +6,7 @@
       :openInformation="openInformation" />
     <main>
       <v-content :is="layout">
-        <router-view />
+        <router-view v-show="isReady" />
       </v-content>
     </main>
   </v-app>
@@ -44,7 +44,10 @@ export default {
     };
   },
 
-  computed: { ...mapState('i18n', ['locale']) },
+  computed: {
+    ...mapState('i18n', ['locale']),
+    ...mapState(['isReady']),
+  },
 
   watch: {
     $route(route) {
@@ -78,7 +81,6 @@ export default {
         const accessToken = this.session.access_token;
         const data = await this.$http.openAnimeInformation(mediaId, accessToken);
         EventBus.$emit('setInformation', data);
-        this.$refs[this.infoBox].show();
       } catch (error) {
         const { status, message } = error.response.data.errors[0];
         if (status === 404) {

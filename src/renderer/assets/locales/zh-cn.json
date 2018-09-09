@@ -4,6 +4,7 @@
       "loading": "加载中…",
       "animeTitle": "动画标题",
       "progress": "进度",
+      "airingIn": "Episode {episode} airing {time}",
       "score": "分数",
       "season": "季度",
       "lastUpdated": "最后更新",
@@ -74,7 +75,8 @@
       "aniList": {
         "loggedInAs": "登录为",
         "accountSettings": "账户设置",
-        "aniListRefreshRate": "刷新间隔（分钟）"
+        "aniListRefreshRate": "刷新间隔（分钟）",
+        "minutes": "分"
       },
       "aboutZeroTwo": {
         "version": "版本号",
@@ -137,7 +139,9 @@
       "deleteModalHeader": "确认删除？",
       "doYouReallyWantToDelete": "你真的确定要把 {title} 从你的列表中删除？",
       "clear": "星数归零",
-      "inputRequired": "Input required!"
+      "inputRequired": "Input required!",
+      "ratingError": "Rating is under or over the expected values!",
+      "adultContent": "This media is considered adult content! Your discretion is advised!"
     },
     "actions": {
       "refreshMAL": "刷新MAL",

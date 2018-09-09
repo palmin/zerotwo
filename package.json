@@ -1,7 +1,7 @@
 {
   "name": "zerotwo-ui",
   "productName": "ZeroTwo",
-  "version": "0.7.0-20180825b",
+  "version": "0.7.0-20180909b",
   "author": "NicoAiko <nicochan95.anime@gmail.com>",
   "description": "Taiga alternative",
   "license": "GPL-3.0",
@@ -106,7 +106,7 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^2.0.8",
-    "electron-builder": "^20.28.2",
+    "electron-builder": "^20.28.4",
     "electron-debug": "^2.0.0",
     "electron-rebuild": "^1.8.2",
     "eslint": "^5.4.0",

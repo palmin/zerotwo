@@ -4,6 +4,7 @@
       "loading": "通信中...",
       "animeTitle": "アニメのタイトル",
       "progress": "進行",
+      "airingIn": "エピソード{episode}は{time}に放送開始",
       "score": "評価",
       "season": "シーズン",
       "lastUpdated": "最新更新",
@@ -74,7 +75,8 @@
       "aniList": {
         "loggedInAs": "ログインしたアカウント",
         "accountSettings": "アカウント設定",
-        "aniListRefreshRate": "更新間（分で）"
+        "aniListRefreshRate": "更新間（分で）",
+        "minutes": "分"
       },
       "aboutZeroTwo": {
         "version": "バージョン",
@@ -137,7 +139,9 @@
       "deleteModalHeader": "本当に削除しますか？",
       "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
       "clear": "０☆にセット",
-      "inputRequired": "入力絶対必要！"
+      "inputRequired": "入力絶対必要！",
+      "ratingError": "評価の入力は極限下回りや上回ります！",
+      "adultContent": "十八禁です！"
     },
     "actions": {
       "refreshMAL": "MALを更新",

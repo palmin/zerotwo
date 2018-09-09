@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    ref="searchDialog"
     v-model="dialog"
     scrollable
     persistent :overlay="false"

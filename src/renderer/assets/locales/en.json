@@ -4,6 +4,7 @@
       "loading": "Loading...",
       "animeTitle": "Anime Title",
       "progress": "Progress",
+      "airingIn": "Episode {episode} is airing {time}",
       "score": "Score",
       "season": "Season",
       "lastUpdated": "Last Updated",
@@ -74,7 +75,8 @@
       "aniList": {
         "loggedInAs": "Logged in as",
         "accountSettings": "Account Settings",
-        "aniListRefreshRate": "Refresh interval (in minutes)"
+        "aniListRefreshRate": "Refresh interval (in minutes)",
+        "minutes": "Minutes"
       },
       "aboutZeroTwo": {
         "version": "Version",
@@ -137,7 +139,9 @@
       "deleteModalHeader": "Confirm delete?",
       "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
       "clear": "Set to 0 stars",
-      "inputRequired": "Input required!"
+      "inputRequired": "Input required!",
+      "ratingError": "Rating is under or over the expected values!",
+      "adultContent": "This media is considered adult content! Your discretion is advised!"
     },
     "actions": {
       "refreshMAL": "Refresh MAL",

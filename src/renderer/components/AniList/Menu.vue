@@ -81,6 +81,10 @@ export default {
       return Math.floor((100 / refreshRateInMilliseconds) * this.timeUntilNextRefresh);
     },
     progressCircleColor() {
+      if (!this.isReady) {
+        return 'info';
+      }
+
       if (this.refreshTimePercentage >= 50) {
         return 'success';
       }

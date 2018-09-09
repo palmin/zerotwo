@@ -14,143 +14,110 @@
         <v-toolbar-title>{{ header }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
-          <v-layout class="ma-2">
-            <v-flex xs3>
-              <v-img
-                :src="image"
-                :alt="header"
-                class="ma-4 grey lighten-2"
-              >
-                <v-layout
-                  slot="placeholder"
-                  fill-height
-                  align-center
-                  justify-center
-                  ma-0>
-                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+        <v-layout row wrap class="ma-2">
+          <v-flex xs3>
+            <v-img
+              :src="image"
+              :alt="header"
+              class="ma-4 grey lighten-2"
+            >
+              <v-layout
+                slot="placeholder"
+                fill-height
+                align-center
+                justify-center
+                ma-0>
+                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+              </v-layout>
+            </v-img>
+          </v-flex>
+
+          <v-flex xs4>
+            <h2 class="headline mb-0">{{ $t('system.informationModal.seriesInformation') }}</h2>
+            <ul class="list">
+              <li>{{ $t('system.informationModal.episodes') }}: {{ episodes }}</li>
+              <li>{{ $t('system.informationModal.rating') }}: {{ rating }} / 100</li>
+              <li>{{ $t('system.informationModal.type') }}: {{ type }}</li>
+              <li>{{ $t('system.informationModal.synonyms') }}: {{ synonyms }}</li>
+              <li>{{ $t('system.informationModal.englishName') }}: {{ englishName }}</li>
+              <li>{{ $t('system.informationModal.japaneseName') }}: {{ japaneseName }}</li>
+              <li>{{ $t('system.informationModal.airingTime') }}: {{ airingTime }}</li>
+              <li>{{ $t('system.informationModal.seriesStatus') }}: {{ seriesStatus }}</li>
+              <li v-if="adultContent" class="red--text">
+                <v-layout align-center row wrap>
+                  <v-flex xs1>
+                    <v-icon color="red darken-2">fas fa-ban</v-icon>
+                  </v-flex>
+                  <v-flex xs11>
+                    {{ $t('system.informationModal.adultContent') }}
+                  </v-flex>
                 </v-layout>
-              </v-img>
+              </li>
+            </ul>
+          </v-flex>
+
+          <v-flex xs4 offset-xs1>
+            <h2 class="headline mb-0">{{ $t('system.informationModal.dataInformation') }}</h2>
+
+            <v-select
+              :placeholder="dropdownPlaceholder"
+              :items="statuses"
+              :label="$t('system.informationModal.ownStatus')"
+              item-text="name"
+              item-value="value"
+              v-model="ownStatusValue"
+              dark
+            ></v-select>
+
+            <v-text-field
+              type="number"
+              v-model="ownEpisodeProgressValue"
+              :label="$t('system.informationModal.watchedEpisodes')"
+              :suffix="`/ ${episodes}`"
+              :max="episodes !== '?' ? episodes : ''"
+              min="0"
+              dark
+              :rules="[value => value.length !== 0 || $t('system.informationModal.inputRequired')]"
+            ></v-text-field>
+
+            <v-text-field
+              type="number"
+              v-model="ratingValue"
+              :label="$t('system.informationModal.ownRating')"
+              suffix="/ 100"
+              max="100"
+              min="0"
+              dark
+              :rules="[
+                value => value >= 0 && value <= 100 || $t('system.informationModal.ratingError'),
+                value => value.length !== 0 || $t('system.informationModal.inputRequired'),
+              ]"
+            ></v-text-field>
+
+            <v-flex text-xs-center v-if="isInOwnList">
+              <v-btn color="success darken-1" small dark @click="submitChanges">
+                {{ $t('system.actions.save') }}
+              </v-btn>
+              <v-btn color="warning darken-2" small dark @click="resetChanges">
+                {{ $t('system.actions.reset') }}
+              </v-btn>
+              <v-btn color="error darken-1" small dark @click="deleteFromList">
+                <template v-if="!deleteMode">{{ $t('system.actions.remove') }}</template>
+                <template v-else>{{ $t('system.actions.submitDelete') }}</template>
+              </v-btn>
             </v-flex>
-
-            <v-flex xs4>
-              <h2 class="headline mb-0">{{ $t('system.informationModal.seriesInformation') }}</h2>
-              <v-list>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.episodes') }}: {{ episodes }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.rating') }}: {{ rating }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.type') }}: {{ type }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.synonyms') }}: {{ synonyms }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.englishName') }}: {{ englishName }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.japaneseName') }}: {{ japaneseName }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.airingTime') }}: {{ airingTime }}
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-divider></v-divider>
-
-                <v-list-tile>
-                  <v-list-tile-content>
-                    {{ $t('system.informationModal.seriesStatus') }}: {{ seriesStatus }}
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
+            <v-flex text-xs-center v-else>
+              <v-btn color="success darken-1" small dark @click="addToList">
+                {{ $t('system.actions.add') }}
+              </v-btn>
             </v-flex>
-
-            <v-flex xs4 offset-xs1>
-              <h2 class="headline mb-0">{{ $t('system.informationModal.dataInformation') }}</h2>
-
-              <v-select
-                :placeholder="dropdownPlaceholder"
-                :items="statuses"
-                :label="$t('system.informationModal.ownStatus')"
-                item-text="name"
-                item-value="value"
-                v-model="ownStatusValue"
-                dark
-              ></v-select>
-
-              <v-text-field
-                type="number"
-                v-model="ownEpisodeProgressValue"
-                :label="$t('system.informationModal.watchedEpisodes')"
-                :suffix="`/ ${episodes}`"
-                dark
-                :rules="[value => !!value || $t('system.informationModal.inputRequired')]"
-              ></v-text-field>
-
-              <v-text-field
-                type="number"
-                v-model="ratingValue"
-                :label="$t('system.informationModal.ownRating')"
-                suffix="/ 100"
-                dark
-                :rules="[
-                  value => !!value || $t('system.informationModal.inputRequired'),
-                  value => value >= 0 && value <= 100 || $t('system.informationModal.ratingError'),
-                ]"
-              ></v-text-field>
-
-              <v-flex text-xs-center v-if="isInOwnList">
-                <v-btn color="success darken-1" small dark @click="submitChanges">
-                  {{ $t('system.actions.save') }}
-                </v-btn>
-                <v-btn color="warning darken-2" small dark @click="resetChanges">
-                  {{ $t('system.actions.reset') }}
-                </v-btn>
-                <v-btn color="error darken-1" small dark @click="deleteFromList">
-                  {{ $t('system.actions.remove') }}
-                </v-btn>
-              </v-flex>
-              <v-flex text-xs-center v-else>
-                <v-btn color="success darken-1" small dark @click="addToList">
-                  {{ $t('system.actions.add') }}
-                </v-btn>
-              </v-flex>
-            </v-flex>
-          </v-layout>
+          </v-flex>
+          <v-flex xs12>
+            <h2 class="headline mb-0">{{ $t('system.informationModal.description') }}</h2>
+            <v-divider></v-divider>
+            <section class="mt-2" v-html="description"></section>
+          </v-flex>
+        </v-layout>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -169,16 +136,15 @@ export default {
 
   components: { Dropdown, DeleteModal },
 
-  data() {
-    return {
-      dialog: false,
-      data: null,
-      deleteModalRef: 'informationDeleteModal',
-      ownEpisodeProgressValue: 0,
-      ownStatusValue: null,
-      ratingValue: 0,
-    };
-  },
+  data: () => ({
+    dialog: false,
+    data: null,
+    deleteMode: false,
+    deleteModalRef: 'informationDeleteModal',
+    ownEpisodeProgressValue: 0,
+    ownStatusValue: null,
+    ratingValue: 0,
+  }),
 
   computed: {
     ...mapState('i18n', ['locale']),
@@ -348,6 +314,14 @@ export default {
       return '?';
     },
 
+    adultContent() {
+      if (!this.data) {
+        return null;
+      }
+
+      return this.data.isAdult;
+    },
+
     deleteModalContent() {
       return this.$t('system.informationModal.doYouReallyWantToDelete', { title: this.header });
     },
@@ -365,20 +339,12 @@ export default {
 
       this.ownEpisodeProgressValue = value;
     },
-    rating() {
-      if (!this.data) {
-        return;
-      }
-
-      this.updateMALRating();
-    },
     ownRating(value) {
       if (!this.data) {
         return;
       }
 
       this.ratingValue = value;
-      this.updateOwnRating();
     },
     ownStatus(newValue) {
       if (!this.data) {
@@ -390,6 +356,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['setReady']),
     checkChangedAnimeStatus(status) {
       // When status was set to finished
       if (status === 'COMPLETED') {
@@ -402,15 +369,21 @@ export default {
     },
 
     deleteFromList() {
-      // this.$refs[this.deleteModalRef].show();
+      if (!this.deleteMode) {
+        this.deleteMode = true;
+        return;
+      }
+
+      this.deleteMode = false;
+      this.submitDelete();
     },
 
-    submitDelete() {
+    async submitDelete() {
       const { id } = this.data.mediaListEntry;
-      this.cancelDelete();
-      this.show();
 
-      this.$http.deleteAnimeFromList(id, this.session.access_token)
+      await this.setReady(false);
+
+      await this.$http.deleteAnimeFromList(id, this.session.access_token)
         .then((response) => {
           if (response.data.DeleteMediaListEntry.deleted) {
             this.$notify({
@@ -427,15 +400,18 @@ export default {
             title: 'ERROR',
             text: error,
           });
+        })
+        .finally(() => {
+          this.setReady(true);
         });
     },
 
-    addToList() {
+    async addToList() {
       const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
       let score;
 
       const progress = this.ownEpisodeProgressValue;
-      const status = this.ownStatusValue;
+      const status = this.ownStatusValue || 'CURRENT';
       const mediaId = this.data.id;
 
       switch (scoringSystem) {
@@ -457,7 +433,10 @@ export default {
           break;
       }
 
-      this.$http.addAnimeToList({ mediaId, score, status, progress }, this.session.access_token)
+      await this.setReady(false);
+
+      await this.$http.addAnimeToList({ mediaId, score, status, progress },
+        this.session.access_token)
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({
@@ -475,18 +454,18 @@ export default {
             text: error,
           });
         });
+
+      await this.setReady(true);
     },
 
     clearRating() {
       this.ratingValue = 0;
-      this.updateOwnRating();
     },
 
     resetChanges() {
       this.ownEpisodeProgressValue = this.data.mediaListEntry.progress;
       this.ownStatusValue = this.data.mediaListEntry.status;
       this.ratingValue = this.data.mediaListEntry.score;
-      this.updateOwnRating();
     },
 
     submitChanges() {
@@ -543,6 +522,7 @@ export default {
       this.ratingValue = 0;
       this.ownStatusValue = null;
       this.dialog = false;
+      this.deleteMode = false;
       EventBus.$emit('setOpenInformationId', null);
       EventBus.$emit('setInformation', null);
     },
@@ -561,14 +541,12 @@ export default {
 };
 </script>
 
-<style scoped>
-.ui.basic.segment {
-  white-space: pre-line;
-}
-.ui.basic.segment * {
-  white-space: initial;
-}
-i.yellow.star.icon {
-  margin-right: 0;
+<style lang="scss" scoped>
+.list {
+  list-style: none;
+
+  & > li {
+    padding: 4px;
+  }
 }
 </style>

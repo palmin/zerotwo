@@ -4,6 +4,7 @@
       "loading": "Lädt...",
       "animeTitle": "Animetitel",
       "progress": "Fortschritt",
+      "airingIn": "Ausstrahlung von Episode {episode} {time}",
       "score": "Bewertung",
       "season": "Saison",
       "lastUpdated": "Zuletzt aktualisiert",
@@ -139,7 +140,8 @@
       "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
       "clear": "Auf 0 Sterne setzen",
       "inputRequired": "Eingabe erforderlich!",
-      "ratingError": "Bewertung unter- oder überschreitet die Grenzwerte!"
+      "ratingError": "Bewertung unter- oder überschreitet die Grenzwerte!",
+      "adultContent": "Dieses Medium ist als Nicht-Jugendfrei eingestuft!"
     },
     "actions": {
       "refreshMAL": "MAL aktualisieren",
@@ -148,6 +150,7 @@
       "cancel": "Abbrechen",
       "edit": "Bearbeiten",
       "delete": "Löschen",
+      "submitDelete": "Löschen bestätigen!",
       "close": "Schließen",
       "save": "Speichern",
       "reset": "Zurücksetzen",

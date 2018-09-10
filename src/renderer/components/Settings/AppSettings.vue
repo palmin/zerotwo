@@ -2,15 +2,17 @@
   <v-tab-item key="appSettings">
     <v-card flat>
       <v-container fluid>
-        <v-select
+        <v-flex xs6>
+          <v-select
           :items="languages"
           item-text="name"
           v-model="localeSetting"
           :label="$t('system.settings.appSettings.chooseLanguage')"
-        ></v-select>
-        <v-btn dark color="primary" @click="submitLanguageChange">
-          {{ $t('system.settings.appSettings.changeLanguage') }}
-        </v-btn>
+          ></v-select>
+          <v-btn dark color="primary" @click="submitLanguageChange">
+            {{ $t('system.settings.appSettings.changeLanguage') }}
+          </v-btn>
+        </v-flex>
       </v-container>
     </v-card>
   </v-tab-item>

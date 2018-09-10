@@ -75,6 +75,13 @@
     src: url("assets/fonts/Nunito-BoldItalic.ttf") format("truetype");
 }
 
-*:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi) {
-    font-family: 'Nunito', 'Noto Sans', Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+* {
+    &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+    &[class^='display-'] {
+        font-family: 'Nunito', 'Noto Sans', Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.v-progress-circular > .v-progress-circular__info {
+    font-family: Roboto, sans-serif !important;
 }

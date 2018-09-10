@@ -78,6 +78,11 @@
         "aniListRefreshRate": "刷新间隔（分钟）",
         "minutes": "分"
       },
+      "restoreFactoryData": {
+        "restore": "恢复出厂数据",
+        "confirmRestoration": "Yes, I want to restore to factory data!",
+        "pressWithinToRestore": "{seconds} second(s) until the button resets back."
+      },
       "aboutZeroTwo": {
         "version": "版本号",
         "link": "点击我"

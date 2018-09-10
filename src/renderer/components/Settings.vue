@@ -25,9 +25,9 @@
             <app-settings />
             <my-anime-list />
             <ani-list />
-            <!--<restore-factory-data />
+            <restore-factory-data />
             <about-zero-two />
-            <special-thanks /> -->
+            <special-thanks />
           </v-tabs-items>
         </v-tabs>
       </v-card-text>

@@ -78,6 +78,11 @@
         "aniListRefreshRate": "Aktualisierungsintervall",
         "minutes": "Minuten"
       },
+      "restoreFactoryData": {
+        "restore": "Werkszustand wiederherstellen",
+        "confirmRestoration": "Ja, Werkszustand wiederherstellen!",
+        "pressWithinToRestore": "{seconds} Sekunde(n) bis der Button sich auf Normalzustand zurücksetzt."
+      },
       "aboutZeroTwo": {
         "version": "Version",
         "link": "Klick mich"

@@ -34,13 +34,13 @@
             </v-btn>
           </div>
         </td>
-        <td class="text-xs-center">
+        <td class="text-xs-left">
           <v-progress-circular :value="props.item.score * 10" size="40" :rotate="-90"
             :color="(props.item.score >= 7 ? 'success' : (props.item.score < 7 && props.item.score >= 4 ? 'warning' : 'error'))">
             {{ props.item.score * 10 }}
           </v-progress-circular>
         </td>
-        <td class="text-xs-center">{{ props.item.season }}</td>
+        <td class="text-xs-left">{{ props.item.season }}</td>
         <td class="text-xs-right">{{ props.item.updated }}</td>
       </template>
     </v-data-table>
@@ -79,23 +79,28 @@ export default {
         text: this.$t('system.constants.animeTitle'),
         align: 'left',
         value: 'title',
+        width: '45%',
       }, {
         text: this.$t('system.constants.progress'),
-        align: 'center',
+        align: 'left',
         value: 'episode',
+        width: '15%',
       }, {
         text: this.$t('system.constants.score'),
-        align: 'center',
+        align: 'left',
         value: 'score',
+        width: '5%',
       }, {
         text: this.$t('system.constants.season'),
-        align: 'center',
+        align: 'left',
         value: 'season',
+        width: '12.5%',
       }, {
         text: this.$t('system.constants.lastUpdated'),
-        align: 'center',
+        align: 'right',
         value: 'updated',
         sortable: false,
+        width: '27.5%',
       }];
     },
 

@@ -78,6 +78,11 @@
         "aniListRefreshRate": "更新間（分で）",
         "minutes": "分"
       },
+      "restoreFactoryData": {
+        "restore": "ファクトリー設定に戻る",
+        "confirmRestoration": "はい、ファクトリー設定を戻りたい！",
+        "pressWithinToRestore": "ボタンが元に戻る、後{seconds}秒。"
+      },
       "aboutZeroTwo": {
         "version": "バージョン",
         "link": "クリックして"

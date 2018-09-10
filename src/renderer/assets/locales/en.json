@@ -78,6 +78,11 @@
         "aniListRefreshRate": "Refresh interval (in minutes)",
         "minutes": "Minutes"
       },
+      "restoreFactoryData": {
+        "restore": "Restore Factory Data",
+        "confirmRestoration": "Yes, I want to restore to factory data!",
+        "pressWithinToRestore": "{seconds} second(s) until the button changes back to normal state."
+      },
       "aboutZeroTwo": {
         "version": "Version",
         "link": "Click Me"

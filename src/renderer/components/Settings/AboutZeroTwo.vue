@@ -1,64 +1,41 @@
 <template>
-  <div class="ui basic tab segment" data-tab="aboutZeroTwo">
-    <h2 class="ui center aligned header">
-      {{ $t('system.settings.menu.aboutZeroTwo') }}
-    </h2>
-    <div class="ui equal width grid">
-      <div class="center aligned sixteen wide column">
-        <div class="ui huge statistic">
-          <div class="label">
-            {{ $t('system.settings.aboutZeroTwo.version') }}
-          </div>
-          <div class="value">
-            {{ currentAppVersion }}
-          </div>
-        </div>
-      </div>
-
-      <div class="center aligned column">
-        <a href="#" class="ui huge icon header" @click="openPage(githubPage)">
-          <i class="github icon"></i>
-          <div class="content">
-            <img
-            src="~@/assets/logos/github-logo.png"
-            style="padding: 0 25px; margin-top: -14px;"
-            class="ui medium image"
-            alt="GitHub" />
-          </div>
-        </a>
-      </div>
-
-      <div class="center aligned column">
-        <a href="#" class="ui huge icon header" @click="openPage(discordPage)">
-          <i class="blurple discord icon"></i>
-          <div class="content">
-            <img
-            src="~@/assets/logos/discord-blurple-logo.png"
-            class="ui medium image"
-            alt="Discord" />
-          </div>
-        </a>
-      </div>
-
-      <div class="center aligned column">
-        <a href="#" class="ui huge header" @click="openPage(zeroTwoPage)">
-          <div class="content">
-            <img
-            src="~@/assets/logos/ZeroTwoAppIcon_1024.png"
-            class="ui small image"
-            title="ZeroTwo Website"
-            alt="ZeroTwo Website" />
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
+  <v-tab-item key="appSettings">
+    <v-card flat>
+      <v-container fluid>
+        <v-layout align-center justify-center row wrap>
+          <v-flex xs12>
+            <h2 class="display-3 text-xs-center">{{ $t('system.settings.aboutZeroTwo.version') }}</h2>
+            <h3 class="display-2 text-xs-center">{{ currentAppVersion }}</h3>
+          </v-flex>
+          <v-flex xs4>
+            <a href="#" class="headline" @click="openPage(githubPage)">
+              <v-img :src="githubLogo" alt="GitHub" />
+            </a>
+          </v-flex>
+          <v-flex xs4>
+            <a href="#" class="headline" @click="openPage(discordPage)">
+              <v-img :src="discordLogo" alt="Discord" />
+            </a>
+          </v-flex>
+          <v-flex xs4>
+            <a href="#" class="headline" @click="openPage(zeroTwoPage)">
+              <v-img :src="zeroTwoLogo" alt="ZeroTwo" />
+            </a>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card>
+  </v-tab-item>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { shell } from 'electron';
 import { mapState } from 'vuex';
+
+import githubLogo from '@/assets/logos/github-logo.png';
+import discordLogo from '@/assets/logos/discord-blurple-logo.png';
+import zeroTwoLogo from '@/assets/logos/ZeroTwoAppIcon_1024.png';
 
 export default {
   computed: { ...mapState(['currentAppVersion']) },
@@ -67,6 +44,10 @@ export default {
       githubPage: 'https://github.com/nicoaiko/zerotwo',
       discordPage: 'https://discord.gg/sTpR4Gw',
       zeroTwoPage: 'https://www.zerotwo.org',
+
+      githubLogo,
+      discordLogo,
+      zeroTwoLogo,
     };
   },
   methods: {

@@ -2,16 +2,15 @@ import Axios from 'axios';
 import { readFileSync } from 'fs';
 
 // Queries
-const getAnime = readFileSync(`${__dirname}/queries/getAnime.graphql`, 'utf-8');
-const getUser = readFileSync(`${__dirname}/queries/getUser.graphql`, 'utf-8');
-const getUserList = readFileSync(`${__dirname}/queries/getUserList.graphql`, 'utf-8');
-const getUserAnimeInformation = readFileSync(`${__dirname}/queries/getUserAnimeInformation.graphql`, 'utf-8');
-const searchAnime = readFileSync(`${__dirname}/queries/searchAnime.graphql`, 'utf-8');
+import getUser from './queries/getUser';
+import getUserList from './queries/getUserList';
+import getUserAnimeInformation from './queries/getUserAnimeInformation';
+import searchAnime from './queries/searchAnime';
 
 // Mutations
-const addAnimeToList = readFileSync(`${__dirname}/mutations/addAnimeToList.graphql`, 'utf-8');
-const updateAnimeInList = readFileSync(`${__dirname}/mutations/updateAnimeToList.graphql`, 'utf-8');
-const deleteAnimeFromList = readFileSync(`${__dirname}/mutations/deleteAnimeFromList.graphql`, 'utf-8');
+import addAnimeToList from './mutations/addAnimeToList';
+import updateAnimeInList from './mutations/updateAnimeInList';
+import deleteAnimeFromList from './mutations/deleteAnimeFromList';
 
 const axios = Axios.create({
   baseURL: 'https://graphql.anilist.co/',

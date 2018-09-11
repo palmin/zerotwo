@@ -61,6 +61,10 @@ const rendererConfig = {
         use: 'node-loader',
       },
       {
+        test: /\.graphql?$/,
+        loader: 'webpack-graphql-loader',
+      },
+      {
         test: /\.vue$/,
         use: {
           loader: 'vue-loader',
@@ -118,15 +122,6 @@ const rendererConfig = {
           : false,
     }),
     new VueLoaderPlugin(),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jquery: 'jquery',
-      'window.jQuery': 'jquery',
-      jQuery: 'jquery',
-      semantic: 'semantic-ui',
-      Semantic: 'semantic-ui',
-      'semantic-ui': 'semantic-ui',
-    }),
     new webpack.HotModuleReplacementPlugin(),
     // new MiniCssExtractPlugin()
   ],
@@ -140,7 +135,7 @@ const rendererConfig = {
       '@': path.join(__dirname, '../src/renderer'),
       vue$: 'vue/dist/vue.esm.js',
     },
-    extensions: ['.js', '.vue', '.json', '.css', '.node'],
+    extensions: ['.js', '.vue', '.json', '.css', '.node', '.graphql'],
   },
   target: 'electron-renderer',
 };

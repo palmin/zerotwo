@@ -35,9 +35,9 @@
           </div>
         </td>
         <td class="text-xs-left">
-          <v-progress-circular :value="props.item.score * 10" size="40" :rotate="-90"
-            :color="(props.item.score >= 7 ? 'success' : (props.item.score < 7 && props.item.score >= 4 ? 'warning' : 'error'))">
-            {{ props.item.score * 10 }}
+          <v-progress-circular :value="props.item.scorePercentage" size="40" :rotate="-90"
+            :color="(props.item.scorePercentage >= 70 ? 'success' : (props.item.scorePercentage < 70 && props.item.scorePercentage >= 40 ? 'warning' : 'error'))">
+            {{ props.item.score }}
           </v-progress-circular>
         </td>
         <td class="text-xs-left">{{ props.item.season }}</td>
@@ -121,9 +121,9 @@ export default {
         title: item.media.title.userPreferred,
         progress: item.progress,
         episodes: item.media.episodes,
-        progressInPercent: item.media.episodes <= 0
-          ? 80 : item.progress / item.media.episodes * 100,
+        progressInPercent: this.getEpisodePercentage(item.progress, item.media.episodes),
         score: item.score,
+        scorePercentage: this.scorePercentage(item.score),
         season: this.getSeason(item.media.startDate.year, item.media.season),
         updated: this.getTimeByTimestamp(item.updatedAt),
         finishedAiring: item.media.status === 'FINISHED',
@@ -176,6 +176,9 @@ export default {
       }], [this.currentSort.direction]);
 
       return _.slice(orderedListItems, this.currentOffset, (this.currentOffset + this.listLimit));
+    },
+    scoringSystem() {
+      return this.session.user.mediaListOptions.scoreFormat;
     },
   },
 
@@ -360,6 +363,18 @@ export default {
         });
     },
 
+    getEpisodePercentage(progress, episodes) {
+      if (!progress) {
+        return 0;
+      }
+
+      if (!episodes || episodes <= 0) {
+        return progress + (progress * 0.2);
+      }
+
+      return progress / episodes * 100;
+    },
+
     progressMaxEpisodes(data) {
       if (!data.media.episodes || data.media.episodes <= 0) {
         return data.progress + (data.progress * 0.2);
@@ -384,6 +399,35 @@ export default {
       }
 
       return temp;
+    },
+    scorePercentage(score) {
+      let percentage = 0;
+      switch (this.scoringSystem) {
+        case 'POINT_10':
+        case 'POINT_10_DECIMAL':
+          percentage = score * 10;
+          break;
+        case 'POINT_5':
+          percentage = score * 20;
+          break;
+        case 'POINT_3':
+          if (score === 3) {
+            percentage = 100;
+          } else if (score === 2) {
+            percentage = 66;
+          } else if (score === 1) {
+            percentage = 33;
+          } else {
+            percentage = 0;
+          }
+          break;
+        case 'POINT_100':
+        default:
+          percentage = score;
+          break;
+      }
+
+      return percentage;
     },
   },
 };

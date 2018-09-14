@@ -7,6 +7,7 @@ import 'vuetify/dist/vuetify.min.css';
 import api from '@/modules/api';
 import { i18n } from '@/modules/i18n';
 import { init as initAuth } from '@/modules/aniList';
+import '@/assets/fontawesome/css/fontawesome-all.css';
 
 import store from './store';
 import App from './App';

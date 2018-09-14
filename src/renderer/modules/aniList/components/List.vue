@@ -7,7 +7,7 @@
       :pagination.sync="pagination"
       item-key="id"
       :must-sort="true"
-      no-data-text="No data."
+      :no-data-text="$t('system.$vuetify.noDataText')"
       :rows-per-page-items="[pagination.rowsPerPage]"
     >
       <template slot="items" slot-scope="props">

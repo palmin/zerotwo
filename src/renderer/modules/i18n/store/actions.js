@@ -1,11 +1,28 @@
+import find from 'lodash/find';
+
 export default {
   detectAndSetLocale({ commit }) {
-    // IE11 uses non-standard userLanguage property
-    const language = window.navigator.language || window.navigator.userLanguage;
-    const locale = language.split('-')[0] || window.env.FALLBACK_LOCALE;
+    const { language } = window.navigator;
 
-    commit('setLocale', locale);
+    // This array contains all first parts of the language code
+    // that should be split into two parts and only the first
+    // should be taken.
+    // Chinese (zh-cn) for example should not be split.
+    const singleCodeLanguages = [
+      'de',
+      'en',
+      'ja',
+    ];
 
-    return Promise.resolve(locale);
+    const singleCode = language.split('-')[0];
+    if (find(singleCodeLanguages, item => item === singleCode) !== undefined) {
+      commit('setLocale', singleCode);
+
+      return Promise.resolve(singleCode);
+    }
+
+    commit('setLocale', language);
+
+    return Promise.resolve(language);
   },
 };

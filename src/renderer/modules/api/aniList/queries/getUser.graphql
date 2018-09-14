@@ -1,0 +1,15 @@
+query {
+  user: Viewer {
+    name
+    id
+    avatar {
+      medium
+    }
+    mediaListOptions {
+      scoreFormat
+    }
+    options {
+      displayAdultContent
+    }
+  }
+}

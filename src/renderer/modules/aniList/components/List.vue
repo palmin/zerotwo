@@ -1,184 +1,50 @@
 <template>
-  <table class="ui compact single line selectable sortable celled table">
-    <thead>
-      <tr>
-        <th class="collapsing"></th>
-
-        <th @click="orderTable('media.title.userPreferred')">
-          {{ $t('animeTitle') }}
-          <i class="sort alphabet icon"
-            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
-            v-if="currentSort.field === 'media.title.userPreferred'"
-          ></i>
-        </th>
-
-        <th @click="orderTable('progress')" class="collapsing center aligned">
-          {{ $t('progress') }}
-          <i class="sort icon"
-            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
-            v-if="currentSort.field === 'progress'"
-          ></i>
-        </th>
-
-        <th @click="orderTable('score')" class="collapsing center aligned">
-          {{ $t('score') }}
-          <i class="sort numeric icon"
-            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
-            v-if="currentSort.field === 'score'"
-          ></i>
-        </th>
-
-        <th @click="orderTable('season')" class="collapsing center aligned">
-          {{ $t('season') }}
-          <i class="sort icon"
-            :class="{ down: currentSort.direction === 'asc', up: currentSort.direction === 'desc' }"
-            v-if="currentSort.field === 'season'"
-          ></i>
-        </th>
-
-        <th class="collapsing right aligned">{{ $t('lastUpdated') }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-if="currentOffset !== 0">
-        <td class="center aligned" colspan="6" @click="scrollUpInfinite">
-          {{ $t('loadMore') }}
-        </td>
-      </tr>
-
-      <tr v-for="data in list" :key="data.media.id">
-
-        <td class="collapsing center aligned">
-          <div class="ui status inline dropdown">
-            <div class="text">
-              <i class="stop icon" :class="{
-                green: listStatus === 'CURRENT' || listStatus === 'REPEATING',
-                blue: listStatus === 'COMPLETED',
-                yellow: listStatus === 'PAUSED',
-                red: listStatus === 'DROPPED',
-                black: listStatus === 'PLANNING'
-              }"></i>
-            </div>
-            <div class="menu">
-              <div class="item"
-              data-value="CURRENT"
-              :data-id="data.media.id">
-                <i class="green stop icon"></i>
-              </div>
-
-              <div class="item"
-              data-value="COMPLETED"
-              :data-id="data.media.id">
-                <i class="blue stop icon"></i>
-              </div>
-
-              <div class="item"
-              data-value="PAUSED"
-              :data-id="data.media.id">
-                <i class="yellow stop icon"></i>
-              </div>
-
-              <div class="item"
-              data-value="DROPPED"
-              :data-id="data.media.id">
-                <i class="red stop icon"></i>
-              </div>
-
-              <div class="item"
-              data-value="PLANNING"
-              :data-id="data.media.id">
-                <i class="black stop icon"></i>
-              </div>
-            </div>
+  <v-layout child-flex>
+    <v-data-table
+      dark
+      :headers="headers"
+      :items="items"
+      :pagination.sync="pagination"
+      item-key="id"
+      :must-sort="true"
+      :no-data-text="$t('$vuetify.noDataText')"
+      :rows-per-page-items="[pagination.rowsPerPage]"
+    >
+      <template slot="items" slot-scope="props">
+        <td class="table-row" @click="openInformation(props.item.id)" :class="{ 'finished-airing': props.item.finishedAiring }">
+          {{ props.item.title }}
+          <div dark class="green--text text--accent-3" v-if="props.item.nextAiringEpisode">
+            {{ $t('system.constants.airingIn', {
+              episode: props.item.nextAiringEpisode.episode,
+              time: getTimeByTimestamp(props.item.nextAiringEpisode.airingAt),
+             }) }}
           </div>
         </td>
+        <td class="text-xs-left episode-row">
+          <span class="caption">
+            {{ props.item.progress }} / {{ props.item.episodes | episode }}
+          </span>
 
-        <td
-        @click="openInformation(data.media.id)"
-        :class="{ blue: data.media.status === 'COMPLETED' && finishedHighlight }">
-          {{ data.media.title.userPreferred }}
-        </td>
+          <div class="episode-action">
+            <v-progress-linear color="success" height="20" class="disable-progress-margin" :value="props.item.progressInPercent">
+            </v-progress-linear>
 
-        <td class="collapsing episodeRow">
-          <progress :value="data.progress" :max="progressMaxEpisodes(data)" />
-          {{ data.progress }} / {{ data.media.episodes | episode }}
-          <div class="controlIcons">
-            <span class="red" @click="decreaseOneEpisode(data)" v-if="data.progress !== 0">
-              <div class="preview">
-                <span class="episode-arrow" v-if="data.progress !== 0">
-                  {{ data.progress - 1 }}
-                  <i class="inverted left arrow icon" />
-                  {{ data.progress }}
-                </span>
-              </div>
-              <i class="inverted minus icon"
-                :class="{ disabled: data.progress === 0 }" />
-            </span>
-
-            <span
-            class="green"
-            @click="increaseOneEpisode(data)"
-            v-if="data.progress !== data.media.episodes">
-              <i class="inverted plus icon"
-                :class="{
-                  disabled: !!data.media.episodes &&
-                  data.progress === data.media.episodes
-                }" />
-              <div class="preview">
-                <span
-                class="episode-arrow"
-                v-if="(data.media.episodes > 0
-                && data.progress < data.media.episodes)
-                || data.media.episodes <= 0">
-                  {{ data.progress }}
-                  <i class="inverted right arrow icon" />
-                  {{ data.progress + 1 }}
-                </span>
-                <span
-                class="new-status"
-                v-if="(data.media.episodes > 0 && data.progress + 1 === data.media.episodes)">
-                  {{ $t('toFinished') }}
-                </span>
-              </div>
-            </span>
+            <v-btn small flat color="success" class="plus-action" @click="increaseOneEpisode(props.item.item)">
+              <v-icon small>fas fa-plus</v-icon>
+            </v-btn>
           </div>
         </td>
-
-        <td class="collapsing center aligned scoreRow">
-          {{ data.score }}
-          <!-- <div class="ui score scrolling compact dropdown">
-            <input type="hidden" name="score" :value="data.score">
-            <div class="default text">-</div>
-            <div class="menu">
-              <div class="item" :data-value="0" :data-id="data.media.id">-</div>
-              <div class="item" :data-value="1" :data-id="data.media.id">1</div>
-              <div class="item" :data-value="2" :data-id="data.media.id">2</div>
-              <div class="item" :data-value="3" :data-id="data.media.id">3</div>
-              <div class="item" :data-value="4" :data-id="data.media.id">4</div>
-              <div class="item" :data-value="5" :data-id="data.media.id">5</div>
-              <div class="item" :data-value="6" :data-id="data.media.id">6</div>
-              <div class="item" :data-value="7" :data-id="data.media.id">7</div>
-              <div class="item" :data-value="8" :data-id="data.media.id">8</div>
-              <div class="item" :data-value="9" :data-id="data.media.id">9</div>
-              <div class="item" :data-value="10" :data-id="data.media.id">10</div>
-            </div>
-          </div> -->
+        <td class="text-xs-left">
+          <v-progress-circular :value="props.item.scorePercentage" size="40" :rotate="-90"
+            :color="(props.item.scorePercentage >= 70 ? 'success' : (props.item.scorePercentage < 70 && props.item.scorePercentage >= 40 ? 'warning' : 'error'))">
+            {{ props.item.score }}
+          </v-progress-circular>
         </td>
-
-        <td class="collapsing center aligned">
-          {{ getSeason(data.media.startDate.year, data.media.season) }}
-        </td>
-
-        <td class="collapsing right aligned">{{ getTimeByTimestamp(data.updatedAt) }}</td>
-      </tr>
-
-      <tr v-if="itemsAvailable">
-        <td class="center aligned" colspan="6" @click="scrollDownInfinite">
-          {{ $t('loadMore') }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <td class="text-xs-left">{{ props.item.season }}</td>
+        <td class="text-xs-right">{{ props.item.updated }}</td>
+      </template>
+    </v-data-table>
+  </v-layout>
 </template>
 
 <script>
@@ -199,25 +65,71 @@ export default {
 
       this.finishedHighlight = list.status !== 'COMPLETED';
       this.setReady(true);
-      this.$forceUpdate();
     },
   },
 
-  components: {
-    InfoBox,
-  },
+  components: { InfoBox },
 
   computed: {
     ...mapGetters('aniList', ['isAuthenticated']),
     ...mapState('aniList', ['session']),
+
+    headers() {
+      return [{
+        text: this.$t('system.constants.animeTitle'),
+        align: 'left',
+        value: 'title',
+        width: '45%',
+      }, {
+        text: this.$t('system.constants.progress'),
+        align: 'left',
+        value: 'episode',
+        width: '15%',
+      }, {
+        text: this.$t('system.constants.score'),
+        align: 'left',
+        value: 'score',
+        width: '5%',
+      }, {
+        text: this.$t('system.constants.season'),
+        align: 'left',
+        value: 'season',
+        width: '12.5%',
+      }, {
+        text: this.$t('system.constants.lastUpdated'),
+        align: 'right',
+        value: 'updated',
+        sortable: false,
+        width: '27.5%',
+      }];
+    },
+
+    pageText() {
+      return `${this.pagination.currentPage}`;
+    },
     listEntries() {
       return this.listItems.entries;
     },
-    listStatus() {
-      return this.listItems.status;
-    },
     itemsAvailable() {
       return (this.currentOffset + this.listLimit) < this.listEntries.length;
+    },
+    items() {
+      const items = this.listEntries;
+
+      return _.map(items, item => ({
+        id: item.media.id,
+        title: item.media.title.userPreferred,
+        progress: item.progress,
+        episodes: item.media.episodes,
+        progressInPercent: this.getEpisodePercentage(item.progress, item.media.episodes),
+        score: item.score,
+        scorePercentage: this.scorePercentage(item.score),
+        season: this.getSeason(item.media.startDate.year, item.media.season),
+        updated: this.getTimeByTimestamp(item.updatedAt),
+        finishedAiring: item.media.status === 'FINISHED',
+        nextAiringEpisode: item.media.nextAiringEpisode,
+        item,
+      }));
     },
     list() {
       if (this.currentSort.field === null) {
@@ -265,29 +177,14 @@ export default {
 
       return _.slice(orderedListItems, this.currentOffset, (this.currentOffset + this.listLimit));
     },
+    scoringSystem() {
+      return this.session.user.mediaListOptions.scoreFormat;
+    },
   },
 
   filters: {
     score: value => (value <= 0 ? '-' : value),
     episode: value => (!value || value <= 0 ? '?' : value),
-  },
-
-  mounted() {
-    $('.ui.status.dropdown', this.$el).dropdown({
-      onChange: this.changeAnimeStatus,
-    });
-    $('.ui.score.dropdown', this.$el).dropdown({
-      onChange: this.changeScore,
-    });
-  },
-
-  updated() {
-    $('.ui.status.dropdown', this.$el).dropdown({
-      onChange: this.changeAnimeStatus,
-    });
-    $('.ui.score.dropdown', this.$el).dropdown({
-      onChange: this.changeScore,
-    });
   },
 
   data() {
@@ -307,41 +204,13 @@ export default {
       listLimit: 100,
 
       finishedHighlight: false,
+      fab: null,
 
-      // scores: [{
-      //   text: '-',
-      //   value: 0,
-      // }, {
-      //   text: '1',
-      //   value: 1,
-      // }, {
-      //   text: '2',
-      //   value: 2,
-      // }, {
-      //   text: '3',
-      //   value: 3,
-      // }, {
-      //   text: '4',
-      //   value: 4,
-      // }, {
-      //   text: '5',
-      //   value: 5,
-      // }, {
-      //   text: '6',
-      //   value: 6,
-      // }, {
-      //   text: '7',
-      //   value: 7,
-      // }, {
-      //   text: '8',
-      //   value: 8,
-      // }, {
-      //   text: '9',
-      //   value: 9,
-      // }, {
-      //   text: '10',
-      //   value: 10,
-      // }],
+      pagination: {
+        sortBy: 'title',
+        rowsPerPage: 100,
+        currentPage: 1,
+      },
     };
   },
 
@@ -353,9 +222,6 @@ export default {
 
       return this.$moment(value, 'X').fromNow();
     },
-    // ...mapActions('myAnimeList', ['detectAndSetMALData']),
-    // ...mapMutations('myAnimeList', ['setInformation']),
-    // ...mapMutations('aniList', ['setInformation']),
     ...mapMutations(['setReady']),
     orderTable(field) {
       // Easy order:
@@ -374,49 +240,9 @@ export default {
       this.currentSort.direction = 'asc';
     },
 
-    scrollUpInfinite() {
-      if (this.currentOffset === 0) {
-        return;
-      }
-
-      this.currentOffset -= this.listLimit;
-
-      // To continue at the next anime
-      window.scrollTo(0, document.body.scrollHeight);
-    },
-    scrollDownInfinite() {
-      if (!this.itemsAvailable) {
-        return;
-      }
-
-      // To continue at the next anime
-      window.scrollTo(0, 0);
-
-      this.currentOffset += this.listLimit;
-    },
-
     openInformation(id) {
       EventBus.$emit('setOpenInformationId', id);
     },
-
-    // changeScore(value, text, $selectedItem) {
-    //   const id = $($selectedItem).attr('data-id');
-
-    //   _.map(this.listItems, (item) => {
-    //     if (+item.series_animedb_id !== +id) {
-    //       return item;
-    //     }
-
-    //     if (value === '-') {
-    //       value = 0;
-    //     }
-
-    //     item.my_score = value;
-    //     this.startUpdateTimer(item);
-    //     this.scoreChanged = true;
-    //     return item;
-    //   });
-    // },
 
     changeAnimeStatus(value, text, $selectedItem) {
       const id = $($selectedItem).attr('data-id');
@@ -443,16 +269,6 @@ export default {
       });
     },
 
-    decreaseOneEpisode(data) {
-      if (!data || data.progress === 0) {
-        return;
-      }
-
-      data.progress -= 1;
-      this.episodeChanged = true;
-      this.startUpdateTimer(data);
-    },
-
     increaseOneEpisode(data) {
       if
       (
@@ -470,26 +286,6 @@ export default {
       this.episodeChanged = true;
       this.startUpdateTimer(data);
     },
-
-    // decreaseOneStar(data) {
-    //   if (!data || +data.my_score === 0) {
-    //     return;
-    //   }
-
-    //   data.my_score = +data.my_score - 1;
-    //   this.scoreChanged = true;
-    //   this.startUpdateTimer(data);
-    // },
-
-    // increaseOneStar(data) {
-    //   if (!data || (!!+data.my_score && +data.my_score === 10)) {
-    //     return;
-    //   }
-
-    //   data.my_score = +data.my_score + 1;
-    //   this.scoreChanged = true;
-    //   this.startUpdateTimer(data);
-    // },
 
     startUpdateTimer(data) {
       if (this.updateTimer) {
@@ -527,30 +323,28 @@ export default {
       // that has all relevant changes
       const entries = _.chain(this.updatePayload)
         .groupBy(value => value.id)
-        .map(group => _.reduce(group, (accumulator, item) =>
-          (item.changeFrom > accumulator.changeFrom ? item : accumulator), { changeFrom: 0 }))
+        .map(group => _.reduce(group, (accumulator, item) => (
+          item.changeFrom > accumulator.changeFrom ? item : accumulator), { changeFrom: 0 }))
         .value();
 
       await Promise.each(entries, async (entry) => {
-        const {
-          id, title, status, progress, score,
-        } = entry;
+        const { id, title, status, progress, score } = entry;
 
-        return this.$http.updateAnimeInList({
-          id, status, progress, score,
-        }, this.session.access_token)
+        return this.$http.updateAnimeInList(
+          { id, status, progress, score }, this.session.access_token,
+        )
           .then((response) => {
             if (response.data.SaveMediaListEntry.id) {
               this.$notify({
-                title: this.$t('updated.title'),
-                text: this.$t('updated.text', { title }),
+                title: this.$t('system.constants.updated.title'),
+                text: this.$t('system.constants.updated.text', { title }),
               });
             }
           })
           .catch((error) => {
             this.$notify({
-              type: 'error',
-              title: this.$t('errorResponseTitle'),
+              type: 'err',
+              title: this.$t('system.constants.errorResponseTitle'),
               text: error,
             });
           });
@@ -569,6 +363,18 @@ export default {
         });
     },
 
+    getEpisodePercentage(progress, episodes) {
+      if (!progress) {
+        return 0;
+      }
+
+      if (!episodes || episodes <= 0) {
+        return progress + (progress * 0.2);
+      }
+
+      return progress / episodes * 100;
+    },
+
     progressMaxEpisodes(data) {
       if (!data.media.episodes || data.media.episodes <= 0) {
         return data.progress + (data.progress * 0.2);
@@ -583,7 +389,7 @@ export default {
       if (!season) {
         temp = '';
       } else {
-        temp = `${this.$t(season.toLowerCase())} `;
+        temp = `${this.$t(`system.constants.${season.toLowerCase()}`)} `;
       }
 
       if (!year) {
@@ -594,207 +400,71 @@ export default {
 
       return temp;
     },
+    scorePercentage(score) {
+      let percentage = 0;
+      switch (this.scoringSystem) {
+        case 'POINT_10':
+        case 'POINT_10_DECIMAL':
+          percentage = score * 10;
+          break;
+        case 'POINT_5':
+          percentage = score * 20;
+          break;
+        case 'POINT_3':
+          if (score === 3) {
+            percentage = 100;
+          } else if (score === 2) {
+            percentage = 66;
+          } else if (score === 1) {
+            percentage = 33;
+          } else {
+            percentage = 0;
+          }
+          break;
+        case 'POINT_100':
+        default:
+          percentage = score;
+          break;
+      }
+
+      return percentage;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-td.blue {
-  color: rgb(0, 122, 170);
+.disable-progress-margin {
+  margin: 0;
 }
 
-td > .ui.dropdown > .text > i.stop.icon,
-td > .ui.dropdown > .menu > .item > i.stop.icon {
-  margin-right: 0;
+.finished-airing {
+  color: #19bef0;
 }
 
-td.episodeRow,
-td.scoreRow {
-  position: relative;
-
-  & > .controlIcons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    cursor: pointer;
-
-    & > span {
-      opacity: 0;
-      width: 50%;
-      height: 100%;
-      margin: auto;
-      position: absolute;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      transition: opacity .25s ease-out;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      & > i.icon {
-        margin: auto;
-        height: 100%;
-        flex: 1 0 1;
-      }
-
-      & > div.preview {
-        color: white;
-        font-weight: bold;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 2;
-        height: 100%;
-
-        & > span {
-          &.episode-arrow {
-            margin-bottom: -2px;
-          }
-
-          &.new-status {
-            margin-top: -2px;
-          }
-
-          & > i.icon {
-            height: initial;
-            margin-right: 0;
-          }
-        }
-      }
-
-      &.red {
-        background-color: rgb(219, 40, 40);
-
-        & > div.preview {
-          padding-left: 5px;
-        }
-      }
-
-      &.green {
-        right: 0;
-        background-color: rgb(33, 186, 69);
-
-        & > div.preview {
-          padding-right: 5px;
-          text-align: right;
-        }
-      }
-    }
-  }
-}
-
-tr {
+.table-row {
   cursor: pointer;
 }
 
-progress[value] {
-  -webkit-appearance: none;
-  vertical-align: -webkit-baseline-middle;
-}
+.episode-row {
+  .episode-action {
+    position: relative;
 
-progress[value]::-webkit-progress-bar,
-progress[value]::-webkit-progress-value {
-  border-radius: 1em;
-  height: 5px;
-}
+    .plus-action {
+      position: absolute;
+      right: -30px;
+      bottom: 0;
+      line-height: 20px;
+      height: 20px;
+      min-width: 0;
+      max-width: 30px;
+      margin: 0;
+      display: none;
+    }
+  }
 
-progress[value]::-webkit-progress-bar {
-  background-color: #aaaaaa;
-}
-
-progress[value]::-webkit-progress-value {
-  background-color: #00AAEE;
-}
-</style>
-
-
-<i18n>
-{
-  "en": {
-    "animeTitle": "Anime Title",
-    "progress": "Progress",
-    "score": "Score",
-    "season": "Season",
-    "lastUpdated": "Last Updated",
-    "winter": "Winter",
-    "spring": "Spring",
-    "summer": "Summer",
-    "autumn": "Autumn",
-    "fall": "Fall",
-    "unknown": "Unknown",
-    "dateFormat": "MMM DD YYYY",
-    "loading": "Loading",
-    "updated": {
-      "title": "Anime updated!",
-      "text": "{title} was successfully updated!"
-    },
-    "errorResponseTitle": "Update not successful!",
-    "watching": "Watching",
-    "finished": "Finished",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "toFinished": "Finish",
-    "loadMore": "Load more..."
-  },
-  "de": {
-    "animeTitle": "Animetitel",
-    "progress": "Fortschritt",
-    "score": "Bewertung",
-    "season": "Saison",
-    "lastUpdated": "Zuletzt aktualisiert",
-    "winter": "Winter",
-    "spring": "Frühling",
-    "summer": "Sommer",
-    "autumn": "Herbst",
-    "fall": "Herbst",
-    "unknown": "Unbekannt",
-    "dateFormat": "DD[.] MMM YYYY",
-    "loading": "Lädt",
-    "updated": {
-      "title": "Anime aktualisiert!",
-      "text": "{title} wurde erfolgreich aktualisiert!"
-    },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
-    "watching": "Laufend",
-    "finished": "Beendet",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "toFinished": "Beendet",
-    "loadMore": "Mehr Elemente laden..."
-  },
-  "ja": {
-    "animeTitle": "アニメのタイトル",
-    "progress": "進行",
-    "score": "評価",
-    "season": "シーズン",
-    "lastUpdated": "最新更新",
-    "winter": "冬",
-    "spring": "春",
-    "summer": "夏",
-    "autumn": "秋",
-    "fall": "秋",
-    "unknown": "未知",
-    "dateFormat": "MMM DD YYYY",
-    "loading": "通信中",
-    "updated": {
-      "title": "更新成功！",
-      "text": "「{title}」の更新は成功しました！"
-    },
-    "errorResponseTitle": "シンクロは出来ませんでした！",
-    "watching": "見る",
-    "finished": "終了",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "toFinished": "終了",
-    "loadMore": "次のリストデータ・・・"
+  &:hover .plus-action {
+    display: inline-flex;
   }
 }
-</i18n>
+</style>

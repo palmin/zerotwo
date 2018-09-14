@@ -1,4 +1,5 @@
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
+import API from '@/modules/api';
 
 export default {
   beforeDestroy() {
@@ -18,19 +19,20 @@ export default {
     this.refreshTimer();
   },
   data() {
-    return {
-      timer: null,
-    };
+    return { timer: null };
   },
   methods: {
-    ...mapActions('aniList', ['detectAndSetAniData', 'setTimeUntilNextRefresh', 'setTimerRunning', 'getUser']),
+    ...mapActions('aniList', ['detectAndSetAniData', 'setTimeUntilNextRefresh', 'setTimerRunning']),
     ...mapMutations('aniList', ['SET_USER']),
+    ...mapMutations(['setReady']),
     async timerAction() {
       await this.setTimeUntilNextRefresh(this.timeUntilNextRefresh - 1000);
       if (this.timeUntilNextRefresh <= 0) {
         const refreshInterval = this.refreshRate * 60 * 1000;
+        await this.setReady(false);
         await this.detectAndSetAniData();
         await this.setTimeUntilNextRefresh(refreshInterval);
+        await this.setReady(true);
       }
     },
     async refreshTimer() {
@@ -51,7 +53,7 @@ export default {
         this.setTimerRunning(false);
       } else {
         this.setTimerRunning(true);
-        this.getUser()
+        API.getUser(this.session.access_token)
           .then((user) => {
             this.SET_USER(user);
           });

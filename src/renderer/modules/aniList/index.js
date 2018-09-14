@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ipcRenderer } from 'electron';
-// import * as types from './store/mutation-types';
+import API from '../api';
 
 export const init = (store) => {
   if (store.state.aniList.session.access_token) {
@@ -13,7 +13,7 @@ export const init = (store) => {
     store.commit('aniList/SET_ACCESS_TOKEN', access_token);
     store.commit('aniList/SET_REFRESH_TOKEN', refresh_token);
     store.commit('aniList/SET_AUTHORIZATION_TOKEN', authorizationToken);
-    store.dispatch('aniList/getUser').then((user) => {
+    API.getUser(access_token).then((user) => {
       store.commit('aniList/SET_USER', user);
     });
   });

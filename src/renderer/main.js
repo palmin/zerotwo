@@ -1,29 +1,28 @@
 import Vue from 'vue';
-import VueI18n from 'vue-i18n';
 import VueNotification from 'vue-notification';
-import 'semantic-ui/dist/semantic.min.css';
-import 'semantic-ui/dist/semantic.min';
+import Vuetify from 'vuetify';
+import VueElectron from 'vue-electron';
+import 'vuetify/dist/vuetify.min.css';
+
 import api from '@/modules/api';
+import { i18n } from '@/modules/i18n';
 import { init as initAuth } from '@/modules/aniList';
+import '@/assets/fontawesome/css/fontawesome-all.css';
 
 import store from './store';
 import App from './App';
 import router from './router';
 import getDate from './plugins/getDate';
-import './assets/style/main.sass';
-import './assets/style/animations.sass';
-import './assets/fontawesome/css/fontawesome-all.css';
 
 Vue.http = Vue.prototype.$http = api;
 Vue.config.productionTip = false;
 
-Vue.use(require('vue-electron'));
-Vue.use(VueI18n);
+Vue.use(VueElectron);
 Vue.use(VueNotification);
 Vue.use(getDate);
-
-const i18n = new VueI18n({
-  fallbackLocale: 'en',
+Vue.use(Vuetify, {
+  iconfont: 'fa',
+  lang: { t: (key, ...params) => i18n.t(key, params) },
 });
 
 /* eslint-disable no-new */

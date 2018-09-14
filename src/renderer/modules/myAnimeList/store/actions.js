@@ -10,8 +10,7 @@ export default {
     return this._vm.$http.getAnimeList(this.state.myAnimeList.auth.username)
       .then((data) => {
         commit('setUserData', data.user[0]);
-        commit('setMALData', sortBy(data.anime, item =>
-          item.series_title.toLowerCase()));
+        commit('setMALData', sortBy(data.anime, item => item.series_title.toLowerCase()));
       })
       .then(() => Promise.resolve());
   },

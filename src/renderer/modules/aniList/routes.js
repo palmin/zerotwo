@@ -1,33 +1,34 @@
-import Watching from './pages/Watching';
-import Completed from './pages/Completed';
-import Paused from './pages/Paused';
-import Dropped from './pages/Dropped';
-import Planning from './pages/Planning';
+import Main from './pages/Main';
 
 export default [
   {
     path: '/aniList/Watching',
     name: 'Ani-Watching',
-    component: Watching,
+    component: Main,
+    props: { status: 'CURRENT' },
   },
   {
     path: '/aniList/Completed',
     name: 'Ani-Completed',
-    component: Completed,
+    component: Main,
+    props: { status: 'COMPLETED' },
   },
   {
     path: '/aniList/Paused',
     name: 'Ani-Paused',
-    component: Paused,
+    component: Main,
+    props: { status: 'PAUSED' },
   },
   {
     path: '/aniList/Dropped',
     name: 'Ani-Dropped',
-    component: Dropped,
+    component: Main,
+    props: { status: 'DROPPED' },
   },
   {
     path: '/aniList/Planning',
     name: 'Ani-Planning',
-    component: Planning,
+    component: Main,
+    props: { status: 'PLANNING' },
   },
 ];

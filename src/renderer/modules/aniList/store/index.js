@@ -8,9 +8,7 @@ const state = {
   refreshRate: 15, // set a default refreshRate of 15 minutes
   timeUntilNextRefresh: null,
   timerRunning: false,
-  server: {
-    url: 'https://graphql.anilist.co/',
-  },
+  server: { url: 'https://graphql.anilist.co/' },
   session: {
     access_token: '',
     refresh_token: '',
@@ -18,9 +16,7 @@ const state = {
     user: {
       name: '',
       id: -1,
-      avatar: {
-        medium: '',
-      },
+      avatar: { medium: '' },
     },
   },
 };

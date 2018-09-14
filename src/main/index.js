@@ -8,9 +8,7 @@ import { version } from '../../package.json';
 const windowParams = {
   alwaysOnTop: true,
   autoHideMenuBar: true,
-  webPreferences: {
-    nodeIntegration: false,
-  },
+  webPreferences: { nodeIntegration: false },
 };
 const aniListOAuth = electronOauth2(oauthConfig, windowParams);
 
@@ -57,8 +55,7 @@ if (process.env.NODE_ENV === 'development') {
   try {
     // eslint-disable-next-line
     require('electron-debug')({
-      showDevTools: true,
-    });
+      showDevTools: true });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('Failed to install `electron-debug`: Please set `NODE_ENV=production` before build to avoid installing debugging packages. ');
@@ -96,12 +93,12 @@ function createWindow() {
     useContentSize: true,
     width: 1280,
     minWidth: 1280,
-    // backgroundColor: '#fff',
+    vibrancy: 'ultra-dark',
+    show: false,
     webPreferences: {
       nodeIntegrationInWorker: true,
       webSecurity: false,
     },
-    show: false,
   });
 
   // mainWindow.setMenu(null)
@@ -113,8 +110,8 @@ function createWindow() {
     mainWindow.focus();
 
     if (
-      process.env.ELECTRON_ENV === 'development' ||
-      process.argv.indexOf('--debug') !== -1
+      process.env.ELECTRON_ENV === 'development'
+      || process.argv.indexOf('--debug') !== -1
     ) {
       mainWindow.webContents.openDevTools();
     }
@@ -212,23 +209,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install `electron-updater` to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-/*
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
-})
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
- */

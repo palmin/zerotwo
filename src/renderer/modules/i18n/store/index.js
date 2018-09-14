@@ -5,7 +5,5 @@ export default {
   namespaced: true,
   actions,
   mutations,
-  state: {
-    locale: null,
-  },
+  state: { locale: null },
 };

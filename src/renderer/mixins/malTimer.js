@@ -5,9 +5,7 @@ export default {
     this.setTimerRunning(false);
     clearInterval(this.timer);
   },
-  computed: {
-    ...mapState('myAnimeList', ['auth', 'refreshRate', 'timeUntilNextRefresh', 'timerRunning']),
-  },
+  computed: { ...mapState('myAnimeList', ['auth', 'refreshRate', 'timeUntilNextRefresh', 'timerRunning']) },
   async mounted() {
     if (!this.auth) {
       await this.setTimerRunning(false);
@@ -17,9 +15,7 @@ export default {
     this.refreshTimer();
   },
   data() {
-    return {
-      timer: null,
-    };
+    return { timer: null };
   },
   methods: {
     ...mapActions('myAnimeList', ['detectAndSetMALData', 'setTimeUntilNextRefresh', 'setTimerRunning']),

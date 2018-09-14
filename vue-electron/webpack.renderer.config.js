@@ -1,7 +1,6 @@
 process.env.BABEL_ENV = 'renderer';
 
 const path = require('path');
-const { dependencies } = require('../package.json');
 
 /* eslint-disable*/
 const webpack = require('webpack')
@@ -11,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const { VueLoaderPlugin } = require('vue-loader')
 /* eslint-enable */
+const { dependencies } = require('../package.json');
 
 /**
  * List of node_modules to include in webpack bundle
@@ -19,16 +19,16 @@ const { VueLoaderPlugin } = require('vue-loader')
  * that provide pure *.vue files that need compiling
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/webpack-configurations.html#white-listing-externals
  */
-const whiteListedModules = ['vue'];
+// const whiteListedModules = ['vue'];
 
 const rendererConfig = {
   mode: process.env.NODE_ENV,
   entry: {
     renderer: path.join(__dirname, '../src/renderer/main.js'),
   },
-  externals: [
-    ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d)),
-  ],
+  // externals: [
+  //   ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d)),
+  // ],
   module: {
     rules: [
       {
@@ -61,6 +61,10 @@ const rendererConfig = {
         use: 'node-loader',
       },
       {
+        test: /\.graphql?$/,
+        loader: 'webpack-graphql-loader',
+      },
+      {
         test: /\.vue$/,
         use: {
           loader: 'vue-loader',
@@ -73,11 +77,6 @@ const rendererConfig = {
             },
           },
         },
-      },
-      {
-        resourceQuery: /blockType=i18n/,
-        type: 'javascript/auto',
-        use: '@kazupon/vue-i18n-loader',
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -123,15 +122,6 @@ const rendererConfig = {
           : false,
     }),
     new VueLoaderPlugin(),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jquery: 'jquery',
-      'window.jQuery': 'jquery',
-      jQuery: 'jquery',
-      semantic: 'semantic-ui',
-      Semantic: 'semantic-ui',
-      'semantic-ui': 'semantic-ui',
-    }),
     new webpack.HotModuleReplacementPlugin(),
     // new MiniCssExtractPlugin()
   ],
@@ -144,9 +134,8 @@ const rendererConfig = {
     alias: {
       '@': path.join(__dirname, '../src/renderer'),
       vue$: 'vue/dist/vue.esm.js',
-      fabric$: path.join(__dirname, '../src/renderer/assets/script/fabric.js'),
     },
-    extensions: ['.js', '.vue', '.json', '.css', '.node'],
+    extensions: ['.js', '.vue', '.json', '.css', '.node', '.graphql'],
   },
   target: 'electron-renderer',
 };

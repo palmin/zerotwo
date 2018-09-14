@@ -1,0 +1,216 @@
+{
+  "system": {
+    "constants": {
+      "loading": "Lädt...",
+      "animeTitle": "Animetitel",
+      "progress": "Fortschritt",
+      "airingIn": "Ausstrahlung von Episode {episode} {time}",
+      "score": "Bewertung",
+      "season": "Saison",
+      "lastUpdated": "Zuletzt aktualisiert",
+      "winter": "Winter",
+      "spring": "Frühling",
+      "summer": "Sommer",
+      "autumn": "Herbst",
+      "fall": "Herbst",
+      "unknown": "Unbekannt",
+      "updated": {
+        "title": "Anime aktualisiert!",
+        "text": "{title} wurde erfolgreich aktualisiert!"
+      },
+      "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
+      "toFinished": "Beendet",
+      "loadMore": "Mehr Elemente laden..."
+    },
+    "error": {
+      "titles": {
+        "notFound": "Nicht gefunden!",
+        "fatalError": "Schwerwiegender Fehler"
+      },
+      "messages": {
+        "notFoundOrAdultContent": "Sollte es ein 18+ Medium sein, schalten Sie bitte in den Einstellungen auf AniList.co '18+ Content' ein!",
+        "numberInsufficient": "This number is not sufficient!"
+      }
+    },
+    "listStatus": {
+      "watching": "Laufend",
+      "repeating": "Wiederholung",
+      "completed": "Beendet",
+      "onHold": "Pausiert",
+      "dropped": "Abgebrochen",
+      "planned": "Geplant"
+    },
+    "modules": {
+      "aniList": "AniList",
+      "myAnimeList": "MyAnimeList",
+      "torrents": "Torrents"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "menu": {
+        "appSettings": "App-Einstellungen",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList",
+        "restoreFactoryData": "Werkszustand wiederherstellen",
+        "aboutZeroTwo": "Über ZeroTwo",
+        "specialThanks": "Spezielle Danksagungen"
+      },
+      "appSettings": {
+        "setAppLanguage": "Ändere App-Sprache",
+        "chooseLanguage": "Sprache wählen",
+        "changeLanguage": "Sprache ändern"
+      },
+      "myAnimeList": {
+        "loggedInAs": "Eingeloggt als",
+        "accountSettings": "Kontoeinstellungen",
+        "loginData": "Logindaten",
+        "username": "Benutzername",
+        "password": "Passwort",
+        "malRefreshRate": "Aktualisierungsintervall (in Minuten)",
+        "noCredentials": "Keine Anmeldedaten!",
+        "enterCredentials": "Bitte gib Anmeldedaten ein, um dich einzuloggen.",
+        "credentialsWrongOrTooManyLoginAttempts": "Anmeldedaten inkorrekt oder zu viele Anmeldeversuche!",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Deine Anmeldedaten sind inkorrekt und konnten demnach nicht verifiziert werden!</p><p>Wenn du dir bei deinen Anmeldedaten sicher bist, dann hattest du vielleicht zu viele Anmeldeversuche gehabt!</p><p>Wenn letzteres, dann versuche es in 1-6 Stunden erneut...</p>"
+      },
+      "aniList": {
+        "loggedInAs": "Eingeloggt als",
+        "accountSettings": "Kontoeinstellungen",
+        "aniListRefreshRate": "Aktualisierungsintervall",
+        "minutes": "Minuten"
+      },
+      "restoreFactoryData": {
+        "restore": "Werkszustand wiederherstellen",
+        "confirmRestoration": "Ja, Werkszustand wiederherstellen!",
+        "pressWithinToRestore": "{seconds} Sekunde(n) bis der Button sich auf Normalzustand zurücksetzt."
+      },
+      "aboutZeroTwo": {
+        "version": "Version",
+        "link": "Klick mich"
+      }
+    },
+    "menu": {
+      "search": {
+        "headline": "Suchfenster",
+        "notInList": "Nicht in deiner Liste",
+        "search": "Suchen ...",
+        "noResults": "Es wurden keine Ergebnisse gefunden"
+      },
+      "listStatus": {
+        "watching": "Laufend",
+        "repeating": "Wiederholung",
+        "completed": "Beendet",
+        "onHold": "Pausiert",
+        "dropped": "Abgebrochen",
+        "planned": "Geplant"
+      }
+    },
+    "informationModal": {
+      "anime": "Anime",
+      "manga": "Manga",
+      "description": "Beschreibung",
+      "seriesInformation": "Serieninformationen",
+      "dataInformation": "Informationen deiner Liste",
+      "episodes": "Episoden",
+      "rating": "Bewertung",
+      "type": "Serientyp",
+      "synonyms": "Synonyme",
+      "noSynonyms": "Keine Synonyme",
+      "airingTime": "Ausstrahlung",
+      "englishName": "Englischer Name",
+      "noEnglishName": "Kein englischer Name vorhanden",
+      "japaneseName": "Japanischer Name",
+      "noJapaneseName": "Kein japanischer Name vorhanden",
+      "seriesStatus": "Serienstatus",
+      "sinceDate": "Seit {date}",
+      "dateFormat": "DD. MMM YYYY",
+      "unknownDate": "Datum unbekannt",
+      "ownRating": "Eigene Bewertung",
+      "ownStatus": "Eigener Status",
+      "watchedEpisodes": "Episoden geschaut",
+      "dropdownPlaceholder": "Bitte wählen...",
+      "updated": {
+        "title": "Aktualisiert!",
+        "text": "Aktualisierung erfolgreich!"
+      },
+      "created": {
+        "title": "Hinzugefügt!",
+        "text": "Hinzufügen erfolgreich!"
+      },
+      "deleted": {
+        "title": "Gelöscht!",
+        "text": "Löschung erfolgreich!"
+      },
+      "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
+      "deleteModalHeader": "Wirklich löschen?",
+      "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
+      "clear": "Auf 0 Sterne setzen",
+      "inputRequired": "Eingabe erforderlich!",
+      "ratingError": "Bewertung unter- oder überschreitet die Grenzwerte!",
+      "adultContent": "Dieses Medium ist als Nicht-Jugendfrei eingestuft!"
+    },
+    "actions": {
+      "refreshMAL": "MAL aktualisieren",
+      "refreshAniList": "AniList aktualisieren",
+      "refreshTorrents": "Torrents aktualisieren",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "submitDelete": "Löschen bestätigen!",
+      "close": "Schließen",
+      "save": "Speichern",
+      "reset": "Zurücksetzen",
+      "add": "Hinzufügen",
+      "remove": "Entfernen",
+      "login": "Einloggen",
+      "logout": "Ausloggen"
+    }
+  },
+  "myAnimeList": {
+    "watching": "Laufend",
+    "completed": "Beendet",
+    "onHold": "Pausiert",
+    "dropped": "Abgebrochen",
+    "planned": "Geplant"
+  },
+  "aniList": {
+    "mediaInformation": {
+      "finishedAiring": "Ausstrahlung beendet",
+      "currentlyAiring": "Ausstrahlung läuft",
+      "notYetAired": "Noch nicht ausgestrahlt",
+      "releasing": "Wird ausgestrahlt",
+      "finished": "Ausstrahlung beendet",
+      "notYetReleased": "Ausstrahlung geplant",
+      "cancelled": "Abgebrochen"
+    },
+    "listStatus": {
+      "current": "Laufend",
+      "repeating": "Wiederholung",
+      "finished": "Beendet",
+      "paused": "Pausiert",
+      "dropped": "Abgebrochen",
+      "planning": "Geplant"
+    }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "prevPage": "Vorherige Seite",
+      "nextPage": "Nächste Seite",
+      "pageText": "{0}-{1} von {2}",
+      "noResultsText": "Keine Ergebnisse vorhanden",
+      "rowsPerPageText": "Datensätze pro Seite",
+      "rowsPerPageAll": "Alle"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Zeilen pro Seite"
+    },
+    "noDataText": "Keine Daten vorhanden"
+  },
+  "$notify": {
+    "titles": {
+      "success": "Erfolgreich!"
+    },
+    "texts": {
+      "aniListRefreshRateUpdated": "Aktualisierungsintervall erfolgreich auf {refreshRate} Minuten aktualisiert!"
+    }
+  }
+}

@@ -32,9 +32,7 @@ export default {
   },
 
   data() {
-    return {
-      anime: [],
-    };
+    return { anime: [] };
   },
 
   watch: {
@@ -47,8 +45,6 @@ export default {
     this.populateAnime();
   },
 
-  computed: {
-    ...mapState('myAnimeList', ['malData']),
-  },
+  computed: { ...mapState('myAnimeList', ['malData']) },
 };
 </script>

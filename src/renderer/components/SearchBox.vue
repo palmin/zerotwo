@@ -1,34 +1,55 @@
 <template>
-  <div class="ui right aligned item">
-    <div class="ui transparent icon input" :class="{ loading: searchTimer }">
-      <input type="text"
-            :placeholder="$t('search')"
-            v-model="searchValue"
-            @input="searching = true"
-            @keyup="searching = false"
-            @focus="toggleResultPopup()"
-            @blur="toggleResultPopup('hide')"
-          />
-      <i class="search icon"></i>
-    </div>
-    <div class="results transition hidden" id="transitionContainer">
-      <div class="category" v-for="result in searchResults" :key="result.id">
-        <div class="name">{{ result.category }}</div>
-        <div class="results">
-          <a class="result" @click="openSearchResult(result)">
-            <div class="content">
-              <div class="title">
-                {{ result.title }}
-              </div>
-              <div class="description" v-if="result.english">
-                {{ result.english }}
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-dialog
+    ref="searchDialog"
+    v-model="dialog"
+    scrollable
+    persistent :overlay="false"
+    transition="slide-y-reverse-transition"
+    origin="bottom center 0"
+  >
+    <v-btn dark flat icon slot="activator">
+      <v-icon>fas fa-search</v-icon>
+    </v-btn>
+    <v-card dark>
+      <v-toolbar color="primary" dark>
+        <v-btn icon dark @click.native="close">
+          <v-icon>fas fa-times</v-icon>
+        </v-btn>
+        <v-toolbar-title>{{ $t('system.menu.search.headline') }}</v-toolbar-title>
+      </v-toolbar>
+      <v-card-text>
+        <v-container grid-list-md>
+          <v-layout wrap>
+            <v-flex sm12 md12 lg12>
+              <v-text-field
+                :label="$t('system.menu.search.search')"
+                v-model="searchValue"
+                @input="searching = true"
+                @keyup="searching = false"
+              ></v-text-field>
+              <v-list two-line>
+                <template v-for="result in searchResults">
+                  <v-list-tile avatar ripple :key="result.id" @click="openSearchResult(result)">
+                    <v-list-tile-content>
+                      <v-list-tile-title>
+                        {{ result.title }}
+                      </v-list-tile-title>
+                      <v-list-tile-sub-title v-if="result.english">
+                        {{ result.english }}
+                      </v-list-tile-sub-title>
+                    </v-list-tile-content>
+                    <v-list-tile-action>
+                      <v-list-tile-action-text>{{ result.category }}</v-list-tile-action-text>
+                    </v-list-tile-action>
+                  </v-list-tile>
+                </template>
+              </v-list>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 
@@ -40,26 +61,57 @@ export default {
   computed: {
     ...mapState('aniList', ['aniData']),
     watchingData() {
-      return _.find(this.aniData.lists, list => list.status === 'CURRENT').entries;
+      const data = _.find(this.aniData.lists, list => list.status === 'CURRENT');
+      if (data === undefined) {
+        return [];
+      }
+
+      return data.entries;
     },
     completedData() {
-      return _.find(this.aniData.lists, list => list.status === 'COMPLETED').entries;
+      const data = _.find(this.aniData.lists, list => list.status === 'COMPLETED');
+      if (data === undefined) {
+        return [];
+      }
+
+      return data.entries;
     },
     pausedData() {
-      return _.find(this.aniData.lists, list => list.status === 'PAUSED').entries;
+      const data = _.find(this.aniData.lists, list => list.status === 'PAUSED');
+      if (data === undefined) {
+        return [];
+      }
+
+      return data.entries;
     },
     droppedData() {
-      return _.find(this.aniData.lists, list => list.status === 'DROPPED').entries;
+      const data = _.find(this.aniData.lists, list => list.status === 'DROPPED');
+      if (data === undefined) {
+        return [];
+      }
+
+      return data.entries;
     },
     planningData() {
-      return _.find(this.aniData.lists, list => list.status === 'PLANNING').entries;
+      const data = _.find(this.aniData.lists, list => list.status === 'PLANNING');
+      if (data === undefined) {
+        return [];
+      }
+
+      return data.entries;
     },
     repeatingData() {
-      return _.find(this.aniData.lists, list => list.status === 'REPEATING').entries;
+      const data = _.find(this.aniData.lists, list => list.status === 'REPEATING');
+      if (data === undefined) {
+        return [];
+      }
+
+      return data.entries;
     },
   },
   data() {
     return {
+      dialog: false,
       searchValue: '',
       searching: false,
       searchTimer: null,
@@ -79,43 +131,28 @@ export default {
     },
   },
   methods: {
+    close() {
+      this.dialog = false;
+      this.searchResults = [];
+      this.searchValue = '';
+    },
+
     openSearchResult(result) {
       this.$emit('openInformation', result);
-      this.toggleResultPopup('hide');
     },
 
     triggerSearch() {
       if (this.searchValue.length < 3) {
         this.searchResults = [];
-        this.toggleResultPopup('hide');
         return;
       }
 
       this.search();
     },
 
-    /* eslint-disable */
-    toggleResultPopup(transition = 'show') {
-      const element = $('#transitionContainer', this.$el);
-      if ((_.isEmpty(this.searchResults) && transition !== 'hide')
-      || element.transition('is animating')) {
-        return;
-      }
-
-      if (transition === 'hide' || transition === 'show') {
-        setTimeout(() => { element.transition(transition); }, 250);
-        return;
-      }
-
-      element
-        .transition(transition);
-    },
-    /* eslint-enable */
-
     beginSearching() {
       if (this.searchValue.length < 3) {
         this.searchResults = [];
-        this.toggleResultPopup('hide');
         return;
       }
 
@@ -185,7 +222,7 @@ export default {
 
           return _.map(results, (result) => {
             const element = this.findInData(result.title.userPreferred);
-            result.category = !element ? this.$t('notInList') : this.getStatus(element.status);
+            result.category = !element ? this.$t('system.menu.search.notInList') : this.getStatus(element.status);
 
             return {
               id: result.id,
@@ -197,15 +234,12 @@ export default {
         })
         .then((results) => {
           if (_.isEmpty(results)) {
-            this.toggleResultPopup('hide');
             return;
           }
 
           this.searchResults = _.chain(results)
             .sortBy(['category', 'title'])
-            .take(10)
             .value();
-          this.toggleResultPopup();
         })
         .catch(() => {});
     },
@@ -214,20 +248,22 @@ export default {
       let statusText = '';
       switch (status) {
         case 'CURRENT':
+          statusText = this.$t('system.listStatus.watching');
+          break;
         case 'REPEATING':
-          statusText = this.$t('watching');
+          statusText = this.$t('system.listStatus.repeating');
           break;
         case 'COMPLETED':
-          statusText = this.$t('completed');
+          statusText = this.$t('system.listStatus.completed');
           break;
         case 'PAUSED':
-          statusText = this.$t('onHold');
+          statusText = this.$t('system.listStatus.onHold');
           break;
         case 'DROPPED':
-          statusText = this.$t('dropped');
+          statusText = this.$t('system.listStatus.dropped');
           break;
         case 'PLANNING':
-          statusText = this.$t('planned');
+          statusText = this.$t('system.listStatus.planned');
           break;
         default:
           break;
@@ -328,35 +364,3 @@ export default {
 }
 
 </style>
-
-<i18n>
-{
-  "en": {
-    "search": "Search...",
-    "watching": "Watching",
-    "completed": "Completed",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "notInList": "Not in your list"
-  },
-  "de": {
-    "search": "Suchen...",
-    "watching": "Laufend",
-    "completed": "Beendet",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "notInList": "Nicht in deiner Liste"
-  },
-  "ja": {
-    "search": "検索・・・",
-    "watching": "見る",
-    "completed": "終了",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "notInList": "リストにはありません"
-  }
-}
-</i18n>

@@ -204,9 +204,7 @@ export default {
     },
   },
 
-  components: {
-    InfoBox,
-  },
+  components: { InfoBox },
 
   computed: {
     ...mapState('myAnimeList', ['auth']),
@@ -259,21 +257,13 @@ export default {
   },
 
   mounted() {
-    $('.ui.status.dropdown', this.$el).dropdown({
-      onChange: this.changeAnimeStatus,
-    });
-    $('.ui.score.dropdown', this.$el).dropdown({
-      onChange: this.changeScore,
-    });
+    $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
+    $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
   },
 
   updated() {
-    $('.ui.status.dropdown', this.$el).dropdown({
-      onChange: this.changeAnimeStatus,
-    });
-    $('.ui.score.dropdown', this.$el).dropdown({
-      onChange: this.changeScore,
-    });
+    $('.ui.status.dropdown', this.$el).dropdown({ onChange: this.changeAnimeStatus });
+    $('.ui.score.dropdown', this.$el).dropdown({ onChange: this.changeScore });
   },
 
   data() {
@@ -491,8 +481,8 @@ export default {
       // that has all relevant changes
       const entries = _.chain(this.updatePayload)
         .groupBy(value => value.id)
-        .map(group => _.reduce(group, (accumulator, item) =>
-          (item.changeFrom > accumulator.changeFrom ? item : accumulator), { changeFrom: 0 }))
+        .map(group => _.reduce(group, (accumulator, item) => (
+          item.changeFrom > accumulator.changeFrom ? item : accumulator), { changeFrom: 0 }))
         .value();
 
       const builder = new Builder({ rootName: 'entry' });
@@ -511,7 +501,7 @@ export default {
           })
           .catch((error) => {
             this.$notify({
-              type: 'error',
+              type: 'err',
               title: this.$t('errorResponseTitle'),
               text: error,
             });
@@ -675,87 +665,3 @@ progress[value]::-webkit-progress-value {
   background-color: #00AAEE;
 }
 </style>
-
-
-<i18n>
-{
-  "en": {
-    "animeTitle": "Anime Title",
-    "progress": "Progress",
-    "score": "Score",
-    "season": "Season",
-    "lastUpdated": "Last Updated",
-    "winter": "Winter",
-    "spring": "Spring",
-    "summer": "Summer",
-    "autumn": "Autumn",
-    "unknown": "Unknown",
-    "dateFormat": "MMM DD YYYY",
-    "loading": "Loading",
-    "updated": {
-      "title": "Anime updated!",
-      "text": "{title} was successfully updated!"
-    },
-    "errorResponseTitle": "Update not successful!",
-    "watching": "Watching",
-    "finished": "Finished",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "toFinished": "Finish",
-    "loadMore": "Load more..."
-  },
-  "de": {
-    "animeTitle": "Animetitel",
-    "progress": "Fortschritt",
-    "score": "Bewertung",
-    "season": "Saison",
-    "lastUpdated": "Zuletzt aktualisiert",
-    "winter": "Winter",
-    "spring": "Frühling",
-    "summer": "Sommer",
-    "autumn": "Herbst",
-    "unknown": "Unbekannt",
-    "dateFormat": "DD[.] MMM YYYY",
-    "loading": "Lädt",
-    "updated": {
-      "title": "Anime aktualisiert!",
-      "text": "{title} wurde erfolgreich aktualisiert!"
-    },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
-    "watching": "Laufend",
-    "finished": "Beendet",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "toFinished": "Beendet",
-    "loadMore": "Mehr Elemente laden..."
-  },
-  "ja": {
-    "animeTitle": "アニメのタイトル",
-    "progress": "進行",
-    "score": "評価",
-    "season": "シーズン",
-    "lastUpdated": "最新更新",
-    "winter": "冬",
-    "spring": "春",
-    "summer": "夏",
-    "autumn": "秋",
-    "unknown": "未知",
-    "dateFormat": "MMM DD YYYY",
-    "loading": "通信中",
-    "updated": {
-      "title": "更新成功！",
-      "text": "「{title}」の更新は成功しました！"
-    },
-    "errorResponseTitle": "シンクロは出来ませんでした！",
-    "watching": "見る",
-    "finished": "終了",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "toFinished": "終了",
-    "loadMore": "次のリストデータ・・・"
-  }
-}
-</i18n>

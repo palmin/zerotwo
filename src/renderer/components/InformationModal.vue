@@ -1,107 +1,126 @@
 <template>
-  <div class="ui fullscreen modal">
-    <div class="header">{{ header }}</div>
-    <div class="scrolling content">
-      <div class="ui grid">
-        <div class="stretched row">
-          <div class="four wide column">
-            <img :src="image" :alt="header" class="ui fluid image" />
-          </div>
+  <v-dialog
+    v-model="dialog"
+    scrollable
+    lazy
+    :overlay="false"
+    transition="fade-transition"
+  >
+    <v-card dark>
+      <v-toolbar>
+        <v-btn icon dark @click.native="close">
+          <v-icon>fas fa-times</v-icon>
+        </v-btn>
+        <v-toolbar-title>{{ header }}</v-toolbar-title>
+      </v-toolbar>
+      <v-card-text>
+        <v-layout row wrap class="ma-2">
+          <v-flex xs3>
+            <v-img
+              :src="image"
+              :alt="header"
+              class="ma-4 grey lighten-2"
+            >
+              <v-layout
+                slot="placeholder"
+                fill-height
+                align-center
+                justify-center
+                ma-0>
+                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+              </v-layout>
+            </v-img>
+          </v-flex>
 
-          <div class="six wide column">
-            <div class="ui basic segment">
-              <h2 class="ui header">
-                {{ $t('seriesInformation') }}
-              </h2>
-              <p>{{ $t('episodes') }}: {{ episodes }}</p>
-              <p>{{ $t('rating') }}:
-                <span id="malRating" class="ui star rating"></span> ({{ rating }})
-              </p>
-              <p>{{ $t('type') }}: {{ type }}</p>
-              <p>{{ $t('synonyms') }}: {{ synonyms }}</p>
-              <p>{{ $t('englishName') }}: {{ englishName }}</p>
-              <p>{{ $t('japaneseName') }}: {{ japaneseName }}</p>
-              <p>{{ $t('airingTime') }}: {{ airingTime }}</p>
-              <p>{{ $t('seriesStatus') }}: {{ seriesStatus }}</p>
-            </div>
-          </div>
+          <v-flex xs4>
+            <h2 class="headline mb-0">{{ $t('system.informationModal.seriesInformation') }}</h2>
+            <ul class="list">
+              <li>{{ $t('system.informationModal.episodes') }}: {{ episodes }}</li>
+              <li>{{ $t('system.informationModal.rating') }}: {{ rating }} / 100</li>
+              <li>{{ $t('system.informationModal.type') }}: {{ type }}</li>
+              <li>{{ $t('system.informationModal.synonyms') }}: {{ synonyms }}</li>
+              <li>{{ $t('system.informationModal.englishName') }}: {{ englishName }}</li>
+              <li>{{ $t('system.informationModal.japaneseName') }}: {{ japaneseName }}</li>
+              <li>{{ $t('system.informationModal.airingTime') }}: {{ airingTime }}</li>
+              <li>{{ $t('system.informationModal.seriesStatus') }}: {{ seriesStatus }}</li>
+              <li v-if="adultContent" class="red--text">
+                <v-layout align-center row wrap>
+                  <v-flex xs1>
+                    <v-icon color="red darken-2">fas fa-ban</v-icon>
+                  </v-flex>
+                  <v-flex xs11>
+                    {{ $t('system.informationModal.adultContent') }}
+                  </v-flex>
+                </v-layout>
+              </li>
+            </ul>
+          </v-flex>
 
-          <div class="six wide column">
-            <div class="ui basic segment">
-              <h2 class="ui header">
-                {{ $t('dataInformation') }}
-              </h2>
-              <div class="ui form">
-                <div class="field">
-                  <label>{{ $t('ownStatus') }}</label>
-                  <dropdown
-                  ref="informationModalStatusDropdown"
-                  :placeholder="dropdownPlaceholder"
-                  :items="statuses"
-                  :value="ownStatus"
-                  v-model="ownStatusValue"
-                  @change="checkChangedAnimeStatus" />
-                </div>
-                <div class="field">
-                  <label>{{ $t('watchedEpisodes') }}</label>
-                  <div class="ui right labeled input">
-                    <input type="number" v-model="ownEpisodeProgressValue" />
-                    <div class="ui basic label">
-                      / {{ episodes }}
-                    </div>
-                  </div>
-                </div>
-                <div class="field">
-                  <label>{{ $t('ownRating') }} (0 - 100)</label>
-                  <div class="ui right labeled input">
-                    <input type="number" min="0" max="100" v-model="ratingValue" />
-                    <div class="ui basic label">
-                      <i class="yellow star icon"></i>
-                    </div>
-                  </div>
-                </div>
-                <template v-if="isInOwnList">
-                  <div class="ui right floated primary button" @click="submitChanges">
-                    {{ $t('submitChanges') }}
-                  </div>
-                  <div class="ui right floated secondary button" @click="resetChanges">
-                    {{ $t('resetChanges') }}
-                  </div>
-                  <div class="ui right floated red button" @click="deleteFromList">
-                    {{ $t('deleteFromList') }}
-                  </div>
-                  <delete-modal
-                    :ref="deleteModalRef"
-                    :submitHandler="submitDelete"
-                    :cancelHandler="cancelDelete"
-                    :header="$t('deleteModalHeader')"
-                    :content="deleteModalContent"
-                  />
-                </template>
-                <template v-else>
-                  <div class="ui right floated secondary button" @click="addToList">
-                    {{ $t('addToList') }}
-                  </div>
-                </template>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ui divider"></div>
-      <div class="sixteen wide column">
-        <div class="ui basic segment">
-          <h3 class="ui header">
-            {{ $t('description') }}
-          </h3>
-          <div v-html="description"></div>
-        </div>
-      </div>
-    </div>
-    <div class="actions">
-      <div class="ui button" @click="close">{{ $t('close') }}</div>
-    </div>
-  </div>
+          <v-flex xs4 offset-xs1>
+            <h2 class="headline mb-0">{{ $t('system.informationModal.dataInformation') }}</h2>
+
+            <v-select
+              :placeholder="dropdownPlaceholder"
+              :items="statuses"
+              :label="$t('system.informationModal.ownStatus')"
+              item-text="name"
+              item-value="value"
+              v-model="ownStatusValue"
+              dark
+            ></v-select>
+
+            <v-text-field
+              type="number"
+              v-model="ownEpisodeProgressValue"
+              :label="$t('system.informationModal.watchedEpisodes')"
+              :suffix="`/ ${episodes}`"
+              :max="episodes !== '?' ? episodes : ''"
+              min="0"
+              dark
+              :rules="[value => value.length !== 0 || $t('system.informationModal.inputRequired')]"
+            ></v-text-field>
+
+            <v-text-field
+              type="number"
+              v-model="ratingValue"
+              :label="$t('system.informationModal.ownRating')"
+              suffix="/ 100"
+              max="100"
+              min="0"
+              dark
+              :rules="[
+                value => value >= 0 && value <= 100 || $t('system.informationModal.ratingError'),
+                value => value.length !== 0 || $t('system.informationModal.inputRequired'),
+              ]"
+            ></v-text-field>
+
+            <v-flex text-xs-center v-if="isInOwnList">
+              <v-btn color="success darken-1" small dark @click="submitChanges">
+                {{ $t('system.actions.save') }}
+              </v-btn>
+              <v-btn color="warning darken-2" small dark @click="resetChanges">
+                {{ $t('system.actions.reset') }}
+              </v-btn>
+              <v-btn color="error darken-1" small dark @click="deleteFromList">
+                <template v-if="!deleteMode">{{ $t('system.actions.remove') }}</template>
+                <template v-else>{{ $t('system.actions.submitDelete') }}</template>
+              </v-btn>
+            </v-flex>
+            <v-flex text-xs-center v-else>
+              <v-btn color="success darken-1" small dark @click="addToList">
+                {{ $t('system.actions.add') }}
+              </v-btn>
+            </v-flex>
+          </v-flex>
+          <v-flex xs12>
+            <h2 class="headline mb-0">{{ $t('system.informationModal.description') }}</h2>
+            <v-divider></v-divider>
+            <section class="mt-2" v-html="description"></section>
+          </v-flex>
+        </v-layout>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -117,59 +136,39 @@ export default {
 
   components: { Dropdown, DeleteModal },
 
-  data() {
-    return {
-      data: null,
-      deleteModalRef: 'informationDeleteModal',
-      ownEpisodeProgressValue: 0,
-      ownStatusValue: null,
-      ratingValue: 0,
-    };
-  },
+  data: () => ({
+    dialog: false,
+    data: null,
+    deleteMode: false,
+    deleteModalRef: 'informationDeleteModal',
+    ownEpisodeProgressValue: 0,
+    ownStatusValue: null,
+    ratingValue: 0,
+  }),
 
   computed: {
     ...mapState('i18n', ['locale']),
     ...mapState('aniList', ['session']),
 
-    // ratingMax() {
-    //   if (!this.session.user || !this.session.user.mediaListOptions) {
-    //     return 100;
-    //   }
-
-    //   const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
-    //   switch (scoringSystem) {
-    //     case 'POINT_100':
-    //     default:
-    //       return 100;
-    //     case 'POINT_10_DECIMAL':
-    //     case 'POINT_10':
-    //       return 10;
-    //     case 'POINT_5':
-    //       return 5;
-    //     case 'POINT_3':
-    //       return 3;
-    //   }
-    // },
-
     statuses() {
       return [{
         value: 'CURRENT',
-        name: this.$t('watching'),
+        name: this.$t('system.listStatus.watching'),
       }, {
         value: 'REPEATING',
-        name: this.$t('repeating'),
+        name: this.$t('system.listStatus.repeating'),
       }, {
         value: 'COMPLETED',
-        name: this.$t('finished'),
+        name: this.$t('system.listStatus.completed'),
       }, {
         value: 'PAUSED',
-        name: this.$t('onHold'),
+        name: this.$t('system.listStatus.onHold'),
       }, {
         value: 'DROPPED',
-        name: this.$t('dropped'),
+        name: this.$t('system.listStatus.dropped'),
       }, {
         value: 'PLANNING',
-        name: this.$t('planned'),
+        name: this.$t('system.listStatus.planned'),
       }];
     },
 
@@ -248,7 +247,7 @@ export default {
         return '';
       }
 
-      return this.data.synonyms.join(', ') || this.$t('noSynonyms');
+      return this.data.synonyms.join(', ') || this.$t('system.informationModal.noSynonyms');
     },
 
     type() {
@@ -256,7 +255,7 @@ export default {
         return '';
       }
 
-      return this.$t(this.data.type.toLowerCase());
+      return this.$t(`system.informationModal.${this.data.type.toLowerCase()}`);
     },
 
     englishName() {
@@ -264,7 +263,7 @@ export default {
         return '';
       }
 
-      return this.data.title.english || this.$t('noEnglishName');
+      return this.data.title.english || this.$t('system.informationModal.noEnglishName');
     },
 
     japaneseName() {
@@ -272,7 +271,7 @@ export default {
         return '';
       }
 
-      return this.data.title.native || this.$t('noJapaneseName');
+      return this.data.title.native || this.$t('system.informationModal.noJapaneseName');
     },
 
     seriesStatus() {
@@ -280,7 +279,7 @@ export default {
         return '';
       }
 
-      return this.$t(camelCase(this.data.status));
+      return this.$t(`aniList.mediaInformation.${camelCase(this.data.status)}`);
     },
 
     airingTime() {
@@ -301,22 +300,34 @@ export default {
       });
 
       if (start.isSame(end) && start.isValid()) {
-        return `${start.format(this.$t('dateFormat'))}`;
-      } else if (!start.isSame(end) && start.isValid() && end.isValid()) {
-        return `${start.format(this.$t('dateFormat'))} ~ ${end.format(this.$t('dateFormat'))}`;
-      } else if (start.isValid() && !end.isValid()) {
-        return this.$t('sinceDate', { date: start.format(this.$t('dateFormat')) });
+        return `${start.format(this.$t('system.informationModal.dateFormat'))}`;
+      }
+
+      if (!start.isSame(end) && start.isValid() && end.isValid()) {
+        return `${start.format(this.$t('system.informationModal.dateFormat'))} ~ ${end.format(this.$t('system.informationModal.dateFormat'))}`;
+      }
+
+      if (start.isValid() && !end.isValid()) {
+        return this.$t('system.informationModal.sinceDate', { date: start.format(this.$t('system.informationModal.dateFormat')) });
       }
 
       return '?';
     },
 
+    adultContent() {
+      if (!this.data) {
+        return null;
+      }
+
+      return this.data.isAdult;
+    },
+
     deleteModalContent() {
-      return this.$t('doYouReallyWantToDelete', { title: this.header });
+      return this.$t('system.informationModal.doYouReallyWantToDelete', { title: this.header });
     },
 
     dropdownPlaceholder() {
-      return this.$t('dropdownPlaceholder');
+      return this.$t('system.informationModal.dropdownPlaceholder');
     },
   },
 
@@ -328,20 +339,12 @@ export default {
 
       this.ownEpisodeProgressValue = value;
     },
-    rating() {
-      if (!this.data) {
-        return;
-      }
-
-      this.updateMALRating();
-    },
     ownRating(value) {
       if (!this.data) {
         return;
       }
 
       this.ratingValue = value;
-      this.updateOwnRating();
     },
     ownStatus(newValue) {
       if (!this.data) {
@@ -350,34 +353,10 @@ export default {
 
       this.ownStatusValue = newValue;
     },
-    locale() {
-      if (!this.data) {
-        return;
-      }
-
-      this.statuses = [{
-        value: 'CURRENT',
-        name: this.$t('watching'),
-      }, {
-        value: 'REPEATING',
-        name: this.$t('repeating'),
-      }, {
-        value: 'COMPLETED',
-        name: this.$t('finished'),
-      }, {
-        value: 'PAUSED',
-        name: this.$t('onHold'),
-      }, {
-        value: 'DROPPED',
-        name: this.$t('dropped'),
-      }, {
-        value: 'PLANNING',
-        name: this.$t('planned'),
-      }];
-    },
   },
 
   methods: {
+    ...mapMutations(['setReady']),
     checkChangedAnimeStatus(status) {
       // When status was set to finished
       if (status === 'COMPLETED') {
@@ -390,20 +369,26 @@ export default {
     },
 
     deleteFromList() {
-      this.$refs[this.deleteModalRef].show();
+      if (!this.deleteMode) {
+        this.deleteMode = true;
+        return;
+      }
+
+      this.deleteMode = false;
+      this.submitDelete();
     },
 
-    submitDelete() {
+    async submitDelete() {
       const { id } = this.data.mediaListEntry;
-      this.cancelDelete();
-      this.show();
 
-      this.$http.deleteAnimeFromList(id, this.session.access_token)
+      await this.setReady(false);
+
+      await this.$http.deleteAnimeFromList(id, this.session.access_token)
         .then((response) => {
           if (response.data.DeleteMediaListEntry.deleted) {
             this.$notify({
-              title: this.$t('deleted.title'),
-              text: this.$t('deleted.text'),
+              title: this.$t('system.informationModal.deleted.title'),
+              text: this.$t('system.informationModal.deleted.text'),
             });
             this.close();
             this.$emit('refresh');
@@ -411,23 +396,22 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: 'ERROR',
             text: error,
           });
+        })
+        .finally(() => {
+          this.setReady(true);
         });
     },
 
-    cancelDelete() {
-      this.$refs[this.deleteModalRef].hide();
-    },
-
-    addToList() {
+    async addToList() {
       const scoringSystem = this.session.user.mediaListOptions.scoreFormat;
       let score;
 
       const progress = this.ownEpisodeProgressValue;
-      const status = this.ownStatusValue;
+      const status = this.ownStatusValue || 'CURRENT';
       const mediaId = this.data.id;
 
       switch (scoringSystem) {
@@ -449,14 +433,15 @@ export default {
           break;
       }
 
-      this.$http.addAnimeToList({
-        mediaId, score, status, progress,
-      }, this.session.access_token)
+      await this.setReady(false);
+
+      await this.$http.addAnimeToList({ mediaId, score, status, progress },
+        this.session.access_token)
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({
-              title: this.$t('created.title'),
-              text: this.$t('created.text'),
+              title: this.$t('system.informationModal.created.title'),
+              text: this.$t('system.informationModal.created.text'),
             });
             this.close();
             this.$emit('refresh');
@@ -464,23 +449,23 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            type: 'error',
+            type: 'err',
             title: 'ERROR',
             text: error,
           });
         });
+
+      await this.setReady(true);
     },
 
     clearRating() {
       this.ratingValue = 0;
-      this.updateOwnRating();
     },
 
     resetChanges() {
       this.ownEpisodeProgressValue = this.data.mediaListEntry.progress;
       this.ownStatusValue = this.data.mediaListEntry.status;
       this.ratingValue = this.data.mediaListEntry.score;
-      this.updateOwnRating();
     },
 
     submitChanges() {
@@ -511,14 +496,12 @@ export default {
           break;
       }
 
-      this.$http.updateAnimeInList({
-        id, progress, status, score,
-      }, token)
+      this.$http.updateAnimeInList({ id, progress, status, score }, token)
         .then((response) => {
           if (response.data.SaveMediaListEntry.id) {
             this.$notify({
-              title: this.$t('updated.title'),
-              text: this.$t('updated.text'),
+              title: this.$t('system.informationModal.updated.title'),
+              text: this.$t('system.informationModal.updated.text'),
             });
             this.close();
             this.$emit('refresh');
@@ -526,8 +509,8 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            type: 'error',
-            title: this.$t('errorResponseTitle'),
+            type: 'err',
+            title: this.$t('system.informationModal.errorResponseTitle'),
             text: error,
           });
         });
@@ -538,11 +521,10 @@ export default {
       this.ownEpisodeProgressValue = 0;
       this.ratingValue = 0;
       this.ownStatusValue = null;
-      this.$refs.informationModalStatusDropdown.clear();
+      this.dialog = false;
+      this.deleteMode = false;
       EventBus.$emit('setOpenInformationId', null);
       EventBus.$emit('setInformation', null);
-
-      $(this.$el).modal('hide');
     },
     show(data) {
       if (!data) {
@@ -550,244 +532,21 @@ export default {
       }
 
       this.data = data;
-
-      $(this.$el)
-        .modal({
-          closable: false,
-          centered: false,
-          autofocus: false,
-        })
-        .modal('show');
-      this.updateOwnRating();
+      this.dialog = true;
     },
     updateRatingValue(value) {
       this.ratingValue = value;
-    },
-    updateMALRating() {
-      // eslint-disable-next-line no-bitwise
-      const score = Math.floor(this.data.averageScore / 10) | 0;
-      $('#malRating', this.$el)
-        .rating({
-          initialRating: score,
-          maxRating: 10,
-          clearable: false,
-        })
-        .rating('disable');
-    },
-    updateOwnRating() {
-      $('#ownRating')
-        .rating({
-          initialRating: this.ratingValue,
-          maxRating: 10,
-          clearable: false,
-          onRate: this.updateRatingValue,
-        })
-        .rating('enable');
     },
   },
 };
 </script>
 
-<style scoped>
-.ui.basic.segment {
-  white-space: pre-line;
-}
-.ui.basic.segment * {
-  white-space: initial;
-}
-i.yellow.star.icon {
-  margin-right: 0;
-}
-</style>
+<style lang="scss" scoped>
+.list {
+  list-style: none;
 
-
-<i18n>
-{
-  "en": {
-    "anime": "Anime",
-    "manga": "Manga",
-    "close": "Close",
-    "description": "Description",
-    "seriesInformation": "Series Information",
-    "dataInformation": "Information of your List",
-    "episodes": "Episodes",
-    "rating": "Rating",
-    "type": "Type of Series",
-    "synonyms": "Synonyms",
-    "noSynonyms": "No Synonyms",
-    "airingTime": "Airing Time",
-    "englishName": "English Name",
-    "noEnglishName": "No English Name",
-    "japaneseName": "Japanese Name",
-    "noJapaneseName": "No Japanese Name",
-    "seriesStatus": "Status of Series",
-    "sinceDate": "Since {date}",
-    "dateFormat": "MMM DD YYYY",
-    "unknownDate": "Date unknown",
-    "finishedAiring": "Finished Airing",
-    "currentlyAiring": "Currently Airing",
-    "notYetAired": "Not yet aired",
-    "ownRating": "Own Rating",
-    "ownStatus": "Own Status",
-    "watchedEpisodes": "Watched Episodes",
-    "current": "Watching",
-    "watching": "Watching",
-    "repeating": "Repeating",
-    "finished": "Finished",
-    "completed": "Completed",
-    "paused": "Paused",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned",
-    "planning": "Planning",
-    "releasing": "Releasing",
-    "not_yet_released": "Not yet released",
-    "cancelled": "Cancelled",
-    "dropdownPlaceholder": "Please select...",
-    "submitChanges": "Submit",
-    "resetChanges": "Reset",
-    "addToList": "Add to List",
-    "deleteFromList": "Delete from List",
-    "updated": {
-      "title": "Updated!",
-      "text": "Update was successful!"
-    },
-    "created": {
-      "title": "Created!",
-      "text": "Create was successful!"
-    },
-    "deleted": {
-      "title": "Deleted!",
-      "text": "Delete was successful!"
-    },
-    "errorResponseTitle": "Update not successful!",
-    "deleteModalHeader": "Confirm delete?",
-    "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
-    "clear": "Set to 0 stars"
-  },
-  "de": {
-    "anime": "Anime",
-    "manga": "Manga",
-    "close": "Schließen",
-    "description": "Beschreibung",
-    "seriesInformation": "Serieninformationen",
-    "dataInformation": "Informationen deiner Liste",
-    "episodes": "Episoden",
-    "rating": "Bewertung",
-    "type": "Serientyp",
-    "synonyms": "Synonyme",
-    "noSynonyms": "Keine Synonyme",
-    "airingTime": "Ausstrahlung",
-    "englishName": "Englischer Name",
-    "noEnglishName": "Kein englischer Name vorhanden",
-    "japaneseName": "Japanischer Name",
-    "noJapaneseName": "Kein japanischer Name vorhanden",
-    "seriesStatus": "Serienstatus",
-    "sinceDate": "Seit {date}",
-    "dateFormat": "DD. MMM YYYY",
-    "unknownDate": "Datum unbekannt",
-    "finishedAiring": "Ausstrahlung beendet",
-    "currentlyAiring": "Ausstrahlung läuft",
-    "notYetAired": "Noch nicht ausgestrahlt",
-    "ownRating": "Eigene Bewertung",
-    "ownStatus": "Eigener Status",
-    "watchedEpisodes": "Episoden geschaut",
-    "current": "Laufend",
-    "watching": "Laufend",
-    "repeating": "Wiederholung",
-    "finished": "Beendet",
-    "completed": "Beendet",
-    "paused": "Pausiert",
-    "onHold": "Pausiert",
-    "dropped": "Abgebrochen",
-    "planned": "Geplant",
-    "planning": "Geplant",
-    "releasing": "Wird ausgestrahlt",
-    "not_yet_released": "Ausstrahlung geplant",
-    "cancelled": "Abgebrochen",
-    "dropdownPlaceholder": "Bitte wählen...",
-    "submitChanges": "Speichern",
-    "resetChanges": "Zurücksetzen",
-    "addToList": "Hinzufügen",
-    "deleteFromList": "Entfernen",
-    "updated": {
-      "title": "Aktualisiert!",
-      "text": "Aktualisierung erfolgreich!"
-    },
-    "created": {
-      "title": "Hinzugefügt!",
-      "text": "Hinzufügen erfolgreich!"
-    },
-    "deleted": {
-      "title": "Gelöscht!",
-      "text": "Löschung erfolgreich!"
-    },
-    "errorResponseTitle": "Aktualisierung nicht erfolgreich!",
-    "deleteModalHeader": "Wirklich löschen?",
-    "doYouReallyWantToDelete": "Möchtest du {title} wirklich von deiner Liste löschen?",
-    "clear": "Auf 0 Sterne setzen"
-  },
-  "ja": {
-    "anime": "アニメ",
-    "manga": "漫画",
-    "close": "クローズ",
-    "description": "デスクリプション",
-    "seriesInformation": "シリーズについて",
-    "dataInformation": "自分のリスト情報",
-    "episodes": "エピソード",
-    "rating": "評価",
-    "type": "タイプ",
-    "synonyms": "シノニム",
-    "noSynonyms": "シノニムがありません",
-    "airingTime": "放送時間",
-    "englishName": "英語名",
-    "noEnglishName": "英語名がありません",
-    "japaneseName": "日本語名",
-    "noJapaneseName": "日本語名がありません",
-    "seriesStatus": "シリーズのステータス",
-    "sinceDate": "{date}から放送中",
-    "dateFormat": "YYYY[年]MM[月]DD[日]",
-    "unknownDate": "日付不明",
-    "finishedAiring": "放送終了",
-    "currentlyAiring": "放送中",
-    "notYetAired": "まだ放送していない",
-    "ownRating": "自分の評価",
-    "ownStatus": "自分のステータス",
-    "watchedEpisodes": "見たエピソード",
-    "watching": "見る",
-    "current": "見る",
-    "repeating": "見直す",
-    "finished": "終了",
-    "completed": "終了",
-    "paused": "中止",
-    "onHold": "中止",
-    "dropped": "止めました",
-    "planned": "見るつもり",
-    "planning": "見るつもり",
-    "releasing": "放送中",
-    "not_yet_released": "放送予定",
-    "cancelled": "中止された",
-    "dropdownPlaceholder": "選んでください・・・",
-    "submitChanges": "保存",
-    "resetChanges": "リセット",
-    "addToList": "追加",
-    "deleteFromList": "削除",
-    "updated": {
-      "title": "アップデートしました！",
-      "text": "アップデートはシンクロしました！"
-    },
-    "created": {
-      "title": "追加しました！",
-      "text": "追加はシンクロしました！"
-    },
-    "deleted": {
-      "title": "削除しました！",
-      "text": "削除はシンクロしました！"
-    },
-    "errorResponseTitle": "シンクロは出来ませんでした！",
-    "deleteModalHeader": "本当に削除しますか？",
-    "doYouReallyWantToDelete": "本当に「{title}」を削除しますか？",
-    "clear": "０☆にセット"
+  & > li {
+    padding: 4px;
   }
 }
-</i18n>
+</style>

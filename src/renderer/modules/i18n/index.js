@@ -1,13 +1,19 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 
+import de from '@/assets/locales/de';
+import en from '@/assets/locales/en';
+import ja from '@/assets/locales/ja';
+import zh from '@/assets/locales/zh';
+
 Vue.use(VueI18n);
 
 const messages = {
-  de: require('@/assets/locales/de.json'),
-  en: require('@/assets/locales/en.json'),
-  ja: require('@/assets/locales/ja.json'),
-  'zh-cn': require('@/assets/locales/zh-cn.json'),
+  de,
+  en,
+  ja,
+  zh,
+  'zh-cn': zh,
 };
 
 const i18n = new VueI18n({

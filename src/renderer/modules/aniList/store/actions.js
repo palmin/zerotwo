@@ -27,6 +27,9 @@ export default {
   resetState({ commit }) {
     commit('resetState');
   },
+  setTableHeaders({ commit }, headers) {
+    commit('setTableHeaders', headers);
+  },
   // eslint-disable-next-line no-unused-vars
   getToken({ commit }) {
     ipcRenderer.send('aniList-oauth', 'getToken');

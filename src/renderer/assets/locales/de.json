@@ -5,6 +5,7 @@
       "animeTitle": "Animetitel",
       "progress": "Fortschritt",
       "airingIn": "Ausstrahlung von Episode {episode} {time}",
+      "airingFinished": "Ausstrahlung beendet",
       "score": "Bewertung",
       "season": "Saison",
       "lastUpdated": "Zuletzt aktualisiert",
@@ -76,7 +77,18 @@
         "loggedInAs": "Eingeloggt als",
         "accountSettings": "Kontoeinstellungen",
         "aniListRefreshRate": "Aktualisierungsintervall",
-        "minutes": "Minuten"
+        "minutes": "Minuten",
+        "hintTableHeaders": "Wähle die Spalten aus, die in der Tabelle angezeigt werden sollen.",
+        "tableHeadersLabel": "Zusätzliche Spalten in der Tabelle auswählen",
+        "tableHeaders": {
+          "HEADER_TITLE": "Titel",
+          "HEADER_PROGRESS": "Fortschritt",
+          "HEADER_SCORE": "Bewertung",
+          "HEADER_SEASON": "Saison",
+          "HEADER_LASTUPDATED": "Zuletzt aktualisiert",
+          "HEADER_GENRE": "Genre"
+        },
+        "tableHeadersError": "Es sind nur bis zu vier zusätzliche Spalten erlaubt!"
       },
       "restoreFactoryData": {
         "restore": "Werkszustand wiederherstellen",
@@ -162,7 +174,8 @@
       "add": "Hinzufügen",
       "remove": "Entfernen",
       "login": "Einloggen",
-      "logout": "Ausloggen"
+      "logout": "Ausloggen",
+      "select": "Auswählen"
     }
   },
   "myAnimeList": {

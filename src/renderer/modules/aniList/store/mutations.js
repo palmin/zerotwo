@@ -42,4 +42,7 @@ export default {
     state.timeUntilNextRefresh = null;
     state.timerRunning = false;
   },
+  setTableHeaders(state, payload) {
+    state.tableHeaders = payload;
+  },
 };

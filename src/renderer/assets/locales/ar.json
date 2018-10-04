@@ -1,0 +1,216 @@
+{
+  "system": {
+    "constants": {
+      "loading": "جار التحميل...",
+      "animeTitle": "عنوان الأنمي",
+      "progress": "التقدم",
+      "airingIn": "عرض الحلقة {episode} {time}",
+      "score": "التقيم",
+      "season": "الموسم",
+      "lastUpdated": "تم التحديث مأخرا",
+      "winter": "الشتاء",
+      "spring": "الربيع",
+      "summer": "الصيف",
+      "autumn": "الخريف",
+      "fall": "الخريف",
+      "unknown": "غير معروف",
+      "updated": {
+        "title": "تم تحديث الانمي",
+        "text": "بنجاح {title} تم تحديث"
+      },
+      "errorResponseTitle": "لم يتم التحديث",
+      "toFinished": "إنتهى",
+      "loadMore": "تحميل أكثر من عنصر"
+    },
+    "error": {
+      "titles": {
+        "notFound": "غير موجود",
+        "fatalError": "خطأ فادح"
+      },
+      "messages": {
+        "notFoundOrAdultContent": "إذا كان المحتوى لأكبر من 18 سنة, قم بتفعيل 'محتوى 18' عن طريق الذهاب الى الإعدادت ثم AniList.co !",
+        "numberInsufficient": "هذا الرقم غير كافي!"
+      }
+    },
+    "listStatus": {
+      "watching": "جار المشاهدة",
+      "repeating": "مشاهدة مرة أخرى",
+      "completed": "إنتهى",
+      "onHold": "إيقاف مؤقت",
+      "dropped": "ملغى",
+      "planned": "مخطط له"
+    },
+    "modules": {
+      "aniList": "قائمة الأنمي",
+      "myAnimeList": "مفضلاتي",
+      "torrents": "التريندز"
+    },
+    "settings": {
+      "title": "الإعدادت",
+      "menu": {
+        "appSettings": "إعدادات التطبيق",
+        "myAnimeList": "مفضلاتي",
+        "aniList": "قائمة الأنمي",
+        "restoreFactoryData": "إرجاع الإعدادت الإفتراضية",
+        "aboutZeroTwo": "عن ZeroTwo",
+        "specialThanks": "شكر وتقدير خاص"
+      },
+      "appSettings": {
+        "setAppLanguage": "تغيير لغة التطبيق",
+        "chooseLanguage": "إختر اللفة",
+        "changeLanguage": "تغيير اللغة"
+      },
+      "myAnimeList": {
+        "loggedInAs": "تم تسجيل دخولك كـ",
+        "accountSettings": "إعدادات الحساب",
+        "loginData": "بيانات تسجيل الدخول",
+        "username": "اسم المستخدم",
+        "password": "كلمة السر",
+        "malRefreshRate": "الفاصل الزمني للتحديث (في الدقيقة)",
+        "noCredentials": "لا يوجد أي بيانات تسجيل!",
+        "enterCredentials": "يرجى إدخال البيانات لتسجيل الدخول",
+        "credentialsWrongOrTooManyLoginAttempts": "إما أن البيانات غير صحيحة أو أنك حاولت تسجيل الدخول مرارا وتكرارا!",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>بيانات المدخلة غير صحيحة وبالتالي لا يمكن التحقق منها!</p><p>يرجى التأكد من بياناتك, لانك قد حاولت تسجيل الدخول كثيرا</p><p>حاول أن تسجل الدخول مرة أخرى من فضلك بعد 1 إلى 6 ساعات من الآن...</p>"
+      },
+      "aniList": {
+        "loggedInAs": "تم تسجيل دخولك كـ",
+        "accountSettings": "إعدادات الحساب",
+        "aniListRefreshRate": "الفاصل الزمني للتحديث",
+        "minutes": "دقائق"
+      },
+      "restoreFactoryData": {
+        "restore": "إرجاع الإعدادت الإفتراضية",
+        "confirmRestoration": "نعم, أنا أريد إرجاع الإعدادت الإفتراضية!",
+        "pressWithinToRestore": "{seconds} ثانية حتى يرجع الزر إلى وضعه الطبيعي."
+      },
+      "aboutZeroTwo": {
+        "version": "الإصدار",
+        "link": "إضغط هنا"
+      }
+    },
+    "menu": {
+      "search": {
+        "headline": "البحث",
+        "notInList": "لا يوجد في قائمتك",
+        "search": "جار البحث ...",
+        "noResults": "لا يوجدأي نتائج"
+      },
+      "listStatus": {
+        "watching": "جار المشاهدة",
+        "repeating": "مشاهدة مرة أخرى",
+        "completed": "إنتهى",
+        "onHold": "إيقاف مؤقت",
+        "dropped": "ملغى",
+        "planned": "مخطط"
+      }
+    },
+    "informationModal": {
+      "anime": "أنمي",
+      "manga": "مانجا",
+      "description": "الوصف",
+      "seriesInformation": "معلونات عن الأنمي",
+      "dataInformation": "معلومات عن قائمتك",
+      "episodes": "الحلقة",
+      "rating": "التقيم",
+      "type": "نوع الإنمي",
+      "synonyms": "المرادفات",
+      "noSynonyms": "لا يوجد أي مرادفات",
+      "airingTime": "موعد العرض",
+      "englishName": "اسم إنكليزي",
+      "noEnglishName": "لا يتوفر أي اسم إنكليزي",
+      "japaneseName": "اسم ياباني",
+      "noJapaneseName": "لا يتوفر أي اسم ياباني",
+      "seriesStatus": "حالة الأنمي",
+      "sinceDate": "منذ {date}",
+      "dateFormat": "يوم.شهر.سنة",
+      "unknownDate": "التاريخ غير معروف",
+      "ownRating": "تقييمك الخاص",
+      "ownStatus": "حالتك الخاصة",
+      "watchedEpisodes": "الحلقة مشاهدة",
+      "dropdownPlaceholder": "أختر من فضلك...",
+      "updated": {
+        "title": "تحديث!",
+        "text": "تم التحديث بنجاح!"
+      },
+      "created": {
+        "title": "تحميل!",
+        "text": "تم التحميل بنجاح!"
+      },
+      "deleted": {
+        "title": "حذف!",
+        "text": "تم الحذف بنجاح!"
+      },
+      "errorResponseTitle": "لم يتم التحديث!",
+      "deleteModalHeader": "هل تريد حقا أن تخدفها؟",
+      "doYouReallyWantToDelete": "هل تريد حقا أن تحذف {title} من قائمتك؟",
+      "clear": "إزالة كل النجوم",
+      "inputRequired": "المدخلات المطلوبة!",
+      "ratingError": "التقيم أقل أو أكثر من حدود التقييم!",
+      "adultContent": "المحتوى مصنف للكبار فقط!"
+    },
+    "actions": {
+      "refreshMAL": "التحديث",
+      "refreshAniList": "تحديث قائمة الأنمي",
+      "refreshTorrents": "تحديث التريندز",
+      "cancel": "إلغاء",
+      "edit": "تعديل",
+      "delete": "مسح",
+      "submitDelete": "تأكيد المسح!",
+      "close": "إغلاق",
+      "save": "حفظ",
+      "reset": "إعادة تعيين",
+      "add": "إضافة",
+      "remove": "إزالة",
+      "login": "تسجيل الدخول",
+      "logout": "تسجيل الخروج"
+    }
+  },
+  "myAnimeList": {
+    "watching": "جار المشاهدة",
+    "completed": "إنتهى",
+    "onHold": "إيقاف مؤقت",
+    "dropped": "ملغى",
+    "planned": "مخطط له"
+  },
+  "aniList": {
+    "mediaInformation": {
+      "finishedAiring": "إنتهى العرض",
+      "currentlyAiring": "جار نشغيل العرض",
+      "notYetAired": "لم يعرض بعد",
+      "releasing": "سيعرض",
+      "finished": "إنتهى العرض",
+      "notYetReleased": "العرض المخطط له",
+      "cancelled": "ملغى"
+    },
+    "listStatus": {
+      "current": "جار المشاهدة",
+      "repeating": "مشاهدة مرة أخرى",
+      "finished": "إنتهى",
+      "paused": "إيقاف مؤقت",
+      "dropped": "ملغى",
+      "planning": "مخطط له"
+    }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "prevPage": "الصفحة السابقة",
+      "nextPage": "الصفحة التالية",
+      "pageText": "{0}-{1} من {2}",
+      "noResultsText": "لا يتوفر أي نتائج",
+      "rowsPerPageText": "السجلات لكل صفحة",
+      "rowsPerPageAll": "كل السجلات"
+    },
+    "dataTable": {
+      "rowsPerPageText": "الأسطر لكل صفحة"
+    },
+    "noDataText": "لا يتوفر أي بيانات"
+  },
+  "$notify": {
+    "titles": {
+      "success": "بنجاح!"
+    },
+    "texts": {
+      "aniListRefreshRateUpdated": "تحديث الفاصل الزمني بنجاح إلى  {refreshRate} دقيقة!"
+    }
+  }
+}

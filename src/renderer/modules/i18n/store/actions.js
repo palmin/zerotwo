@@ -9,9 +9,11 @@ export default {
     // should be taken.
     // Chinese (zh-cn) for example should not be split.
     const singleCodeLanguages = [
-      'de',
-      'en',
-      'ja',
+      'ar', // Arabic
+      'de', // German
+      'en', // English
+      'ja', // Japanese
+      'zh', // Chinese
     ];
 
     const singleCode = language.split('-')[0];

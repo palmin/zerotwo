@@ -19,6 +19,7 @@ const state = {
       avatar: { medium: '' },
     },
   },
+  tableHeaders: [],
 };
 
 export default {

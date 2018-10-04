@@ -3,27 +3,27 @@
     <v-toolbar-items>
       <v-btn flat exact :to="{ name: 'Ani-Watching' }">
         <v-icon color="green" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.watching') }} ({{ watchingAmount }})
+        {{ $t('system.menu.listStatus.watching', { amount: watchingAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Completed' }">
         <v-icon color="blue" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.completed') }} ({{ completedAmount }})
+        {{ $t('system.menu.listStatus.completed', { amount: completedAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Paused' }">
         <v-icon color="yellow" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.onHold') }} ({{ pausedAmount }})
+        {{ $t('system.menu.listStatus.onHold', { amount: pausedAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Dropped' }">
         <v-icon color="red" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.dropped') }} ({{ droppedAmount }})
+        {{ $t('system.menu.listStatus.dropped', { amount: droppedAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Planning' }">
         <v-icon color="black" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.planned') }} ({{ planningAmount }})
+        {{ $t('system.menu.listStatus.planned', { amount: planningAmount }) }}
       </v-btn>
     </v-toolbar-items>
 

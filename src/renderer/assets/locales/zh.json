@@ -96,12 +96,12 @@
         "noResults": "未找到结果"
       },
       "listStatus": {
-        "watching": "观看中",
-        "repeating": "回顾中",
-        "completed": "已看完",
-        "onHold": "搁置中",
-        "dropped": "已弃坑",
-        "planned": "计划中"
+        "watching": "观看中 ({amount})",
+        "repeating": "回顾中 ({amount})",
+        "completed": "已看完 ({amount})",
+        "onHold": "搁置中 ({amount})",
+        "dropped": "已弃坑 ({amount})",
+        "planned": "计划中 ({amount})"
       }
     },
     "informationModal": {

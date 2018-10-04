@@ -5,6 +5,7 @@
       "animeTitle": "عنوان الأنمي",
       "progress": "التقدم",
       "airingIn": "عرض الحلقة {episode} {time}",
+      "airingFinished": "Airing finished",
       "score": "التقيم",
       "season": "الموسم",
       "lastUpdated": "تم التحديث مأخرا",
@@ -76,7 +77,18 @@
         "loggedInAs": "تم تسجيل دخولك كـ",
         "accountSettings": "إعدادات الحساب",
         "aniListRefreshRate": "الفاصل الزمني للتحديث",
-        "minutes": "دقائق"
+        "minutes": "دقائق",
+        "hintTableHeaders": "Wähle die Spalten aus, die in der Tabelle angezeigt werden sollen.",
+        "tableHeadersLabel": "Zusätzliche Spalten in der Tabelle auswählen",
+        "tableHeaders": {
+          "HEADER_TITLE": "Titel",
+          "HEADER_PROGRESS": "Fortschritt",
+          "HEADER_SCORE": "Bewertung",
+          "HEADER_SEASON": "Saison",
+          "HEADER_LASTUPDATED": "Zuletzt aktualisiert",
+          "HEADER_GENRE": "Genre"
+        },
+        "tableHeadersError": "Es sind nur bis zu vier zusätzliche Spalten erlaubt!"
       },
       "restoreFactoryData": {
         "restore": "إرجاع الإعدادت الإفتراضية",
@@ -96,12 +108,12 @@
         "noResults": "لا يوجدأي نتائج"
       },
       "listStatus": {
-        "watching": "جار المشاهدة",
-        "repeating": "مشاهدة مرة أخرى",
-        "completed": "إنتهى",
-        "onHold": "إيقاف مؤقت",
-        "dropped": "ملغى",
-        "planned": "مخطط"
+        "watching": "({amount}) جار المشاهدة",
+        "repeating": "({amount}) مشاهدة مرة أخرى",
+        "completed": "({amount}) إنتهى",
+        "onHold": "({amount}) إيقاف مؤقت",
+        "dropped": "({amount}) ملغى",
+        "planned": "({amount}) مخطط"
       }
     },
     "informationModal": {
@@ -162,7 +174,8 @@
       "add": "إضافة",
       "remove": "إزالة",
       "login": "تسجيل الدخول",
-      "logout": "تسجيل الخروج"
+      "logout": "تسجيل الخروج",
+      "select": "Select"
     }
   },
   "myAnimeList": {

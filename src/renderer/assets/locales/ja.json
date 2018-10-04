@@ -96,12 +96,12 @@
         "noResults": "結果は見つかりませんでした。"
       },
       "listStatus": {
-        "watching": "見る",
-        "repeating": "再見",
-        "completed": "終了",
-        "onHold": "中止",
-        "dropped": "停止",
-        "planned": "予定"
+        "watching": "見る ({amount})",
+        "repeating": "再見 ({amount})",
+        "completed": "終了 ({amount})",
+        "onHold": "中止 ({amount})",
+        "dropped": "停止 ({amount})",
+        "planned": "予定 ({amount})"
       }
     },
     "informationModal": {

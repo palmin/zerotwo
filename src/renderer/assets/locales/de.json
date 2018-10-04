@@ -108,12 +108,12 @@
         "noResults": "Es wurden keine Ergebnisse gefunden"
       },
       "listStatus": {
-        "watching": "Laufend",
-        "repeating": "Wiederholung",
-        "completed": "Beendet",
-        "onHold": "Pausiert",
-        "dropped": "Abgebrochen",
-        "planned": "Geplant"
+        "watching": "Laufend ({amount})",
+        "repeating": "Wiederholung ({amount})",
+        "completed": "Beendet ({amount})",
+        "onHold": "Pausiert ({amount})",
+        "dropped": "Abgebrochen ({amount})",
+        "planned": "Geplant ({amount})"
       }
     },
     "informationModal": {

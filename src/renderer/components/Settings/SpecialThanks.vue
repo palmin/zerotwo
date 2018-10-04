@@ -27,13 +27,19 @@
 <script>
 export default {
   data: () => ({
-    contributors: [
-      {
-        name: '晨风Mornwind',
-        thanks: 'for providing the Simplified Chinese localization.',
-        icon: 'fas fa-language',
-      },
-    ],
+    contributors: [{
+      name: '晨风Mornwind',
+      thanks: 'for providing the Simplified Chinese localization.',
+      icon: 'fas fa-language',
+    }, {
+      name: 'Rafeh',
+      thanks: 'for providing the Arabic localization.',
+      icon: 'fas fa-language',
+    }, {
+      name: 'Munkei',
+      thanks: 'for providing the Arabic localization.',
+      icon: 'fas fa-language',
+    }],
   }),
 };
 </script>

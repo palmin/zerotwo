@@ -38,6 +38,10 @@ export default {
     return {
       localeSetting: '',
       languages: [{
+        name: 'العَرَبِيَّة‎',
+        englishName: 'Arabic',
+        value: 'ar',
+      }, {
         name: 'English',
         englishName: 'English',
         value: 'en',
@@ -52,7 +56,7 @@ export default {
       }, {
         name: '简体中文',
         englishName: 'Simplified Chinese',
-        value: 'zh-cn',
+        value: 'zh',
       }],
     };
   },

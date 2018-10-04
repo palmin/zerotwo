@@ -96,12 +96,12 @@
         "noResults": "No results could be found"
       },
       "listStatus": {
-        "watching": "Watching",
-        "repeating": "Repeating",
-        "completed": "Completed",
-        "onHold": "Paused",
-        "dropped": "Dropped",
-        "planned": "Planning"
+        "watching": "Watching ({amount})",
+        "repeating": "Repeating ({amount})",
+        "completed": "Completed ({amount})",
+        "onHold": "Paused ({amount})",
+        "dropped": "Dropped ({amount})",
+        "planned": "Planning ({amount})"
       }
     },
     "informationModal": {

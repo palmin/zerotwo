@@ -1,44 +1,170 @@
 {
+  "$notify": {
+    "texts": {
+      "aniListRefreshRateUpdated": "Refresh rate successfully updated to {refreshRate} minutes!"
+    },
+    "titles": {
+      "success": "Success!"
+    }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "nextPage": "Next page",
+      "noResultsText": "No results",
+      "pageText": "{0}-{1} of {2}",
+      "prevPage": "Previous page",
+      "rowsPerPageAll": "All",
+      "rowsPerPageText": "Items per page"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Items per page"
+    },
+    "noDataText": "No data"
+  },
+  "aniList": {
+    "listStatus": {
+      "current": "观看中",
+      "dropped": "已弃坑",
+      "finished": "已看完",
+      "paused": "搁置中",
+      "planning": "计划中",
+      "repeating": "回顾中"
+    },
+    "mediaInformation": {
+      "cancelled": "已弃坑",
+      "currentlyAiring": "正在放送",
+      "finished": "放送完毕",
+      "finishedAiring": "放送完毕",
+      "notYetAired": "尚未放送",
+      "notYetReleased": "尚未上映",
+      "releasing": "上映中"
+    }
+  },
+  "myAnimeList": {
+    "completed": "已看完",
+    "dropped": "已弃坑",
+    "onHold": "搁置中",
+    "planned": "计划中",
+    "watching": "观看中"
+  },
   "system": {
+    "actions": {
+      "add": "添加",
+      "cancel": "取消",
+      "close": "关闭",
+      "delete": "删除",
+      "edit": "编辑",
+      "login": "登录",
+      "logout": "登出",
+      "refreshAniList": "刷新AniList",
+      "refreshMAL": "刷新MAL",
+      "refreshTorrents": "刷新Torrent",
+      "remove": "删除",
+      "reset": "重置",
+      "save": "保存",
+      "select": "Select",
+      "submitDelete": "Submit Delete!"
+    },
     "constants": {
-      "loading": "加载中…",
-      "animeTitle": "动画标题",
-      "progress": "进度",
       "airingIn": "Episode {episode} airing {time}",
+      "animeTitle": "动画标题",
+      "autumn": "秋",
+      "dateFormat": "YYYY/M/D",
+      "errorResponseTitle": "更新失败！",
+      "fall": "秋",
+      "lastUpdated": "最后更新",
+      "loadMore": "加载更多内容…",
+      "loading": "加载中…",
+      "progress": "进度",
       "score": "分数",
       "season": "季度",
-      "lastUpdated": "最后更新",
-      "winter": "冬",
       "spring": "春",
       "summer": "夏",
-      "autumn": "秋",
-      "fall": "秋",
-      "unknown": "不详",
-      "dateFormat": "YYYY/M/D",
-      "updated": {
-        "title": "动画更新！",
-        "text": "{title} 更新成功！"
-      },
-      "errorResponseTitle": "更新失败！",
       "toFinished": "完结",
-      "loadMore": "加载更多内容…"
+      "unknown": "不详",
+      "updated": {
+        "text": "{title} 更新成功！",
+        "title": "动画更新！"
+      },
+      "winter": "冬"
     },
     "error": {
-      "titles": {
-        "notFound": "Not found!",
-        "fatalError": "Fatal error!"
-      },
       "messages": {
-        "notFoundOrAdultContent": "If this is a medium considered adult content, please activate '18+ Content' in the settings on AniList.co!"
+        "notFoundOrAdultContent": "If this is a medium considered adult content, please activate '18+ Content' in the settings on AniList.co!",
+        "numberInsufficient": "This number is not sufficient!"
+      },
+      "titles": {
+        "fatalError": "Fatal error!",
+        "notFound": "Not found!"
       }
     },
+    "informationModal": {
+      "adultContent": "This media is considered adult content! Your discretion is advised!",
+      "airingTime": "放送时间",
+      "anime": "动画",
+      "clear": "星数归零",
+      "created": {
+        "text": "创建成功！",
+        "title": "创建！"
+      },
+      "dataInformation": "你的列表信息",
+      "dateFormat": "YYYY/M/D",
+      "deleteModalHeader": "确认删除？",
+      "deleted": {
+        "text": "删除成功！",
+        "title": "删除！"
+      },
+      "description": "说明",
+      "doYouReallyWantToDelete": "你真的确定要把 {title} 从你的列表中删除？",
+      "dropdownPlaceholder": "请选择…",
+      "englishName": "英文名",
+      "episodes": "总集数",
+      "errorResponseTitle": "更新失败！",
+      "inputRequired": "Input required!",
+      "japaneseName": "日文名",
+      "manga": "漫画",
+      "noEnglishName": "无英文名",
+      "noJapaneseName": "无日文名",
+      "noSynonyms": "无别名",
+      "ownRating": "个人评分",
+      "ownStatus": "个人状态",
+      "rating": "评分",
+      "ratingError": "Rating is under or over the expected values!",
+      "seriesInformation": "剧集信息",
+      "seriesStatus": "剧集状态",
+      "sinceDate": "从{date}开始",
+      "synonyms": "别名",
+      "type": "剧集类型",
+      "unknownDate": "日期不详",
+      "updated": {
+        "text": "更新成功！",
+        "title": "更新！"
+      },
+      "watchedEpisodes": "已看集数"
+    },
     "listStatus": {
-      "watching": "观看中",
-      "repeating": "回顾中",
       "completed": "已看完",
-      "onHold": "搁置中",
       "dropped": "已弃坑",
-      "planned": "计划中"
+      "onHold": "搁置中",
+      "planned": "计划中",
+      "repeating": "回顾中",
+      "watching": "观看中"
+    },
+    "menu": {
+      "listStatus": {
+        "completed": "已看完 ({amount})",
+        "dropped": "已弃坑 ({amount})",
+        "onHold": "搁置中 ({amount})",
+        "planned": "计划中 ({amount})",
+        "repeating": "回顾中 ({amount})",
+        "watching": "观看中 ({amount})"
+      },
+      "search": {
+        "headline": "Search Window",
+        "noResults": "未找到结果",
+        "notInList": "不在你的列表中",
+        "search": "搜索…"
+      }
     },
     "modules": {
       "aniList": "AniList",
@@ -46,162 +172,58 @@
       "torrents": "Torrents"
     },
     "settings": {
-      "title": "设置",
-      "menu": {
-        "appSettings": "软件设置",
-        "myAnimeList": "MyAnimeList",
-        "aniList": "AniList",
-        "restoreFactoryData": "恢复出厂数据",
-        "aboutZeroTwo": "关于ZeroTwo",
-        "specialThanks": "Special Thanks"
-      },
-      "appSettings": {
-        "setAppLanguage": "设置软件语言",
-        "chooseLanguage": "选择语言",
-        "changeLanguage": "更改语言"
-      },
-      "myAnimeList": {
-        "loggedInAs": "登录为",
-        "accountSettings": "账户设置",
-        "loginData": "登录数据",
-        "username": "用户名",
-        "password": "密码",
-        "malRefreshRate": "刷新间隔（分钟）",
-        "noCredentials": "没有登录信息！",
-        "enterCredentials": "请输入登录信息以用于登录。",
-        "credentialsWrongOrTooManyLoginAttempts": "登录信息错误或登录尝试次数过多！",
-        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>你的登录信息有误，无法通过验证。</p><p>如果你确定你的登录信息准确无误，那么可能是因为你进行了过多次的登录尝试！</p><p>如果你遇到的情况属于后者，请等1~6个小时后再进行尝试…</p>"
+      "aboutZeroTwo": {
+        "link": "点击我",
+        "version": "版本号"
       },
       "aniList": {
-        "loggedInAs": "登录为",
         "accountSettings": "账户设置",
         "aniListRefreshRate": "刷新间隔（分钟）",
-        "minutes": "分"
+        "hintTableHeaders": "Choose the columns that should be displayed in the table.",
+        "loggedInAs": "登录为",
+        "minutes": "分",
+        "tableHeaders": {
+          "HEADER_GENRE": "Genre",
+          "HEADER_LASTUPDATED": "Last updated",
+          "HEADER_PROGRESS": "Progress",
+          "HEADER_SCORE": "Score",
+          "HEADER_SEASON": "Season",
+          "HEADER_TITLE": "Title"
+        },
+        "tableHeadersError": "Only up to four extra columns are registerable!",
+        "tableHeadersLabel": "Add extra columns to the table"
+      },
+      "appSettings": {
+        "changeLanguage": "更改语言",
+        "chooseLanguage": "选择语言",
+        "setAppLanguage": "设置软件语言"
+      },
+      "menu": {
+        "aboutZeroTwo": "关于ZeroTwo",
+        "aniList": "AniList",
+        "appSettings": "软件设置",
+        "myAnimeList": "MyAnimeList",
+        "restoreFactoryData": "恢复出厂数据",
+        "specialThanks": "Special Thanks"
+      },
+      "myAnimeList": {
+        "accountSettings": "账户设置",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>你的登录信息有误，无法通过验证。</p><p>如果你确定你的登录信息准确无误，那么可能是因为你进行了过多次的登录尝试！</p><p>如果你遇到的情况属于后者，请等1~6个小时后再进行尝试…</p>",
+        "credentialsWrongOrTooManyLoginAttempts": "登录信息错误或登录尝试次数过多！",
+        "enterCredentials": "请输入登录信息以用于登录。",
+        "loggedInAs": "登录为",
+        "loginData": "登录数据",
+        "malRefreshRate": "刷新间隔（分钟）",
+        "noCredentials": "没有登录信息！",
+        "password": "密码",
+        "username": "用户名"
       },
       "restoreFactoryData": {
-        "restore": "恢复出厂数据",
         "confirmRestoration": "Yes, I want to restore to factory data!",
-        "pressWithinToRestore": "{seconds} second(s) until the button resets back."
+        "pressWithinToRestore": "{seconds} second(s) until the button resets back.",
+        "restore": "恢复出厂数据"
       },
-      "aboutZeroTwo": {
-        "version": "版本号",
-        "link": "点击我"
-      }
-    },
-    "menu": {
-      "search": {
-        "headline": "Search Window",
-        "notInList": "不在你的列表中",
-        "search": "搜索…",
-        "noResults": "未找到结果"
-      },
-      "listStatus": {
-        "watching": "观看中 ({amount})",
-        "repeating": "回顾中 ({amount})",
-        "completed": "已看完 ({amount})",
-        "onHold": "搁置中 ({amount})",
-        "dropped": "已弃坑 ({amount})",
-        "planned": "计划中 ({amount})"
-      }
-    },
-    "informationModal": {
-      "anime": "动画",
-      "manga": "漫画",
-      "description": "说明",
-      "seriesInformation": "剧集信息",
-      "dataInformation": "你的列表信息",
-      "episodes": "总集数",
-      "rating": "评分",
-      "type": "剧集类型",
-      "synonyms": "别名",
-      "noSynonyms": "无别名",
-      "airingTime": "放送时间",
-      "englishName": "英文名",
-      "noEnglishName": "无英文名",
-      "japaneseName": "日文名",
-      "noJapaneseName": "无日文名",
-      "seriesStatus": "剧集状态",
-      "sinceDate": "从{date}开始",
-      "dateFormat": "YYYY/M/D",
-      "unknownDate": "日期不详",
-      "ownRating": "个人评分",
-      "ownStatus": "个人状态",
-      "watchedEpisodes": "已看集数",
-      "dropdownPlaceholder": "请选择…",
-      "updated": {
-        "title": "更新！",
-        "text": "更新成功！"
-      },
-      "created": {
-        "title": "创建！",
-        "text": "创建成功！"
-      },
-      "deleted": {
-        "title": "删除！",
-        "text": "删除成功！"
-      },
-      "errorResponseTitle": "更新失败！",
-      "deleteModalHeader": "确认删除？",
-      "doYouReallyWantToDelete": "你真的确定要把 {title} 从你的列表中删除？",
-      "clear": "星数归零",
-      "inputRequired": "Input required!",
-      "ratingError": "Rating is under or over the expected values!",
-      "adultContent": "This media is considered adult content! Your discretion is advised!"
-    },
-    "actions": {
-      "refreshMAL": "刷新MAL",
-      "refreshAniList": "刷新AniList",
-      "refreshTorrents": "刷新Torrent",
-      "cancel": "取消",
-      "edit": "编辑",
-      "delete": "删除",
-      "close": "关闭",
-      "save": "保存",
-      "reset": "重置",
-      "add": "添加",
-      "remove": "删除",
-      "login": "登录",
-      "logout": "登出"
+      "title": "设置"
     }
-  },
-  "myAnimeList": {
-    "watching": "观看中",
-    "completed": "已看完",
-    "onHold": "搁置中",
-    "dropped": "已弃坑",
-    "planned": "计划中"
-  },
-  "aniList": {
-    "mediaInformation": {
-      "finishedAiring": "放送完毕",
-      "currentlyAiring": "正在放送",
-      "notYetAired": "尚未放送",
-      "releasing": "上映中",
-      "finished": "放送完毕",
-      "notYetReleased": "尚未上映",
-      "cancelled": "已弃坑"
-    },
-    "listStatus": {
-      "current": "观看中",
-      "repeating": "回顾中",
-      "finished": "已看完",
-      "paused": "搁置中",
-      "dropped": "已弃坑",
-      "planning": "计划中"
-    }
-  },
-  "$vuetify": {
-    "dataIterator": {
-      "prevPage": "Previous page",
-      "nextPage": "Next page",
-      "pageText": "{0}-{1} of {2}",
-      "noResultsText": "No results",
-      "rowsPerPageText": "Items per page",
-      "rowsPerPageAll": "All"
-    },
-    "dataTable": {
-      "rowsPerPageText": "Items per page"
-    },
-    "noDataText": "No data"
   }
 }

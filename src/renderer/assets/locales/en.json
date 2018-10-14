@@ -1,44 +1,170 @@
 {
+  "$notify": {
+    "texts": {
+      "aniListRefreshRateUpdated": "Refresh rate successfully updated to {refreshRate} minutes!"
+    },
+    "titles": {
+      "success": "Success!"
+    }
+  },
+  "$vuetify": {
+    "dataIterator": {
+      "nextPage": "Next page",
+      "noResultsText": "No results",
+      "pageText": "{0}-{1} of {2}",
+      "prevPage": "Previous page",
+      "rowsPerPageAll": "All",
+      "rowsPerPageText": "Items per page"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Items per page"
+    },
+    "noDataText": "No data"
+  },
+  "aniList": {
+    "listStatus": {
+      "current": "Current",
+      "dropped": "Dropped",
+      "finished": "Finished",
+      "paused": "Paused",
+      "planning": "Planning",
+      "repeating": "Repeating"
+    },
+    "mediaInformation": {
+      "cancelled": "Cancelled",
+      "currentlyAiring": "Currently Airing",
+      "finished": "Finished Airing",
+      "finishedAiring": "Finished Airing",
+      "notYetAired": "Not yet aired",
+      "notYetReleased": "Not yet released",
+      "releasing": "Releasing"
+    }
+  },
+  "myAnimeList": {
+    "completed": "Completed",
+    "dropped": "Dropped",
+    "onHold": "On Hold",
+    "planned": "Planned",
+    "watching": "Watching"
+  },
   "system": {
+    "actions": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "close": "Close",
+      "delete": "Delete",
+      "edit": "Edit",
+      "login": "Login",
+      "logout": "Logout",
+      "refreshAniList": "Refresh AniList",
+      "refreshMAL": "Refresh MAL",
+      "refreshTorrents": "Refresh Torrents",
+      "remove": "Remove",
+      "reset": "Reset",
+      "save": "Save",
+      "select": "Select",
+      "submitDelete": "Submit Delete!"
+    },
     "constants": {
-      "loading": "Loading...",
-      "animeTitle": "Anime Title",
-      "progress": "Progress",
       "airingIn": "Episode {episode} is airing {time}",
+      "animeTitle": "Anime Title",
+      "autumn": "Autumn",
+      "dateFormat": "MMM DD YYYY",
+      "errorResponseTitle": "Update not successful!",
+      "fall": "Fall",
+      "lastUpdated": "Last Updated",
+      "loadMore": "Load more...",
+      "loading": "Loading...",
+      "progress": "Progress",
       "score": "Score",
       "season": "Season",
-      "lastUpdated": "Last Updated",
-      "winter": "Winter",
       "spring": "Spring",
       "summer": "Summer",
-      "autumn": "Autumn",
-      "fall": "Fall",
-      "unknown": "Unknown",
-      "dateFormat": "MMM DD YYYY",
-      "updated": {
-        "title": "Anime updated!",
-        "text": "{title} was successfully updated!"
-      },
-      "errorResponseTitle": "Update not successful!",
       "toFinished": "Finish",
-      "loadMore": "Load more..."
+      "unknown": "Unknown",
+      "updated": {
+        "text": "{title} was successfully updated!",
+        "title": "Anime updated!"
+      },
+      "winter": "Winter"
     },
     "error": {
-      "titles": {
-        "notFound": "Not found!",
-        "fatalError": "Fatal error!"
-      },
       "messages": {
-        "notFoundOrAdultContent": "If this is a medium considered adult content, please activate '18+ Content' in the settings on AniList.co!"
+        "notFoundOrAdultContent": "If this is a medium considered adult content, please activate '18+ Content' in the settings on AniList.co!",
+        "numberInsufficient": "This number is not sufficient!"
+      },
+      "titles": {
+        "fatalError": "Fatal error!",
+        "notFound": "Not found!"
       }
     },
+    "informationModal": {
+      "adultContent": "This media is considered adult content! Your discretion is advised!",
+      "airingTime": "Airing Time",
+      "anime": "Anime",
+      "clear": "Set to 0 stars",
+      "created": {
+        "text": "Create was successful!",
+        "title": "Created!"
+      },
+      "dataInformation": "Information of your List",
+      "dateFormat": "MMM DD YYYY",
+      "deleteModalHeader": "Confirm delete?",
+      "deleted": {
+        "text": "Delete was successful!",
+        "title": "Deleted!"
+      },
+      "description": "Description",
+      "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
+      "dropdownPlaceholder": "Please select...",
+      "englishName": "English Name",
+      "episodes": "Episodes",
+      "errorResponseTitle": "Update not successful!",
+      "inputRequired": "Input required!",
+      "japaneseName": "Japanese Name",
+      "manga": "Manga",
+      "noEnglishName": "No English Name",
+      "noJapaneseName": "No Japanese Name",
+      "noSynonyms": "No Synonyms",
+      "ownRating": "Own Rating",
+      "ownStatus": "Own Status",
+      "rating": "Rating",
+      "ratingError": "Rating is under or over the expected values!",
+      "seriesInformation": "Series Information",
+      "seriesStatus": "Status of Series",
+      "sinceDate": "Since {date}",
+      "synonyms": "Synonyms",
+      "type": "Type of Series",
+      "unknownDate": "Date unknown",
+      "updated": {
+        "text": "Update was successful!",
+        "title": "Updated!"
+      },
+      "watchedEpisodes": "Watched Episodes"
+    },
     "listStatus": {
-      "watching": "Watching",
-      "repeating": "Repeating",
       "completed": "Completed",
-      "onHold": "Paused",
       "dropped": "Dropped",
-      "planned": "Planning"
+      "onHold": "Paused",
+      "planned": "Planning",
+      "repeating": "Repeating",
+      "watching": "Watching"
+    },
+    "menu": {
+      "listStatus": {
+        "completed": "Completed ({amount})",
+        "dropped": "Dropped ({amount})",
+        "onHold": "Paused ({amount})",
+        "planned": "Planning ({amount})",
+        "repeating": "Repeating ({amount})",
+        "watching": "Watching ({amount})"
+      },
+      "search": {
+        "headline": "Search Window",
+        "noResults": "No results could be found",
+        "notInList": "Not in your list",
+        "search": "Search ..."
+      }
     },
     "modules": {
       "aniList": "AniList",
@@ -46,162 +172,58 @@
       "torrents": "Torrents"
     },
     "settings": {
-      "title": "Settings",
-      "menu": {
-        "appSettings": "App Settings",
-        "myAnimeList": "MyAnimeList",
-        "aniList": "AniList",
-        "restoreFactoryData": "Restore Factory Data",
-        "aboutZeroTwo": "About ZeroTwo",
-        "specialThanks": "Special Thanks"
-      },
-      "appSettings": {
-        "setAppLanguage": "Set app's language",
-        "chooseLanguage": "Choose language",
-        "changeLanguage": "Change language"
-      },
-      "myAnimeList": {
-        "loggedInAs": "Logged in as",
-        "accountSettings": "Account Settings",
-        "loginData": "Login Data",
-        "username": "Username",
-        "password": "Password",
-        "malRefreshRate": "Refresh interval (in minutes)",
-        "noCredentials": "No credentials!",
-        "enterCredentials": "Please enter credentials to log in.",
-        "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
-        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>"
+      "aboutZeroTwo": {
+        "link": "Click Me",
+        "version": "Version"
       },
       "aniList": {
-        "loggedInAs": "Logged in as",
         "accountSettings": "Account Settings",
         "aniListRefreshRate": "Refresh interval (in minutes)",
-        "minutes": "Minutes"
+        "hintTableHeaders": "Choose the columns that should be displayed in the table.",
+        "loggedInAs": "Logged in as",
+        "minutes": "Minutes",
+        "tableHeaders": {
+          "HEADER_GENRE": "Genre",
+          "HEADER_LASTUPDATED": "Last updated",
+          "HEADER_PROGRESS": "Progress",
+          "HEADER_SCORE": "Score",
+          "HEADER_SEASON": "Season",
+          "HEADER_TITLE": "Title"
+        },
+        "tableHeadersError": "Only up to four extra columns are registerable!",
+        "tableHeadersLabel": "Add extra columns to the table"
+      },
+      "appSettings": {
+        "changeLanguage": "Change language",
+        "chooseLanguage": "Choose language",
+        "setAppLanguage": "Set app's language"
+      },
+      "menu": {
+        "aboutZeroTwo": "About ZeroTwo",
+        "aniList": "AniList",
+        "appSettings": "App Settings",
+        "myAnimeList": "MyAnimeList",
+        "restoreFactoryData": "Restore Factory Data",
+        "specialThanks": "Special Thanks"
+      },
+      "myAnimeList": {
+        "accountSettings": "Account Settings",
+        "credentialsCouldNotBeVerifiedOrTooManyLoginAttempts": "<p>Your credentials are incorrect and could not be verified.</p><p>If you're sure that your credentials are correct, you might have had too many Login attempts!</p><p>If the latter applies to you, try again in one to six hours...</p>",
+        "credentialsWrongOrTooManyLoginAttempts": "Wrong credentials or Too many login attempts!",
+        "enterCredentials": "Please enter credentials to log in.",
+        "loggedInAs": "Logged in as",
+        "loginData": "Login Data",
+        "malRefreshRate": "Refresh interval (in minutes)",
+        "noCredentials": "No credentials!",
+        "password": "Password",
+        "username": "Username"
       },
       "restoreFactoryData": {
-        "restore": "Restore Factory Data",
         "confirmRestoration": "Yes, I want to restore to factory data!",
-        "pressWithinToRestore": "{seconds} second(s) until the button changes back to normal state."
+        "pressWithinToRestore": "{seconds} second(s) until the button changes back to normal state.",
+        "restore": "Restore Factory Data"
       },
-      "aboutZeroTwo": {
-        "version": "Version",
-        "link": "Click Me"
-      }
-    },
-    "menu": {
-      "search": {
-        "headline": "Search Window",
-        "notInList": "Not in your list",
-        "search": "Search ...",
-        "noResults": "No results could be found"
-      },
-      "listStatus": {
-        "watching": "Watching ({amount})",
-        "repeating": "Repeating ({amount})",
-        "completed": "Completed ({amount})",
-        "onHold": "Paused ({amount})",
-        "dropped": "Dropped ({amount})",
-        "planned": "Planning ({amount})"
-      }
-    },
-    "informationModal": {
-      "anime": "Anime",
-      "manga": "Manga",
-      "description": "Description",
-      "seriesInformation": "Series Information",
-      "dataInformation": "Information of your List",
-      "episodes": "Episodes",
-      "rating": "Rating",
-      "type": "Type of Series",
-      "synonyms": "Synonyms",
-      "noSynonyms": "No Synonyms",
-      "airingTime": "Airing Time",
-      "englishName": "English Name",
-      "noEnglishName": "No English Name",
-      "japaneseName": "Japanese Name",
-      "noJapaneseName": "No Japanese Name",
-      "seriesStatus": "Status of Series",
-      "sinceDate": "Since {date}",
-      "dateFormat": "MMM DD YYYY",
-      "unknownDate": "Date unknown",
-      "ownRating": "Own Rating",
-      "ownStatus": "Own Status",
-      "watchedEpisodes": "Watched Episodes",
-      "dropdownPlaceholder": "Please select...",
-      "updated": {
-        "title": "Updated!",
-        "text": "Update was successful!"
-      },
-      "created": {
-        "title": "Created!",
-        "text": "Create was successful!"
-      },
-      "deleted": {
-        "title": "Deleted!",
-        "text": "Delete was successful!"
-      },
-      "errorResponseTitle": "Update not successful!",
-      "deleteModalHeader": "Confirm delete?",
-      "doYouReallyWantToDelete": "Do you really want to delete {title} from your list?",
-      "clear": "Set to 0 stars",
-      "inputRequired": "Input required!",
-      "ratingError": "Rating is under or over the expected values!",
-      "adultContent": "This media is considered adult content! Your discretion is advised!"
-    },
-    "actions": {
-      "refreshMAL": "Refresh MAL",
-      "refreshAniList": "Refresh AniList",
-      "refreshTorrents": "Refresh Torrents",
-      "cancel": "Cancel",
-      "edit": "Edit",
-      "delete": "Delete",
-      "close": "Close",
-      "save": "Save",
-      "reset": "Reset",
-      "add": "Add",
-      "remove": "Remove",
-      "login": "Login",
-      "logout": "Logout"
+      "title": "Settings"
     }
-  },
-  "myAnimeList": {
-    "watching": "Watching",
-    "completed": "Completed",
-    "onHold": "On Hold",
-    "dropped": "Dropped",
-    "planned": "Planned"
-  },
-  "aniList": {
-    "mediaInformation": {
-      "finishedAiring": "Finished Airing",
-      "currentlyAiring": "Currently Airing",
-      "notYetAired": "Not yet aired",
-      "releasing": "Releasing",
-      "finished": "Finished Airing",
-      "notYetReleased": "Not yet released",
-      "cancelled": "Cancelled"
-    },
-    "listStatus": {
-      "current": "Current",
-      "repeating": "Repeating",
-      "finished": "Finished",
-      "paused": "Paused",
-      "dropped": "Dropped",
-      "planning": "Planning"
-    }
-  },
-  "$vuetify": {
-    "dataIterator": {
-      "prevPage": "Previous page",
-      "nextPage": "Next page",
-      "pageText": "{0}-{1} of {2}",
-      "noResultsText": "No results",
-      "rowsPerPageText": "Items per page",
-      "rowsPerPageAll": "All"
-    },
-    "dataTable": {
-      "rowsPerPageText": "Items per page"
-    },
-    "noDataText": "No data"
   }
 }

@@ -66,7 +66,7 @@
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import _ from 'lodash';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';

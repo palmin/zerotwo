@@ -26,6 +26,9 @@ export default {
   setAniData(state, payload) {
     state.aniData = payload;
   },
+  REMOVE_ANI_DATA(state) {
+    state.aniData = null;
+  },
   setRefreshRate(state, payload) {
     state.refreshRate = payload;
   },
@@ -34,6 +37,9 @@ export default {
   },
   setTimerRunning(state, payload) {
     state.timerRunning = payload;
+  },
+  setRestartTimer(state, payload) {
+    state.restartTimer = payload;
   },
   resetState(state) {
     state.aniData = null;

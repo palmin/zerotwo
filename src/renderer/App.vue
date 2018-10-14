@@ -61,7 +61,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('aniList', ['detectAndSetAniData']),
+    ...mapActions('aniList', ['detectAndSetAniData', 'setRestartTimer']),
     ...mapMutations(['setReady']),
     setLayout(layout) {
       this.layout = layout || AniListLayout;
@@ -72,6 +72,7 @@ export default {
     async refreshAniList() {
       await this.setReady(false);
       await this.detectAndSetAniData();
+      await this.setRestartTimer(true);
       await this.setReady(true);
     },
     async openInformation(mediaId) {

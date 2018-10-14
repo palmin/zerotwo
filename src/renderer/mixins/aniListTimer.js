@@ -7,7 +7,7 @@ export default {
     clearInterval(this.timer);
   },
   computed: {
-    ...mapState('aniList', ['refreshRate', 'timeUntilNextRefresh', 'timerRunning', 'session']),
+    ...mapState('aniList', ['refreshRate', 'timeUntilNextRefresh', 'timerRunning', 'session', 'restartTimer']),
     ...mapGetters('aniList', ['isAuthenticated']),
   },
   async mounted() {
@@ -16,13 +16,13 @@ export default {
       return;
     }
 
-    this.refreshTimer();
+    this.startTimer();
   },
   data() {
     return { timer: null };
   },
   methods: {
-    ...mapActions('aniList', ['detectAndSetAniData', 'setTimeUntilNextRefresh', 'setTimerRunning']),
+    ...mapActions('aniList', ['detectAndSetAniData', 'setTimeUntilNextRefresh', 'setTimerRunning', 'setRestartTimer']),
     ...mapMutations('aniList', ['SET_USER']),
     ...mapMutations(['setReady']),
     async timerAction() {
@@ -40,11 +40,17 @@ export default {
         return;
       }
 
-      const refreshInterval = this.refreshRate * 60 * 1000;
       await this.detectAndSetAniData();
+      await this.startTimer();
+    },
+    async startTimer() {
+      const refreshInterval = this.getRefreshInterval();
       await this.setTimeUntilNextRefresh(refreshInterval);
       clearInterval(this.timer);
       this.timer = setInterval(this.timerAction, 1000);
+    },
+    getRefreshInterval() {
+      return this.refreshRate * 60 * 1000;
     },
   },
   watch: {
@@ -59,8 +65,14 @@ export default {
           });
       }
     },
-    refreshRate() {
-      this.refreshTimer();
+    // refreshRate() {
+    //   // this.refreshTimer();
+    // },
+    restartTimer(status) {
+      if (status) {
+        this.startTimer();
+        this.setRestartTimer(false);
+      }
     },
     timerRunning(running) {
       if (!running) {

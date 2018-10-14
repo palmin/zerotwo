@@ -43,7 +43,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions('aniList', ['detectAndSetAniData']),
+    ...mapActions('aniList', ['detectAndSetAniData', 'setRestartTimer']),
     ...mapMutations(['setReady']),
     openSettings() {
       this.$refs[this.event].show();

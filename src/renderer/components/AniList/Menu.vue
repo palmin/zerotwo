@@ -29,7 +29,7 @@
 
     <v-spacer></v-spacer>
 
-    <search-box @openInformation="openInformationWindow" />
+    <search-box :disabled="!isAuthenticated" @openInformation="openInformationWindow" />
 
     <v-tooltip bottom>
       <v-progress-circular :rotate="-90" :value="refreshTimePercentage" :color="progressCircleColor" :indeterminate="!isReady" size="32" :width="2" slot="activator">
@@ -97,7 +97,7 @@ export default {
     },
     readableTimeUntilNextRefresh() {
       if (!this.timeUntilNextRefresh) {
-        return '';
+        return '--:--';
       }
 
       return `(${this.$getMoment(this.timeUntilNextRefresh).format('mm:ss')})`;

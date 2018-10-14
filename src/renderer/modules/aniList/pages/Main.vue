@@ -17,7 +17,7 @@ export default {
     ...mapMutations(['setReady']),
     ...mapActions('aniList', ['detectAndSetAniData']),
     getAnime() {
-      if (!this.aniData.lists) {
+      if (!this.aniData || !this.aniData.lists) {
         return [];
       }
 

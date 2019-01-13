@@ -11,7 +11,7 @@ init:
 
 install:
   - ps: Install-Product node 10
-  - npm install
+  - npm install --force
 
 environment:
   CLIENT_SECRET:

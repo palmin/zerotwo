@@ -152,6 +152,7 @@
     },
     "menu": {
       "listStatus": {
+        "home": "Home",
         "completed": "已看完 ({amount})",
         "dropped": "已弃坑 ({amount})",
         "onHold": "搁置中 ({amount})",

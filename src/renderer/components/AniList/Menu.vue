@@ -1,6 +1,31 @@
 <template>
   <v-toolbar app fixed dark flat dense>
+    <v-menu offset-y>
+      <v-btn flat dark slot="activator">
+        <v-icon left>fas fa-bars</v-icon>
+        {{ $t(`system.modules.${currentModule}`) }}
+      </v-btn>
+      <v-list>
+        <v-list-tile @click="navigateTo(modules.aniList)" :disabled="currentModule !== 'aniList'">
+          <v-list-tile-title>{{ $t('system.modules.aniList') }}</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="navigateTo(modules.myAnimeList)" :disabled="currentModule !== 'myAnimeList'">
+          <v-list-tile-title>{{ $t('system.modules.myAnimeList') }}</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="navigateTo(modules.torrents)" :disabled="currentModule !== 'torrents'">
+          <v-list-tile-title>{{ $t('system.modules.torrents') }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+
+    <v-spacer></v-spacer>
+
     <v-toolbar-items>
+      <!-- <v-btn flat exact :to="{ name: 'Ani-Home' }">
+        <v-icon left>fas fa-home</v-icon>
+        {{ $t('system.menu.listStatus.home') }}
+      </v-btn> -->
+
       <v-btn flat exact :to="{ name: 'Ani-Watching' }">
         <v-icon color="green" left>fas fa-stop</v-icon>
         {{ $t('system.menu.listStatus.watching', { amount: watchingAmount }) }}
@@ -39,23 +64,6 @@
     </v-tooltip>
 
     <settings />
-
-    <v-menu offset-y>
-      <v-btn flat icon dark slot="activator">
-        <v-icon>fas fa-bars</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile @click="navigateTo('Ani-Watching')">
-          <v-list-tile-title>{{ $t('system.modules.aniList') }}</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="navigateTo('MAL-Watching')" disabled>
-          <v-list-tile-title>{{ $t('system.modules.myAnimeList') }}</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="navigateTo('Torrents-Main')" disabled>
-          <v-list-tile-title>{{ $t('system.modules.torrents') }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
   </v-toolbar>
 </template>
 
@@ -68,7 +76,7 @@ export default {
   props: ['refreshAniList', 'openInformation'],
   components: { SearchBox, Settings },
   computed: {
-    ...mapState(['isReady']),
+    ...mapState(['isReady', 'currentModule', 'modules']),
     ...mapState('aniList', ['timeUntilNextRefresh', 'refreshRate', 'aniData']),
     ...mapGetters('aniList', ['isAuthenticated']),
     refreshTimePercentage() {
@@ -158,8 +166,26 @@ export default {
 
       return object === undefined ? null : object;
     },
-    navigateTo(route) {
-      this.$router.push(route);
+    navigateTo(module) {
+      let route = null;
+
+      switch (module) {
+        case this.modules.aniList:
+          route = 'Ani-Watching';
+          break;
+        case this.modules.myAnimeList:
+          route = 'MAL-Watching';
+          break;
+        case this.modules.torrents:
+          route = 'Torrents-Main';
+          break;
+        default:
+          break;
+      }
+
+      if (route) {
+        this.$router.push(route);
+      }
     },
   },
 };

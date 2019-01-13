@@ -152,6 +152,7 @@
     },
     "menu": {
       "listStatus": {
+        "home": "ホーム",
         "completed": "終了 ({amount})",
         "dropped": "停止 ({amount})",
         "onHold": "中止 ({amount})",

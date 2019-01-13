@@ -333,7 +333,9 @@ export default {
       }
 
       if (!episodes || episodes <= 0) {
-        return progress + (progress * 0.2);
+        const calculatedProgress = progress + (progress * 0.2);
+
+        return calculatedProgress > 80 ? 80 : calculatedProgress;
       }
 
       return progress / episodes * 100;

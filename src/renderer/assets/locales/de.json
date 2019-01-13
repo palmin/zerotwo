@@ -152,6 +152,7 @@
     },
     "menu": {
       "listStatus": {
+        "home": "Home",
         "completed": "Beendet ({amount})",
         "dropped": "Abgebrochen ({amount})",
         "onHold": "Pausiert ({amount})",

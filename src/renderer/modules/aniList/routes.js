@@ -1,4 +1,5 @@
 import Main from './pages/Main';
+// import Home from './pages/Home';
 
 export default [
   {
@@ -31,4 +32,9 @@ export default [
     component: Main,
     props: { status: 'PLANNING' },
   },
+  // {
+  //   path: '/aniList/home',
+  //   name: 'Ani-Home',
+  //   component: Home,
+  // },
 ];

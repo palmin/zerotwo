@@ -18,6 +18,8 @@ const state = {
       name: '',
       id: -1,
       avatar: { medium: '' },
+      bannerImage: '',
+      stats: { watchedTime: 0 },
     },
   },
   tableHeaders: [],

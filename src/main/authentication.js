@@ -23,7 +23,7 @@ ipcMain.on('aniList-oauth', (event, action, refreshToken) => {
       window.once('ready-to-show', () => {
         window.show();
 
-        window.webContents.on('will-navigate', (windowEvent, url) => {
+        const oauthFunction = (windowEvent, url) => {
           const params = nodeUrl.parse(url, true);
           if (!params.query || !params.query.code) {
             return;
@@ -49,10 +49,22 @@ ipcMain.on('aniList-oauth', (event, action, refreshToken) => {
           request(tokenRequestOptions, (error, response, body) => {
             if (!error && response.statusCode === 200) {
               event.sender.send('aniList-oauth-reply', { access_token: body.access_token, refresh_token: body.refresh_token }, code);
-              window.close();
+              try {
+                window.close();
+              } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error(`Couldn't be closed! See error: ${error.message}`);
+              }
+            } else {
+              // eslint-disable-next-line no-console
+              console.error(error);
             }
           });
-        });
+        };
+
+        window.webContents.on('will-navigate', (windowEvent, url) => oauthFunction(windowEvent, url));
+        window.webContents.on('will-redirect', (windowEvent, url) => oauthFunction(windowEvent, url));
+        window.webContents.on('did-get-redirect-request', (windowEvent, oldUrl, newUrl) => oauthFunction(windowEvent, newUrl));
       });
 
       break;

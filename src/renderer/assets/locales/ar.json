@@ -152,6 +152,7 @@
     },
     "menu": {
       "listStatus": {
+        "home": "Home",
         "completed": "({amount}) إنتهى",
         "dropped": "({amount}) ملغى",
         "onHold": "({amount}) إيقاف مؤقت",

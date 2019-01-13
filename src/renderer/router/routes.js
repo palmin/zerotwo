@@ -1,4 +1,4 @@
-import AniListLayout from '@/layouts/AniList';
+// import AniListLayout from '@/layouts/AniList';
 // import MyAnimeListLayout from '@/layouts/MyAnimeList';
 // import TorrentsLayout from '@/layouts/Torrents';
 import { routes as Home } from '@/modules/home';
@@ -14,6 +14,6 @@ export default [
   {
     path: '*',
     redirect: '/aniList/Watching',
-    meta: { layout: AniListLayout },
+    // meta: { layout: AniListLayout },
   },
 ];

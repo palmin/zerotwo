@@ -10,7 +10,7 @@ init:
   - git config --global core.autocrlf input
 
 install:
-  - ps: Install-Product node 8
+  - ps: Install-Product node 10
   - npm install
 
 environment:
@@ -18,6 +18,7 @@ environment:
     secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
   github_token:
     secure: diMKIMZOOqW72A72qO+L0ybzXp1TC8GpG/YdFc6Oi7o/098qezYRnKPDpNkUYF+M
+  NODE_ENV: production
 
 before_build:
   - ps: $env:NODE_ENV="production"

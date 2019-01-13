@@ -1,7 +1,7 @@
 {
   "name": "zerotwo-ui",
   "productName": "ZeroTwo",
-  "version": "0.6.2-20190113b",
+  "version": "0.6.2-20190114b",
   "author": "NicoAiko <nicochan95.anime@gmail.com>",
   "description": "Taiga alternative",
   "license": "GPL-3.0",
@@ -108,7 +108,6 @@
     "electron": "^4.0.1",
     "electron-builder": "^20.38.4",
     "electron-debug": "^2.0.0",
-    "electron-rebuild": "^1.8.2",
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-webpack": "^0.10.1",
@@ -143,22 +142,13 @@
   },
   "main": "./dist/electron/main.js",
   "scripts": {
-    "build": "pack && node_modules/.bin/electron-builder --publish never",
-    "build:pack": "pack && node_modules/.bin/electron-builder --publish never",
-    "build:dir": "pack && node_modules/.bin/electron-builder --dir",
-    "build:linux": "pack && node_modules/.bin/electron-builder --linux",
-    "build:mac": "pack && node_modules/.bin/electron-builder --mac",
-    "build:win": "node vue-electron/build.js && node_modules/.bin/electron-builder --publish never",
-    "build:win-app": "pack && node_modules/.bin/electron-builder",
+    "build": "npm run pack && $(npm bin)/electron-builder",
     "clean": "cross-env BUILD_TARGET=clean node vue-electron/build.js",
     "dev": "env-cmd .env cross-env NODE_ENV=development node vue-electron/dev-runner.js",
     "lint": "eslint --ext .js,.vue src",
-    "lint:fix": "eslint --ext .js,.vue --fix src",
-    "pack": "pack:main && pack:renderer",
+    "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "webpack --mode production --hide-modules --config vue-electron/webpack.main.config.js",
     "pack:renderer": "webpack --mode production --hide-modules --config vue-electron/webpack.renderer.config.js",
-    "rebuild-electron": "./node_modules/.bin/electron-rebuild",
-    "postinstall": "node_modules/.bin/electron-builder install-app-deps && npm rebuild node-sass",
-    "release": "build"
+    "release": "npm run build"
   }
 }

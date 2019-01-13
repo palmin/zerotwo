@@ -11,13 +11,16 @@
       :rows-per-page-items="[pagination.rowsPerPage]"
     >
       <template slot="items" slot-scope="props">
-        <td class="table-row" @click="openInformation(props.item.id)" :class="{ 'finished-airing': props.item.finishedAiring }">
+        <td class="table-row" @click="openInformation(props.item.id)">
           {{ props.item.title }}
           <div dark class="green--text text--accent-3" v-if="props.item.nextAiringEpisode">
             {{ $t('system.constants.airingIn', {
               episode: props.item.nextAiringEpisode.episode,
               time: getTimeByTimestamp(props.item.nextAiringEpisode.airingAt),
              }) }}
+          </div>
+          <div dark class="blue--text text--accent-2" v-else-if="props.item.finishedAiring">
+            {{ $t('system.constants.airingFinished') }}
           </div>
         </td>
         <td class="text-xs-left episode-row">
@@ -53,6 +56,7 @@ import Promise from 'bluebird';
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import InfoBox from '@/components/InformationModal';
 import EventBus from '@/plugins/eventBus';
+import { settings } from '@/modules/aniList';
 
 export default {
   props: ['listItems'],
@@ -72,9 +76,16 @@ export default {
 
   computed: {
     ...mapGetters('aniList', ['isAuthenticated']),
-    ...mapState('aniList', ['session']),
+    ...mapState('aniList', ['session', 'tableHeaders']),
 
     headers() {
+      // TODO: Save align into store
+      // return _.map(this.tableHeaders, header => ({
+      //   text: this.$t(`system.settings.aniList.tableHeaders.${header}`),
+      //   align: 'left',
+      //   value: header,
+      //   width: `${settings.WIDTHS[header]}%`,
+      // }));
       return [{
         text: this.$t('system.constants.animeTitle'),
         align: 'left',
@@ -126,56 +137,10 @@ export default {
         scorePercentage: this.scorePercentage(item.score),
         season: this.getSeason(item.media.startDate.year, item.media.season),
         updated: this.getTimeByTimestamp(item.updatedAt),
-        finishedAiring: item.media.status === 'FINISHED',
+        finishedAiring: item.media.status === 'FINISHED' && this.listItems.status !== 'COMPLETED',
         nextAiringEpisode: item.media.nextAiringEpisode,
         item,
       }));
-    },
-    list() {
-      if (this.currentSort.field === null) {
-        return _.slice(this.listEntries, this.currentOffset, (this.currentOffset + this.listLimit));
-      }
-
-      const orderedListItems = _.orderBy(this.listEntries, [(item) => {
-        if (this.currentSort.field === 'score') {
-          // We need to return it as a number
-          // because otherwise lodash compares it as a string
-          // which would make 10's < 2's
-          return Number(item.score);
-        }
-
-        if (this.currentSort.field === 'progress') {
-          if (+item.progress === 0) {
-            // Early return here to prevent the case
-            // that if it still has no ending episode amount
-            // it returns 4/5 even though no episode has been watched yet.
-            // tl;dr: Not yet watched? It's 0% then.
-            return 0;
-          }
-          if (+item.media.episodes <= 0) {
-            // The progress bar is 4/5 full at anime that have no ending episode amount
-            // To keep the overview understandable, it'll be there even if there are
-            // not that much episodes that have been watched
-            return 0.8;
-          }
-
-          const percent = item.progress / item.media.episodes;
-          // JavaScript is not trustworthy...
-          return Number(percent);
-        }
-
-        if (this.currentSort.field === 'season') {
-          return new Date(
-            item.media.startDate.year,
-            item.media.startDate.month - 1,
-            item.media.startDate.day,
-          );
-        }
-
-        return _.get(item, this.currentSort.field);
-      }], [this.currentSort.direction]);
-
-      return _.slice(orderedListItems, this.currentOffset, (this.currentOffset + this.listLimit));
     },
     scoringSystem() {
       return this.session.user.mediaListOptions.scoreFormat;
@@ -204,7 +169,6 @@ export default {
       listLimit: 100,
 
       finishedHighlight: false,
-      fab: null,
 
       pagination: {
         sortBy: 'title',
@@ -369,7 +333,9 @@ export default {
       }
 
       if (!episodes || episodes <= 0) {
-        return progress + (progress * 0.2);
+        const calculatedProgress = progress + (progress * 0.2);
+
+        return calculatedProgress > 80 ? 80 : calculatedProgress;
       }
 
       return progress / episodes * 100;

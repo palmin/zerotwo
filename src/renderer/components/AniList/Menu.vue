@@ -1,35 +1,60 @@
 <template>
   <v-toolbar app fixed dark flat dense>
+    <v-menu offset-y>
+      <v-btn flat dark slot="activator">
+        <v-icon left>fas fa-bars</v-icon>
+        {{ $t(`system.modules.${currentModule}`) }}
+      </v-btn>
+      <v-list>
+        <v-list-tile @click="navigateTo(modules.aniList)" :disabled="currentModule !== 'aniList'">
+          <v-list-tile-title>{{ $t('system.modules.aniList') }}</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="navigateTo(modules.myAnimeList)" :disabled="currentModule !== 'myAnimeList'">
+          <v-list-tile-title>{{ $t('system.modules.myAnimeList') }}</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="navigateTo(modules.torrents)" :disabled="currentModule !== 'torrents'">
+          <v-list-tile-title>{{ $t('system.modules.torrents') }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+
+    <v-spacer></v-spacer>
+
     <v-toolbar-items>
+      <!-- <v-btn flat exact :to="{ name: 'Ani-Home' }">
+        <v-icon left>fas fa-home</v-icon>
+        {{ $t('system.menu.listStatus.home') }}
+      </v-btn> -->
+
       <v-btn flat exact :to="{ name: 'Ani-Watching' }">
         <v-icon color="green" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.watching') }} ({{ watchingAmount }})
+        {{ $t('system.menu.listStatus.watching', { amount: watchingAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Completed' }">
         <v-icon color="blue" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.completed') }} ({{ completedAmount }})
+        {{ $t('system.menu.listStatus.completed', { amount: completedAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Paused' }">
         <v-icon color="yellow" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.onHold') }} ({{ pausedAmount }})
+        {{ $t('system.menu.listStatus.onHold', { amount: pausedAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Dropped' }">
         <v-icon color="red" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.dropped') }} ({{ droppedAmount }})
+        {{ $t('system.menu.listStatus.dropped', { amount: droppedAmount }) }}
       </v-btn>
 
       <v-btn flat exact :to="{ name: 'Ani-Planning' }">
         <v-icon color="black" left>fas fa-stop</v-icon>
-        {{ $t('system.menu.listStatus.planned') }} ({{ planningAmount }})
+        {{ $t('system.menu.listStatus.planned', { amount: planningAmount }) }}
       </v-btn>
     </v-toolbar-items>
 
     <v-spacer></v-spacer>
 
-    <search-box @openInformation="openInformationWindow" />
+    <search-box :disabled="!isAuthenticated" @openInformation="openInformationWindow" />
 
     <v-tooltip bottom>
       <v-progress-circular :rotate="-90" :value="refreshTimePercentage" :color="progressCircleColor" :indeterminate="!isReady" size="32" :width="2" slot="activator">
@@ -39,23 +64,6 @@
     </v-tooltip>
 
     <settings />
-
-    <v-menu offset-y>
-      <v-btn flat icon dark slot="activator">
-        <v-icon>fas fa-bars</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile @click="navigateTo('Ani-Watching')">
-          <v-list-tile-title>{{ $t('system.modules.aniList') }}</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="navigateTo('MAL-Watching')" disabled>
-          <v-list-tile-title>{{ $t('system.modules.myAnimeList') }}</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="navigateTo('Torrents-Main')" disabled>
-          <v-list-tile-title>{{ $t('system.modules.torrents') }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
   </v-toolbar>
 </template>
 
@@ -68,7 +76,7 @@ export default {
   props: ['refreshAniList', 'openInformation'],
   components: { SearchBox, Settings },
   computed: {
-    ...mapState(['isReady']),
+    ...mapState(['isReady', 'currentModule', 'modules']),
     ...mapState('aniList', ['timeUntilNextRefresh', 'refreshRate', 'aniData']),
     ...mapGetters('aniList', ['isAuthenticated']),
     refreshTimePercentage() {
@@ -97,7 +105,7 @@ export default {
     },
     readableTimeUntilNextRefresh() {
       if (!this.timeUntilNextRefresh) {
-        return '';
+        return '--:--';
       }
 
       return `(${this.$getMoment(this.timeUntilNextRefresh).format('mm:ss')})`;
@@ -158,8 +166,26 @@ export default {
 
       return object === undefined ? null : object;
     },
-    navigateTo(route) {
-      this.$router.push(route);
+    navigateTo(module) {
+      let route = null;
+
+      switch (module) {
+        case this.modules.aniList:
+          route = 'Ani-Watching';
+          break;
+        case this.modules.myAnimeList:
+          route = 'MAL-Watching';
+          break;
+        case this.modules.torrents:
+          route = 'Torrents-Main';
+          break;
+        default:
+          break;
+      }
+
+      if (route) {
+        this.$router.push(route);
+      }
     },
   },
 };

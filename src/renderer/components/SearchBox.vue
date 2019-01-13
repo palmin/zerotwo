@@ -6,8 +6,9 @@
     persistent :overlay="false"
     transition="slide-y-reverse-transition"
     origin="bottom center 0"
+    :disabled="disabled"
   >
-    <v-btn dark flat icon slot="activator">
+    <v-btn dark flat icon slot="activator" :disabled="disabled">
       <v-icon>fas fa-search</v-icon>
     </v-btn>
     <v-card dark>
@@ -58,6 +59,12 @@ import _ from 'lodash';
 import { mapState } from 'vuex';
 
 export default {
+  props: {
+    disabled: {
+      type: Boolean,
+      required: true,
+    },
+  },
   computed: {
     ...mapState('aniList', ['aniData']),
     watchingData() {

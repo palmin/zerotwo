@@ -5,8 +5,12 @@ query {
     avatar {
       medium
     }
+    bannerImage
     mediaListOptions {
       scoreFormat
+    }
+    stats {
+      watchedTime
     }
     options {
       displayAdultContent

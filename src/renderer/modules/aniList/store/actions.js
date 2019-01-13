@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ipcRenderer } from 'electron';
 import API from '@/modules/api';
@@ -8,10 +9,13 @@ export default {
       return Promise.resolve();
     }
 
-    // eslint-disable-next-line no-underscore-dangle
-    return API.getUserList(state.session.user.name, 'ANIME')
-      .then((data) => {
-        commit('setAniData', data);
+    return Promise.all([
+      API.getUserList(state.session.user.name, 'ANIME'),
+      API.getUser(state.session.access_token),
+    ])
+      .spread((listData, userData) => {
+        commit('setAniData', listData);
+        commit('SET_USER', userData);
       })
       .then(() => Promise.resolve());
   },
@@ -24,8 +28,14 @@ export default {
   setTimerRunning({ commit }, status) {
     commit('setTimerRunning', status);
   },
+  setRestartTimer({ commit }, status) {
+    commit('setRestartTimer', status);
+  },
   resetState({ commit }) {
     commit('resetState');
+  },
+  setTableHeaders({ commit }, headers) {
+    commit('setTableHeaders', headers);
   },
   // eslint-disable-next-line no-unused-vars
   getToken({ commit }) {
@@ -39,6 +49,7 @@ export default {
       commit('REMOVE_ACCESS_TOKEN');
       commit('REMOVE_REFRESH_TOKEN');
       commit('REMOVE_USER');
+      commit('REMOVE_ANI_DATA');
       resolve();
     });
   },

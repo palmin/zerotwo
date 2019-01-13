@@ -43,7 +43,13 @@ export default new Vuex.Store({
   plugins,
   state: {
     isReady: false,
+    currentModule: 'aniList',
     currentAppVersion: version,
+    modules: {
+      aniList: 'aniList',
+      myAnimeList: 'myAnimeList',
+      torrents: 'torrents',
+    },
   },
   mutations: {
     hydrateState(state, payload) {
@@ -51,6 +57,9 @@ export default new Vuex.Store({
     },
     setReady(state, payload) {
       state.isReady = payload;
+    },
+    setCurrentModule(state, payload) {
+      state.currentModule = payload;
     },
   },
   modules: {

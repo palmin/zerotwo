@@ -16,6 +16,8 @@ install:
 environment:
   CLIENT_SECRET:
     secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
+  github_token:
+    secure: diMKIMZOOqW72A72qO+L0ybzXp1TC8GpG/YdFc6Oi7o/098qezYRnKPDpNkUYF+M
 
 before_build:
   - ps: $env:NODE_ENV="production"
@@ -39,8 +41,7 @@ deploy:
   description: ''
   tag: $(appveyor_repo_tag_name)
   release: ZeroTwo $(appveyor_repo_tag_name)
-  auth_token:
-    secure: 2l9QA3INcc7ZP0Ye2bV5n7cNfi7WpRb2AjX1nSV878So7aX/K8+a+kFwqMWtUsLS
+  auth_token: $(github_token)
   on:
     branch: master
     appveyor_repo_tag: true

@@ -1,12 +1,13 @@
 sudo: required
 dist: trusty
 language: node_js
+node_js: 10
+
 matrix:
   include:
   - os: osx
     osx_image: xcode9.4
     language: node_js
-    node_js: "10"
     env:
       - ELECTRON_CACHE=$HOME/.cache/electron
       - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
@@ -14,22 +15,13 @@ matrix:
     env: CC=clang CXX=clang++ npm_config_clang=1
     compiler: clang
 
-cache:
-  directories:
-    - node_modules
-    - $HOME/.cache/electron
-    - $HOME/.cache/electron-builder
-
 branches:
   only:
     - master
     - /^v\d+\.\d+\.\d+\-?[a-z]*$/
 
-# node_js:
-# - '10'
-
-# install:
-# - npm install --force
+before_install:
+  - yarn global add electron-builder
 
 script:
   - |
@@ -46,9 +38,6 @@ script:
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
-
-# - printf "CLIENT_SECRET=$CLIENT_SECRET\nNODE_ENV=production" > .env
-# - npm run build
 
 deploy:
   skip_cleanup: false

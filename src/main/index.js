@@ -2,6 +2,7 @@
 import { app, BrowserWindow, Menu } from 'electron'
 import './authentication';
 import macMenu from './macMenu';
+import setupDiscord from './discord';
 /* eslint-enable */
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
 
@@ -86,6 +87,7 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
+  setupDiscord();
 
   if (process.env.NODE_ENV === 'development') {
     installDevTools();

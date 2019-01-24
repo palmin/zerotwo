@@ -66,6 +66,7 @@
       "submitDelete": "Submit Delete!"
     },
     "constants": {
+      "airingFinished": "Airing finished",
       "airingIn": "Episode {episode} airing {time}",
       "animeTitle": "动画标题",
       "autumn": "秋",

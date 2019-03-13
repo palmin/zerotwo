@@ -21,12 +21,14 @@ async function setActivity() {
 
 export default () => {
   client.on('ready', () => {
-    setActivity();
+    // Disabled for hotfix!
+    // @TODO: finish, fix and re-enable
+    // setActivity();
 
-    // activity can only be set every 15 seconds
-    setInterval(() => {
-      setActivity();
-    }, 15e3);
+    // // activity can only be set every 15 seconds
+    // setInterval(() => {
+    //   setActivity();
+    // }, 15e3);
   });
 
   // eslint-disable-next-line no-console

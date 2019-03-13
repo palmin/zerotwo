@@ -20,6 +20,9 @@ branches:
     - master
     - /^v\d+\.\d+\.\d+\-?[a-z]*$/
 
+node_js:
+- '10'
+
 before_script:
   - npm install
 

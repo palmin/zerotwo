@@ -10,19 +10,22 @@ init:
   - git config --global core.autocrlf input
 
 install:
-  - ps: Install-Product node 8
-  - npm install
+  - ps: Install-Product node 10
+  - yarn
 
 environment:
   CLIENT_SECRET:
     secure: JMBmvZNgm2X7uTsEe1b7sPKoJHSqowjcHxDZ+/vdzGixlY7ycTrYC1Igf9hKQz8U
+  github_token:
+    secure: diMKIMZOOqW72A72qO+L0ybzXp1TC8GpG/YdFc6Oi7o/098qezYRnKPDpNkUYF+M
+  NODE_ENV: production
 
 before_build:
   - ps: $env:NODE_ENV="production"
   - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
 
 build_script:
-  - npm run build
+  - yarn release
 
 test: off
 
@@ -39,8 +42,7 @@ deploy:
   description: ''
   tag: $(appveyor_repo_tag_name)
   release: ZeroTwo $(appveyor_repo_tag_name)
-  auth_token:
-    secure: 2l9QA3INcc7ZP0Ye2bV5n7cNfi7WpRb2AjX1nSV878So7aX/K8+a+kFwqMWtUsLS
+  auth_token: $(github_token)
   on:
     branch: master
     appveyor_repo_tag: true

@@ -22,6 +22,7 @@ environment:
 
 before_build:
   - ps: $env:NODE_ENV="production"
+  - ps: $env:ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES="true"
   - ps: echo "CLIENT_SECRET=$env:CLIENT_SECRET`r`nNODE_ENV=production" > .env
 
 build_script:

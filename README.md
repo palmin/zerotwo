@@ -15,7 +15,7 @@ Electron - Vue.js Anime Tracker
 > Welcome to ZeroTwo, the whole new experience of managing the ~~MyAnimeList~~ AniList!
 >
 > With this program you will easily add, update or delete Anime from your list!
-> 
+>
 > You only have to login to ~~MyAnimeList~~ AniList and the fun can begin!",
 
 ## [Get the latest release here!](https://github.com/NicoAiko/zerotwo/releases)
@@ -45,7 +45,16 @@ npm run build
 
 # lint all JS/Vue component files in `src/`
 npm run lint
+```
 
+#### Installation issues
+For installation issues with the `electron-builder` you have to set the environment variable `ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES` to `true`
+```bash
+# sample for unix based shells
+ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES="true" npm i
+
+# sample for windows powershell
+$env:ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES="true"; npm i
 ```
 
 ---

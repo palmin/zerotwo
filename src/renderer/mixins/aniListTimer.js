@@ -65,9 +65,6 @@ export default {
           });
       }
     },
-    // refreshRate() {
-    //   // this.refreshTimer();
-    // },
     restartTimer(status) {
       if (status) {
         this.startTimer();

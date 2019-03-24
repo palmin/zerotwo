@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 
 // Components
-import App from './App';
+import App from './App.vue';
 import { i18n } from './i18n';
 import router from './router';
 import { store } from './store';

@@ -1,3 +1,13 @@
+<template>
+  <v-app dark id="app">
+    <main>
+      <Navigation />
+      <router-view />
+    </main>
+  </v-app>
+</template>
+
+<script lang="ts">
 import { remote } from 'electron';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { validLanguageCodes } from './i18n';
@@ -24,17 +34,6 @@ export default class App extends Vue {
     }
   }
 
-  public render() {
-    return (
-      <v-app dark id="app">
-        <main>
-          <Navigation />
-          <router-view/>
-        </main>
-      </v-app>
-    );
-  }
-
   public get locale(): string | undefined {
     return appStore.language;
   }
@@ -51,3 +50,4 @@ export default class App extends Vue {
       : this.$i18n.fallbackLocale;
   }
 }
+</script>

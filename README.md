@@ -1,22 +1,17 @@
-# ZeroTwo
+# ZeroTwo (TypeScript version) (still in Development)
 Electron - Vue.js Anime Tracker
 
 > Taiga alternative
-
-#### Build status
-
-[![Build Status](https://travis-ci.org/NicoAiko/zerotwo.svg?branch=master)](https://travis-ci.org/NicoAiko/zerotwo)
-[![Build status](https://ci.appveyor.com/api/projects/status/goacd72jf5oopi47?svg=true)](https://ci.appveyor.com/project/NicoAiko/zerotwo)
 
 ---
 
 ## What is ZeroTwo?
 
-> Welcome to ZeroTwo, the whole new experience of managing the ~~MyAnimeList~~ AniList!
+> Welcome to ZeroTwo, the whole new experience of managing the AniList!
 >
 > With this program you will easily add, update or delete Anime from your list!
 >
-> You only have to login to ~~MyAnimeList~~ AniList and the fun can begin!",
+> You only have to login to AniList and the fun can begin!",
 
 ## [Get the latest release here!](https://github.com/NicoAiko/zerotwo/releases)
 
@@ -28,22 +23,19 @@ Electron - Vue.js Anime Tracker
 
 ---
 
-## [Documentation](https://github.com/NicoAiko/zerotwo/wiki)
-
 #### Short Build Setup
 
 ``` bash
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:9080
-npm run dev
+# Open Electron app in development mode
+npm run serve
 
 # build electron application for production
 npm run build
 
-
-# lint all JS/Vue component files in `src/`
+# lint all files in `src/`
 npm run lint
 ```
 

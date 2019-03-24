@@ -1,0 +1,26 @@
+{
+  "originalReading": "English",
+  "englishReading": "English",
+  "system": {
+    "actions": {
+      "login": "Login"
+    },
+    "modules": {
+      "aniList": "AniList"
+    },
+    "settings": {
+      "appSettings": {
+        "chooseLanguage": "Choose language"
+      },
+      "menu": {
+        "about": "About ZeroTwo",
+        "aniList": "AniList",
+        "appSettings": "App Settings"
+      }
+    }
+  },
+  "menu": {
+    "home": "Home",
+    "settings": "Settings"
+  }
+}

@@ -18,17 +18,12 @@
     "quotemark": [true, "single", "jsx-double"],
     "variable-name": [true, "check-format", "allow-leading-underscore"],
     "whitespace": [
-      true,
+      false,
       "check-branch",
       "check-decl",
-      "check-module",
+      "check-operator",
       "check-separator",
-      "check-rest-spread",
-      "check-type",
-      "check-typecast",
-      "check-type-operator",
-      "check-preblock",
-      "check-operator"
+      "check-type"
     ]
   }
 }

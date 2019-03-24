@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h1>{{ version }}</h1>
-    <img alt="Vue logo" :src="require('../assets/logo.png')" />
     <HelloWorld />
   </div>
 </template>

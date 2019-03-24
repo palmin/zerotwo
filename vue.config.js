@@ -15,6 +15,5 @@ module.exports = {
     config.module.rule('ts')
       .use('tslint-loader')
       .loader('tslint-loader');
-    
   },
 };

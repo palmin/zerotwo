@@ -1,3 +1,5 @@
+// ENUMS
+
 /**
  * @enum AniListScoreFormat contains the scoring systems of AniList
  */
@@ -8,6 +10,64 @@ export enum AniListScoreFormat {
   POINT_5 = 'POINT_5',
   POINT_3 = 'POINT_3',
 }
+
+/**
+ * @enum AniListSeason contains the anime seasons
+ */
+export enum AniListSeason {
+  WINTER = 'WINTER',
+  SPRING = 'SPRING',
+  SUMMER = 'SUMMER',
+  FALL = 'FALL',
+}
+
+/**
+ * @enum AniListMediaStatus contains the media status
+ */
+export enum AniListMediaStatus {
+  FINISHED = 'FINISHED',
+  RELEASING = 'RELEASING',
+  NOT_YET_RELEASED = 'NOT_YET_RELEASED',
+  CANCELLED = 'CANCELLED',
+}
+
+/**
+ * @enum AniListListStatus contains the list status
+ */
+export enum AniListListStatus {
+  CURRENT = 'CURRENT',
+  PLANNING = 'PLANNING',
+  COMPLETED = 'COMPLETED',
+  DROPPED = 'DROPPED',
+  PAUSED = 'PAUSED',
+  REPEATING = 'REPEATING',
+}
+
+/**
+ * @enum AniListFormat contains the media format
+ */
+export enum AniListFormat {
+  TV = 'TV',
+  TV_SHORT = 'TV_SHORT',
+  MOVIE = 'MOVIE',
+  SPECIAL = 'SPECIAL',
+  OVA = 'OVA',
+  ONA = 'ONA',
+  MUSIC = 'MUSIC',
+  MANGA = 'MANGA',
+  NOVEL = 'NOVEL',
+  ONE_SHOT = 'ONE_SHOT',
+}
+
+/**
+ * @enum AniListType contains the media's type
+ */
+export enum AniListType {
+  ANIME = 'ANIME',
+  MANGA = 'MANGA',
+}
+
+// INTERFACES
 
 /**
  * @interface IAniListStreamingEpisode
@@ -106,62 +166,6 @@ export interface IAniListMediaTitle {
    * @var {string} userPreferred contains the title using the user's preference
    */
   userPreferred: string;
-}
-
-/**
- * @enum AniListSeason contains the anime seasons
- */
-export enum AniListSeason {
-  WINTER = 'WINTER',
-  SPRING = 'SPRING',
-  SUMMER = 'SUMMER',
-  FALL = 'FALL',
-}
-
-/**
- * @enum AniListMediaStatus contains the media status
- */
-export enum AniListMediaStatus {
-  FINISHED = 'FINISHED',
-  RELEASING = 'RELEASING',
-  NOT_YET_RELEASED = 'NOT_YET_RELEASED',
-  CANCELLED = 'CANCELLED',
-}
-
-/**
- * @enum AniListListStatus contains the list status
- */
-export enum AniListListStatus {
-  CURRENT = 'CURRENT',
-  PLANNING = 'PLANNING',
-  COMPLETED = 'COMPLETED',
-  DROPPED = 'DROPPED',
-  PAUSED = 'PAUSED',
-  REPEATING = 'REPEATING',
-}
-
-/**
- * @enum AniListFormat contains the media format
- */
-export enum AniListFormat {
-  TV = 'TV',
-  TV_SHORT = 'TV_SHORT',
-  MOVIE = 'MOVIE',
-  SPECIAL = 'SPECIAL',
-  OVA = 'OVA',
-  ONA = 'ONA',
-  MUSIC = 'MUSIC',
-  MANGA = 'MANGA',
-  NOVEL = 'NOVEL',
-  ONE_SHOT = 'ONE_SHOT',
-}
-
-/**
- * @enum AniListType contains the media's type
- */
-export enum AniListType {
-  ANIME = 'ANIME',
-  MANGA = 'MANGA',
 }
 
 /**

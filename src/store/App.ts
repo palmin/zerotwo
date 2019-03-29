@@ -6,10 +6,19 @@ import { version } from '../../package.json';
  */
 @Module()
 export class AppStore extends VuexModule {
+  /**
+   * @private
+   * @var {string} _version contains the current app's version string
+   */
   private _version: string = version;
-  private _locale?: string = undefined;
+  /**
+   * @private
+   * @var {string} _locale contains the locale string
+   */
+  private _locale?: string = process.env.VUE_APP_I18N_FALLBACK_LOCALE;
 
   /**
+   * @getter
    * @method AppStore.version
    * @returns the current Version string
    */
@@ -19,6 +28,7 @@ export class AppStore extends VuexModule {
   }
 
   /**
+   * @getter
    * @method AppStore.language
    * @returns the current language string or undefined, if not yet set.
    */
@@ -27,6 +37,12 @@ export class AppStore extends VuexModule {
     return this._locale;
   }
 
+  /**
+   * @mutation
+   * @method AppStore.setLanguage
+   * @description Sets the app's locale to set language
+   * @param {string} language
+   */
   @mutation
   public setLanguage(language: string) {
     this._locale = language;

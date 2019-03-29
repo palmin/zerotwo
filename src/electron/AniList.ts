@@ -23,6 +23,10 @@ const windowParams: Electron.BrowserWindowConstructorOptions = {
   show: false,
 };
 
+/**
+ * @event aniListOAuth
+ * @description handles the authentication event sent by the app to authenticate to AniList
+ */
 ipcMain.on('aniListOAuth', (event: any, action: string) => {
   if (action === 'getToken') {
     const redirectUri = encodeURIComponent(oauthConfig.redirectUri);

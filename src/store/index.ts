@@ -35,6 +35,10 @@ export const appStore = AppStore.CreateProxy(store, AppStore);
  */
 export const aniListStore = AniListStore.CreateProxy(store, AniListStore);
 
+/**
+ * @event aniListOAuthReply
+ * @description This event triggers when the authentication to AniList was successful
+ */
 ipcRenderer.on('aniListOAuthReply', (event: any, accessToken: string) => {
   aniListStore.setSession(accessToken);
   aniListStore.refreshAniListData();

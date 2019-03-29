@@ -9,6 +9,12 @@
       "aniList": "AniList"
     },
     "settings": {
+      "aboutZeroTwo": {
+        "version": "Version"
+      },
+      "aniList": {
+        "loggedInAs": "Logged in as {0}"
+      },
       "appSettings": {
         "chooseLanguage": "Choose language"
       },
@@ -22,5 +28,8 @@
   "menu": {
     "home": "Home",
     "settings": "Settings"
+  },
+  "$vuetify": {
+    "noDataText": "No data"
   }
 }

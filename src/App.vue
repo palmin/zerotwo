@@ -14,7 +14,7 @@ import { validLanguageCodes } from './i18n';
 import { aniListStore, appStore } from './store';
 
 // Components
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation.vue';
 
 @Component({
   components: {

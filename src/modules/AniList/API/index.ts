@@ -41,6 +41,8 @@ export default class AniListAPI {
         },
       });
 
+      // response.data is part of the axios response object.
+      // the last data is part of the response of AniList
       return response.data.data.list as IAniListMediaListCollection;
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getUserList'], error);

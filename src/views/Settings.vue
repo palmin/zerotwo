@@ -30,6 +30,9 @@
                       {{ $t('system.actions.login') }}
                     </v-btn>
                   </v-layout>
+                  <v-layout fill-height justify-start align-start v-else>
+                    {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
+                  </v-layout>
                 </v-container>
               </v-card>
             </v-tab-item>
@@ -76,6 +79,7 @@ import { TranslateResult } from 'vue-i18n';
 import { Component, Vue } from 'vue-property-decorator';
 
 // Custom Components
+import { IAniListUser } from '@/modules/AniList/types';
 import { aniListStore, appStore } from '../store';
 
 interface ISettingTab {
@@ -172,6 +176,10 @@ export default class Settings extends Vue {
 
   private get isAuthenticated(): boolean {
     return aniListStore && aniListStore.isAuthenticated;
+  }
+
+  private get currentUser(): IAniListUser {
+    return aniListStore.session.user;
   }
 }
 </script>

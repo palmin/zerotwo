@@ -11,6 +11,7 @@
 
     <v-toolbar-items>
       <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
+      <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
       <v-btn flat exact :to="{ name: 'Settings' }">{{ $t('menu.settings') }}</v-btn>
     </v-toolbar-items>
 

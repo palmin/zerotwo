@@ -27,7 +27,8 @@
   },
   "menu": {
     "home": "Home",
-    "settings": "Settings"
+    "settings": "Settings",
+    "watching": "Watching"
   },
   "$vuetify": {
     "noDataText": "No data"

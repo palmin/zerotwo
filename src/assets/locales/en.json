@@ -5,6 +5,9 @@
     "actions": {
       "login": "Login"
     },
+    "aniList": {
+      "currentProgress": "{0} / {1}"
+    },
     "modules": {
       "aniList": "AniList"
     },

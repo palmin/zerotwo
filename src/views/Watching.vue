@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-layout fill-height fluid>
-      <v-flex xs12>
+      <v-flex xs12 fill-height>
         <List />
       </v-flex>
     </v-layout>

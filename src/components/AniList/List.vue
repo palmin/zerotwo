@@ -1,14 +1,35 @@
 <template>
   <v-layout row wrap>
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
-      <v-card dark>
-        <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-0">
-              {{ item.name }}
-            </h3>
-          </div>
-        </v-card-title>
+      <v-card class="ma-1" dark hover @click="changeMetaMediaTitle(item.name)">
+        <v-layout row wrap>
+          <v-flex xs12 class="pl-1">
+            <v-img
+              :src="item.imageLink"
+              height="250px"
+            >
+              <v-container fill-height fluid>
+                <v-layout fill-height>
+                  <v-flex xs12 align-end flexbox>
+                    <span class="title shadowed">{{ item.name }}</span>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-img>
+          </v-flex>
+          <v-flex xs12>
+            <v-card-title primary-title>
+              <div>
+                <span class="grey--text">{{ $t('system.aniList.currentProgress', [item.currentProgress, item.episodeAmount]) }}</span>
+              </div>
+            </v-card-title>
+          </v-flex>
+        </v-layout>
+        <v-card-actions>
+          <v-layout align-center justify-end>
+            ({{ item.score }})<v-rating :length="ratingStarAmount" half-increments dark dense small readonly :value="item.scoreStars"></v-rating>
+          </v-layout>
+        </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
@@ -19,17 +40,20 @@ import { chain } from 'lodash';
 import { Component, Vue } from 'vue-property-decorator';
 
 // Custom Components
+import { AniListScoreFormat } from '@/modules/AniList/types';
 import { aniListStore } from '@/store';
 
 @Component
 export default class List extends Vue {
-  private get headers() {
-    return [{
-      text: 'Name',
-      align: 'left',
-      sortable: true,
-      value: 'name',
-    }];
+  // TODO: Add actual link to media page route
+  private changeMetaMediaTitle(title: string): void {
+    this.$route.meta.mediaTitle = title;
+  }
+
+  private get ratingStarAmount(): number {
+    return aniListStore.session.user.mediaListOptions.scoreFormat === AniListScoreFormat.POINT_3
+      ? 3
+      : 5;
   }
 
   private get listData() {
@@ -37,21 +61,57 @@ export default class List extends Vue {
       return [];
     }
 
-    const listElement = aniListStore.aniListData.lists[0];
+    const listElement = aniListStore.aniListData.lists[4];
 
     return chain(listElement.entries)
       .map((entry) => {
       const { media } = entry;
 
-      const preferredName = media.title.native ? media.title.native : media.title.userPreferred;
+      const scoreStars = this.getScoreStarValue(entry.score);
 
       return {
         id: entry.id,
-        name: preferredName,
+        name: media.title.userPreferred,
+        imageLink: media.coverImage.extraLarge,
+        currentProgress: entry.progress,
+        episodeAmount: media.episodes,
+        score: entry.score,
+        scoreStars,
       };
     })
     .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
     .value();
   }
+
+  private getScoreStarValue(score: number): number {
+    if (!score) {
+      return 0;
+    }
+
+    const userScoringSystem = aniListStore.session.user.mediaListOptions.scoreFormat;
+
+    switch (userScoringSystem) {
+      case AniListScoreFormat.POINT_100:
+        return score / 20;
+      case AniListScoreFormat.POINT_10_DECIMAL:
+      case AniListScoreFormat.POINT_10:
+        return score / 2;
+      case AniListScoreFormat.POINT_5:
+      case AniListScoreFormat.POINT_3:
+        return score;
+      default:
+        return 0;
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+.shadowed {
+  text-shadow:
+    -1px 1px 2px #000,
+    1px 1px 2px #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+</style>

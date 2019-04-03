@@ -37,6 +37,8 @@ query GetListByUsername($userName: String!, $type: MediaType!) {
           updatedAt
           coverImage {
             medium
+            large
+            extraLarge
           }
           synonyms
           averageScore

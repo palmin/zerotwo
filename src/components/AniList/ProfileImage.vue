@@ -1,12 +1,12 @@
 <template>
   <v-layout column fill-height d-flex align-center>
     <v-flex xs12>
-      <v-avatar size="64">
+      <v-avatar size="128" tile>
         <img :src="avatarUrl" :alt="userName" />
       </v-avatar>
     </v-flex>
     <v-flex xs12>
-      {{ userName }}
+      <span class="headline">{{ userName }}</span>
     </v-flex>
   </v-layout>
 </template>

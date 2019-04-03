@@ -17,6 +17,9 @@ export default new Router({
       path: '/watching',
       name: 'Watching',
       component: Watching,
+      meta: {
+        sortingPage: true,
+      },
     },
     {
       path: '/settings',

@@ -51,6 +51,11 @@ export class AniListStore extends VuexModule {
       },
     },
   };
+  /**
+   * @private
+   * @var {string | null} _currentMediaTitle contains the title of the currently viewing media
+   */
+  private _currentMediaTitle: string | null = null;
 
   /**
    * @getter
@@ -90,6 +95,11 @@ export class AniListStore extends VuexModule {
   @getter
   public get isAuthenticated(): boolean {
     return !!this._session.accessToken;
+  }
+
+  @getter
+  public get currentMediaTitle(): string | null {
+    return this._currentMediaTitle;
   }
 
   /**
@@ -134,6 +144,11 @@ export class AniListStore extends VuexModule {
     this._setSession(accessToken);
   }
 
+  @action()
+  public async setCurrentMediaTitle(title: string | null): Promise<void> {
+    this._setCurrentMediaTitle(title);
+  }
+
   /**
    * @protected
    * @mutation
@@ -171,6 +186,11 @@ export class AniListStore extends VuexModule {
   @mutation
   protected _setAniListData(data: IAniListMediaListCollection): void {
     this._aniListData = data;
+  }
+
+  @mutation
+  protected _setCurrentMediaTitle(title: string | null): void {
+    this._currentMediaTitle = title;
   }
 }
 

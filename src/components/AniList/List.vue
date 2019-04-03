@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout row wrap class="infinite-wrapper">
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
       <v-card class="ma-1" dark hover @click="changeMetaMediaTitle(item.name)">
         <v-layout row wrap>
@@ -8,6 +8,16 @@
               :src="item.imageLink"
               height="250px"
             >
+              <template v-slot:placeholder>
+                <v-layout
+                  fill-height
+                  align-center
+                  justify-center
+                  ma-0
+                >
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-layout>
+              </template>
               <v-container fill-height fluid>
                 <v-layout fill-height>
                   <v-flex xs12 align-end flexbox>
@@ -32,22 +42,27 @@
         </v-card-actions>
       </v-card>
     </v-flex>
+    <!--<infinite-loading @infinite="fetchData" spinner="waveDots" force-use-infinite-wrapper=".infinite-wrapper"></infinite-loading>-->
   </v-layout>
 </template>
 
 <script lang="ts">
 import { chain } from 'lodash';
+import InfiniteLoading, { InfiniteOptions } from 'vue-infinite-loading';
 import { Component, Vue } from 'vue-property-decorator';
 
 // Custom Components
 import { AniListScoreFormat } from '@/modules/AniList/types';
 import { aniListStore } from '@/store';
 
-@Component
+@Component({ components: { InfiniteLoading } })
 export default class List extends Vue {
+  private listData: any[] = [];
+  private startAmount: number = 50;
+
   // TODO: Add actual link to media page route
   private changeMetaMediaTitle(title: string): void {
-    this.$route.meta.mediaTitle = title;
+    aniListStore.setCurrentMediaTitle(title);
   }
 
   private get ratingStarAmount(): number {
@@ -56,14 +71,32 @@ export default class List extends Vue {
       : 5;
   }
 
-  private get listData() {
+  private created() {
+    const entries = this.getData();
+    if (entries.length) {
+      this.listData = entries;
+    }
+  }
+
+  private fetchData($state: any): void {
+    console.log('called');
+    const entries = this.getData();
+    if (entries.length) {
+      this.listData = entries;
+      $state.loaded();
+    } else {
+      $state.complete();
+    }
+  }
+
+  private getData(): any[] {
     if (!aniListStore.aniListData.lists.length) {
       return [];
     }
 
-    const listElement = aniListStore.aniListData.lists[4];
+    const listElement = aniListStore.aniListData.lists[0];
 
-    return chain(listElement.entries)
+    const newEntries = chain(listElement.entries)
       .map((entry) => {
       const { media } = entry;
 
@@ -80,7 +113,10 @@ export default class List extends Vue {
       };
     })
     .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
+    .slice(this.listData.length, this.startAmount)
     .value();
+
+    return [...this.listData, ...newEntries];
   }
 
   private getScoreStarValue(score: number): number {

@@ -9,16 +9,18 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items>
-      <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
-      <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
-    </v-toolbar-items>
+    <template v-if="!isMediaPage">
+      <v-toolbar-items>
+        <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
+        <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
+      </v-toolbar-items>
 
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+    </template>
 
     <v-toolbar-items>
-      <v-btn flat dark v-if="isMediaPage && mediaTitle()">
-        {{ mediaTitle() }}
+      <v-btn flat dark v-if="isMediaPage">
+        {{ currentMediaTitle }}
       </v-btn>
       <v-btn flat dark icon v-if="isSortingPage">
         <v-icon>mdi-sort</v-icon>
@@ -36,38 +38,21 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 
+// Custom Components
+import { aniListStore } from '@/store';
+
 @Component
 export default class Navigation extends Vue {
   private get isSortingPage(): boolean {
-    const currentRouteName = this.$route.name;
-
-    switch (currentRouteName) {
-      case 'Watching':
-        return true;
-      default:
-        return false;
-    }
+    return this.$route.meta && this.$route.meta.sortingPage;
   }
 
   private get isMediaPage(): boolean {
-    const currentRouteName = this.$route.name;
-
-    // TODO: Add Media page route
-    switch (currentRouteName) {
-      case 'Watching':
-        return true;
-      default:
-        return false;
-    }
+    return this.$route.meta && this.$route.meta.mediaPage;
   }
 
-  @Watch('$route', { deep: true, immediate: true })
-  private mediaTitle(route: Route): string | null {
-    if (!this.isMediaPage || !route || !route.meta.mediaTitle) {
-      return null;
-    }
-
-    return route.meta.mediaTitle;
+  private get currentMediaTitle(): string | null {
+    return aniListStore.currentMediaTitle;
   }
 }
 </script>

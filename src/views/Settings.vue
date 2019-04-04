@@ -11,11 +11,20 @@
                 <v-container fluid>
                   <v-flex xs6>
                     <v-select
-                      :items="languages"
-                      item-text="original"
-                      :value="this._locale"
-                      :label="this.$t('system.settings.appSettings.chooseLanguage')"
-                      @change="setLanguage">
+                    :items="languages"
+                    item-text="original"
+                    :value="this._locale"
+                    :label="this.$t('system.settings.appSettings.chooseLanguage')"
+                    @change="setLanguage">
+                      <template slot="selection" scope="data">
+                        {{ data.item.original }} ({{ data.item.english }})
+                      </template>
+                      <template slot="item" scope="data">
+                        <v-list-tile-content>
+                          <v-list-tile-title>{{ data.item.original }}</v-list-tile-title>
+                          <v-list-tile-sub-title>{{ data.item.english }}</v-list-tile-sub-title>
+                        </v-list-tile-content>
+                      </template>
                     </v-select>
                   </v-flex>
                 </v-container>

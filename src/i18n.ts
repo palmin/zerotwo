@@ -21,6 +21,7 @@ function loadLocaleMessages(): LocaleMessages {
 export const validLanguageCodes: string[] = [
   'de',
   'en',
+  'ja',
 ];
 
 export const i18n = new VueI18n({

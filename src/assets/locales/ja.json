@@ -1,0 +1,45 @@
+{
+  "originalReading": "日本語",
+  "englishReading": "Japanese",
+  "system": {
+    "actions": {
+      "login": "ログイン",
+      "sort": "並べる",
+      "toPageTop": "トップへ"
+    },
+    "alerts": {
+      "adultContent": "１８禁コンテンツです！ご注意下さい！"
+    },
+    "aniList": {
+      "activities": "最近の更新",
+      "currentProgress": "{0} / {1}"
+    },
+    "modules": {
+      "aniList": "AniList"
+    },
+    "settings": {
+      "aboutZeroTwo": {
+        "version": "バージョン"
+      },
+      "aniList": {
+        "loggedInAs": "{0}として認識しました"
+      },
+      "appSettings": {
+        "chooseLanguage": "言語を選択してください (Choose language)"
+      },
+      "menu": {
+        "about": "ゼロツーについて",
+        "aniList": "AniList",
+        "appSettings": "環境設定"
+      }
+    }
+  },
+  "menu": {
+    "home": "ホーム",
+    "settings": "環境設定",
+    "watching": "見る中"
+  },
+  "$vuetify": {
+    "noDataText": "データ無し"
+  }
+}

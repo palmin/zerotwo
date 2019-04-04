@@ -5,6 +5,7 @@ query {
     id
     avatar {
       medium
+      large
     }
     bannerImage
     mediaListOptions {

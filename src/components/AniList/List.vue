@@ -36,29 +36,43 @@
           </v-flex>
         </v-layout>
         <v-card-actions>
+          <v-layout align-start justify-start>
+            <template v-if="item.forAdults">
+              <v-tooltip top>
+                <template v-slot:activator="{ on }">
+                  <v-icon color="error" v-on="on">mdi-alert</v-icon>
+                </template>
+                <span>{{ $t('system.alerts.adultContent') }}</span>
+              </v-tooltip>
+            </template>
+          </v-layout>
+
           <v-layout align-center justify-end>
             ({{ item.score }})<v-rating :length="ratingStarAmount" half-increments dark dense small readonly :value="item.scoreStars"></v-rating>
           </v-layout>
         </v-card-actions>
       </v-card>
     </v-flex>
-    <!--<infinite-loading @infinite="fetchData" spinner="waveDots" force-use-infinite-wrapper=".infinite-wrapper"></infinite-loading>-->
+    <v-flex xs12 v-show="loading" justify-center align-center>
+      <v-progress-linear :indeterminate="true" background-color="pink lighten-3" color="pink lighten-1"></v-progress-linear>
+    </v-flex>
   </v-layout>
 </template>
 
 <script lang="ts">
 import { chain } from 'lodash';
-import InfiniteLoading, { InfiniteOptions } from 'vue-infinite-loading';
 import { Component, Vue } from 'vue-property-decorator';
 
 // Custom Components
 import { AniListScoreFormat } from '@/modules/AniList/types';
 import { aniListStore } from '@/store';
 
-@Component({ components: { InfiniteLoading } })
+@Component
 export default class List extends Vue {
+  private loading: boolean = false;
   private listData: any[] = [];
-  private startAmount: number = 50;
+  // TODO: Make this a non-static number via Store
+  private startAmount: number = 20;
 
   // TODO: Add actual link to media page route
   private changeMetaMediaTitle(title: string): void {
@@ -72,24 +86,27 @@ export default class List extends Vue {
   }
 
   private created() {
-    const entries = this.getData();
+    const entries = this.getData(0);
     if (entries.length) {
       this.listData = entries;
     }
+
+    // Infinite Scrolling
+    window.onscroll = () => {
+      this.loading = true;
+      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        const newEntries = this.getData(this.listData.length);
+        if (newEntries.length) {
+          this.listData = [...this.listData, ...newEntries];
+        }
+      }
+      this.loading = false;
+    };
   }
 
-  private fetchData($state: any): void {
-    console.log('called');
-    const entries = this.getData();
-    if (entries.length) {
-      this.listData = entries;
-      $state.loaded();
-    } else {
-      $state.complete();
-    }
-  }
-
-  private getData(): any[] {
+  private getData(startValue: number): any[] {
     if (!aniListStore.aniListData.lists.length) {
       return [];
     }
@@ -110,13 +127,14 @@ export default class List extends Vue {
         episodeAmount: media.episodes,
         score: entry.score,
         scoreStars,
+        forAdults: media.isAdult,
       };
     })
     .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
-    .slice(this.listData.length, this.startAmount)
+    .slice(startValue, this.startAmount + startValue)
     .value();
 
-    return [...this.listData, ...newEntries];
+    return newEntries;
   }
 
   private getScoreStarValue(score: number): number {

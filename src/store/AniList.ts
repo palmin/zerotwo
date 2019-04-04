@@ -6,6 +6,7 @@ import API from '@/modules/AniList/API';
 import {
   AniListScoreFormat,
   AniListType,
+  IAniListActivity,
   IAniListMediaListCollection,
   IAniListSession,
   IAniListUser,
@@ -36,6 +37,7 @@ export class AniListStore extends VuexModule {
     user: {
       avatar: {
         medium: '',
+        large: '',
       },
       bannerImage: '',
       id: -1,
@@ -51,6 +53,11 @@ export class AniListStore extends VuexModule {
       },
     },
   };
+  /**
+   * @private
+   * @var {IAniListActivity[]} _latestActivities contains the current user's latest activities
+   */
+  private _latestActivities: IAniListActivity[] = [];
   /**
    * @private
    * @var {string | null} _currentMediaTitle contains the title of the currently viewing media
@@ -89,6 +96,16 @@ export class AniListStore extends VuexModule {
 
   /**
    * @getter
+   * @method latestActivities
+   * @returns {IAniListActivity[]} the current user's latest activities
+   */
+  @getter
+  public get latestActivities(): IAniListActivity[] {
+    return this._latestActivities;
+  }
+
+  /**
+   * @getter
    * @method isAuthenticated
    * @returns {boolean} is the current user logged in
    */
@@ -122,9 +139,13 @@ export class AniListStore extends VuexModule {
       const userName = (user as IAniListUser).name;
       const userList = await API.getUserList(userName, AniListType.ANIME);
 
-      if (userList && user) {
+      const userId = (user as IAniListUser).id;
+      const latestActivities = await API.getLatestActivities(userId, 0, 10);
+
+      if (userList && user && latestActivities) {
         this._setAniListData(userList);
         this._setUser(user);
+        this._setLatestActivities(latestActivities);
       }
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'store', 'refreshAniListData'], error);
@@ -186,6 +207,11 @@ export class AniListStore extends VuexModule {
   @mutation
   protected _setAniListData(data: IAniListMediaListCollection): void {
     this._aniListData = data;
+  }
+
+  @mutation
+  protected _setLatestActivities(data: IAniListActivity[]): void {
+    this._latestActivities = data;
   }
 
   @mutation

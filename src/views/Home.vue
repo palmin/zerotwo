@@ -13,7 +13,8 @@
       <v-card-text>
         <v-container fluid fill-height>
           <v-flex xs6>
-            <span class="subheader">{{ $t('') }}</span>
+            <div class="title">{{ $t('system.aniList.activities') }}</div>
+            <Activities />
           </v-flex>
         </v-container>
       </v-card-text>
@@ -22,12 +23,14 @@
 </template>
 
 <script lang="ts">
+import Activities from '@/components/AniList/Activities.vue';
 import ProfileImage from '@/components/AniList/ProfileImage.vue';
 import { Component, Vue } from 'vue-property-decorator';
 import { aniListStore } from '../store';
 
 @Component({
   components: {
+    Activities,
     ProfileImage,
   },
 })

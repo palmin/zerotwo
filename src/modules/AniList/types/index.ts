@@ -67,6 +67,17 @@ export enum AniListType {
   MANGA = 'MANGA',
 }
 
+/**
+ * @enum AniListActivityType contains an Activity's type of update
+ */
+export enum AniListActivityType {
+  TEXT = 'TEXT',
+  ANIME_LIST = 'ANIME_LIST',
+  MANGA_LIST = 'MANGA_LIST',
+  MESSAGE = 'MESSAGE',
+  MEDIA_LIST = 'MEDIA_LIST',
+}
+
 // INTERFACES
 
 /**
@@ -325,6 +336,10 @@ export interface IAniListUserAvatar {
    * @var {string} medium contains the URL to the user's avatar (medium-size)
    */
   medium: string;
+  /**
+   * @var {string} large contains the URL to the user's avatar (large-size)
+   */
+  large: string;
 }
 
 /**
@@ -405,4 +420,31 @@ export interface IAniListSession {
    * @var {IAniListUser} user contains the data of the currently logged in user
    */
   user: IAniListUser;
+}
+
+export interface IAniListActivity {
+  /**
+   * @var {number} id contains the activity id
+   */
+  id: number;
+  /**
+   * @var {IAniListMedia} media contains the activity's media information
+   */
+  media: IAniListMedia;
+  /**
+   * @var {string | null} progress contains the episode number or if completed is null
+   */
+  progress: string | null;
+  /**
+   * @var {string} status contains a string if "completed" or "watched episode"
+   */
+  status: string;
+  /**
+   * @var {AniListActivityType} type contains the activity type
+   */
+  type: AniListActivityType;
+  /**
+   * @var {number} createdAt contains the date of the activity as a timestamp
+   */
+  createdAt: number;
 }

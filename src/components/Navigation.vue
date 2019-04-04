@@ -22,13 +22,45 @@
       <v-btn flat dark v-if="isMediaPage">
         {{ currentMediaTitle }}
       </v-btn>
-      <v-btn flat dark icon v-if="isSortingPage">
-        <v-icon>mdi-sort</v-icon>
-      </v-btn>
 
-      <v-btn flat exact icon :to="{ name: 'Settings' }">
-        <v-icon>mdi-settings</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on: toolTip }">
+          <v-btn flat dark icon v-if="isSortingPage" v-on="{ ...toolTip }" @click="jumpToTop">
+            <v-icon>mdi-arrow-up</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $t('system.actions.toPageTop') }}</span>
+      </v-tooltip>
+
+      <v-menu v-model="sortMenu" :close-on-content-click="false" offset-y>
+        <template v-slot:activator="{ on: sortWindow }">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat dark icon v-if="isSortingPage" v-on="{ ...toolTip, ...sortWindow }">
+                <v-icon>mdi-sort</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('system.actions.sort') }}</span>
+          </v-tooltip>
+        </template>
+        <v-card>
+          <v-container fluid>
+            <v-flex xs12 d-flex>
+              <v-select :items="['Name']" label="Sort by"></v-select>
+            </v-flex>
+          </v-container>
+        </v-card>
+      </v-menu>
+
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on: toolTip }">
+          <v-btn flat exact icon :to="{ name: 'Settings' }" v-on="{ ...toolTip }">
+            <v-icon>mdi-settings</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $t('menu.settings') }}</span>
+      </v-tooltip>
     </v-toolbar-items>
 
   </v-toolbar>
@@ -43,6 +75,8 @@ import { aniListStore } from '@/store';
 
 @Component
 export default class Navigation extends Vue {
+  private sortMenu: boolean = false;
+
   private get isSortingPage(): boolean {
     return this.$route.meta && this.$route.meta.sortingPage;
   }
@@ -53,6 +87,10 @@ export default class Navigation extends Vue {
 
   private get currentMediaTitle(): string | null {
     return aniListStore.currentMediaTitle;
+  }
+
+  private jumpToTop(): void {
+    window.scrollTo(0, 0);
   }
 }
 </script>

@@ -3,9 +3,15 @@
   "englishReading": "English",
   "system": {
     "actions": {
-      "login": "Login"
+      "login": "Login",
+      "sort": "Sort",
+      "toPageTop": "Jump to top"
+    },
+    "alerts": {
+      "adultContent": "This media is considered adult content! Viewer Discretion Advised."
     },
     "aniList": {
+      "activities": "Activities",
       "currentProgress": "{0} / {1}"
     },
     "modules": {

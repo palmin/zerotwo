@@ -165,18 +165,33 @@ class Log {
   private checkLogPaths(): void {
     // Each Log file is created if not yet existing
     if (!fs.existsSync(this.getPathOf(Logs.STDOUT))) {
-      fs.appendFileSync(this.getPathOf(Logs.STDOUT), '');
-      this.writeToLog(Logs.STDOUT, ['initialize', 'main'], 'Log started.');
+      fs.appendFile(this.getPathOf(Logs.STDOUT), '', (err) => {
+        if (err) {
+          return;
+        }
+
+        this.writeToLog(Logs.STDOUT, ['initialize', 'main'], 'Log started.');
+      });
     }
 
     if (!fs.existsSync(this.getPathOf(Logs.ERROR))) {
-      fs.appendFileSync(this.getPathOf(Logs.ERROR), '');
-      this.writeToLog(Logs.ERROR, ['initialize', 'main'], 'Log started.');
+      fs.appendFile(this.getPathOf(Logs.ERROR), '', (err) => {
+        if (err) {
+          return;
+        }
+
+        this.writeToLog(Logs.ERROR, ['initialize', 'main'], 'Log started.');
+      });
     }
 
     if (!fs.existsSync(this.getPathOf(Logs.WARNING))) {
-      fs.appendFileSync(this.getPathOf(Logs.WARNING), '');
-      this.writeToLog(Logs.WARNING, ['initialize', 'main'], 'Log started.');
+      fs.appendFile(this.getPathOf(Logs.WARNING), '', (err) => {
+        if (err) {
+          return;
+        }
+        // TODO: Write Error handler for this kind of file writing error!
+        this.writeToLog(Logs.WARNING, ['initialize', 'main'], 'Log started.');
+      });
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-content>
-    <v-card>
+    <v-card v-if="isAuthenticated">
       <v-card-text class="background" :style="`background-image: url(${currentUser.bannerImage})`">
         <v-container fluid>
           <v-flex xs2>
@@ -9,7 +9,7 @@
         </v-container>
       </v-card-text>
     </v-card>
-    <v-card>
+    <v-card v-if="isAuthenticated">
       <v-card-text>
         <v-container fluid fill-height>
           <v-flex xs6>
@@ -37,6 +37,10 @@ import { aniListStore } from '../store';
 export default class Home extends Vue {
   private get currentUser() {
     return aniListStore.session.user;
+  }
+
+  private get isAuthenticated(): boolean {
+    return aniListStore.isAuthenticated;
   }
 }
 </script>

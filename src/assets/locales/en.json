@@ -8,11 +8,20 @@
       "toPageTop": "Jump to top"
     },
     "alerts": {
-      "adultContent": "This media is considered adult content! Viewer Discretion Advised."
+      "adultContent": "This media is considered adult content! Viewer Discretion Advised.",
+      "unauthenticated": "You are not authenticated!"
     },
     "aniList": {
       "activities": "Activities",
-      "currentProgress": "{0} / {1}"
+      "currentProgress": "{0} / {1}",
+      "howToAuthenticate": {
+        "header": "How to login:",
+        "text": [
+          "Please navigate to the settings page (cog in the right-hand corner) and then to the \"AniList\" tab.",
+          "There you will find a \"Login\" button which will open an AniList login window.",
+          "After inputting the login data the window will close and login process should be done successfully."
+        ]
+      }
     },
     "modules": {
       "aniList": "AniList"
@@ -25,7 +34,8 @@
         "loggedInAs": "Logged in as {0}"
       },
       "appSettings": {
-        "chooseLanguage": "Choose language"
+        "chooseLanguage": "Choose language",
+        "darkMode": "Dark mode"
       },
       "menu": {
         "about": "About ZeroTwo",

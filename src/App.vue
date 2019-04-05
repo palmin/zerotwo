@@ -1,5 +1,5 @@
 <template>
-  <v-app dark id="app">
+  <v-app :dark="darkMode" id="app">
     <main>
       <Navigation />
       <router-view />
@@ -36,6 +36,10 @@ export default class App extends Vue {
 
   public get locale(): string | undefined {
     return appStore.language;
+  }
+
+  public get darkMode(): boolean {
+    return appStore.darkMode;
   }
 
   /**

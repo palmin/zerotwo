@@ -1,10 +1,11 @@
 <template>
   <v-layout row wrap class="infinite-wrapper">
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
-      <v-card class="ma-1" dark hover @click="changeMetaMediaTitle(item.name)">
+      <v-card class="ma-1" hover @click="changeMetaMediaTitle(item.name)">
         <v-layout row wrap>
           <v-flex xs12 class="pl-1">
-            <v-img
+            <ImageWrapper :originalLink="item.imageLink" height="250px" />
+            <!-- <v-img
               :src="item.imageLink"
               height="250px"
             >
@@ -25,7 +26,7 @@
                   </v-flex>
                 </v-layout>
               </v-container>
-            </v-img>
+            </v-img> -->
           </v-flex>
           <v-flex xs12>
             <v-card-title primary-title>
@@ -48,7 +49,7 @@
           </v-layout>
 
           <v-layout align-center justify-end>
-            ({{ item.score }})<v-rating :length="ratingStarAmount" half-increments dark dense small readonly :value="item.scoreStars"></v-rating>
+            ({{ item.score }})<v-rating :length="ratingStarAmount" half-increments dense small readonly :value="item.scoreStars"></v-rating>
           </v-layout>
         </v-card-actions>
       </v-card>
@@ -64,10 +65,15 @@ import { chain } from 'lodash';
 import { Component, Vue } from 'vue-property-decorator';
 
 // Custom Components
+import ImageWrapper from '@/components/ImageWrapper.vue';
 import { AniListScoreFormat } from '@/modules/AniList/types';
 import { aniListStore } from '@/store';
 
-@Component
+@Component({
+  components: {
+    ImageWrapper,
+  },
+})
 export default class List extends Vue {
   private loading: boolean = false;
   private listData: any[] = [];

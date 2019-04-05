@@ -1,4 +1,4 @@
-import { getter, Module, mutation, VuexModule } from 'vuex-class-component';
+import { action, getter, Module, mutation, VuexModule } from 'vuex-class-component';
 import { version } from '../../package.json';
 
 /**
@@ -16,6 +16,12 @@ export class AppStore extends VuexModule {
    * @var {string} _locale contains the locale string
    */
   private _locale?: string = process.env.VUE_APP_I18N_FALLBACK_LOCALE;
+  /**
+   * @private
+   * @var {boolean} _darkMode toggles the dark or light mode
+   * @default true
+   */
+  private _darkMode: boolean = true;
 
   /**
    * @getter
@@ -38,14 +44,61 @@ export class AppStore extends VuexModule {
   }
 
   /**
+   * @getter
+   * @method AppStore.darkMode
+   * @returns {boolean} the current dark mode setting state
+   */
+  @getter
+  public get darkMode(): boolean {
+    return this._darkMode;
+  }
+
+  /**
+   * @async
+   * @action
+   * @method setLanguage
+   * @param {string} language the language string
+   * @returns {Promise<void>}
+   */
+  @action()
+  public async setLanguage(language: string): Promise<void> {
+    this._setLanguage(language);
+  }
+
+  /**
+   * @async
+   * @action
+   * @method setDarkMode
+   * @param {boolean} state contains the state if dark mode is to be enabled or not
+   * @returns {Promise<void>}
+   */
+  @action()
+  public async setDarkMode(state: boolean): Promise<void> {
+    this._setDarkMode(state);
+  }
+
+  /**
+   * @protected
    * @mutation
-   * @method AppStore.setLanguage
+   * @method _setLanguage
    * @description Sets the app's locale to set language
    * @param {string} language
    */
   @mutation
-  public setLanguage(language: string) {
+  protected _setLanguage(language: string) {
     this._locale = language;
+  }
+
+  /**
+   * @protected
+   * @mutation
+   * @method _setDarkMode
+   * @description Sets the app's dark mode to on or off
+   * @param {boolean} state
+   */
+  @mutation
+  protected _setDarkMode(state: boolean) {
+    this._darkMode = state;
   }
 }
 

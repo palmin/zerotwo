@@ -8,11 +8,20 @@
       "toPageTop": "トップへ"
     },
     "alerts": {
-      "adultContent": "１８禁コンテンツです！ご注意下さい！"
+      "adultContent": "１８禁コンテンツです！ご注意下さい！",
+      "unauthenticated": "まだログインしませんでした！"
     },
     "aniList": {
       "activities": "最近の更新",
-      "currentProgress": "{0} / {1}"
+      "currentProgress": "{0} / {1}",
+      "howToAuthenticate": {
+        "header": "身分確認（ログイン方法）：",
+        "text": [
+          "環境設定のページへ移動して（右上の歯車）、「ＡｎｉＬｉｓｔ」のタブをクリック。",
+          "そこのあるのは「ログイン」のボタン。そのボタンをクリックして、ＡｎｉＬｉｓｔのログインウィンドーが開きます。",
+          "ログインデータを入力して成功に完成しましたはずです。"
+        ]
+      }
     },
     "modules": {
       "aniList": "AniList"
@@ -25,7 +34,8 @@
         "loggedInAs": "{0}として認識しました"
       },
       "appSettings": {
-        "chooseLanguage": "言語を選択してください (Choose language)"
+        "chooseLanguage": "言語を選択してください (Choose language)",
+        "darkMode": "ダークモード"
       },
       "menu": {
         "about": "ゼロツーについて",

@@ -19,6 +19,21 @@
         </v-container>
       </v-card-text>
     </v-card>
+    <v-card v-if="!isAuthenticated">
+      <v-card-title primary-title>
+        <div>
+          <div class="headline">{{ $t('system.alerts.unauthenticated') }}</div>
+          <span class="subheading">{{ $t('system.aniList.howToAuthenticate.header') }}</span>
+        </div>
+      </v-card-title>
+      <v-card-text>
+        <div class="body-2">
+          <p>{{ $t('system.aniList.howToAuthenticate.text.0') }}</p>
+          <p>{{ $t('system.aniList.howToAuthenticate.text.1') }}</p>
+          <p>{{ $t('system.aniList.howToAuthenticate.text.2') }}</p>
+        </div>
+      </v-card-text>
+    </v-card>
   </v-content>
 </template>
 

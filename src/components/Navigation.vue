@@ -1,7 +1,7 @@
 <template>
-  <v-toolbar app fixed dark flat dense>
+  <v-toolbar app fixed flat dense>
     <v-menu offset-y>
-      <v-btn flat dark slot="activator">
+      <v-btn flat slot="activator">
         <v-icon left>mdi-menu</v-icon>
         {{ $t('system.modules.aniList') }}
       </v-btn>
@@ -12,20 +12,23 @@
     <template v-if="!isMediaPage">
       <v-toolbar-items>
         <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
-        <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
+
+        <template v-if="isAuthenticated">
+          <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
+        </template>
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
     </template>
 
     <v-toolbar-items>
-      <v-btn flat dark v-if="isMediaPage">
+      <v-btn flat v-if="isMediaPage">
         {{ currentMediaTitle }}
       </v-btn>
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
-          <v-btn flat dark icon v-if="isSortingPage" v-on="{ ...toolTip }" @click="jumpToTop">
+          <v-btn flat icon v-if="isSortingPage" v-on="{ ...toolTip }" @click="jumpToTop">
             <v-icon>mdi-arrow-up</v-icon>
           </v-btn>
         </template>
@@ -36,7 +39,7 @@
         <template v-slot:activator="{ on: sortWindow }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on: toolTip }">
-              <v-btn flat dark icon v-if="isSortingPage" v-on="{ ...toolTip, ...sortWindow }">
+              <v-btn flat icon v-if="isSortingPage" v-on="{ ...toolTip, ...sortWindow }">
                 <v-icon>mdi-sort</v-icon>
               </v-btn>
             </template>
@@ -87,6 +90,10 @@ export default class Navigation extends Vue {
 
   private get currentMediaTitle(): string | null {
     return aniListStore.currentMediaTitle;
+  }
+
+  private get isAuthenticated(): boolean {
+    return aniListStore.isAuthenticated;
   }
 
   private jumpToTop(): void {

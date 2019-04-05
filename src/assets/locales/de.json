@@ -8,11 +8,20 @@
       "toPageTop": "Zum Anfang springen"
     },
     "alerts": {
-      "adultContent": "Dieses Element ist für Jugendliche unter 18 Jahren ungeeignet!"
+      "adultContent": "Dieses Element ist für Jugendliche unter 18 Jahren ungeeignet!",
+      "unauthenticated": "Du bist nicht eingeloggt!"
     },
     "aniList": {
       "activities": "Aktivitäten",
-      "currentProgress": "{0} / {1}"
+      "currentProgress": "{0} / {1}",
+      "howToAuthenticate": {
+        "header": "Wie man sich einloggt:",
+        "text": [
+          "Navigiere bitte auf die Einstellungsseite (Zahnrad rechts oben) und auf \"AniList\".",
+          "Dort findest du einen \"Login\"-Button, der einen von AniList erstellten Login-Dialog öffnet.",
+          "Nach Eingabe der Login-Daten schließt sich das Fenster wieder und der Login-Prozess sollte erfolgreich abgeschlossen sein."
+        ]
+      }
     },
     "modules": {
       "aniList": "AniList"
@@ -25,7 +34,8 @@
         "loggedInAs": "Eingeloggt als {0}"
       },
       "appSettings": {
-        "chooseLanguage": "Sprache wählen (Choose language)"
+        "chooseLanguage": "Sprache wählen (Choose language)",
+        "darkMode": "Dunkles App-Design"
       },
       "menu": {
         "about": "Über ZeroTwo",

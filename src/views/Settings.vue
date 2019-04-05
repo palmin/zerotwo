@@ -1,32 +1,38 @@
 <template>
   <v-content>
-    <v-card dark>
+    <v-card>
       <v-card-text>
-        <v-tabs grow fluid dark>
+        <v-tabs grow fluid>
           <v-tab v-for="tab in settingsTabs" :key="tab.key" :disabled="tab.disabled" ripple>{{ tab.value }}</v-tab>
 
           <v-tabs-items>
             <v-tab-item key="appSettings">
               <v-card flat>
                 <v-container fluid>
-                  <v-flex xs6>
-                    <v-select
-                    :items="languages"
-                    item-text="original"
-                    :value="this._locale"
-                    :label="this.$t('system.settings.appSettings.chooseLanguage')"
-                    @change="setLanguage">
-                      <template slot="selection" scope="data">
-                        {{ data.item.original }} ({{ data.item.english }})
-                      </template>
-                      <template slot="item" scope="data">
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ data.item.original }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ data.item.english }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </template>
-                    </v-select>
-                  </v-flex>
+                  <v-layout row wrap>
+                    <v-flex xs5>
+                      <v-select
+                      :items="languages"
+                      item-text="original"
+                      :value="this._locale"
+                      :label="this.$t('system.settings.appSettings.chooseLanguage')"
+                      @change="setLanguage">
+                        <template slot="selection" scope="data">
+                          {{ data.item.original }} ({{ data.item.english }})
+                        </template>
+                        <template slot="item" scope="data">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ data.item.original }}</v-list-tile-title>
+                            <v-list-tile-sub-title>{{ data.item.english }}</v-list-tile-sub-title>
+                          </v-list-tile-content>
+                        </template>
+                      </v-select>
+                    </v-flex>
+
+                    <v-flex xs5 offset-xs2 justify-center align-center>
+                      <v-switch v-model="darkMode" :label="$t('system.settings.appSettings.darkMode')"></v-switch>
+                    </v-flex>
+                  </v-layout>
                 </v-container>
               </v-card>
             </v-tab-item>
@@ -181,6 +187,14 @@ export default class Settings extends Vue {
 
   private get currentAppVersion(): string {
     return appStore.version;
+  }
+
+  private get darkMode(): boolean {
+    return appStore.darkMode;
+  }
+
+  private set darkMode(state: boolean) {
+    appStore.setDarkMode(state);
   }
 
   private get isAuthenticated(): boolean {

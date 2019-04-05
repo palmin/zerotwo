@@ -78,6 +78,15 @@ export enum AniListActivityType {
   MEDIA_LIST = 'MEDIA_LIST',
 }
 
+/**
+ * @enum AniListImageSize contains an image's type of size
+ */
+export enum AniListImageSize {
+  MEDIUM = 'MEDIUM',
+  LARGE = 'LARGE',
+  EXTRA_LARGE = 'EXTRA_LARGE',
+}
+
 // INTERFACES
 
 /**
@@ -422,6 +431,10 @@ export interface IAniListSession {
   user: IAniListUser;
 }
 
+/**
+ * @interface IAniListActivity
+ * @description contains the user's activity
+ */
 export interface IAniListActivity {
   /**
    * @var {number} id contains the activity id
@@ -447,4 +460,12 @@ export interface IAniListActivity {
    * @var {number} createdAt contains the date of the activity as a timestamp
    */
   createdAt: number;
+}
+
+export interface IAniListImageStorage {
+  id: number | null;
+  fileName: string;
+  size: AniListImageSize;
+  originalLink: string;
+  path: string;
 }

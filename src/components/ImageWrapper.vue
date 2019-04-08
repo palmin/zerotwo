@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-img :height="height" :src="`data:image/jpg;base64,${imageLink}`">
+    <v-img :height="height" :src="imageLink">
       <template v-slot:placeholder>
         <v-layout
           fill-height
@@ -42,7 +42,7 @@ export default class ImageWrapper extends Vue {
   private async mounted() {
     const imageLink = await this.getImageLink();
 
-    this.imageLink = imageLink;
+    this.imageLink = `data:image/jpg;base64,${imageLink}`;
   }
 
   private async getImageLink(): Promise<string> {

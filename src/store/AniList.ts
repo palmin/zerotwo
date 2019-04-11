@@ -1,7 +1,8 @@
 import electron from 'electron';
-import FS from 'fs';
+import FS, { read } from 'fs';
 import Path from 'path';
 import request from 'request';
+import { promisify } from 'util';
 import UUIDv4 from 'uuid/v4';
 import { action, getter, Module, mutation, VuexModule } from 'vuex-class-component';
 
@@ -9,11 +10,9 @@ import { action, getter, Module, mutation, VuexModule } from 'vuex-class-compone
 import Log from '@/log';
 import API from '@/modules/AniList/API';
 import {
-  AniListImageSize,
   AniListScoreFormat,
   AniListType,
   IAniListActivity,
-  IAniListImageStorage,
   IAniListMediaListCollection,
   IAniListSession,
   IAniListUser,
@@ -70,29 +69,6 @@ export class AniListStore extends VuexModule {
    * @var {string | null} _currentMediaTitle contains the title of the currently viewing media
    */
   private _currentMediaTitle: string | null = null;
-  /**
-   * @private
-   * @var {IAniListImageStorage[]} _storedImages contains the information about all currently stored images.
-   */
-  private _storedImages: IAniListImageStorage[] = [];
-
-  private constructor() {
-    super();
-
-    const userDataPath = (electron.app || electron.remote.app).getPath('userData');
-    const jsonPath = Path.join(userDataPath, 'storedImages.json');
-
-    if (FS.existsSync(jsonPath)) {
-      this._storedImages = this.parseImageStorageData(jsonPath);
-    } else {
-      FS.writeFileSync(jsonPath, '[]');
-    }
-
-    const imagesFolder = Path.join(userDataPath, 'AniListImages');
-    if (!FS.existsSync(imagesFolder)) {
-      FS.mkdirSync(imagesFolder);
-    }
-  }
 
   /**
    * @getter
@@ -149,66 +125,6 @@ export class AniListStore extends VuexModule {
     return this._currentMediaTitle;
   }
 
-  @getter
-  public get storedImages(): IAniListImageStorage[] {
-    return this._storedImages;
-  }
-
-  @action()
-  public async searchImage(
-    { aniListId, originalLink, size }:
-    { aniListId?: number; originalLink?: string; size: AniListImageSize } = { size: AniListImageSize.LARGE }):
-  Promise<IAniListImageStorage | null> {
-    try {
-      let image = null;
-
-      if (aniListId) {
-        image = this._storedImages.find((storedImage) =>
-          storedImage.id === aniListId && storedImage.size === size);
-      } else if (originalLink) {
-        image = this._storedImages.find((storedImage) =>
-          storedImage.originalLink === originalLink);
-      } else {
-        throw Error('Neither aniListId nor originalLink has been provided!');
-      }
-
-      if (!image) {
-        return null;
-      }
-
-      return image;
-    } catch (error) {
-      Log.log(Log.getErrorSeverity(), ['store', 'AniList', 'searchImage'], error, aniListId, originalLink, size);
-      return null;
-    }
-  }
-
-  @action()
-  public async addImageToStorage(
-    { aniListId, originalLink, size }: { aniListId: number | null, originalLink: string, size: AniListImageSize }):
-    Promise<string> {
-    const imageExtension = Path.extname(originalLink);
-    const fileName = UUIDv4();
-    const userDataPath = (electron.app || electron.remote.app).getPath('userData');
-    const filePath = Path.join(userDataPath, 'AniListImages', `${fileName}${imageExtension}`);
-
-    await new Promise((resolve) =>
-      request(originalLink)
-        .pipe(FS.createWriteStream(filePath))
-        .on('finish', resolve));
-
-    const imageStorage: IAniListImageStorage = {
-      id: aniListId,
-      fileName,
-      originalLink,
-      size,
-      path: filePath,
-    };
-    this._storedImages.push(imageStorage);
-
-    return imageStorage.path;
-  }
-
   /**
    * @action
    * @async
@@ -260,11 +176,6 @@ export class AniListStore extends VuexModule {
     this._setCurrentMediaTitle(title);
   }
 
-  @mutation
-  public setStoredImages() {
-    this._storedImages = [];
-  }
-
   /**
    * @protected
    * @mutation
@@ -312,16 +223,6 @@ export class AniListStore extends VuexModule {
   @mutation
   protected _setCurrentMediaTitle(title: string | null): void {
     this._currentMediaTitle = title;
-  }
-
-  private parseImageStorageData(filePath: string): IAniListImageStorage[] {
-    try {
-      return JSON.parse(FS.readFileSync(filePath).toString());
-    } catch (error) {
-      Log.log(Log.getErrorSeverity(), ['store', 'AniList', 'parseImageStorageData'], error);
-    }
-
-    return [];
   }
 }
 

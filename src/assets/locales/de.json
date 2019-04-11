@@ -3,7 +3,10 @@
   "englishReading": "German",
   "system": {
     "actions": {
+      "addToPlanToWatch": "Zur Plan-Liste hinzufügen",
+      "loading": "Lädt...",
       "login": "Login",
+      "resetImageCache": "Bildercache leeren",
       "sort": "Sortieren",
       "toPageTop": "Zum Anfang springen"
     },
@@ -23,15 +26,35 @@
         ]
       }
     },
+    "dates": {
+      "full": "DD. MMMM YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Datum unbekannt"
+    },
     "modules": {
       "aniList": "AniList"
+    },
+    "routes": {
+      "aniList": "AniList",
+      "seasonPreview": "Saison-Vorschau",
+      "settings": "Einstellungen"
     },
     "settings": {
       "aboutZeroTwo": {
         "version": "Version"
       },
       "aniList": {
-        "loggedInAs": "Eingeloggt als {0}"
+        "loggedInAs": "Eingeloggt als {0}",
+        "resetImageCache": {
+          "title": "Bildercache leeren",
+          "body": [
+            "ZeroTwo speichert Bilder, wie beispielsweise das Profilbild oder Plakatbilder von Medien auf dem Computer zwischen.",
+            "Diese Funktion verringert die Anzahl der Anfragen an Servern und Ladezeiten, um Bilder zu laden.",
+            "Zudem macht es die Bilder offline verfügbar.",
+            "Diese Funktion ist vorerst zwangsaktiv und kann gerne mit einem Issue im öffentlichen GitHub-Repo diskutiert werden."
+          ]
+        }
       },
       "appSettings": {
         "chooseLanguage": "Sprache wählen (Choose language)",
@@ -44,8 +67,18 @@
       }
     }
   },
+  "seasonPreview": {
+    "episodes": "? Episoden | 1 Episode | {count} Episoden",
+    "startDate": "Serienstart:"
+  },
   "menu": {
+    "completed": "Abgeschlossen",
+    "dropped": "Abgebrochen",
     "home": "Home",
+    "paused": "Pausiert",
+    "planning": "Geplant",
+    "repeating": "Wiederholend",
+    "seasonPreview": "Saison-Vorschau",
     "settings": "Einstellungen",
     "watching": "Laufend"
   },

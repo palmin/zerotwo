@@ -3,7 +3,10 @@
   "englishReading": "Japanese",
   "system": {
     "actions": {
+      "addToPlanToWatch": "見る予定リストに追加",
+      "loading": "通信中・・・",
       "login": "ログイン",
+      "resetImageCache": "イメージキャッシュメモリーを消す",
       "sort": "並べる",
       "toPageTop": "トップへ"
     },
@@ -23,15 +26,35 @@
         ]
       }
     },
+    "dates": {
+      "full": "YYYY年MM月DD日",
+      "monthAndYear": "YYYY年MM月",
+      "yearOnly": "YYYY年",
+      "dateUnknown": "不明"
+    },
     "modules": {
       "aniList": "AniList"
+    },
+    "routes": {
+      "aniList": "AniList",
+      "seasonPreview": "シーズン予告",
+      "settings": "環境設定"
     },
     "settings": {
       "aboutZeroTwo": {
         "version": "バージョン"
       },
       "aniList": {
-        "loggedInAs": "{0}として認識しました"
+        "loggedInAs": "{0}として認識しました",
+        "resetImageCache": {
+          "title": "イメージのキャッシュを消す",
+          "body": [
+            "ゼロツーはイメージ、例えばプロファイルのアバターやメディアのカバーイメージ、を保存します。",
+            "この機能はサーバーへの要求数と通信時間を減ります。",
+            "追加的に、保存させたイメージはオフラインの時にアクセス出来ます。",
+            "とりあえず、この機能は強制起動です。無効にしたければ、GitHubに課題を開きましてください。そこで、起動や無効のメリットやデメリットを詮議できます。"
+          ]
+        }
       },
       "appSettings": {
         "chooseLanguage": "言語を選択してください (Choose language)",
@@ -44,8 +67,18 @@
       }
     }
   },
+  "seasonPreview": {
+    "episodes": "エピソード数：？ | エピソード数：1 | エピソード数：{count}",
+    "startDate": "放送開始日："
+  },
   "menu": {
+    "completed": "終了",
+    "dropped": "中止",
     "home": "ホーム",
+    "paused": "一時的中止",
+    "planning": "予定",
+    "repeating": "再見",
+    "seasonPreview": "シーズン予告",
     "settings": "環境設定",
     "watching": "見る中"
   },

@@ -22,6 +22,12 @@ export class AppStore extends VuexModule {
    * @default true
    */
   private _darkMode: boolean = true;
+  /**
+   * @private
+   * @var {boolean} _loading toggles the loading state
+   * @default false
+   */
+  private _loading: boolean = false;
 
   /**
    * @getter
@@ -54,6 +60,16 @@ export class AppStore extends VuexModule {
   }
 
   /**
+   * @getter
+   * @method AppStore.isLoading
+   * @returns {boolean} the current loading state
+   */
+  @getter
+  public get isLoading(): boolean {
+    return this._loading;
+  }
+
+  /**
    * @async
    * @action
    * @method setLanguage
@@ -75,6 +91,11 @@ export class AppStore extends VuexModule {
   @action()
   public async setDarkMode(state: boolean): Promise<void> {
     this._setDarkMode(state);
+  }
+
+  @action()
+  public async setLoadingState(state: boolean): Promise<void> {
+    this._setLoadingState(state);
   }
 
   /**
@@ -99,6 +120,11 @@ export class AppStore extends VuexModule {
   @mutation
   protected _setDarkMode(state: boolean) {
     this._darkMode = state;
+  }
+
+  @mutation
+  protected _setLoadingState(state: boolean) {
+    this._loading = state;
   }
 }
 

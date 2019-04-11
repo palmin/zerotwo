@@ -28,9 +28,9 @@
       </v-card-title>
       <v-card-text>
         <div class="body-2">
-          <p>{{ $t('system.aniList.howToAuthenticate.text.0') }}</p>
-          <p>{{ $t('system.aniList.howToAuthenticate.text.1') }}</p>
-          <p>{{ $t('system.aniList.howToAuthenticate.text.2') }}</p>
+          <p v-for="(item, index) in $t('system.aniList.howToAuthenticate.text')" :key="index">
+            {{ item }}
+          </p>
         </div>
       </v-card-text>
     </v-card>

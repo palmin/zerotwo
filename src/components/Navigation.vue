@@ -3,18 +3,28 @@
     <v-menu offset-y>
       <v-btn flat slot="activator">
         <v-icon left>mdi-menu</v-icon>
-        {{ $t('system.modules.aniList') }}
+        {{ currentRouteName }}
       </v-btn>
+      <v-list>
+        <v-list-tile v-for="(item, index) in menuItems" :key="index" @click="navigateTo(item.location)">
+          <v-list-tile-title>{{ $t(item.title) }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
     </v-menu>
 
     <v-spacer></v-spacer>
 
-    <template v-if="!isMediaPage">
+    <template v-if="!isMediaPage && isAniListRoute">
       <v-toolbar-items>
         <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
 
         <template v-if="isAuthenticated">
           <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Repeating' }">{{ $t('menu.repeating') }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Completed' }">{{ $t('menu.completed') }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Paused' }">{{ $t('menu.paused') }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Dropped' }">{{ $t('menu.dropped') }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Planning' }">{{ $t('menu.planning') }}</v-btn>
         </template>
       </v-toolbar-items>
 
@@ -22,6 +32,10 @@
     </template>
 
     <v-toolbar-items>
+      <v-btn flat small icon>
+        <v-progress-circular size="16" width="2" indeterminate v-if="isLoading"></v-progress-circular>
+      </v-btn>
+
       <v-btn flat v-if="isMediaPage">
         {{ currentMediaTitle }}
       </v-btn>
@@ -71,14 +85,22 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Route } from 'vue-router';
+import { RawLocation } from 'vue-router';
 
 // Custom Components
-import { aniListStore } from '@/store';
+import { aniListStore, appStore } from '@/store';
 
 @Component
 export default class Navigation extends Vue {
   private sortMenu: boolean = false;
+
+  private menuItems: Array<{ title: string, location: RawLocation }> = [{
+    title: 'system.modules.aniList',
+    location: { name: 'Home' },
+  }, {
+    title: 'menu.seasonPreview',
+    location: { name: 'SeasonPreview' },
+  }];
 
   private get isSortingPage(): boolean {
     return this.$route.meta && this.$route.meta.sortingPage;
@@ -88,12 +110,32 @@ export default class Navigation extends Vue {
     return this.$route.meta && this.$route.meta.mediaPage;
   }
 
+  private get currentRouteName(): string {
+    const routeName = this.$route.meta.routeName;
+
+    return this.$t(`system.routes.${routeName}`) as string;
+  }
+
   private get currentMediaTitle(): string | null {
     return aniListStore.currentMediaTitle;
   }
 
   private get isAuthenticated(): boolean {
     return aniListStore.isAuthenticated;
+  }
+
+  private get isLoading(): boolean {
+    return appStore.isLoading;
+  }
+
+  private get isAniListRoute(): boolean {
+    const currentRoute = this.$route.path;
+
+    return currentRoute.startsWith('/aniList');
+  }
+
+  private navigateTo(location: RawLocation) {
+    this.$router.push(location);
   }
 
   private jumpToTop(): void {

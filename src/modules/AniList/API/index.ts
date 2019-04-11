@@ -2,7 +2,15 @@ import Axios, { AxiosInstance } from 'axios';
 
 // Custom Components
 import Log from '@/log';
-import { AniListType, IAniListActivity, IAniListMediaListCollection, IAniListUser } from '../types';
+import {
+  AniListSeason,
+  AniListType,
+  IAniListActivity,
+  IAniListMediaListCollection,
+  IAniListSeasonPreview,
+  IAniListSeasonPreviewMedia,
+  IAniListUser,
+} from '../types';
 
 const axios: AxiosInstance = Axios.create({
   baseURL: 'https://graphql.anilist.co/',
@@ -16,6 +24,7 @@ const axios: AxiosInstance = Axios.create({
 
 // Queries
 import getLatestActivities from './queries/getLatestActivities.graphql';
+import getSeasonPreview from './queries/getSeasonPreview.graphql';
 import getUser from './queries/getUser.graphql';
 import getUserList from './queries/getUserList.graphql';
 
@@ -31,8 +40,7 @@ export default class AniListAPI {
    * @param {AniListType} type contains the type of media
    * @returns {Promise<IAniListMediaListCollection | void>} User's Media list collection or nothing
    */
-  public static async getUserList(userName: string, type: AniListType):
-  Promise<IAniListMediaListCollection | void> {
+  public static async getUserList(userName: string, type: AniListType): Promise<IAniListMediaListCollection | void> {
     try {
       const response = await axios.post('/', {
         query: getUserList,
@@ -71,8 +79,8 @@ export default class AniListAPI {
     return;
   }
 
-  public static async getLatestActivities(userId: number, page: number = 0, perPage: number = 0):
-  Promise<IAniListActivity[] | void> {
+  // tslint:disable-next-line max-line-length
+  public static async getLatestActivities(userId: number, page: number = 0, perPage: number = 0): Promise<IAniListActivity[] | void> {
     try {
       const response = await axios.post('/', {
         query: getLatestActivities,
@@ -87,6 +95,31 @@ export default class AniListAPI {
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getLatestActivities'], error);
     }
+  }
+
+  // tslint:disable-next-line max-line-length
+  public static async getSeasonPreview(seasonYear: number, season: AniListSeason): Promise<IAniListSeasonPreview | null> {
+    try {
+      const response = await axios.post('/', {
+        query: getSeasonPreview,
+        variables: {
+          season,
+          seasonYear,
+        },
+      });
+
+      const media: IAniListSeasonPreviewMedia[] = response.data.data.page.media;
+
+      return {
+        season,
+        seasonYear,
+        media,
+      };
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getSeasonPreview'], error);
+    }
+
+    return null;
   }
 
   /**

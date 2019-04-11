@@ -17,10 +17,10 @@
                       :value="this._locale"
                       :label="this.$t('system.settings.appSettings.chooseLanguage')"
                       @change="setLanguage">
-                        <template slot="selection" scope="data">
+                        <template v-slot:selection="data">
                           {{ data.item.original }} ({{ data.item.english }})
                         </template>
-                        <template slot="item" scope="data">
+                        <template v-slot:item="data">
                           <v-list-tile-content>
                             <v-list-tile-title>{{ data.item.original }}</v-list-tile-title>
                             <v-list-tile-sub-title>{{ data.item.english }}</v-list-tile-sub-title>
@@ -45,8 +45,10 @@
                       {{ $t('system.actions.login') }}
                     </v-btn>
                   </v-layout>
-                  <v-layout fill-height justify-start align-start v-else>
-                    {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
+                  <v-layout fill-height row v-else>
+                    <v-flex xs4>
+                      {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
+                    </v-flex>
                   </v-layout>
                 </v-container>
               </v-card>

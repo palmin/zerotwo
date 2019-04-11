@@ -1,11 +1,17 @@
 <template>
-  <v-layout row wrap class="infinite-wrapper">
+  <v-layout row wrap>
+    <v-flex xs12 v-if="!listData.length">
+      <v-container>
+        <div class="headline text-xs-center">
+          {{ $t('$vuetify.noDataText') }}
+        </div>
+      </v-container>
+    </v-flex>
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
       <v-card class="ma-1" hover @click="changeMetaMediaTitle(item.name)">
         <v-layout row wrap>
           <v-flex xs12 class="pl-1">
-            <ImageWrapper :originalLink="item.imageLink" height="250px" />
-            <!-- <v-img
+            <v-img
               :src="item.imageLink"
               height="250px"
             >
@@ -26,7 +32,7 @@
                   </v-flex>
                 </v-layout>
               </v-container>
-            </v-img> -->
+            </v-img>
           </v-flex>
           <v-flex xs12>
             <v-card-title primary-title>
@@ -54,31 +60,25 @@
         </v-card-actions>
       </v-card>
     </v-flex>
-    <v-flex xs12 v-show="loading" justify-center align-center>
-      <v-progress-linear :indeterminate="true" background-color="pink lighten-3" color="pink lighten-1"></v-progress-linear>
-    </v-flex>
   </v-layout>
 </template>
 
 <script lang="ts">
 import { chain } from 'lodash';
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 // Custom Components
-import ImageWrapper from '@/components/ImageWrapper.vue';
-import { AniListScoreFormat } from '@/modules/AniList/types';
-import { aniListStore } from '@/store';
+import { AniListListStatus, AniListScoreFormat, IAniListEntry } from '@/modules/AniList/types';
+import { aniListStore, appStore } from '@/store';
 
-@Component({
-  components: {
-    ImageWrapper,
-  },
-})
+@Component
 export default class List extends Vue {
-  private loading: boolean = false;
   private listData: any[] = [];
   // TODO: Make this a non-static number via Store
   private startAmount: number = 20;
+
+  @Prop()
+  private readonly status!: AniListListStatus;
 
   // TODO: Add actual link to media page route
   private changeMetaMediaTitle(title: string): void {
@@ -91,54 +91,64 @@ export default class List extends Vue {
       : 5;
   }
 
-  private created() {
-    const entries = this.getData(0);
+  private get isLoading(): boolean {
+    return appStore.isLoading;
+  }
+
+  private async created() {
+    const entries = await this.getData(0);
     if (entries.length) {
       this.listData = entries;
     }
 
     // Infinite Scrolling
-    window.onscroll = () => {
-      this.loading = true;
+    window.onscroll = async () => {
       const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===
         document.documentElement.offsetHeight;
       if (bottomOfWindow) {
-        const newEntries = this.getData(this.listData.length);
+        const newEntries = await this.getData(this.listData.length);
         if (newEntries.length) {
           this.listData = [...this.listData, ...newEntries];
         }
       }
-      this.loading = false;
     };
   }
 
-  private getData(startValue: number): any[] {
+  private async prepareEntry(entry: IAniListEntry) {
+    const { media } = entry;
+    const scoreStars = this.getScoreStarValue(entry.score);
+    const imageLink = media.coverImage.extraLarge;
+
+    return {
+      id: entry.id,
+      name: media.title.userPreferred,
+      imageLink,
+      currentProgress: entry.progress,
+      episodeAmount: media.episodes || '?',
+      score: entry.score,
+      scoreStars,
+      forAdults: media.isAdult,
+    };
+  }
+
+  private async getData(startValue: number): Promise<any> {
     if (!aniListStore.aniListData.lists.length) {
       return [];
     }
 
-    const listElement = aniListStore.aniListData.lists[0];
+    const listElement = aniListStore.aniListData.lists.find((list) => list.status === this.status);
 
-    const newEntries = chain(listElement.entries)
-      .map((entry) => {
-      const { media } = entry;
+    // If we can't find our list, just return empty.
+    if (!listElement) {
+      return [];
+    }
 
-      const scoreStars = this.getScoreStarValue(entry.score);
+    let newEntries = await Promise.all(listElement.entries.map((entry) => this.prepareEntry(entry)));
 
-      return {
-        id: entry.id,
-        name: media.title.userPreferred,
-        imageLink: media.coverImage.extraLarge,
-        currentProgress: entry.progress,
-        episodeAmount: media.episodes,
-        score: entry.score,
-        scoreStars,
-        forAdults: media.isAdult,
-      };
-    })
-    .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
-    .slice(startValue, this.startAmount + startValue)
-    .value();
+    newEntries = chain(newEntries)
+      .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
+      .slice(startValue, this.startAmount + startValue)
+      .value();
 
     return newEntries;
   }

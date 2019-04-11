@@ -25,15 +25,15 @@ export const store = new Vuex.Store({
  * @module UserSettings This module consists of all user settings
  * @description This creates a proxy for the Vue Templates to use.
  */
-export const userStore = UserSettings.CreateProxy(store, UserSettings);
+export const userStore = UserSettings.CreateProxy(store, UserSettings) as UserSettings;
 /**
  * @module AppStore This module contains all general App data
  */
-export const appStore = AppStore.CreateProxy(store, AppStore);
+export const appStore = AppStore.CreateProxy(store, AppStore) as AppStore;
 /**
  * @module AniListStore This module contains all data concerning AniList
  */
-export const aniListStore = AniListStore.CreateProxy(store, AniListStore);
+export const aniListStore = AniListStore.CreateProxy(store, AniListStore) as AniListStore;
 
 /**
  * @event aniListOAuthReply

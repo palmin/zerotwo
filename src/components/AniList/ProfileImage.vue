@@ -2,8 +2,7 @@
   <v-layout column fill-height d-flex align-center>
     <v-flex xs12>
       <v-avatar size="128" tile>
-        <ImageWrapper :aniListId="null" :originalLink="avatarUrl" size="LARGE" />
-        <!-- <v-img :src="avatarUrl" :alt="userName">
+        <v-img :src="avatarUrl" :alt="userName">
           <template v-slot:placeholder>
             <v-layout
               fill-height
@@ -14,7 +13,7 @@
               <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
             </v-layout>
           </template>
-        </v-img> -->
+        </v-img>
       </v-avatar>
     </v-flex>
     <v-flex xs12>
@@ -24,13 +23,10 @@
 </template>
 
 <script lang="ts">
-import ImageWrapper from '@/components/ImageWrapper.vue';
 import { aniListStore } from '@/store';
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component({
-  components: { ImageWrapper },
-})
+@Component
 export default class ProfileImage extends Vue {
   private get avatarUrl(): string {
     return aniListStore.session.user.avatar.large;

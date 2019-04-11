@@ -3,7 +3,10 @@
   "englishReading": "English",
   "system": {
     "actions": {
+      "addToPlanToWatch": "Add to plan to watch",
+      "loading": "Loading...",
       "login": "Login",
+      "resetImageCache": "Reset image cache",
       "sort": "Sort",
       "toPageTop": "Jump to top"
     },
@@ -23,15 +26,36 @@
         ]
       }
     },
+    "dates": {
+      "full": "MMMM Do YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Date unknown"
+    },
     "modules": {
       "aniList": "AniList"
+    },
+    "routes": {
+      "aniList": "AniList",
+      "seasonPreview": "Season Preview",
+      "settings": "Settings"
     },
     "settings": {
       "aboutZeroTwo": {
         "version": "Version"
       },
       "aniList": {
-        "loggedInAs": "Logged in as {0}"
+        "loggedInAs": "Logged in as {0}",
+        "resetImageCache": {
+          "title": "Reset image cache",
+          "body": [
+            "ZeroTwo saves images like profile avatars or cover images for media directly on the computer.",
+            "This saves many requests to servers and lowers loading times.",
+            "Additionally, it's possible to see the images in offline mode.",
+            "This function will be on by default and is not yet defeatable.",
+            "If you wish to disable this function, let's discuss this via an issue in the open-source GitHub repository."
+          ]
+        }
       },
       "appSettings": {
         "chooseLanguage": "Choose language",
@@ -44,8 +68,18 @@
       }
     }
   },
+  "seasonPreview": {
+    "episodes": "? episodes | 1 episode | {count} episodes",
+    "startDate": "Start of airing:"
+  },
   "menu": {
+    "completed": "Completed",
+    "dropped": "Dropped",
     "home": "Home",
+    "paused": "Paused",
+    "planning": "Planning",
+    "repeating": "Repeating",
+    "seasonPreview": "Season Preview",
     "settings": "Settings",
     "watching": "Watching"
   },

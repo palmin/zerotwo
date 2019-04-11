@@ -78,15 +78,6 @@ export enum AniListActivityType {
   MEDIA_LIST = 'MEDIA_LIST',
 }
 
-/**
- * @enum AniListImageSize contains an image's type of size
- */
-export enum AniListImageSize {
-  MEDIUM = 'MEDIUM',
-  LARGE = 'LARGE',
-  EXTRA_LARGE = 'EXTRA_LARGE',
-}
-
 // INTERFACES
 
 /**
@@ -462,10 +453,23 @@ export interface IAniListActivity {
   createdAt: number;
 }
 
-export interface IAniListImageStorage {
-  id: number | null;
-  fileName: string;
-  size: AniListImageSize;
-  originalLink: string;
-  path: string;
+export interface IAniListSeasonPreviewMedia {
+  id: number;
+  title: IAniListMediaTitle;
+  startDate: IAniListMediaDate;
+  episodes: number;
+  streamingEpisodes: IAniListStreamingEpisode[];
+  coverImage: IAniListCoverImage;
+  bannerImage: string | null;
+  genres: string[];
+  nextAiringEpisode: IAniListNextAiringEpisode;
+  isAdult: boolean;
+  isLocked: boolean;
+  description: string;
+}
+
+export interface IAniListSeasonPreview {
+  season: AniListSeason;
+  seasonYear: number;
+  media: IAniListSeasonPreviewMedia[];
 }

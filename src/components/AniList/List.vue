@@ -10,7 +10,7 @@
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
       <v-card class="ma-1" hover :to="{ name: 'DetailView', params: { id: item.aniListId } }">
         <v-layout row wrap>
-          <v-flex xs12 class="pl-1">
+          <v-flex xs12>
             <v-img
               :src="item.imageLink"
               height="250px"

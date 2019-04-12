@@ -12,6 +12,8 @@ const oauthConfig = {
   redirectUri: 'http://localhost/',
 };
 
+const currentWindow = BrowserWindow.getFocusedWindow();
+
 const windowParams: Electron.BrowserWindowConstructorOptions = {
   alwaysOnTop: true,
   autoHideMenuBar: true,
@@ -20,6 +22,7 @@ const windowParams: Electron.BrowserWindowConstructorOptions = {
     devTools: false,
     webSecurity: false,
   },
+  parent: currentWindow || undefined,
   show: false,
 };
 

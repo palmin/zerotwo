@@ -13,6 +13,8 @@
     },
     "alerts": {
       "adultContent": "１８禁コンテンツです！ご注意下さい！",
+      "noDescription": "内容説明はありません。",
+      "noSynonyms": "シノニムはありません。",
       "unauthenticated": "まだログインしませんでした！"
     },
     "aniList": {
@@ -72,6 +74,17 @@
   "seasonPreview": {
     "episodes": "エピソード数：？ | エピソード数：1 | エピソード数：{count}",
     "startDate": "放送開始日："
+  },
+  "detailView": {
+    "airedOn": "{0}～{1}",
+    "airingStarts": "{0}に始める",
+    "airingTime": "最初放送",
+    "airingWithUnknownStart": "？ - {0}",
+    "description": "内容",
+    "englishTitle": "英語のタイトル",
+    "genres": "ジャンル",
+    "nativeTitle": "ネイティブ・タイトル",
+    "synonyms": "シノニム"
   },
   "menu": {
     "completed": "終了",

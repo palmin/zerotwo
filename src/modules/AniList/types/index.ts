@@ -249,6 +249,10 @@ export interface IAniListMedia {
    */
   bannerImage: string | null;
   /**
+   * @var {string[]} genres contains the media's genres
+   */
+  genres: string[];
+  /**
    * @var {string[]} synonyms contains all the synonyms of the media's title
    */
   synonyms: string[];

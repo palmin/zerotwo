@@ -32,6 +32,7 @@ query GetAnime($id: Int!) {
       medium
     }
     bannerImage
+    genres
     synonyms
     averageScore
     favourites

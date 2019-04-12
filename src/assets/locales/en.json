@@ -13,6 +13,8 @@
     },
     "alerts": {
       "adultContent": "This media is considered adult content! Viewer Discretion Advised.",
+      "noDescription": "No description available.",
+      "noSynonyms": "No synonyms available.",
       "unauthenticated": "You are not authenticated!"
     },
     "aniList": {
@@ -73,6 +75,17 @@
   "seasonPreview": {
     "episodes": "? episodes | 1 episode | {count} episodes",
     "startDate": "Start of airing:"
+  },
+  "detailView": {
+    "airedOn": "{0} until {1}",
+    "airingStarts": "Starts on {0}",
+    "airingTime": "Airing time",
+    "airingWithUnknownStart": "? - {0}",
+    "description": "Description",
+    "englishTitle": "English title",
+    "genres": "Genres",
+    "nativeTitle": "Native title",
+    "synonyms": "Synonyms"
   },
   "menu": {
     "completed": "Completed",

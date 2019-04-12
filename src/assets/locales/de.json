@@ -13,6 +13,8 @@
     },
     "alerts": {
       "adultContent": "Dieses Element ist für Jugendliche unter 18 Jahren ungeeignet!",
+      "noDescription": "Keine Beschreibung vorhanden.",
+      "noSynonyms": "Keine Synonyme vorhanden.",
       "unauthenticated": "Du bist nicht eingeloggt!"
     },
     "aniList": {
@@ -72,6 +74,17 @@
   "seasonPreview": {
     "episodes": "? Episoden | 1 Episode | {count} Episoden",
     "startDate": "Serienstart:"
+  },
+  "detailView": {
+    "airedOn": "{0} bis {1}",
+    "airingStarts": "Startet am {0}",
+    "airingTime": "Ausstrahlung",
+    "airingWithUnknownStart": "? - {0}",
+    "description": "Beschreibung",
+    "englishTitle": "Englischer Titel",
+    "genres": "Genres",
+    "nativeTitle": "Originaltitel",
+    "synonyms": "Synonyme"
   },
   "menu": {
     "completed": "Abgeschlossen",

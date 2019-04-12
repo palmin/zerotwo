@@ -20,13 +20,9 @@
     "postuninstall": "electron-builder install-app-deps"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.123",
-    "@types/request": "^2.48.1",
-    "@types/uuid": "^3.4.4",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
-    "uuid": "^3.3.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-i18n": "^8.10.0",
@@ -39,6 +35,8 @@
   },
   "devDependencies": {
     "@mdi/font": "^3.5.95",
+    "@types/lodash": "^4.14.123",
+    "@types/request": "^2.48.1",
     "@types/webpack": "^4.4.26",
     "@vue/cli-plugin-babel": "^3.5.3",
     "@vue/cli-plugin-pwa": "^3.5.1",

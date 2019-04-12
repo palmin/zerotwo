@@ -8,6 +8,7 @@
               <v-img
                 :src="item.coverImage"
                 height="250px"
+                position="50% 35%"
               >
                 <template v-slot:placeholder>
                   <v-layout

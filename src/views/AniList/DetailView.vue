@@ -28,7 +28,7 @@
             </template>
           </v-img>
         </v-flex>
-        <v-container>
+        <v-container fluid>
           <v-layout row wrap>
             <v-flex xs3>
               <v-img :src="item.coverImage">

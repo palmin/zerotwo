@@ -4,6 +4,7 @@
   "system": {
     "actions": {
       "addToPlanToWatch": "見る予定リストに追加",
+      "back": "戻る",
       "loading": "通信中・・・",
       "login": "ログイン",
       "resetImageCache": "イメージキャッシュメモリーを消す",
@@ -37,6 +38,7 @@
     },
     "routes": {
       "aniList": "AniList",
+      "detailView": "インフォーメーション",
       "seasonPreview": "シーズン予告",
       "settings": "環境設定"
     },

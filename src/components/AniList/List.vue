@@ -8,7 +8,7 @@
       </v-container>
     </v-flex>
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
-      <v-card class="ma-1" hover @click="changeMetaMediaTitle(item.name)">
+      <v-card class="ma-1" hover :to="{ name: 'DetailView', params: { id: item.aniListId } }">
         <v-layout row wrap>
           <v-flex xs12 class="pl-1">
             <v-img
@@ -80,11 +80,6 @@ export default class List extends Vue {
   @Prop()
   private readonly status!: AniListListStatus;
 
-  // TODO: Add actual link to media page route
-  private changeMetaMediaTitle(title: string): void {
-    aniListStore.setCurrentMediaTitle(title);
-  }
-
   private get ratingStarAmount(): number {
     return aniListStore.session.user.mediaListOptions.scoreFormat === AniListScoreFormat.POINT_3
       ? 3
@@ -121,6 +116,7 @@ export default class List extends Vue {
 
     return {
       id: entry.id,
+      aniListId: media.id,
       name: media.title.userPreferred,
       imageLink,
       currentProgress: entry.progress,

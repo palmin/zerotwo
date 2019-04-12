@@ -4,6 +4,7 @@
   "system": {
     "actions": {
       "addToPlanToWatch": "Zur Plan-Liste hinzufügen",
+      "back": "Zurück",
       "loading": "Lädt...",
       "login": "Login",
       "resetImageCache": "Bildercache leeren",
@@ -37,6 +38,7 @@
     },
     "routes": {
       "aniList": "AniList",
+      "detailView": "Detail-Ansicht",
       "seasonPreview": "Saison-Vorschau",
       "settings": "Einstellungen"
     },

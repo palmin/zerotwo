@@ -40,8 +40,8 @@
 <script lang="ts">
 import Activities from '@/components/AniList/Activities.vue';
 import ProfileImage from '@/components/AniList/ProfileImage.vue';
+import { aniListStore } from '@/store';
 import { Component, Vue } from 'vue-property-decorator';
-import { aniListStore } from '../store';
 
 @Component({
   components: {

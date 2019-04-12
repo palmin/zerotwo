@@ -31,13 +31,23 @@
       <v-spacer></v-spacer>
     </template>
 
+    <template v-if="isMediaPage">
+      <v-toolbar-items>
+        <v-btn flat v-if="isMediaPage">
+          {{ currentMediaTitle }}
+        </v-btn>
+      </v-toolbar-items>
+
+      <v-spacer></v-spacer>
+    </template>
+
     <v-toolbar-items>
-      <v-btn flat small icon>
-        <v-progress-circular size="16" width="2" indeterminate v-if="isLoading"></v-progress-circular>
+      <v-btn flat small icon v-if="isLoading">
+        <v-progress-circular size="16" width="2" indeterminate></v-progress-circular>
       </v-btn>
 
-      <v-btn flat v-if="isMediaPage">
-        {{ currentMediaTitle }}
+      <v-btn flat icon v-if="isMediaPage" @click="$router.back()">
+        <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
       <v-tooltip bottom>

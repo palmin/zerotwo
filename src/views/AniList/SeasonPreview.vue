@@ -2,7 +2,7 @@
   <v-content>
     <v-layout row wrap>
       <v-flex d-flex xs3 v-for="item in preparedMedia" :key="item.id">
-        <v-card hover class="ma-1">
+        <v-card hover class="ma-1" :to="{ name: 'DetailView', params: { id: item.id } }">
           <v-layout row wrap>
             <v-flex xs12 class="pl-1">
               <v-img
@@ -100,6 +100,7 @@ export default class SeasonPreview extends Vue {
           dateFormat = 'YYYY';
           itemDate = `${item.startDate.year}`;
         }
+
         if (item.startDate.month) {
           dateFormat = `M-YYYY`;
           itemDate = `${item.startDate.month}-${item.startDate.year}`;

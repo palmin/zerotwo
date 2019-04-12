@@ -6,6 +6,7 @@ import {
   AniListSeason,
   AniListType,
   IAniListActivity,
+  IAniListMedia,
   IAniListMediaListCollection,
   IAniListSeasonPreview,
   IAniListSeasonPreviewMedia,
@@ -23,6 +24,7 @@ const axios: AxiosInstance = Axios.create({
 });
 
 // Queries
+import getAnimeInfo from './queries/getAnimeInfo.graphql';
 import getLatestActivities from './queries/getLatestActivities.graphql';
 import getSeasonPreview from './queries/getSeasonPreview.graphql';
 import getUser from './queries/getUser.graphql';
@@ -120,6 +122,23 @@ export default class AniListAPI {
     }
 
     return null;
+  }
+
+  public static async getAnimeInfo(aniListId: number): Promise<IAniListMedia | void> {
+    try {
+      const response = await axios.post('/', {
+        query: getAnimeInfo,
+        variables: {
+          id: aniListId,
+        },
+      });
+
+      const media = response.data.data.media as IAniListMedia;
+
+      return media;
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getAnimeInfo'], error);
+    }
   }
 
   /**

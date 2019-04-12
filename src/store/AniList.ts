@@ -1,9 +1,3 @@
-import electron from 'electron';
-import FS, { read } from 'fs';
-import Path from 'path';
-import request from 'request';
-import { promisify } from 'util';
-import UUIDv4 from 'uuid/v4';
 import { action, getter, Module, mutation, VuexModule } from 'vuex-class-component';
 
 // Custom components

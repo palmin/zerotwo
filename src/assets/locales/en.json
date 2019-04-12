@@ -4,6 +4,7 @@
   "system": {
     "actions": {
       "addToPlanToWatch": "Add to plan to watch",
+      "back": "Back",
       "loading": "Loading...",
       "login": "Login",
       "resetImageCache": "Reset image cache",
@@ -37,6 +38,7 @@
     },
     "routes": {
       "aniList": "AniList",
+      "detailView": "Detail View",
       "seasonPreview": "Season Preview",
       "settings": "Settings"
     },

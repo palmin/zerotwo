@@ -14,8 +14,11 @@
     "alerts": {
       "adultContent": "Dieses Element ist für Jugendliche unter 18 Jahren ungeeignet!",
       "noDescription": "Keine Beschreibung vorhanden.",
+      "noEnglishTitle": "Kein englischer Titel verfügbar.",
+      "noInformation": "Keine Informationen verfügbar.",
       "noSynonyms": "Keine Synonyme vorhanden.",
-      "unauthenticated": "Du bist nicht eingeloggt!"
+      "unauthenticated": "Du bist nicht eingeloggt!",
+      "unknown": "Unbekannt"
     },
     "aniList": {
       "activities": "Aktivitäten",
@@ -82,8 +85,13 @@
     "airingWithUnknownStart": "? - {0}",
     "description": "Beschreibung",
     "englishTitle": "Englischer Titel",
+    "episodes": "Episoden",
     "genres": "Genres",
     "nativeTitle": "Originaltitel",
+    "romajiTitle": "Rōmaji-Titel",
+    "score": "{0} / {1} Punkte",
+    "scoreLabel": "Durchschnittliche Bewertung",
+    "streamingSubheader": "Streaminganbieter (engl.)",
     "synonyms": "Synonyme"
   },
   "menu": {

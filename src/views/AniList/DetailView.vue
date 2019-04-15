@@ -47,14 +47,15 @@
 
             <v-flex xs9>
               <v-layout row wrap class="pl-3">
-                <v-flex xs12>
-                  <div class="headline">
-                    {{ item.title }}
-                  </div>
-                </v-flex>
-
                 <v-flex xs6>
                   <v-list dense two-line>
+                    <v-list-tile>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{ $t('detailView.romajiTitle') }}</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+
                     <v-list-tile>
                       <v-list-tile-content>
                         <v-list-tile-title>{{ item.nativeTitle }}</v-list-tile-title>
@@ -66,6 +67,13 @@
                       <v-list-tile-content>
                         <v-list-tile-title>{{ item.englishTitle }}</v-list-tile-title>
                         <v-list-tile-sub-title>{{ $t('detailView.englishTitle') }}</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+
+                    <v-list-tile>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ item.episodes }}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{ $t('detailView.episodes') }}</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
 
@@ -89,11 +97,56 @@
                         <v-list-tile-sub-title>{{ $t('detailView.airingTime') }}</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
+
+                    <v-list-tile>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ $t('detailView.score', [item.score, 100]) }}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{ $t('detailView.scoreLabel') }}</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+
+                    <v-list-tile color="red" v-if="item.isAdult">
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ $t('detailView.adult') }}</v-list-tile-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
                   </v-list>
                 </v-flex>
 
                 <v-flex xs6>
+                  <v-list class="ml-4">
+                    <v-list-group v-model="streamingEpisodesExpanded">
+                      <template v-slot:activator>
+                        <v-list-tile>
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('detailView.streamingSubheader') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </template>
 
+                      <v-list-tile v-for="episode in item.streamingEpisodes" :key="episode.url">
+                        <v-list-tile-content>
+                          <v-list-tile-title>{{ episode.title }}</v-list-tile-title>
+                          <v-list-tile-sub-title>{{ episode.site }}</v-list-tile-sub-title>
+                        </v-list-tile-content>
+
+                        <v-list-tile-action>
+                          <v-icon @click="openInBrowser(episode.url)" color="yellow">mdi-open-in-new</v-icon>
+                        </v-list-tile-action>
+                      </v-list-tile>
+                    </v-list-group>
+
+                    <v-list-tile v-if="item.nextAiringEpisode && item.nextAiringEpisode.episode">
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ item.nextAiringEpisode.episode }}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{ getReadableDateByTimestamp(item.nextAiringEpisode.airingAt) || $t('system.alerts.noInformation') }}</v-list-tile-sub-title>
+                      </v-list-tile-content>
+
+                      <v-list-tile-action>
+                        <v-icon @click="openInBrowser(episode.url)" color="yellow">mdi-open-in-new</v-icon>
+                      </v-list-tile-action>
+                    </v-list-tile>
+                  </v-list>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -117,6 +170,7 @@
 import API from '@/modules/AniList/API';
 import { IAniListMedia } from '@/modules/AniList/types';
 import { aniListStore, appStore } from '@/store';
+import { shell } from 'electron';
 import { chain } from 'lodash';
 import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator';
@@ -124,6 +178,7 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class DetailView extends Vue {
   private media: IAniListMedia | null = null;
+  private streamingEpisodesExpanded: boolean = false;
 
   private get item() {
     if (!this.media) {
@@ -157,9 +212,13 @@ export default class DetailView extends Vue {
       bannerImage: this.media.bannerImage,
       coverImage: this.media.coverImage.extraLarge,
       description: this.media.description || this.$t('system.alerts.noDescription'),
-      englishTitle: this.media.title.english,
+      englishTitle: this.media.title.english || this.$t('system.alerts.noEnglishTitle'),
+      episodes: this.media.episodes || this.$t('system.alerts.unknown'),
       genres,
       nativeTitle: this.media.title.native,
+      nextAiringEpisode: this.media.nextAiringEpisode,
+      score: this.media.averageScore,
+      streamingEpisodes: this.media.streamingEpisodes,
       synonyms,
       title: this.media.title.romaji,
       type: this.media.type,
@@ -189,6 +248,25 @@ export default class DetailView extends Vue {
     format = this.$t('system.dates.full') as string;
 
     return moment(`${day}-${month}-${year}`, 'D-M-YYYY').format(format);
+  }
+
+  private getReadableDateByTimestamp(timestamp?: number): string | null {
+    if (!timestamp) {
+      return null;
+    }
+
+    const format = this.$t('system.dates.full') as string;
+
+    const formattedMoment = moment(timestamp, 'X');
+    if (!formattedMoment.isValid()) {
+      return null;
+    }
+
+    return formattedMoment.format(format);
+  }
+
+  private openInBrowser(link: string) {
+    shell.openExternal(link);
   }
 
   private async created() {

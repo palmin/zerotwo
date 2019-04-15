@@ -14,8 +14,11 @@
     "alerts": {
       "adultContent": "１８禁コンテンツです！ご注意下さい！",
       "noDescription": "内容説明はありません。",
+      "noEnglishTitle": "英語のタイトルはありません。",
+      "noInformation": "情報がありません。",
       "noSynonyms": "シノニムはありません。",
-      "unauthenticated": "まだログインしませんでした！"
+      "unauthenticated": "まだログインしませんでした！",
+      "unknown": "未知"
     },
     "aniList": {
       "activities": "最近の更新",
@@ -82,8 +85,13 @@
     "airingWithUnknownStart": "？ - {0}",
     "description": "内容",
     "englishTitle": "英語のタイトル",
+    "episodes": "エピソード数",
     "genres": "ジャンル",
     "nativeTitle": "ネイティブ・タイトル",
+    "romajiTitle": "ローマ字・タイトル",
+    "score": "{1}点満点の{0}点",
+    "scoreLabel": "平均値点",
+    "streamingSubheader": "放送サービス（英語）",
     "synonyms": "シノニム"
   },
   "menu": {

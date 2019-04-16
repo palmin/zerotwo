@@ -1,11 +1,14 @@
 import Axios, { AxiosInstance } from 'axios';
+import { omit } from 'lodash';
 
 // Custom Components
 import Log from '@/log';
+import { aniListStore } from '@/store';
 import {
   AniListSeason,
   AniListType,
   IAniListActivity,
+  IAniListEntry,
   IAniListMedia,
   IAniListMediaListCollection,
   IAniListSeasonPreview,
@@ -26,6 +29,7 @@ const axios: AxiosInstance = Axios.create({
 // Queries
 import getAnimeInfo from './queries/getAnimeInfo.graphql';
 import getLatestActivities from './queries/getLatestActivities.graphql';
+import getListEntry from './queries/getListEntry.graphql';
 import getSeasonPreview from './queries/getSeasonPreview.graphql';
 import getUser from './queries/getUser.graphql';
 import getUserList from './queries/getUserList.graphql';
@@ -139,6 +143,29 @@ export default class AniListAPI {
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getAnimeInfo'], error);
     }
+  }
+
+  public static async getListEntryByMediaId(mediaId: number): Promise<IAniListEntry | null> {
+    try {
+      const { accessToken } = aniListStore.session;
+      const headers = { Authorization: `Bearer ${accessToken}` };
+      const response = await axios.post('/', {
+        query: getListEntry,
+        variables: {
+          mediaId,
+        },
+      }, { headers });
+
+      const media = response.data.data.media;
+      const listEntry = media.mediaListEntry || {};
+      listEntry.media = omit(media, 'mediaListEntry');
+
+      return listEntry as IAniListEntry;
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getListEntry'], error);
+    }
+
+    return null;
   }
 
   /**

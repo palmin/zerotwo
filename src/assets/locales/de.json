@@ -3,6 +3,7 @@
   "englishReading": "German",
   "system": {
     "actions": {
+      "add": "Hinzufügen",
       "addToPlanToWatch": "Zur Plan-Liste hinzufügen",
       "back": "Zurück",
       "loading": "Lädt...",
@@ -17,6 +18,7 @@
       "noEnglishTitle": "Kein englischer Titel verfügbar.",
       "noInformation": "Keine Informationen verfügbar.",
       "noSynonyms": "Keine Synonyme vorhanden.",
+      "notYetInList": "Dieses Element ist noch nicht in deiner Liste.",
       "unauthenticated": "Du bist nicht eingeloggt!",
       "unknown": "Unbekannt"
     },
@@ -46,6 +48,9 @@
       "detailView": "Detail-Ansicht",
       "seasonPreview": "Saison-Vorschau",
       "settings": "Einstellungen"
+    },
+    "rules": {
+      "required": "Diese Eingabe muss ausgefüllt werden."
     },
     "settings": {
       "aboutZeroTwo": {
@@ -80,6 +85,7 @@
   },
   "detailView": {
     "airedOn": "{0} bis {1}",
+    "airingStartedOn": "Startete am {0}",
     "airingStarts": "Startet am {0}",
     "airingTime": "Ausstrahlung",
     "airingWithUnknownStart": "? - {0}",
@@ -88,11 +94,23 @@
     "episodes": "Episoden",
     "genres": "Genres",
     "nativeTitle": "Originaltitel",
+    "ownInformation": "Informationen auf eigener Liste",
+    "ownProgress": "Fortschritt",
+    "ownStatus": "Status",
+    "ownScore": "Bewertung",
     "romajiTitle": "Rōmaji-Titel",
     "score": "{0} / {1} Punkte",
     "scoreLabel": "Durchschnittliche Bewertung",
     "streamingSubheader": "Streaminganbieter (engl.)",
     "synonyms": "Synonyme"
+  },
+  "listStatusses": {
+    "completed": "Abgeschlossen",
+    "dropped": "Abgebrochen",
+    "paused": "Pausiert",
+    "planning": "Geplant",
+    "repeating": "Wiederholend",
+    "watching": "Laufend"
   },
   "menu": {
     "completed": "Abgeschlossen",

@@ -175,6 +175,7 @@ export default class List extends Vue {
 
 <style lang="scss" scoped>
 .shadowed {
+  color: #FFF;
   text-shadow:
     -1px 1px 2px #000,
     1px 1px 2px #000,

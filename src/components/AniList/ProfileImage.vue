@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { aniListStore } from '@/store';
+import { aniListStore, appStore } from '@/store';
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
@@ -34,11 +34,15 @@ export default class ProfileImage extends Vue {
   private get userName(): string {
     return aniListStore.session.user.name;
   }
+  private get isDarkMode(): boolean {
+    return appStore.darkMode;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .shadowed {
+  color: #FFF;
   text-shadow:
     -1px 1px 2px #000,
     1px 1px 2px #000,

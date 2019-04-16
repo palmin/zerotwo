@@ -3,6 +3,7 @@
   "englishReading": "English",
   "system": {
     "actions": {
+      "add": "Add",
       "addToPlanToWatch": "Add to plan to watch",
       "back": "Back",
       "loading": "Loading...",
@@ -17,6 +18,7 @@
       "noEnglishTitle": "No English title available.",
       "noInformation": "No information available.",
       "noSynonyms": "No synonyms available.",
+      "notYetInList": "This media is not yet in your list.",
       "unauthenticated": "You are not authenticated!",
       "unknown": "Unknown"
     },
@@ -46,6 +48,9 @@
       "detailView": "Detail View",
       "seasonPreview": "Season Preview",
       "settings": "Settings"
+    },
+    "rules": {
+      "required": "This input must be filled."
     },
     "settings": {
       "aboutZeroTwo": {
@@ -81,19 +86,32 @@
   },
   "detailView": {
     "airedOn": "{0} until {1}",
+    "airingStartedOn": "Started on {0}",
     "airingStarts": "Starts on {0}",
     "airingTime": "Airing time",
     "airingWithUnknownStart": "? - {0}",
     "description": "Description",
     "englishTitle": "English title",
-    "episodes": "Episoden",
+    "episodes": "Episodes",
     "genres": "Genres",
     "nativeTitle": "Native title",
+    "ownInformation": "Information of your list",
+    "ownProgress": "Progress",
+    "ownStatus": "Status",
+    "ownScore": "Score",
     "romajiTitle": "Rōmaji title",
     "score": "{0} / {1} points",
     "scoreLabel": "Average score",
     "streamingSubheader": "Streaming services",
     "synonyms": "Synonyms"
+  },
+  "listStatusses": {
+    "completed": "Completed",
+    "dropped": "Dropped",
+    "paused": "Paused",
+    "planning": "Planning",
+    "repeating": "Repeating",
+    "watching": "Watching"
   },
   "menu": {
     "completed": "Completed",

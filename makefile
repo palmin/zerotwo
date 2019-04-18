@@ -2,6 +2,8 @@ npm=npm run
 build=build
 dev=serve
 
+.PHONY: build
+
 help:
 	@echo "usage: make [target]"
 	@echo ""

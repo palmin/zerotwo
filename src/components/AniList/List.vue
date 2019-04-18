@@ -8,13 +8,14 @@
       </v-container>
     </v-flex>
     <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
-      <v-card class="ma-1" hover :to="{ name: 'DetailView', params: { id: item.aniListId } }">
+      <v-card class="ma-1">
         <v-layout row wrap>
           <v-flex xs12>
             <v-img
               :src="item.imageLink"
               height="250px"
               position="50% 35%"
+              @click.native="moveToDetails(item.aniListId)"
             >
               <template v-slot:placeholder>
                 <v-layout
@@ -36,11 +37,31 @@
             </v-img>
           </v-flex>
           <v-flex xs12>
-            <v-card-title primary-title>
-              <div>
-                <span class="grey--text">{{ $t('system.aniList.currentProgress', [item.currentProgress, item.episodeAmount]) }}</span>
-              </div>
-            </v-card-title>
+            <v-container fluid class="pa-3">
+              <v-layout row wrap>
+                <v-flex xs6>
+                  <span class="grey--text">{{ $t('system.aniList.currentProgress', [item.currentProgress, item.episodeAmount]) }}</span>
+                </v-flex>
+
+                <v-flex xs12>
+                  <v-layout align-center justify-center row>
+                    <v-flex grow>
+                      <v-progress-linear color="success" :value="item.progressPercentage" height="20"></v-progress-linear>
+                    </v-flex>
+                    <v-flex shrink v-if="showEpisodeIncreaseButton">
+                      <v-btn flat color="success" class="episode-increase-icon">
+                        <v-icon color="green" size="22">mdi-plus</v-icon>
+                      </v-btn>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+
+                <v-flex xs12>
+                  <span v-if="item.nextEpisode" class="success--text">{{ item.nextEpisode }}</span>
+                  <span v-else class="info--text">{{ $t('system.aniList.airingFinished') }}</span>
+                </v-flex>
+              </v-layout>
+            </v-container>
           </v-flex>
         </v-layout>
         <v-card-actions>
@@ -66,7 +87,9 @@
 
 <script lang="ts">
 import { chain } from 'lodash';
+import moment from 'moment';
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { RawLocation } from 'vue-router';
 
 // Custom Components
 import { AniListListStatus, AniListScoreFormat, IAniListEntry } from '@/modules/AniList/types';
@@ -89,6 +112,10 @@ export default class List extends Vue {
 
   private get isLoading(): boolean {
     return appStore.isLoading;
+  }
+
+  private get showEpisodeIncreaseButton(): boolean {
+    return this.status !== AniListListStatus.COMPLETED;
   }
 
   private async created() {
@@ -115,16 +142,29 @@ export default class List extends Vue {
     const scoreStars = this.getScoreStarValue(entry.score);
     const imageLink = media.coverImage.extraLarge;
 
+    const nextEpisode = media.nextAiringEpisode
+      ? this.$t(
+        'system.aniList.nextAiringEpisode',
+        [
+          media.nextAiringEpisode.episode,
+          moment(media.nextAiringEpisode.airingAt, 'X').fromNow(),
+        ],
+      )
+      : null;
+    const progressPercentage = this.calculateProgressPercentage(entry);
+
     return {
-      id: entry.id,
       aniListId: media.id,
-      name: media.title.userPreferred,
-      imageLink,
       currentProgress: entry.progress,
       episodeAmount: media.episodes || '?',
+      forAdults: media.isAdult,
+      id: entry.id,
+      imageLink,
+      name: media.title.userPreferred,
+      nextEpisode,
+      progressPercentage,
       score: entry.score,
       scoreStars,
-      forAdults: media.isAdult,
     };
   }
 
@@ -150,6 +190,12 @@ export default class List extends Vue {
     return newEntries;
   }
 
+  private moveToDetails(id: number) {
+    const aniListId = id.toString();
+    const location: RawLocation = { name: 'DetailView', params: { id: aniListId } };
+    this.$router.push(location);
+  }
+
   private getScoreStarValue(score: number): number {
     if (!score) {
       return 0;
@@ -170,6 +216,40 @@ export default class List extends Vue {
         return 0;
     }
   }
+
+  private calculateProgressPercentage(entry: IAniListEntry): number {
+    const episodes = entry.media.episodes;
+    const nextAiringEpisode = entry.media.nextAiringEpisode;
+    const currentProgress = entry.progress;
+
+    if (!currentProgress) {
+      return 0;
+    }
+
+    // Check if max episode amount is known
+    if (episodes) {
+      return currentProgress / episodes * 100;
+    }
+
+    // We don't know the exact amount of episodes
+    // But we might know how many episodes have been aired so far
+    // so we can calculate the percentage of the currently available episodes
+    // and then add some buffer
+    if (nextAiringEpisode && nextAiringEpisode.episode) {
+      // We have to substract one here as that episode isn't aired yet
+      const episode = nextAiringEpisode.episode - 1 > 0
+        ? nextAiringEpisode.episode - 1
+        : 1;
+
+      // We choose only 80 percent here, as we are unaware of the episode amount
+      return currentProgress / episode * 80;
+    }
+
+    // Just return 75% if we have a non-zero progress but
+    // neither through the next airing episode nor through the episode amount
+    // we can determine our status.
+    return 75;
+  }
 }
 </script>
 
@@ -181,5 +261,19 @@ export default class List extends Vue {
     1px 1px 2px #000,
     1px -1px 0 #000,
     -1px -1px 0 #000;
+}
+
+.episode-increase-icon {
+  height: auto;
+  min-width: auto;
+  margin: auto;
+  padding: 0;
+  margin-left: 2px;
+  opacity: 0;
+  transition: opacity ease-in-out 0.1s;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 </style>

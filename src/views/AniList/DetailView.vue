@@ -214,19 +214,13 @@
                             <v-flex d-flex>
                               <v-btn flat color="success">
                                 <v-icon left>mdi-content-save</v-icon>
-                                Save
-                              </v-btn>
-                            </v-flex>
-                            <v-flex d-flex>
-                              <v-btn flat color="orange">
-                                <v-icon left>mdi-restore</v-icon>
-                                Reset
+                                {{ $t('system.actions.save') }}
                               </v-btn>
                             </v-flex>
                             <v-flex d-flex>
                               <v-btn flat color="error">
                                 <v-icon left>mdi-delete</v-icon>
-                                Remove
+                                {{ $t('system.actions.remove') }}
                               </v-btn>
                             </v-flex>
                           </v-layout>
@@ -322,6 +316,9 @@ export default class DetailView extends Vue {
   private readonly POINT_5 = AniListScoreFormat.POINT_5;
   private readonly POINT_3 = AniListScoreFormat.POINT_3;
   private readonly listStatusses = [{
+    text: this.$root.$t('listStatusses.watching'),
+    value: AniListListStatus.CURRENT,
+  }, {
     text: this.$root.$t('listStatusses.completed'),
     value: AniListListStatus.COMPLETED,
   }, {
@@ -336,9 +333,6 @@ export default class DetailView extends Vue {
   }, {
     text: this.$root.$t('listStatusses.repeating'),
     value: AniListListStatus.REPEATING,
-  }, {
-    text: this.$root.$t('listStatusses.watching'),
-    value: AniListListStatus.CURRENT,
   }];
   private readonly rules = {
     required: (value: any) => !!value || this.$root.$t('system.rules.required'),

@@ -8,7 +8,8 @@
       "back": "戻る",
       "loading": "通信中・・・",
       "login": "ログイン",
-      "resetImageCache": "イメージキャッシュメモリーを消す",
+      "remove": "削除",
+      "save": "保存",
       "sort": "並べる",
       "toPageTop": "トップへ"
     },
@@ -24,6 +25,7 @@
     },
     "aniList": {
       "activities": "最近の更新",
+      "airingFinished": "放送終了",
       "currentProgress": "{0} / {1}",
       "howToAuthenticate": {
         "header": "身分確認（ログイン方法）：",
@@ -32,7 +34,8 @@
           "そこのあるのは「ログイン」のボタン。そのボタンをクリックして、ＡｎｉＬｉｓｔのログインウィンドーが開きます。",
           "ログインデータを入力して成功に完成しましたはずです。"
         ]
-      }
+      },
+      "nextAiringEpisode": "第{0}話は{1}に放送開始"
     },
     "dates": {
       "full": "YYYY年MM月DD日",

@@ -8,7 +8,8 @@
       "back": "Back",
       "loading": "Loading...",
       "login": "Login",
-      "resetImageCache": "Reset image cache",
+      "remove": "Remove",
+      "save": "Save",
       "sort": "Sort",
       "toPageTop": "Jump to top"
     },
@@ -24,6 +25,7 @@
     },
     "aniList": {
       "activities": "Activities",
+      "airingFinished": "Airing finished",
       "currentProgress": "{0} / {1}",
       "howToAuthenticate": {
         "header": "How to login:",
@@ -32,7 +34,8 @@
           "There you will find a \"Login\" button which will open an AniList login window.",
           "After inputting the login data the window will close and login process should be done successfully."
         ]
-      }
+      },
+      "nextAiringEpisode": "Episode {0} is airing {1}"
     },
     "dates": {
       "full": "MMMM Do YYYY",

@@ -35,6 +35,7 @@
           "After inputting the login data the window will close and login process should be done successfully."
         ]
       },
+      "missingEpisodes": "One episode to watch | {count} episodes to watch",
       "nextAiringEpisode": "Episode {0} is airing {1}"
     },
     "dates": {

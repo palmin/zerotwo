@@ -16,6 +16,7 @@
               height="250px"
               position="50% 35%"
               @click.native="moveToDetails(item.aniListId)"
+              class="pointerCursor"
             >
               <template v-slot:placeholder>
                 <v-layout
@@ -39,26 +40,25 @@
           <v-flex xs12>
             <v-container fluid class="pa-3">
               <v-layout row wrap>
-                <v-flex xs6>
-                  <span class="grey--text">{{ $t('system.aniList.currentProgress', [item.currentProgress, item.episodeAmount]) }}</span>
+                <v-flex xs4>
+                  <v-progress-circular class="episodeProgress" color="success" :value="item.progressPercentage" size="75" rotate="-90">
+                    <div class="episodeCount">{{ item.currentProgress }}</div>
+                    <div class="episodeDivider"></div>
+                    <div class="episodeAmount">{{ item.episodeAmount }}</div>
+                    <v-btn class="episodeIncrease" small flat icon color="success"><v-icon size="18">mdi-plus</v-icon></v-btn>
+                  </v-progress-circular>
                 </v-flex>
 
-                <v-flex xs12>
-                  <v-layout align-center justify-center row>
-                    <v-flex grow>
-                      <v-progress-linear color="success" :value="item.progressPercentage" height="20"></v-progress-linear>
+                <v-flex xs8>
+                  <v-layout align-center justify-end row wrap>
+                    <v-flex xs12>
+                      <span v-if="item.nextEpisode" class="success--text">{{ item.nextEpisode }}</span>
+                      <span v-else class="info--text">{{ $t('system.aniList.airingFinished') }}</span>
                     </v-flex>
-                    <v-flex shrink v-if="showEpisodeIncreaseButton">
-                      <v-btn flat color="success" class="episode-increase-icon">
-                        <v-icon color="green" size="22">mdi-plus</v-icon>
-                      </v-btn>
+                    <v-flex xs12 v-if="item.missingEpisodes">
+                      <span class="info--text">{{ $tc('system.aniList.missingEpisodes', item.missingEpisodes, [item.missingEpisodes]) }}</span>
                     </v-flex>
                   </v-layout>
-                </v-flex>
-
-                <v-flex xs12>
-                  <span v-if="item.nextEpisode" class="success--text">{{ item.nextEpisode }}</span>
-                  <span v-else class="info--text">{{ $t('system.aniList.airingFinished') }}</span>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -69,7 +69,7 @@
             <template v-if="item.forAdults">
               <v-tooltip top>
                 <template v-slot:activator="{ on }">
-                  <v-icon color="error" v-on="on">mdi-alert</v-icon>
+                  <v-icon class="pointerCursor" color="error" v-on="on">mdi-alert</v-icon>
                 </template>
                 <span>{{ $t('system.alerts.adultContent') }}</span>
               </v-tooltip>
@@ -143,7 +143,7 @@ export default class List extends Vue {
     const imageLink = media.coverImage.extraLarge;
 
     const nextEpisode = media.nextAiringEpisode
-      ? this.$t(
+      ? this.$root.$t(
         'system.aniList.nextAiringEpisode',
         [
           media.nextAiringEpisode.episode,
@@ -152,6 +152,7 @@ export default class List extends Vue {
       )
       : null;
     const progressPercentage = this.calculateProgressPercentage(entry);
+    const missingEpisodes = this.calculateMissingEpisodes(entry);
 
     return {
       aniListId: media.id,
@@ -160,6 +161,7 @@ export default class List extends Vue {
       forAdults: media.isAdult,
       id: entry.id,
       imageLink,
+      missingEpisodes,
       name: media.title.userPreferred,
       nextEpisode,
       progressPercentage,
@@ -250,6 +252,24 @@ export default class List extends Vue {
     // we can determine our status.
     return 75;
   }
+
+  private calculateMissingEpisodes(entry: IAniListEntry): number | null {
+    const nextAiringEpisode = entry.media.nextAiringEpisode;
+    const currentProgress = entry.progress;
+
+    // We don't care about episodes that are not airing anymore.
+    if (!nextAiringEpisode) {
+      return null;
+    }
+
+    const nextEpisode = nextAiringEpisode.episode;
+
+    // Return the amount of episodes only when there are next episodes
+    // and if there are episodes the user hasn't watched yet.
+    return nextEpisode - 1 > 0 && nextEpisode - 1 - currentProgress > 0
+      ? nextEpisode - 1 - currentProgress
+      : null;
+  }
 }
 </script>
 
@@ -263,17 +283,65 @@ export default class List extends Vue {
     -1px -1px 0 #000;
 }
 
-.episode-increase-icon {
-  height: auto;
-  min-width: auto;
-  margin: auto;
-  padding: 0;
-  margin-left: 2px;
-  opacity: 0;
-  transition: opacity ease-in-out 0.1s;
+.pointerCursor {
+  cursor: pointer;
+}
 
+.episodeProgress {
   &:hover {
-    opacity: 1;
+    & .episodeAmount {
+      opacity: 0;
+    }
+
+    & .episodeIncrease {
+      opacity: 1;
+    }
+  }
+
+  .episodeCount {
+    font-size: 15pt;
+    position: absolute;
+    top: -27px;
+    left: -25px;
+    z-index: 1;
+    width: 50px;
+    text-align: center;
+  }
+
+  .episodeDivider {
+    font-size: 15pt;
+    position: absolute;
+    top: -18px;
+    left: -5px;
+    transform: scaleX(5);
+    text-align: center;
+    z-index: 2;
+
+    &::before {
+      content: '_';
+    }
+  }
+
+  .episodeAmount {
+    position: absolute;
+    top: 7px;
+    left: -25px;
+    z-index: 3;
+    text-align: center;
+    width: 50px;
+    transition: opacity ease-in-out 0.2s;
+  }
+
+  .episodeIncrease {
+    position: absolute;
+    top: 5px;
+    left: -12.5px;
+    width: 25px;
+    height: 25px;
+    z-index: 4;
+    margin: 0;
+    opacity: 0;
+    transition: opacity ease-in-out 0.2s;
   }
 }
 </style>

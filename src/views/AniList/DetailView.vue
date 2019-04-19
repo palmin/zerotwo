@@ -389,7 +389,7 @@ export default class DetailView extends Vue {
       listEntry,
       nativeTitle: media.title.native,
       nextAiringEpisode: media.nextAiringEpisode,
-      score: media.averageScore,
+      score: media.averageScore || '-',
       streamingEpisodes: media.streamingEpisodes,
       synonyms,
       title: media.title.romaji,

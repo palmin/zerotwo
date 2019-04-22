@@ -36,6 +36,7 @@
         ]
       },
       "missingEpisodes": "１つのエピソードが見残る | {count}つのエピソードが見残る",
+      "notYetAired": "まだ放送していませんでした。",
       "nextAiringEpisode": "第{0}話は{1}に放送開始"
     },
     "dates": {

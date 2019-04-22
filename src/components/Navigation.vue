@@ -46,7 +46,7 @@
         <v-progress-circular size="16" width="2" indeterminate></v-progress-circular>
       </v-btn>
 
-      <v-btn flat icon v-if="isMediaPage" @click="$router.back()">
+      <v-btn flat icon v-if="isMediaPage || isSettingsPage" @click="$router.back()">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
@@ -118,6 +118,10 @@ export default class Navigation extends Vue {
 
   private get isMediaPage(): boolean {
     return this.$route.meta && this.$route.meta.mediaPage;
+  }
+
+  private get isSettingsPage(): boolean {
+    return this.$route.name === 'Settings';
   }
 
   private get currentRouteName(): string {

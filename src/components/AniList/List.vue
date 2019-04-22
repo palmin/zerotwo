@@ -11,52 +11,22 @@
       <v-card class="ma-1">
         <v-layout row wrap>
           <v-flex xs12>
-            <v-img
-              :src="item.imageLink"
-              height="250px"
-              position="50% 35%"
-              @click.native="moveToDetails(item.aniListId)"
-              class="pointerCursor"
-            >
-              <template v-slot:placeholder>
-                <v-layout
-                  fill-height
-                  align-center
-                  justify-center
-                  ma-0
-                >
-                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                </v-layout>
-              </template>
-              <v-container fill-height fluid>
-                <v-layout fill-height>
-                  <v-flex xs12 align-end flexbox>
-                    <span class="title shadowed">{{ item.name }}</span>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-img>
+            <ListImage :imageLink="item.imageLink" :aniListId="item.aniListId" :name="item.name" />
           </v-flex>
           <v-flex xs12>
             <v-container fluid class="pa-3">
               <v-layout row wrap>
                 <v-flex xs4>
-                  <v-progress-circular class="episodeProgress" color="success" :value="item.progressPercentage" size="75" rotate="-90">
-                    <div class="episodeCount">{{ item.currentProgress }}</div>
-                    <div class="episodeDivider"></div>
-                    <div class="episodeAmount">{{ item.episodeAmount }}</div>
-                    <v-btn class="episodeIncrease" small flat icon color="success"><v-icon size="18">mdi-plus</v-icon></v-btn>
-                  </v-progress-circular>
+                  <ProgressCircle :status="status" :progressPercentage="item.progressPercentage" :currentProgress="item.currentProgress" :episodeAmount="item.episodeAmount" />
                 </v-flex>
 
                 <v-flex xs8>
                   <v-layout align-center justify-end row wrap>
                     <v-flex xs12>
-                      <span v-if="item.nextEpisode" class="success--text">{{ item.nextEpisode }}</span>
-                      <span v-else class="info--text">{{ $t('system.aniList.airingFinished') }}</span>
+                      <EpisodeState :status="item.status" :nextEpisode="item.nextEpisode" />
                     </v-flex>
                     <v-flex xs12 v-if="item.missingEpisodes">
-                      <span class="info--text">{{ $tc('system.aniList.missingEpisodes', item.missingEpisodes, [item.missingEpisodes]) }}</span>
+                      <MissingEpisodes :missingEpisodes="item.missingEpisodes" />
                     </v-flex>
                   </v-layout>
                 </v-flex>
@@ -65,20 +35,8 @@
           </v-flex>
         </v-layout>
         <v-card-actions>
-          <v-layout align-start justify-start>
-            <template v-if="item.forAdults">
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-icon class="pointerCursor" color="error" v-on="on">mdi-alert</v-icon>
-                </template>
-                <span>{{ $t('system.alerts.adultContent') }}</span>
-              </v-tooltip>
-            </template>
-          </v-layout>
-
-          <v-layout align-center justify-end>
-            ({{ item.score }})<v-rating :length="ratingStarAmount" half-increments dense small readonly :value="item.scoreStars"></v-rating>
-          </v-layout>
+          <AdultToolTip v-if="item.forAdults" />
+          <StarRating :score="item.score" :ratingStarAmount="ratingStarAmount" :scoreStars="item.scoreStars" />
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -92,10 +50,25 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { RawLocation } from 'vue-router';
 
 // Custom Components
-import { AniListListStatus, AniListScoreFormat, IAniListEntry } from '@/modules/AniList/types';
+import { AniListListStatus, AniListMediaStatus, AniListScoreFormat, IAniListEntry } from '@/modules/AniList/types';
 import { aniListStore, appStore } from '@/store';
+import AdultToolTip from './ListElements/AdultToolTip.vue';
+import EpisodeState from './ListElements/EpisodeState.vue';
+import ListImage from './ListElements/ListImage.vue';
+import MissingEpisodes from './ListElements/MissingEpisodes.vue';
+import ProgressCircle from './ListElements/ProgressCircle.vue';
+import StarRating from './ListElements/StarRating.vue';
 
-@Component
+@Component({
+  components: {
+    AdultToolTip,
+    EpisodeState,
+    ListImage,
+    MissingEpisodes,
+    ProgressCircle,
+    StarRating,
+  },
+})
 export default class List extends Vue {
   private listData: any[] = [];
   // TODO: Make this a non-static number via Store
@@ -167,6 +140,7 @@ export default class List extends Vue {
       progressPercentage,
       score: entry.score,
       scoreStars,
+      status: media.status,
     };
   }
 
@@ -190,12 +164,6 @@ export default class List extends Vue {
       .value();
 
     return newEntries;
-  }
-
-  private moveToDetails(id: number) {
-    const aniListId = id.toString();
-    const location: RawLocation = { name: 'DetailView', params: { id: aniListId } };
-    this.$router.push(location);
   }
 
   private getScoreStarValue(score: number): number {
@@ -274,19 +242,6 @@ export default class List extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.shadowed {
-  color: #FFF;
-  text-shadow:
-    -1px 1px 2px #000,
-    1px 1px 2px #000,
-    1px -1px 0 #000,
-    -1px -1px 0 #000;
-}
-
-.pointerCursor {
-  cursor: pointer;
-}
-
 .episodeProgress {
   &:hover {
     & .episodeAmount {

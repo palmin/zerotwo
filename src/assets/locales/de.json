@@ -36,6 +36,7 @@
         ]
       },
       "missingEpisodes": "Noch eine Folge gucken | Noch {count} Folgen gucken",
+      "notYetAired": "Noch nicht ausgestrahlt",
       "nextAiringEpisode": "Ausstrahlung von Episode {0} {1}"
     },
     "dates": {

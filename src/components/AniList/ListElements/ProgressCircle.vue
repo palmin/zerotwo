@@ -3,13 +3,13 @@
     <div class="episodeCount">{{ currentProgress }}</div>
     <div class="episodeDivider"></div>
     <div class="episodeAmount" :class="{ complete: completedList }">{{ episodeAmount }}</div>
-    <v-btn class="episodeIncrease" v-if="!completedList" small flat icon color="success"><v-icon size="18">mdi-plus</v-icon></v-btn>
+    <v-btn class="episodeIncrease" v-if="!completedList" small flat icon color="success" @click="increaseEpisodeCounter"><v-icon size="18">mdi-plus</v-icon></v-btn>
   </v-progress-circular>
 </template>
 
 <script lang="ts">
 import { AniListListStatus } from '@/modules/AniList/types';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class ProgressCircle extends Vue {
@@ -25,8 +25,16 @@ export default class ProgressCircle extends Vue {
   @Prop(String)
   private status!: string;
 
+  @Prop(Number)
+  private entryId!: number;
+
   private get completedList(): boolean {
     return this.status === AniListListStatus.COMPLETED;
+  }
+
+  @Emit('increase')
+  private increaseEpisodeCounter() {
+    return this.entryId;
   }
 }
 </script>

@@ -17,7 +17,13 @@
             <v-container fluid class="pa-3">
               <v-layout row wrap>
                 <v-flex xs4>
-                  <ProgressCircle :status="status" :progressPercentage="item.progressPercentage" :currentProgress="item.currentProgress" :episodeAmount="item.episodeAmount" />
+                  <ProgressCircle
+                    :entryId="item.id"
+                    :status="status"
+                    :progressPercentage="item.progressPercentage"
+                    :currentProgress="item.currentProgress"
+                    :episodeAmount="item.episodeAmount"
+                    @increase="increaseCurrentEpisodeProgress" />
                 </v-flex>
 
                 <v-flex xs8>
@@ -50,6 +56,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { RawLocation } from 'vue-router';
 
 // Custom Components
+import API from '@/modules/AniList/API';
 import { AniListListStatus, AniListMediaStatus, AniListScoreFormat, IAniListEntry } from '@/modules/AniList/types';
 import { aniListStore, appStore } from '@/store';
 import AdultToolTip from './ListElements/AdultToolTip.vue';
@@ -81,14 +88,6 @@ export default class List extends Vue {
     return aniListStore.session.user.mediaListOptions.scoreFormat === AniListScoreFormat.POINT_3
       ? 3
       : 5;
-  }
-
-  private get isLoading(): boolean {
-    return appStore.isLoading;
-  }
-
-  private get showEpisodeIncreaseButton(): boolean {
-    return this.status !== AniListListStatus.COMPLETED;
   }
 
   private async created() {
@@ -238,65 +237,25 @@ export default class List extends Vue {
       ? nextEpisode - 1 - currentProgress
       : null;
   }
+
+  private increaseCurrentEpisodeProgress(entryId: number): void {
+    const listEntry = this.listData.find((entry) => entry.id === entryId);
+
+    if (!listEntry) {
+      return;
+    }
+
+    const currentProgress = listEntry.progress;
+    const episodeAmount = listEntry.media.episodes;
+
+    if (episodeAmount && currentProgress + 1 >= episodeAmount) {
+      // Initialize Completed sequence
+      // TODO: Implement API function
+      // API.setMediaCompleted(entryId);
+    } else {
+      // TODO: Implement API function
+      // API.increaseEpisodeProgress(entryId);
+    }
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-.episodeProgress {
-  &:hover {
-    & .episodeAmount {
-      opacity: 0;
-    }
-
-    & .episodeIncrease {
-      opacity: 1;
-    }
-  }
-
-  .episodeCount {
-    font-size: 15pt;
-    position: absolute;
-    top: -27px;
-    left: -25px;
-    z-index: 1;
-    width: 50px;
-    text-align: center;
-  }
-
-  .episodeDivider {
-    font-size: 15pt;
-    position: absolute;
-    top: -18px;
-    left: -5px;
-    transform: scaleX(5);
-    text-align: center;
-    z-index: 2;
-
-    &::before {
-      content: '_';
-    }
-  }
-
-  .episodeAmount {
-    position: absolute;
-    top: 7px;
-    left: -25px;
-    z-index: 3;
-    text-align: center;
-    width: 50px;
-    transition: opacity ease-in-out 0.2s;
-  }
-
-  .episodeIncrease {
-    position: absolute;
-    top: 5px;
-    left: -12.5px;
-    width: 25px;
-    height: 25px;
-    z-index: 4;
-    margin: 0;
-    opacity: 0;
-    transition: opacity ease-in-out 0.2s;
-  }
-}
-</style>

@@ -34,6 +34,9 @@ import getSeasonPreview from './queries/getSeasonPreview.graphql';
 import getUser from './queries/getUser.graphql';
 import getUserList from './queries/getUserList.graphql';
 
+// Mutations
+import setEpisodeProgress from './mutations/setEpisodeProgress.graphql';
+
 /**
  * @class AniListAPI
  * @description Contains only static functions to connect to AniList's API
@@ -166,6 +169,50 @@ export default class AniListAPI {
     }
 
     return null;
+  }
+
+  // Mutations
+
+  public static async setEntryProgress(entryId: number, progress: number): Promise<void> {
+    try {
+      const { accessToken } = aniListStore.session;
+      const headers = { Authorization: `Bearer ${accessToken}` };
+
+      await axios.post('/', {
+        query: setEpisodeProgress,
+        variables: {
+          entryId,
+          progress,
+        },
+      }, { headers });
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'setEpisodeProgress'], error);
+    }
+  }
+
+  public static async setEntryCompleted(entryId: number, episodeAmount: number): Promise<void> {
+    try {
+      const { accessToken } = aniListStore.session;
+      const headers = { Authorization: `Bearer ${accessToken}` };
+
+      const now = new Date();
+      const completedAt = {
+        year: now.getUTCFullYear(),
+        month: now.getUTCMonth() + 1,
+        day: now.getUTCDate(),
+      };
+
+      await axios.post('/', {
+        query: setEpisodeProgress,
+        variables: {
+          entryId,
+          progress: episodeAmount,
+          completedAt,
+        },
+      }, { headers });
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'setEntryCompleted'], error);
+    }
   }
 
   /**

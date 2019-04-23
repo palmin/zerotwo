@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { chain } from 'lodash';
+import { chain, isEmpty, reduce } from 'lodash';
 import moment from 'moment';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { RawLocation } from 'vue-router';
@@ -80,6 +80,10 @@ export default class List extends Vue {
   private listData: any[] = [];
   // TODO: Make this a non-static number via Store
   private startAmount: number = 20;
+  // Contains the Timer ID
+  private updateTimer: NodeJS.Timeout | null = null;
+  private updatePayload: any[] = [];
+  private updateInterval = 750;
 
   @Prop()
   private readonly status!: AniListListStatus;
@@ -250,12 +254,72 @@ export default class List extends Vue {
 
     if (episodeAmount && currentProgress + 1 >= episodeAmount) {
       // Initialize Completed sequence
-      // TODO: Implement API function
-      // API.setMediaCompleted(entryId);
+      API.setEntryCompleted(entryId, episodeAmount);
     } else {
-      // TODO: Implement API function
-      // API.increaseEpisodeProgress(entryId);
+      // Just increase the progress
+      API.setEntryProgress(entryId, currentProgress + 1);
     }
+  }
+
+  private startUpdateTimer(listEntry: any) {
+    if (this.updateTimer) {
+      clearTimeout(this.updateTimer);
+    }
+
+    const now = Date.now();
+    const entry = {
+      id: listEntry.id,
+      mediaId: listEntry.media.id,
+      title: listEntry.media.title.userPreferred,
+      progress: listEntry.progress,
+      status: listEntry.status,
+      score: listEntry.score,
+      changeFrom: now,
+    };
+
+    this.updatePayload.push(entry);
+    this.updateTimer = setTimeout(this.updateChanges, this.updateInterval);
+  }
+
+  private async updateChanges() {
+    if (isEmpty(this.updatePayload)) {
+      return;
+    }
+
+    const entries = chain(this.updatePayload)
+      .groupBy((value) => value.id)
+      .map((group) => reduce((group), (accumulator, item) =>
+        (item.changeFrom > accumulator.changeFrom ? item : accumulator), {
+          id: null,
+          title: null,
+          status: null,
+          progress: null,
+          score: null,
+          changeFrom: 0,
+        }))
+      .filter((group) => !!group.id)
+      .value();
+
+    if (isEmpty(entries)) {
+      return;
+    }
+
+    await Promise.all(entries.map(async (entry) => {
+      const { id, title, status, progress, score } = entry;
+
+      if (!id || progress === null) {
+        return;
+      }
+
+      if (status === AniListListStatus.COMPLETED) {
+        return API.setEntryCompleted(id, progress);
+      } else {
+        return API.setEntryProgress(id, progress);
+      }
+    }))
+    .finally(() => {
+      this.updatePayload = [];
+    });
   }
 }
 </script>

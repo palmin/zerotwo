@@ -65,6 +65,12 @@ export class AniListStore extends VuexModule {
   private _currentMediaTitle: string | null = null;
 
   /**
+   * @private
+   * @var {number} _timeUntilRefresh contains the amount of seconds until the next refresh
+   */
+  private _timeUntilRefresh: number = 0;
+
+  /**
    * @getter
    * @method aniListData
    * @returns {IAniListMediaListCollection} the current user's AniList data
@@ -117,6 +123,11 @@ export class AniListStore extends VuexModule {
   @getter
   public get currentMediaTitle(): string | null {
     return this._currentMediaTitle;
+  }
+
+  @getter
+  public get timeUntilRefresh(): number {
+    return this._timeUntilRefresh;
   }
 
   /**

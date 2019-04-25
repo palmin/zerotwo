@@ -1,13 +1,18 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs12 v-if="!listData.length">
+    <v-flex xs12 v-show="isLoading" align-self-center>
+      <div class="display-3 text-xs-center ma-4">
+        {{ $t('system.actions.loading') }}
+      </div>
+    </v-flex>
+    <v-flex xs12 v-if="!listData.length && !isLoading">
       <v-container>
         <div class="headline text-xs-center">
           {{ $t('$vuetify.noDataText') }}
         </div>
       </v-container>
     </v-flex>
-    <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
+    <v-flex d-flex xs3 v-for="item in listData" :key="item.id" v-if="!isLoading">
       <v-card class="ma-1">
         <v-layout row wrap>
           <v-flex xs12>
@@ -96,6 +101,10 @@ export default class List extends Vue {
     return aniListStore.session.user.mediaListOptions.scoreFormat === AniListScoreFormat.POINT_3
       ? 3
       : 5;
+  }
+
+  private get isLoading(): boolean {
+    return appStore.isLoading;
   }
 
   private async created() {

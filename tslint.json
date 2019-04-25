@@ -12,6 +12,7 @@
   "rules": {
     "indent": [true, "spaces", 2],
     "interface-name": false,
+    "linebreak-style": [true, "LF"],
     "no-consecutive-blank-lines": true,
     "object-literal-sort-keys": false,
     "ordered-imports": true,

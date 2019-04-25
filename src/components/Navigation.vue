@@ -81,9 +81,9 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
-          <v-btn flat icon v-on="{ ...toolTip }">
+          <v-btn flat icon v-on="{ ...toolTip }" @click="refreshData">
             <v-progress-circular :rotate="-90" :width="2" color="success" :value="100">
-              <v-icon size="18" color="white">mdi-sync</v-icon>
+              <v-icon style="vertical-align: text-top" size="18" color="white">mdi-sync {{ isLoading ? 'mdi-spin' : '' }}</v-icon>
             </v-progress-circular>
           </v-btn>
         </template>
@@ -108,6 +108,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import { RawLocation } from 'vue-router';
 
 // Custom Components
+import Log from '@/log';
 import { aniListStore, appStore } from '@/store';
 
 @Component
@@ -164,6 +165,19 @@ export default class Navigation extends Vue {
 
   private navigateTo(location: RawLocation) {
     this.$router.push(location);
+  }
+
+  private async refreshData() {
+    await appStore.setLoadingState(true);
+
+    // AniList
+    try {
+      await aniListStore.refreshAniListData();
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['navigation', 'refreshData', 'aniList'], error);
+    }
+
+    await appStore.setLoadingState(false);
   }
 
   private jumpToTop(): void {

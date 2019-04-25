@@ -79,6 +79,16 @@
         </v-card>
       </v-menu>
 
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on: toolTip }">
+          <v-btn flat icon v-on="{ ...toolTip }">
+            <v-progress-circular :rotate="-90" :width="2" color="success" :value="100">
+              <v-icon size="18" color="white">mdi-sync</v-icon>
+            </v-progress-circular>
+          </v-btn>
+        </template>
+        <span>Test</span>
+      </v-tooltip>
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
@@ -111,6 +121,10 @@ export default class Navigation extends Vue {
     title: 'menu.seasonPreview',
     location: { name: 'SeasonPreview' },
   }];
+
+  private get isRefreshablePage(): boolean {
+    return this.$route.meta && this.$route.meta.refreshablePage;
+  }
 
   private get isSortingPage(): boolean {
     return this.$route.meta && this.$route.meta.sortingPage;

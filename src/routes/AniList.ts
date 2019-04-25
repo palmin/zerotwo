@@ -10,6 +10,7 @@ const routes: RouteConfig[] = [{
   name: 'Home',
   component: Home,
   meta: {
+    refreshablePage: true,
     routeName: 'aniList',
   },
 },
@@ -18,6 +19,7 @@ const routes: RouteConfig[] = [{
   name: 'Watching',
   component: AniList,
   meta: {
+    refreshablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.CURRENT,
@@ -28,6 +30,7 @@ const routes: RouteConfig[] = [{
   name: 'Repeating',
   component: AniList,
   meta: {
+    refreshablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.REPEATING,
@@ -38,6 +41,7 @@ const routes: RouteConfig[] = [{
   name: 'Completed',
   component: AniList,
   meta: {
+    refreshablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.COMPLETED,
@@ -48,6 +52,7 @@ const routes: RouteConfig[] = [{
   name: 'Dropped',
   component: AniList,
   meta: {
+    refreshablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.DROPPED,
@@ -58,6 +63,7 @@ const routes: RouteConfig[] = [{
   name: 'Planning',
   component: AniList,
   meta: {
+    refreshablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.PLANNING,
@@ -68,6 +74,7 @@ const routes: RouteConfig[] = [{
   name: 'Paused',
   component: AniList,
   meta: {
+    refreshablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.PAUSED,

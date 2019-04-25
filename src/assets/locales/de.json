@@ -36,6 +36,11 @@
         ]
       },
       "missingEpisodes": "Noch eine Folge gucken | Noch {count} Folgen gucken",
+      "notification": {
+        "title": "Synchronisation erfolgreich",
+        "completeUpdateText": "{0} wurde mit Episode {1} abgeschlossen und erfolgreich synchronisiert.",
+        "simpleUpdateText": "{0} wurde erfolgreich auf Episode {1} synchronisiert."
+      },
       "notYetAired": "Noch nicht ausgestrahlt",
       "nextAiringEpisode": "Ausstrahlung von Episode {0} {1}"
     },

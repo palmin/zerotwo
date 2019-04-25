@@ -46,6 +46,7 @@
         </v-card-actions>
       </v-card>
     </v-flex>
+    <v-snackbar v-model="isSnackbarVisible" top :color="snackbarColor" :timeout="3500">{{ snackbarText }}</v-snackbar>
   </v-layout>
 </template>
 
@@ -84,6 +85,9 @@ export default class List extends Vue {
   private updateTimer: NodeJS.Timeout | null = null;
   private updatePayload: any[] = [];
   private updateInterval = 750;
+  private snackbarColor: string = 'success';
+  private isSnackbarVisible: boolean = false;
+  private snackbarText: string = '';
 
   @Prop()
   private readonly status!: AniListListStatus;
@@ -249,16 +253,15 @@ export default class List extends Vue {
       return;
     }
 
-    const currentProgress = listEntry.progress;
-    const episodeAmount = listEntry.media.episodes;
-
-    if (episodeAmount && currentProgress + 1 >= episodeAmount) {
-      // Initialize Completed sequence
-      API.setEntryCompleted(entryId, episodeAmount);
+    const { currentProgress, episodeAmount } = listEntry;
+    if (currentProgress + 1 >= episodeAmount) {
+      listEntry.status = AniListListStatus.COMPLETED;
+      listEntry.currentProgress++;
     } else {
-      // Just increase the progress
-      API.setEntryProgress(entryId, currentProgress + 1);
+      listEntry.currentProgress++;
     }
+
+    this.startUpdateTimer(listEntry);
   }
 
   private startUpdateTimer(listEntry: any) {
@@ -269,9 +272,9 @@ export default class List extends Vue {
     const now = Date.now();
     const entry = {
       id: listEntry.id,
-      mediaId: listEntry.media.id,
-      title: listEntry.media.title.userPreferred,
-      progress: listEntry.progress,
+      mediaId: listEntry.aniListId,
+      title: listEntry.name,
+      progress: listEntry.currentProgress,
       status: listEntry.status,
       score: listEntry.score,
       changeFrom: now,
@@ -312,9 +315,17 @@ export default class List extends Vue {
       }
 
       if (status === AniListListStatus.COMPLETED) {
-        return API.setEntryCompleted(id, progress);
+        await API.setEntryCompleted(id, progress);
+        this.$notify({
+          title: this.$t('system.aniList.notification.title') as string,
+          text: this.$t('system.aniList.notification.completeUpdateText', [title, progress]) as string,
+        });
       } else {
-        return API.setEntryProgress(id, progress);
+        await API.setEntryProgress(id, progress);
+        this.$notify({
+          title: this.$t('system.aniList.notification.title') as string,
+          text: this.$t('system.aniList.notification.simpleUpdateText', [title, progress]) as string,
+        });
       }
     }))
     .finally(() => {

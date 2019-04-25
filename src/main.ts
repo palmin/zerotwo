@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Notification from 'vue-notification';
 import Vuetify from 'vuetify';
 
 // Components
@@ -16,6 +17,8 @@ Vue.use(Vuetify, {
   iconfont: 'mdi',
   lang: { t: (key: string, ...params: any) => i18n.t(key, params) },
 });
+
+Vue.use(Notification);
 
 Vue.config.productionTip = false;
 

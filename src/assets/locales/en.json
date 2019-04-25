@@ -36,6 +36,11 @@
         ]
       },
       "missingEpisodes": "One episode to watch | {count} episodes to watch",
+      "notification": {
+        "title": "Synchronization successful",
+        "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
+        "simpleUpdateText": "{0} was successfully synchronized to episode {1}."
+      },
       "notYetAired": "Not yet aired",
       "nextAiringEpisode": "Episode {0} is airing {1}"
     },

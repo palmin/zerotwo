@@ -36,6 +36,11 @@
         ]
       },
       "missingEpisodes": "１つのエピソードが見残る | {count}つのエピソードが見残る",
+      "notification": {
+        "title": "更新成功",
+        "completeUpdateText": "{0}を成功にエピソード{1}に終了して、更新しました。",
+        "simpleUpdateText": "{0}を成功にエピソード{1}に更新しました。"
+      },
       "notYetAired": "まだ放送していませんでした。",
       "nextAiringEpisode": "第{0}話は{1}に放送開始"
     },

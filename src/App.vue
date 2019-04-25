@@ -3,6 +3,7 @@
     <main>
       <Navigation />
       <router-view :key="$route.path" />
+      <notifications position="top center" />
     </main>
   </v-app>
 </template>

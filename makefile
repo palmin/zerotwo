@@ -1,9 +1,12 @@
-npm=npm run
+npm=npm
+run=run
+run_npm=${npm} ${run}
 build=build
 dev=serve
 lint=wotan
+install=install
 
-.PHONY: build lint
+.PHONY: build lint install
 
 help:
 	@echo "usage: make [target]"
@@ -19,12 +22,16 @@ help:
 
 dev:
 	@echo "Starting development environment..."
-	powershell.exe ${npm} ${dev}
+	powershell.exe ${npm_run} ${dev}
 
 build:
 	@echo "Starting build process..."
-	powershell.exe ${npm} ${build}
+	powershell.exe ${npm_run} ${build}
 
 lint:
 	@echo "Starting lint process..."
-	powershell.exe ${npm} ${lint}
+	powershell.exe ${npm_run} ${lint}
+
+install:
+	@echo "Starting install process..."
+	powershell.exe ${npm} ${install}

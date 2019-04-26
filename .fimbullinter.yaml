@@ -1,0 +1,12 @@
+# Tell wotan to use the valtyr module for linting.
+modules:
+  - "@fimbul/valtyr"
+# Valtýr configuration.
+valtyr:
+  overrides:
+    # Use the Vé preprocessor for all *.vue files.
+    # Valtýr will still run for *.ts files by default.
+    - files: "*.vue"
+      processor: "@fimbul/ve"
+exclude:
+  - "**/*.d.ts"

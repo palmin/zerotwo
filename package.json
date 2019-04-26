@@ -17,7 +17,8 @@
     "build": "vue-cli-service electron:build",
     "lint": "vue-cli-service lint",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "wotan": "wotan"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -35,6 +36,10 @@
     "vuex-persist": "^2.0.0"
   },
   "devDependencies": {
+    "@fimbul/mithotyn": "^0.18.0",
+    "@fimbul/valtyr": "^0.20.0",
+    "@fimbul/ve": "^0.18.0",
+    "@fimbul/wotan": "^0.20.0",
     "@mdi/font": "^3.6.95",
     "@types/lodash": "^4.14.123",
     "@types/request": "^2.48.1",
@@ -45,6 +50,7 @@
     "@vue/cli-service": "^3.6.0",
     "electron": "^4.1.4",
     "fibers": "^3.1.1",
+    "husky": "^2.1.0",
     "sass": "^1.19.0",
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
@@ -58,5 +64,10 @@
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2"
   },
-  "main": "background.js"
+  "main": "background.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run wotan"
+    }
+  }
 }

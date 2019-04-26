@@ -28,9 +28,7 @@
       "scripthost"
     ],
     "plugins": [
-      {
-        "name": "typescript-tslint-plugin"
-      }
+      { "name": "@fimbul/mithotyn", "displayErrorsAsWarnings": true }
     ]
   },
   "include": [

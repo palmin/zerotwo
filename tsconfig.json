@@ -26,9 +26,6 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ],
-    "plugins": [
-      { "name": "@fimbul/mithotyn", "displayErrorsAsWarnings": true }
     ]
   },
   "include": [

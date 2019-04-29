@@ -184,6 +184,11 @@ export class AniListStore extends VuexModule {
   }
 
   @action()
+  public async setRefreshRate(refreshRate: number): Promise<void> {
+    this._setRefreshRate(refreshRate);
+  }
+
+  @action()
   public async restartRefreshTimer(): Promise<void> {
     if (this._refreshTimer) {
       clearInterval(this._refreshTimer);
@@ -270,6 +275,11 @@ export class AniListStore extends VuexModule {
   @mutation
   protected _setRefreshTimer(timeoutId: NodeJS.Timeout | null): void {
     this._refreshTimer = timeoutId;
+  }
+
+  @mutation
+  protected _setRefreshRate(refreshRate: number): void {
+    this._refreshRate = refreshRate;
   }
 }
 

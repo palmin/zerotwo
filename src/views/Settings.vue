@@ -49,6 +49,16 @@
                     <v-flex xs4>
                       {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
                     </v-flex>
+                    <v-flex xs4>
+                      <v-text-field
+                        type="number"
+                        v-model="currentAniListRefreshRate"
+                        :min="5"
+                        :label="$t('system.settings.aniList.refreshRate')"
+                        :suffix="$t('system.settings.aniList.refreshRateSuffix')"
+                        :hint="$t('system.settings.aniList.refreshRateHint')">
+                      </v-text-field>
+                    </v-flex>
                   </v-layout>
                 </v-container>
               </v-card>
@@ -205,6 +215,14 @@ export default class Settings extends Vue {
 
   private get currentUser(): IAniListUser {
     return aniListStore.session.user;
+  }
+
+  private get currentAniListRefreshRate(): number {
+    return aniListStore.refreshRate;
+  }
+
+  private set currentAniListRefreshRate(refreshRate: number) {
+    aniListStore.setRefreshRate(refreshRate);
   }
 }
 </script>

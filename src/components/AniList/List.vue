@@ -37,8 +37,8 @@
                       <v-flex xs12>
                         <EpisodeState :status="item.status" :nextEpisode="item.nextEpisode" />
                       </v-flex>
-                      <v-flex xs12 v-if="item.missingEpisodes">
-                        <MissingEpisodes :missingEpisodes="item.missingEpisodes" />
+                      <v-flex xs12>
+                        <MissingEpisodes :nextAiringEpisode="item.nextAiringEpisode" :currentProgress="item.currentProgress" />
                       </v-flex>
                     </v-layout>
                   </v-flex>
@@ -148,12 +148,14 @@ export default class List extends Vue {
     return {
       aniListId: media.id,
       currentProgress: entry.progress,
+      entry,
       episodeAmount: media.episodes || '?',
       forAdults: media.isAdult,
       id: entry.id,
       imageLink,
       missingEpisodes,
       name: media.title.userPreferred,
+      nextAiringEpisode: media.nextAiringEpisode,
       nextEpisode,
       progressPercentage,
       score: entry.score,

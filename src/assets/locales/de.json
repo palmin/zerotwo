@@ -69,15 +69,9 @@
       },
       "aniList": {
         "loggedInAs": "Eingeloggt als {0}",
-        "resetImageCache": {
-          "title": "Bildercache leeren",
-          "body": [
-            "ZeroTwo speichert Bilder, wie beispielsweise das Profilbild oder Plakatbilder von Medien auf dem Computer zwischen.",
-            "Diese Funktion verringert die Anzahl der Anfragen an Servern und Ladezeiten, um Bilder zu laden.",
-            "Zudem macht es die Bilder offline verfügbar.",
-            "Diese Funktion ist vorerst zwangsaktiv und kann gerne mit einem Issue im öffentlichen GitHub-Repo diskutiert werden."
-          ]
-        }
+        "refreshRate": "Aktualisierungsintervall",
+        "refreshRateSuffix": "Minuten",
+        "refreshRateHint": "Dieses Intervall bestimmt die Dauer (in Minuten) bis zur nächsten Synchronisation mit dem AniList-Server. Änderungen des Intervalls treten nach der nächsten Synchronisation in Kraft."
       },
       "appSettings": {
         "chooseLanguage": "Sprache wählen (Choose language)",

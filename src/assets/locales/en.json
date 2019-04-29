@@ -69,16 +69,9 @@
       },
       "aniList": {
         "loggedInAs": "Logged in as {0}",
-        "resetImageCache": {
-          "title": "Reset image cache",
-          "body": [
-            "ZeroTwo saves images like profile avatars or cover images for media directly on the computer.",
-            "This saves many requests to servers and lowers loading times.",
-            "Additionally, it's possible to see the images in offline mode.",
-            "This function will be on by default and is not yet defeatable.",
-            "If you wish to disable this function, let's discuss this via an issue in the open-source GitHub repository."
-          ]
-        }
+        "refreshRate": "Refresh rate",
+        "refreshRateSuffix": "minutes",
+        "refreshRateHint": "This interval determines the amount of minutes until the next synchronization with the AniList server. Changes to the interval will be applied after the next synchronization."
       },
       "appSettings": {
         "chooseLanguage": "Choose language",

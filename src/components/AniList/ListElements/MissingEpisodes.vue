@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import { IAniListEntry, IAniListNextAiringEpisode } from '@/modules/AniList/types';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class MissingEpisodes extends Vue {

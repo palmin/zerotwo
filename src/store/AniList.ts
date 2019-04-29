@@ -70,6 +70,8 @@ export class AniListStore extends VuexModule {
    */
   private _timeUntilRefresh: number = 0;
 
+  private _refreshTimer: NodeJS.Timeout | null = null;
+
   /**
    * @getter
    * @method aniListData
@@ -181,6 +183,36 @@ export class AniListStore extends VuexModule {
     this._setCurrentMediaTitle(title);
   }
 
+  @action()
+  public async restartRefreshTimer(): Promise<void> {
+    if (this._refreshTimer) {
+      clearInterval(this._refreshTimer);
+      this._setRefreshTimer(null);
+    }
+
+    // Amount of minutes x 60 seconds
+    this._setTimeUntilRefresh(this.refreshRate * 60);
+    this._setRefreshTimer(setInterval(() => {
+      this._setTimeUntilRefresh(this._timeUntilRefresh - 1);
+      if (this.timeUntilRefresh <= 0 && this._refreshTimer) {
+        clearInterval(this._refreshTimer);
+        this._setRefreshTimer(null);
+
+        this.refreshAniListData();
+        this.restartRefreshTimer();
+      }
+    }, 1000));
+  }
+
+  @action()
+  public async destroyRefreshTimer(): Promise<void> {
+    if (this._refreshTimer) {
+      clearInterval(this._refreshTimer);
+    }
+    this._setTimeUntilRefresh(0);
+    this._setRefreshTimer(null);
+  }
+
   /**
    * @protected
    * @mutation
@@ -228,6 +260,16 @@ export class AniListStore extends VuexModule {
   @mutation
   protected _setCurrentMediaTitle(title: string | null): void {
     this._currentMediaTitle = title;
+  }
+
+  @mutation
+  protected _setTimeUntilRefresh(time: number): void {
+    this._timeUntilRefresh = time;
+  }
+
+  @mutation
+  protected _setRefreshTimer(timeoutId: NodeJS.Timeout | null): void {
+    this._refreshTimer = timeoutId;
   }
 }
 

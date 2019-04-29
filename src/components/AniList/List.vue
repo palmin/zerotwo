@@ -12,45 +12,47 @@
         </div>
       </v-container>
     </v-flex>
-    <v-flex d-flex xs3 v-for="item in listData" :key="item.id" v-if="!isLoading">
-      <v-card class="ma-1">
-        <v-layout row wrap>
-          <v-flex xs12>
-            <ListImage :imageLink="item.imageLink" :aniListId="item.aniListId" :name="item.name" />
-          </v-flex>
-          <v-flex xs12>
-            <v-container fluid class="pa-3">
-              <v-layout row wrap>
-                <v-flex xs4>
-                  <ProgressCircle
-                    :entryId="item.id"
-                    :status="status"
-                    :progressPercentage="item.progressPercentage"
-                    :currentProgress="item.currentProgress"
-                    :episodeAmount="item.episodeAmount"
-                    @increase="increaseCurrentEpisodeProgress" />
-                </v-flex>
+    <template v-if="!isLoading">
+      <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
+        <v-card class="ma-1">
+          <v-layout row wrap>
+            <v-flex xs12>
+              <ListImage :imageLink="item.imageLink" :aniListId="item.aniListId" :name="item.name" />
+            </v-flex>
+            <v-flex xs12>
+              <v-container fluid class="pa-3">
+                <v-layout row wrap>
+                  <v-flex xs4>
+                    <ProgressCircle
+                      :entryId="item.id"
+                      :status="status"
+                      :progressPercentage="item.progressPercentage"
+                      :currentProgress="item.currentProgress"
+                      :episodeAmount="item.episodeAmount"
+                      @increase="increaseCurrentEpisodeProgress" />
+                  </v-flex>
 
-                <v-flex xs8>
-                  <v-layout align-center justify-end row wrap>
-                    <v-flex xs12>
-                      <EpisodeState :status="item.status" :nextEpisode="item.nextEpisode" />
-                    </v-flex>
-                    <v-flex xs12 v-if="item.missingEpisodes">
-                      <MissingEpisodes :missingEpisodes="item.missingEpisodes" />
-                    </v-flex>
-                  </v-layout>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-flex>
-        </v-layout>
-        <v-card-actions>
-          <AdultToolTip v-if="item.forAdults" />
-          <StarRating :score="item.score" :ratingStarAmount="ratingStarAmount" :scoreStars="item.scoreStars" />
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+                  <v-flex xs8>
+                    <v-layout align-center justify-end row wrap>
+                      <v-flex xs12>
+                        <EpisodeState :status="item.status" :nextEpisode="item.nextEpisode" />
+                      </v-flex>
+                      <v-flex xs12 v-if="item.missingEpisodes">
+                        <MissingEpisodes :missingEpisodes="item.missingEpisodes" />
+                      </v-flex>
+                    </v-layout>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-flex>
+          </v-layout>
+          <v-card-actions>
+            <AdultToolTip v-if="item.forAdults" />
+            <StarRating :score="item.score" :ratingStarAmount="ratingStarAmount" :scoreStars="item.scoreStars" />
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </template>
     <v-snackbar v-model="isSnackbarVisible" top :color="snackbarColor" :timeout="3500">{{ snackbarText }}</v-snackbar>
   </v-layout>
 </template>

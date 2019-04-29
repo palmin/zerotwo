@@ -81,13 +81,22 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
-          <v-btn flat icon v-on="{ ...toolTip }" @click="refreshData">
-            <v-progress-circular :rotate="-90" :width="2" color="success" :value="100">
+          <v-btn flat icon v-on="{ ...toolTip }" @click="() => {}" v-if="isSearchablePage">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $t('system.actions.search') }}</span>
+      </v-tooltip>
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on: toolTip }">
+          <v-btn flat icon v-on="{ ...toolTip }" @click="refreshData" v-if="isAuthenticated">
+            <v-progress-circular :rotate="-90" :width="2" color="success" :value="timeUntilRefreshPercentage">
               <v-icon style="vertical-align: text-top" size="18" color="white">mdi-sync {{ isLoading ? 'mdi-spin' : '' }}</v-icon>
             </v-progress-circular>
           </v-btn>
         </template>
-        <span>Test</span>
+        <span>({{ timeUntilRefresh }})</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -104,6 +113,7 @@
 </template>
 
 <script lang="ts">
+import moment from 'moment';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { RawLocation } from 'vue-router';
 
@@ -129,6 +139,10 @@ export default class Navigation extends Vue {
 
   private get isSortingPage(): boolean {
     return this.$route.meta && this.$route.meta.sortingPage;
+  }
+
+  private get isSearchablePage(): boolean {
+    return this.$route.meta && this.$route.meta.searchablePage;
   }
 
   private get isMediaPage(): boolean {
@@ -163,6 +177,19 @@ export default class Navigation extends Vue {
     return currentRoute.startsWith('/aniList');
   }
 
+  private get timeUntilRefresh(): string {
+    const time = aniListStore.timeUntilRefresh * 1000;
+
+    return moment(time).format('mm:ss');
+  }
+
+  private get timeUntilRefreshPercentage(): number {
+    const fullTime = aniListStore.refreshRate * 60;
+    const currentTime = aniListStore.timeUntilRefresh;
+
+    return (currentTime / fullTime) * 100;
+  }
+
   private navigateTo(location: RawLocation) {
     this.$router.push(location);
   }
@@ -173,6 +200,7 @@ export default class Navigation extends Vue {
     // AniList
     try {
       await aniListStore.refreshAniListData();
+      await aniListStore.restartRefreshTimer();
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['navigation', 'refreshData', 'aniList'], error);
     }

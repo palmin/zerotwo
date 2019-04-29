@@ -60,9 +60,14 @@ export default class App extends Vue {
 
     if (aniListStore.isAuthenticated) {
       await aniListStore.refreshAniListData();
+      await aniListStore.restartRefreshTimer();
     }
 
     await appStore.setLoadingState(false);
+  }
+
+  private async beforeDestroy() {
+    await aniListStore.destroyRefreshTimer();
   }
 }
 </script>

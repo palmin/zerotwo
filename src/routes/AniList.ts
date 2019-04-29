@@ -20,6 +20,7 @@ const routes: RouteConfig[] = [{
   component: AniList,
   meta: {
     refreshablePage: true,
+    searchablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.CURRENT,
@@ -31,6 +32,7 @@ const routes: RouteConfig[] = [{
   component: AniList,
   meta: {
     refreshablePage: true,
+    searchablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.REPEATING,
@@ -42,6 +44,7 @@ const routes: RouteConfig[] = [{
   component: AniList,
   meta: {
     refreshablePage: true,
+    searchablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.COMPLETED,
@@ -53,6 +56,7 @@ const routes: RouteConfig[] = [{
   component: AniList,
   meta: {
     refreshablePage: true,
+    searchablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.DROPPED,
@@ -64,6 +68,7 @@ const routes: RouteConfig[] = [{
   component: AniList,
   meta: {
     refreshablePage: true,
+    searchablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.PLANNING,
@@ -75,6 +80,7 @@ const routes: RouteConfig[] = [{
   component: AniList,
   meta: {
     refreshablePage: true,
+    searchablePage: true,
     sortingPage: true,
     routeName: 'aniList',
     status: AniListListStatus.PAUSED,
@@ -84,6 +90,7 @@ const routes: RouteConfig[] = [{
   name: 'SeasonPreview',
   component: SeasonPreview,
   meta: {
+    searchablePage: true,
     sortingPage: true,
     routeName: 'seasonPreview',
   },

@@ -1,4 +1,5 @@
 import AniList from '@/routes/AniList';
+import Search from '@/views/Search.vue';
 import Settings from '@/views/Settings.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
@@ -14,6 +15,15 @@ export default new Router({
       component: Settings,
       meta: {
         routeName: 'settings',
+      },
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
+      meta: {
+        searchablePage: true,
+        routeName: 'search',
       },
     },
     {

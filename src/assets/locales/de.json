@@ -10,7 +10,7 @@
       "login": "Login",
       "remove": "Entfernen",
       "save": "Speichern",
-      "search": "Suche",
+      "search": "Suchen",
       "sort": "Sortieren",
       "toPageTop": "Zum Anfang springen"
     },
@@ -57,6 +57,7 @@
     "routes": {
       "aniList": "AniList",
       "detailView": "Detail-Ansicht",
+      "search": "Suche",
       "seasonPreview": "Saison-Vorschau",
       "settings": "Einstellungen"
     },

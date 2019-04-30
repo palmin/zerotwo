@@ -57,6 +57,7 @@
     "routes": {
       "aniList": "AniList",
       "detailView": "インフォーメーション",
+      "search": "検索",
       "seasonPreview": "シーズン予告",
       "settings": "環境設定"
     },

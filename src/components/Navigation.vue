@@ -81,7 +81,7 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
-          <v-btn flat icon v-on="{ ...toolTip }" @click="() => {}" v-if="isSearchablePage">
+          <v-btn flat icon v-on="{ ...toolTip }" :to="{ name: 'Search' }" v-if="isSearchablePage">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
         </template>

@@ -57,6 +57,7 @@
     "routes": {
       "aniList": "AniList",
       "detailView": "Detail View",
+      "search": "Search",
       "seasonPreview": "Season Preview",
       "settings": "Settings"
     },

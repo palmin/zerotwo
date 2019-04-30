@@ -51,6 +51,12 @@
       "yearOnly": "YYYY",
       "dateUnknown": "Datum unbekannt"
     },
+    "errors": {
+      "updateFailed": {
+        "title": "Synchronisation fehlgeschlagen",
+        "text": "Die geplante Änderung konnte nicht synchronisiert werden! Bitte überprüfe deine Internetverbindung und die Erreichbarkeit von AniList."
+      }
+    },
     "modules": {
       "aniList": "AniList"
     },

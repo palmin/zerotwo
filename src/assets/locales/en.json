@@ -51,6 +51,12 @@
       "yearOnly": "YYYY",
       "dateUnknown": "Date unknown"
     },
+    "errors": {
+      "updateFailed": {
+        "title": "Update failed",
+        "text": "The committed update could not be synchronized! Check AniList availability or the internet connection!"
+      }
+    },
     "modules": {
       "aniList": "AniList"
     },

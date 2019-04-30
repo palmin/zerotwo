@@ -51,6 +51,12 @@
       "yearOnly": "YYYY年",
       "dateUnknown": "不明"
     },
+    "errors": {
+      "updateFailed": {
+        "title": "更新失敗",
+        "text": "変更は更新出来ませんでした！AniListや自分のインターネットへの接続をチェックして下さい。"
+      }
+    },
     "modules": {
       "aniList": "AniList"
     },

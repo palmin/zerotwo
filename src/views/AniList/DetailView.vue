@@ -212,7 +212,7 @@
                         <v-flex d-flex>
                           <v-layout row>
                             <v-flex d-flex>
-                              <v-btn flat color="success">
+                              <v-btn flat color="success" @click="saveChanges">
                                 <v-icon left>mdi-content-save</v-icon>
                                 {{ $t('system.actions.save') }}
                               </v-btn>
@@ -384,6 +384,7 @@ export default class DetailView extends Vue {
       coverImage: media.coverImage.extraLarge,
       description: media.description || this.$t('system.alerts.noDescription'),
       englishTitle: media.title.english || this.$t('system.alerts.noEnglishTitle'),
+      entryId: this.entry.id,
       episodes: media.episodes || this.$t('system.alerts.unknown'),
       genres,
       listEntry,
@@ -482,6 +483,27 @@ export default class DetailView extends Vue {
 
   private openInBrowser(link: string) {
     shell.openExternal(link);
+  }
+
+  private async saveChanges(): Promise<void> {
+    await appStore.setLoadingState(true);
+    if (this.item && this.item.listEntry) {
+      const status = this.item.listEntry.status;
+      const progress = this.item.listEntry.progress;
+      const score = this.item.listEntry.score;
+      const entryId = this.item.entryId;
+
+      try {
+        await API.updateEntry(entryId, progress, score, status);
+      } catch (error) {
+        this.$notify({
+          title: this.$t('system.errors.updateFailed.title') as string,
+          text: this.$t('system.errors.updateFailed.text') as string,
+          type: 'error',
+        });
+      }
+    }
+    await appStore.setLoadingState(false);
   }
 
   private async created() {

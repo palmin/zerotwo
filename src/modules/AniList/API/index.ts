@@ -5,6 +5,7 @@ import { omit } from 'lodash';
 import Log from '@/log';
 import { aniListStore } from '@/store';
 import {
+  AniListListStatus,
   AniListSeason,
   AniListType,
   IAniListActivity,
@@ -36,6 +37,7 @@ import getUserList from './queries/getUserList.graphql';
 
 // Mutations
 import setEpisodeProgress from './mutations/setEpisodeProgress.graphql';
+import updateEntry from './mutations/updateEntry.graphql';
 
 /**
  * @class AniListAPI
@@ -172,6 +174,26 @@ export default class AniListAPI {
   }
 
   // Mutations
+
+  // tslint:disable-next-line max-line-length
+  public static async updateEntry(entryId: number, progress: number, score: number, status: AniListListStatus): Promise<void> {
+    try {
+      const { accessToken } = aniListStore.session;
+      const headers = { Authorization: `Bearer ${accessToken}` };
+
+      await axios.post('/', {
+        query: updateEntry,
+        variables: {
+          entryId,
+          progress,
+          score,
+          status,
+        },
+      }, { headers });
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'updateEntry'], error);
+    }
+  }
 
   public static async setEntryProgress(entryId: number, progress: number): Promise<void> {
     try {

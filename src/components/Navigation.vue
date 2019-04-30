@@ -46,7 +46,7 @@
         <v-progress-circular size="16" width="2" indeterminate></v-progress-circular>
       </v-btn>
 
-      <v-btn flat icon v-if="isMediaPage || isSettingsPage" @click="$router.back()">
+      <v-btn flat icon v-if="isMediaPage || isSettingsPage" @click="navigateBack">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
@@ -115,7 +115,7 @@
 <script lang="ts">
 import moment from 'moment';
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { RawLocation } from 'vue-router';
+import { RawLocation, Route } from 'vue-router';
 
 // Custom Components
 import Log from '@/log';
@@ -124,6 +124,7 @@ import { aniListStore, appStore } from '@/store';
 @Component
 export default class Navigation extends Vue {
   private sortMenu: boolean = false;
+  private lastRoutes: Route[] = [];
 
   private menuItems: Array<{ title: string, location: RawLocation }> = [{
     title: 'system.modules.aniList',
@@ -210,6 +211,23 @@ export default class Navigation extends Vue {
 
   private jumpToTop(): void {
     window.scrollTo(0, 0);
+  }
+
+  private navigateBack(): void {
+    if (this.lastRoutes && this.lastRoutes.length) {
+      const lastRoute = this.lastRoutes.pop() as Route;
+      this.$router.push(lastRoute);
+
+      // Due to hitting back actually uses "push"
+      // Our current route is being saved in our storage.
+      // We have to get rid of this entry so we get in no loop.
+      this.lastRoutes.pop();
+    }
+  }
+
+  @Watch('$route', { deep: true })
+  private onRouteUpdate(route: Route, oldRoute: Route) {
+    this.lastRoutes.push(oldRoute);
   }
 }
 </script>

@@ -35,7 +35,7 @@
                   <v-flex xs8>
                     <v-layout align-center justify-end row wrap>
                       <v-flex xs12>
-                        <EpisodeState :status="item.status" :nextEpisode="item.nextEpisode" />
+                        <EpisodeState :status="item.mediaStatus" :nextEpisode="item.nextEpisode" />
                       </v-flex>
                       <v-flex xs12>
                         <MissingEpisodes :nextAiringEpisode="item.nextAiringEpisode" :currentProgress="item.currentProgress" />
@@ -85,9 +85,10 @@ import StarRating from './ListElements/StarRating.vue';
   },
 })
 export default class List extends Vue {
-  private listData: any[] = [];
+  // private listData: any[] = [];
   // TODO: Make this a non-static number via Store
   private startAmount: number = 20;
+  private currentIndex: number = 0;
   // Contains the Timer ID
   private updateTimer: NodeJS.Timeout | null = null;
   private updatePayload: any[] = [];
@@ -109,82 +110,135 @@ export default class List extends Vue {
     return appStore.isLoading;
   }
 
-  private async created() {
-    const entries = await this.getData(0);
-    if (entries.length) {
-      this.listData = entries;
-    }
-
-    // Infinite Scrolling
-    window.onscroll = async () => {
-      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
-      if (bottomOfWindow) {
-        const newEntries = await this.getData(this.listData.length);
-        if (newEntries.length) {
-          this.listData = [...this.listData, ...newEntries];
-        }
-      }
-    };
-  }
-
-  private async prepareEntry(entry: IAniListEntry) {
-    const { media } = entry;
-    const scoreStars = this.getScoreStarValue(entry.score);
-    const imageLink = media.coverImage.extraLarge;
-
-    const nextEpisode = media.nextAiringEpisode
-      ? this.$root.$t(
-        'system.aniList.nextAiringEpisode',
-        [
-          media.nextAiringEpisode.episode,
-          moment(media.nextAiringEpisode.airingAt, 'X').fromNow(),
-        ],
-      )
-      : null;
-    const progressPercentage = this.calculateProgressPercentage(entry);
-    const missingEpisodes = this.calculateMissingEpisodes(entry);
-
-    return {
-      aniListId: media.id,
-      currentProgress: entry.progress,
-      entry,
-      episodeAmount: media.episodes || '?',
-      forAdults: media.isAdult,
-      id: entry.id,
-      imageLink,
-      missingEpisodes,
-      name: media.title.userPreferred,
-      nextAiringEpisode: media.nextAiringEpisode,
-      nextEpisode,
-      progressPercentage,
-      score: entry.score,
-      scoreStars,
-      status: media.status,
-    };
-  }
-
-  private async getData(startValue: number): Promise<any> {
+  private get listData() {
     if (!aniListStore.aniListData.lists.length) {
       return [];
     }
 
     const listElement = aniListStore.aniListData.lists.find((list) => list.status === this.status);
 
-    // If we can't find our list, just return empty.
     if (!listElement) {
       return [];
     }
 
-    let newEntries = await Promise.all(listElement.entries.map((entry) => this.prepareEntry(entry)));
+    let newEntries = listElement.entries.map((entry) => {
+      const { media } = entry;
+      const scoreStars = this.getScoreStarValue(entry.score);
+      const imageLink = media.coverImage.extraLarge;
+
+      const nextEpisode = media.nextAiringEpisode
+        ? this.$root.$t(
+          'system.aniList.nextAiringEpisode',
+          [
+            media.nextAiringEpisode.episode,
+            moment(media.nextAiringEpisode.airingAt, 'X').fromNow(),
+          ],
+        )
+        : null;
+      const progressPercentage = this.calculateProgressPercentage(entry);
+      const missingEpisodes = this.calculateMissingEpisodes(entry);
+
+      return {
+        aniListId: media.id,
+        currentProgress: entry.progress,
+        entry,
+        episodeAmount: media.episodes || '?',
+        forAdults: media.isAdult,
+        id: entry.id,
+        imageLink,
+        mediaStatus: media.status,
+        missingEpisodes,
+        name: media.title.userPreferred,
+        nextAiringEpisode: media.nextAiringEpisode,
+        nextEpisode,
+        progressPercentage,
+        score: entry.score,
+        scoreStars,
+        status: entry.status,
+      };
+    });
 
     newEntries = chain(newEntries)
       .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
-      .slice(startValue, this.startAmount + startValue)
+      .slice(0, this.startAmount + this.currentIndex)
       .value();
 
     return newEntries;
   }
+
+  private async created() {
+    // const entries = await this.getData(0);
+    // if (entries.length) {
+    //   this.listData = entries;
+    // }
+
+    // Infinite Scrolling
+    window.onscroll = async () => {
+      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        this.currentIndex += this.startAmount;
+      }
+    };
+  }
+
+  // private async prepareEntry(entry: IAniListEntry) {
+  //   const { media } = entry;
+  //   const scoreStars = this.getScoreStarValue(entry.score);
+  //   const imageLink = media.coverImage.extraLarge;
+
+  //   const nextEpisode = media.nextAiringEpisode
+  //     ? this.$root.$t(
+  //       'system.aniList.nextAiringEpisode',
+  //       [
+  //         media.nextAiringEpisode.episode,
+  //         moment(media.nextAiringEpisode.airingAt, 'X').fromNow(),
+  //       ],
+  //     )
+  //     : null;
+  //   const progressPercentage = this.calculateProgressPercentage(entry);
+  //   const missingEpisodes = this.calculateMissingEpisodes(entry);
+
+  //   return {
+  //     aniListId: media.id,
+  //     currentProgress: entry.progress,
+  //     entry,
+  //     episodeAmount: media.episodes || '?',
+  //     forAdults: media.isAdult,
+  //     id: entry.id,
+  //     imageLink,
+  //     missingEpisodes,
+  //     name: media.title.userPreferred,
+  //     nextAiringEpisode: media.nextAiringEpisode,
+  //     nextEpisode,
+  //     progressPercentage,
+  //     score: entry.score,
+  //     scoreStars,
+  //     status: media.status,
+  //   };
+  // }
+
+  // private async getData(startValue: number): Promise<any> {
+  //   if (!aniListStore.aniListData.lists.length) {
+  //     return [];
+  //   }
+
+  //   const listElement = aniListStore.aniListData.lists.find((list) => list.status === this.status);
+
+  //   // If we can't find our list, just return empty.
+  //   if (!listElement) {
+  //     return [];
+  //   }
+
+  //   let newEntries = await Promise.all(listElement.entries.map((entry) => this.prepareEntry(entry)));
+
+  //   newEntries = chain(newEntries)
+  //     .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
+  //     .slice(startValue, this.startAmount + startValue)
+  //     .value();
+
+  //   return newEntries;
+  // }
 
   private getScoreStarValue(score: number): number {
     if (!score) {
@@ -329,12 +383,16 @@ export default class List extends Vue {
 
       if (status === AniListListStatus.COMPLETED) {
         await API.setEntryCompleted(id, progress);
+        await appStore.setLoadingState(true);
+        await aniListStore.refreshAniListData();
+        await appStore.setLoadingState(false);
         this.$notify({
           title: this.$t('system.aniList.notification.title') as string,
           text: this.$t('system.aniList.notification.completeUpdateText', [title, progress]) as string,
         });
       } else {
         await API.setEntryProgress(id, progress);
+        await aniListStore.refreshAniListData();
         this.$notify({
           title: this.$t('system.aniList.notification.title') as string,
           text: this.$t('system.aniList.notification.simpleUpdateText', [title, progress]) as string,

@@ -1,5 +1,5 @@
 <template>
-  <v-progress-circular class="episodeProgress" color="success" :value="progressPercentage" size="75" rotate="-90">
+  <v-progress-circular class="episodeProgress" color="success" :value="progressPercentage" :indeterminate="indeterminate" size="75" rotate="-90">
     <div class="episodeCount">{{ currentProgress }}</div>
     <div class="episodeDivider"></div>
     <div class="episodeAmount" :class="{ complete: completedList }">{{ episodeAmount }}</div>
@@ -9,32 +9,42 @@
 
 <script lang="ts">
 import { AniListListStatus } from '@/modules/AniList/types';
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
+import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator';
+
+type AlphaNumerical = number | string;
 
 @Component
 export default class ProgressCircle extends Vue {
+  private indeterminate: boolean = false;
+
+  private get completedList(): boolean {
+    return this.status === AniListListStatus.COMPLETED;
+  }
+
   @Prop(Number)
   private progressPercentage!: number;
 
   @Prop(Number)
   private currentProgress!: number;
 
-  @Prop([Number, String])
-  private episodeAmount!: number | string;
+  @Prop(Number)
+  private entryId!: number;
 
   @Prop(String)
   private status!: string;
 
-  @Prop(Number)
-  private entryId!: number;
-
-  private get completedList(): boolean {
-    return this.status === AniListListStatus.COMPLETED;
-  }
+  @Prop([Number, String])
+  private episodeAmount!: AlphaNumerical;
 
   @Emit('increase')
   private increaseEpisodeCounter() {
+    this.indeterminate = true;
     return this.entryId;
+  }
+
+  @Watch('currentProgress')
+  private onCurrentProgressChange() {
+    this.indeterminate = false;
   }
 }
 </script>

@@ -202,6 +202,7 @@ export default class Navigation extends Vue {
     try {
       await aniListStore.refreshAniListData();
       await aniListStore.restartRefreshTimer();
+      this.$forceUpdate();
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['navigation', 'refreshData', 'aniList'], error);
     }

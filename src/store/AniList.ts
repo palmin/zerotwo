@@ -25,7 +25,7 @@ export class AniListStore extends VuexModule {
   private _aniListData: IAniListMediaListCollection = { lists: [] };
   /**
    * @private
-   * @var {number} _refreshRate contains the amount of numbers until the app refreshes the user's lists
+   * @var {number} _refreshRate contains the amount of minutes until the app refreshes the user's lists
    */
   private _refreshRate: number = 15;
   /**

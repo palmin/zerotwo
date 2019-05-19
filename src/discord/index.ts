@@ -52,6 +52,7 @@ export const startRPC = (): void => {
   });
 };
 
-export const stopRPC = (): void => {
+export const stopRPC = async (): Promise<void> => {
+  await rpc.clearActivity();
   rpc.logoff();
 };

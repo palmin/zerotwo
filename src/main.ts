@@ -4,7 +4,7 @@ import Vuetify from 'vuetify';
 
 // Components
 import App from './App.vue';
-import { mediaDetection } from './discord';
+import { mediaDetection, startRPC } from './discord';
 import { i18n } from './i18n';
 import router from './router';
 import { store } from './store';
@@ -24,6 +24,7 @@ Vue.use(Notification);
 Vue.config.productionTip = false;
 
 mediaDetection();
+startRPC();
 
 new Vue({
   router,

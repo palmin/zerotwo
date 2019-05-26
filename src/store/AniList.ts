@@ -150,7 +150,7 @@ export class AniListStore extends VuexModule {
       const user = await API.getUser(accessToken);
 
       const userName = (user as IAniListUser).name;
-      const userList = await API.getUserList(userName, AniListType.ANIME);
+      const userList = await API.getUserList(userName, AniListType.ANIME, accessToken);
 
       const userId = (user as IAniListUser).id;
       const latestActivities = await API.getLatestActivities(userId, 0, 10);
@@ -162,6 +162,25 @@ export class AniListStore extends VuexModule {
       }
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'store', 'refreshAniListData'], error);
+    }
+  }
+
+  @action()
+  public async refreshLists(): Promise<void> {
+    if (!this.session.accessToken) {
+      return;
+    }
+
+    try {
+      const { accessToken, user } = this.session;
+      const userName = (user as IAniListUser).name;
+      const userList = await API.getUserList(userName, AniListType.ANIME, accessToken);
+
+      if (userList) {
+        this._setAniListData(userList);
+      }
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'store', 'refreshLists'], error);
     }
   }
 

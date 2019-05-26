@@ -51,15 +51,17 @@ export default class AniListAPI {
    * @param {AniListType} type contains the type of media
    * @returns {Promise<IAniListMediaListCollection | void>} User's Media list collection or nothing
    */
-  public static async getUserList(userName: string, type: AniListType): Promise<IAniListMediaListCollection | void> {
+  // tslint:disable-next-line max-line-length
+  public static async getUserList(userName: string, type: AniListType, accessToken: string): Promise<IAniListMediaListCollection | void> {
     try {
+      const headers = { Authorization: `Bearer ${accessToken}` };
       const response = await axios.post('/', {
         query: getUserList,
         variables: {
           userName,
           type,
         },
-      });
+      }, { headers });
 
       // response.data is part of the axios response object.
       // the last data is part of the response of AniList

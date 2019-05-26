@@ -384,7 +384,7 @@ export default class List extends Vue {
       if (status === AniListListStatus.COMPLETED) {
         await API.setEntryCompleted(id, progress);
         await appStore.setLoadingState(true);
-        await aniListStore.refreshAniListData();
+        await aniListStore.refreshLists();
         await appStore.setLoadingState(false);
         this.$notify({
           title: this.$t('system.aniList.notification.title') as string,
@@ -392,7 +392,7 @@ export default class List extends Vue {
         });
       } else {
         await API.setEntryProgress(id, progress);
-        await aniListStore.refreshAniListData();
+        await aniListStore.refreshLists();
         this.$notify({
           title: this.$t('system.aniList.notification.title') as string,
           text: this.$t('system.aniList.notification.simpleUpdateText', [title, progress]) as string,

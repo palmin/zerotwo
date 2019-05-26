@@ -107,6 +107,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 // Custom Components
 import { IAniListUser } from '@/modules/AniList/types';
+import { version } from '../../package.json';
 import { aniListStore, appStore } from '../store';
 
 interface ISettingTab {
@@ -198,7 +199,7 @@ export default class Settings extends Vue {
   }
 
   private get currentAppVersion(): string {
-    return appStore.version;
+    return version;
   }
 
   private get darkMode(): boolean {

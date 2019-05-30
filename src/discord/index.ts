@@ -38,57 +38,62 @@ export const mediaDetection = (): Promise<void> => {
 };
 
 export const refreshRPC = async (): Promise<void> => {
-  await mediaDetection();
+  try {
+    await mediaDetection();
 
-  if (errors.length) {
-    Log.log(Log.getErrorSeverity(), ['discord', 'mediaDetection'], errors.join('; '));
+    if (errors.length) {
+      Log.log(Log.getErrorSeverity(), ['discord', 'mediaDetection'], errors.join('; '));
+    }
+
+    // Most likely, openWindows will at least contain ['MainWindowTitle', '-----------']
+    // which will result in an empty result.
+    if (openWindows.length < 3) {
+      return;
+    }
+
+    // Removes the first two elements.
+    openWindows.splice(0, 2);
+
+    const validWindows = openWindows.filter((openWindow) => {
+      const name = (openWindow.split(' - ').pop() as string).trim();
+      return validApps.find((validApp) =>
+        validApp.toLowerCase() === name.toLowerCase());
+    });
+
+    if (!validWindows.length) {
+      return;
+    }
+
+    const validWindow: string = validWindows.shift() as string;
+    const windowNameParts = validWindow.split(' - ');
+    const programName = windowNameParts.pop();
+    const openedFilenameParts = windowNameParts.join(' - ').split('.');
+    const extension = openedFilenameParts.pop();
+    let openedFilename = openedFilenameParts.join('.');
+
+    // This pattern ignores all unnecessary data
+    const ignoringPattern = /(\[[\w+-_]+\])/gi;
+    // const episodePattern = /([0-9]+)/gi;
+
+    // Remove ignore patterns
+    openedFilename = openedFilename.replace(ignoringPattern, '').trim();
+    // const episode = openedFilename.match(episodePattern);
+
+    rpc.setActivity({
+      details: `Watching ${openedFilename}`,
+      state: `using ${programName}`,
+      startTimestamp: Math.floor(Date.now() / 1000),
+      endTimestamp: undefined,
+      largeImageKey: 'zerotwo',
+      smallImageKey: 'zerotwo',
+      largeImageText: `Watching ${openedFilename}`,
+      smallImageText: programName as string,
+      instance: false,
+    });
+  } catch (error) {
+    // not on windows
+    stopRPC();
   }
-
-  // Most likely, openWindows will at least contain ['MainWindowTitle', '-----------']
-  // which will result in an empty result.
-  if (openWindows.length < 3) {
-    return;
-  }
-
-  // Removes the first two elements.
-  openWindows.splice(0, 2);
-
-  const validWindows = openWindows.filter((openWindow) => {
-    const name = (openWindow.split(' - ').pop() as string).trim();
-    return validApps.find((validApp) =>
-      validApp.toLowerCase() === name.toLowerCase());
-  });
-
-  if (!validWindows.length) {
-    return;
-  }
-
-  const validWindow: string = validWindows.shift() as string;
-  const windowNameParts = validWindow.split(' - ');
-  const programName = windowNameParts.pop();
-  const openedFilenameParts = windowNameParts.join(' - ').split('.');
-  const extension = openedFilenameParts.pop();
-  let openedFilename = openedFilenameParts.join('.');
-
-  // This pattern ignores all unnecessary data
-  const ignoringPattern = /(\[[\w+-_]+\])/gi;
-  // const episodePattern = /([0-9]+)/gi;
-
-  // Remove ignore patterns
-  openedFilename = openedFilename.replace(ignoringPattern, '').trim();
-  // const episode = openedFilename.match(episodePattern);
-
-  rpc.setActivity({
-    details: `Watching ${openedFilename}`,
-    state: `using ${programName}`,
-    startTimestamp: Math.floor(Date.now() / 1000),
-    endTimestamp: undefined,
-    largeImageKey: 'zerotwo',
-    smallImageKey: 'zerotwo',
-    largeImageText: `Watching ${openedFilename}`,
-    smallImageText: programName as string,
-    instance: false,
-  });
 };
 
 export const startRPC = (): void => {

@@ -526,3 +526,17 @@ export interface IAniListSeasonPreview {
   seasonYear: number;
   media: IAniListSeasonPreviewMedia[];
 }
+
+/**
+ * This interface describes one AniList search result
+ * @interface IAniListSearchResult
+ */
+export interface IAniListSearchResult {
+  id: number;
+  title: IAniListMediaTitle;
+  averageScore: number;
+  coverImage: IAniListCoverImage;
+  episodes: number;
+  isAdult: boolean;
+  mediaListEntry: IAniListEntry;
+}

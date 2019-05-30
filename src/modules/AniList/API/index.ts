@@ -177,6 +177,7 @@ export default class AniListAPI {
     return null;
   }
 
+  // tslint:disable-next-line max-line-length
   public static async searchAnime(query: string, filters: { isAdult: boolean | null, listStatus: AniListListStatus[], genres: string[] }): Promise<IAniListSearchResult[] | null> {
     try {
       const { accessToken } = aniListStore.session;

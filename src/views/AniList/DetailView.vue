@@ -352,7 +352,13 @@ export default class DetailView extends Vue {
       airingTime = this.$t('detailView.airedOn', [startDate, endDate]) as string;
     } else if (startDate && !endDate) {
       if (startDateBeforeNow) {
-        airingTime = this.$t('detailView.airingStarts', [startDate]) as string;
+        if (media.startDate.day) {
+          airingTime = this.$t('detailView.airingStartsOnDay', [startDate]) as string;
+        } else if (media.startDate.month) {
+          airingTime = this.$t('detailView.airingStartsInMonthYear', [startDate]) as string;
+        } else {
+          airingTime = this.$t('detailView.airingStartsInYear', [startDate]) as string;
+        }
       } else {
         airingTime = this.$t('detailView.airingStartedOn', [startDate]) as string;
       }

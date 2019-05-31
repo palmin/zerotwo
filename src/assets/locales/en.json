@@ -98,7 +98,9 @@
   "detailView": {
     "airedOn": "{0} until {1}",
     "airingStartedOn": "Started on {0}",
-    "airingStarts": "Starts on {0}",
+    "airingStartsOnDay": "Starts on {0}",
+    "airingStartsInMonthYear": "Starts in {0}",
+    "airingStartsInYear": "Starts in {0}",
     "airingTime": "Airing time",
     "airingWithUnknownStart": "? - {0}",
     "description": "Description",

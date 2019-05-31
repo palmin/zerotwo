@@ -98,7 +98,9 @@
   "detailView": {
     "airedOn": "{0}～{1}",
     "airingStartedOn": "{0}に始まりました",
-    "airingStarts": "{0}に始まる",
+    "airingStartsOnDay": "{0}に始まる",
+    "airingStartsInMonthYear": "{0}に始まる",
+    "airingStartsInYear": "{0}に始まる",
     "airingTime": "最初放送",
     "airingWithUnknownStart": "？ - {0}",
     "description": "内容",

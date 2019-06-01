@@ -127,15 +127,15 @@
     "watching": "Watching"
   },
   "menu": {
-    "completed": "Completed",
-    "dropped": "Dropped",
+    "completed": "Completed ({0})",
+    "dropped": "Dropped ({0})",
     "home": "Home",
-    "paused": "Paused",
-    "planning": "Planning",
-    "repeating": "Repeating",
+    "paused": "Paused ({0})",
+    "planning": "Planning ({0})",
+    "repeating": "Repeating ({0})",
     "seasonPreview": "Season Preview",
     "settings": "Settings",
-    "watching": "Watching"
+    "watching": "Watching ({0})"
   },
   "$vuetify": {
     "noDataText": "No data"

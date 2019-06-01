@@ -19,12 +19,12 @@
         <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
 
         <template v-if="isAuthenticated">
-          <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching') }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Repeating' }">{{ $t('menu.repeating') }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Completed' }">{{ $t('menu.completed') }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Paused' }">{{ $t('menu.paused') }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Dropped' }">{{ $t('menu.dropped') }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Planning' }">{{ $t('menu.planning') }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching', [watchingAmount]) }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Repeating' }">{{ $t('menu.repeating', [repeatingAmount]) }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Completed' }">{{ $t('menu.completed', [completedAmount]) }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Paused' }">{{ $t('menu.paused', [pausedAmount]) }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Dropped' }">{{ $t('menu.dropped', [droppedAmount]) }}</v-btn>
+          <v-btn flat exact :to="{ name: 'Planning' }">{{ $t('menu.planning', [planningAmount]) }}</v-btn>
         </template>
       </v-toolbar-items>
 
@@ -81,7 +81,7 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
-          <v-btn flat icon v-on="{ ...toolTip }" :to="{ name: 'Search' }" v-if="isSearchablePage">
+          <v-btn flat icon v-on="{ ...toolTip }" :to="{ name: 'Search' }">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
         </template>
@@ -119,6 +119,7 @@ import { RawLocation, Route } from 'vue-router';
 
 // Custom Components
 import Log from '@/log';
+import { AniListListStatus } from '@/modules/AniList/types';
 import { aniListStore, appStore } from '@/store';
 
 @Component
@@ -189,6 +190,48 @@ export default class Navigation extends Vue {
     const currentTime = aniListStore.timeUntilRefresh;
 
     return (currentTime / fullTime) * 100;
+  }
+
+  private get watchingAmount(): number {
+    const status: AniListListStatus = AniListListStatus.CURRENT;
+    const element = aniListStore.aniListData.lists.find((list) => list.status === status);
+
+    return element ? element.entries.length : 0;
+  }
+
+  private get repeatingAmount(): number {
+    const status: AniListListStatus = AniListListStatus.REPEATING;
+    const element = aniListStore.aniListData.lists.find((list) => list.status === status);
+
+    return element ? element.entries.length : 0;
+  }
+
+  private get completedAmount(): number {
+    const status: AniListListStatus = AniListListStatus.COMPLETED;
+    const element = aniListStore.aniListData.lists.find((list) => list.status === status);
+
+    return element ? element.entries.length : 0;
+  }
+
+  private get pausedAmount(): number {
+    const status: AniListListStatus = AniListListStatus.PAUSED;
+    const element = aniListStore.aniListData.lists.find((list) => list.status === status);
+
+    return element ? element.entries.length : 0;
+  }
+
+  private get droppedAmount(): number {
+    const status: AniListListStatus = AniListListStatus.DROPPED;
+    const element = aniListStore.aniListData.lists.find((list) => list.status === status);
+
+    return element ? element.entries.length : 0;
+  }
+
+  private get planningAmount(): number {
+    const status: AniListListStatus = AniListListStatus.PLANNING;
+    const element = aniListStore.aniListData.lists.find((list) => list.status === status);
+
+    return element ? element.entries.length : 0;
   }
 
   private navigateTo(location: RawLocation) {

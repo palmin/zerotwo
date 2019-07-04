@@ -16,15 +16,55 @@
 
     <template v-if="!isMediaPage && isAniListRoute">
       <v-toolbar-items>
-        <v-btn flat exact :to="{ name: 'Home' }">{{ $t('menu.home') }}</v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on: toolTip }">
+            <v-btn flat exact :to="{ name: 'Home' }" v-on="{ ...toolTip }"><v-icon>mdi-home</v-icon></v-btn>
+          </template>
+          <span>{{ $t('menu.home') }}</span>
+        </v-tooltip>
 
         <template v-if="isAuthenticated">
-          <v-btn flat exact :to="{ name: 'Watching' }">{{ $t('menu.watching', [watchingAmount]) }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Repeating' }">{{ $t('menu.repeating', [repeatingAmount]) }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Completed' }">{{ $t('menu.completed', [completedAmount]) }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Paused' }">{{ $t('menu.paused', [pausedAmount]) }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Dropped' }">{{ $t('menu.dropped', [droppedAmount]) }}</v-btn>
-          <v-btn flat exact :to="{ name: 'Planning' }">{{ $t('menu.planning', [planningAmount]) }}</v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat exact :to="{ name: 'Watching' }" v-on="{ ...toolTip }"><v-icon color="green">mdi-play</v-icon> ({{ watchingAmount }})</v-btn>
+            </template>
+            <span>{{ $t('menu.watching') }}</span>
+          </v-tooltip>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat exact :to="{ name: 'Repeating' }" v-on="{ ...toolTip }"><v-icon color="green darken-3">mdi-repeat</v-icon> ({{ repeatingAmount }})</v-btn>
+            </template>
+            <span>{{ $t('menu.repeating') }}</span>
+          </v-tooltip>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat exact :to="{ name: 'Completed' }" v-on="{ ...toolTip }"><v-icon color="blue">mdi-check</v-icon> ({{ completedAmount }})</v-btn>
+            </template>
+            <span>{{ $t('menu.completed') }}</span>
+          </v-tooltip>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat exact :to="{ name: 'Paused' }" v-on="{ ...toolTip }"><v-icon color="yellow darken-2">mdi-pause</v-icon> ({{ pausedAmount }})</v-btn>
+            </template>
+            <span>{{ $t('menu.paused') }}</span>
+          </v-tooltip>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat exact :to="{ name: 'Dropped' }" v-on="{ ...toolTip }"><v-icon color="red darken-1">mdi-stop</v-icon> ({{ droppedAmount }})</v-btn>
+            </template>
+            <span>{{ $t('menu.dropped') }}</span>
+          </v-tooltip>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: toolTip }">
+              <v-btn flat exact :to="{ name: 'Planning' }" v-on="{ ...toolTip }"><v-icon color="white darken-4">mdi-playlist-plus</v-icon> ({{ planningAmount }})</v-btn>
+            </template>
+            <span>{{ $t('menu.planning') }}</span>
+          </v-tooltip>
         </template>
       </v-toolbar-items>
 

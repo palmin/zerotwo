@@ -35,19 +35,53 @@
           </v-flex>
 
           <v-flex xs9>
-            <v-container fluid fill-height>
+            <v-container fluid fill-height grid-list-md>
               <v-layout row wrap>
                 <v-flex xs12>
                   <v-text-field v-model="searchInput" @keyup.enter="search" label="Search Query" prepend-icon="mdi-magnify"></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 class="mb-2" v-for="result in searchResults" :key="result.id">
-                  <v-layout row>
-                    <v-flex xs1>
+                  <v-layout d-flex row>
+                    <v-flex xs2>
                       <v-img :src="result.coverImage.extraLarge"></v-img>
                     </v-flex>
-                    <v-flex xs11>
-                      <h3 class="headline">{{ result.title.romaji }}</h3>
+                    <v-flex xs10>
+                      <v-layout row wrap>
+                        <v-flex xs10>
+                          <h3 class="title">{{ result.title.romaji }}</h3>
+                          <h3 class="subheading">{{ result.title.native }}</h3>
+                        </v-flex>
+                        <v-flex xs2>
+                          <h3 v-if="!result.mediaListEntry">{{ result.episodes }} episodes</h3>
+                          <h3 v-else>{{ result.mediaListEntry.progress }} / {{ result.episodes || '?' }}</h3>
+
+                          <div>
+                            <template v-if="result.mediaListEntry">
+                              <v-icon color="green">mdi-account</v-icon> {{ result.mediaListEntry.score }}
+                            </template>
+                            <v-icon color="yellow lighten-1">mdi-account-group</v-icon> {{ result.averageScore || 'n.a.' }}
+                          </div>
+                        </v-flex>
+
+                        <!-- <v-flex xs2 offset-xs10 align-center="">
+                          <template v-if="result.mediaListEntry">
+                            <v-icon color="green">mdi-account</v-icon> {{ result.mediaListEntry.score }}
+                          </template>
+
+                          <v-icon small color="yellow lighten-1">mdi-star</v-icon>
+
+                          <v-icon>mdi-account-group</v-icon> {{ result.averageScore }}
+                        </v-flex> -->
+
+                        <!-- <v-flex xs10>
+                          <h3>{{ result.title.native }}</h3>
+                        </v-flex>
+
+                        <v-flex xs12>
+                          <h3>{{ result.title.english }}</h3>
+                        </v-flex> -->
+                      </v-layout>
                     </v-flex>
                   </v-layout>
                 </v-flex>

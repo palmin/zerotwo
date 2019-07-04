@@ -127,15 +127,15 @@
     "watching": "Laufend"
   },
   "menu": {
-    "completed": "Abgeschlossen ({0})",
-    "dropped": "Abgebrochen ({0})",
+    "completed": "Abgeschlossen",
+    "dropped": "Abgebrochen",
     "home": "Home",
-    "paused": "Pausiert ({0})",
-    "planning": "Geplant ({0})",
-    "repeating": "Wiederholend ({0})",
+    "paused": "Pausiert",
+    "planning": "Geplant",
+    "repeating": "Wiederholend",
     "seasonPreview": "Saison-Vorschau",
     "settings": "Einstellungen",
-    "watching": "Laufend ({0})"
+    "watching": "Laufend"
   },
   "$vuetify": {
     "noDataText": "Keine Daten"

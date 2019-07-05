@@ -15,6 +15,7 @@ query searchAnime({0}) {
       episodes
       isAdult
       mediaListEntry {
+        id
         status
         score
         progress

@@ -3,21 +3,22 @@
     <v-card>
       <v-card-text>
         <v-layout row wrap>
-          <v-flex xs3>
-            <v-container fluid>
+          <v-flex xs12>
+            <v-container fluid fill-height grid-list-md>
               <v-layout row wrap>
-                <v-flex xs12>
-                  <h3 class="headline">Filters</h3>
+                <v-flex xs6>
+                  <v-text-field v-model="searchInput" @keyup.enter="search" label="Search Query" prepend-icon="mdi-magnify"></v-text-field>
                 </v-flex>
-                <v-flex xs12>
+
+                <v-flex xs2>
                   <v-select v-model="adultContentValue" :items="adultContent" label="Adult content" hint="Keep clear to search for both adult content and non-adult content." persistent-hint clearable></v-select>
                 </v-flex>
 
-                <v-flex xs12>
+                <v-flex xs2>
                   <v-select label="In List" v-model="listValues" :items="listStatus" hint="Keep clear to also search for media that is not yet in your list" clearable persistent-hint multiple chips small-chips></v-select>
                 </v-flex>
 
-                <v-flex xs12>
+                <v-flex xs2>
                   <v-combobox v-model="genreValues" :items="genres" clearable :search-input.sync="genreSearch" hide-selected hint="Max. 3" label="Genres" multiple persistent-hint small-chips>
                     <template v-slot:no-data>
                       <v-list-tile>
@@ -34,59 +35,59 @@
             </v-container>
           </v-flex>
 
-          <v-flex xs9>
-            <v-container fluid fill-height grid-list-md>
+          <v-flex d-flex xs3 lg3 xl2 v-for="result in searchResults" :key="result.id">
+            <v-card class="ma-1">
               <v-layout row wrap>
                 <v-flex xs12>
-                  <v-text-field v-model="searchInput" @keyup.enter="search" label="Search Query" prepend-icon="mdi-magnify"></v-text-field>
+                  <ListImage :imageLink="result.coverImage.extraLarge" :aniListId="result.id" :name="result.title.romaji" />
                 </v-flex>
-
-                <v-flex xs12 class="mb-2" v-for="result in searchResults" :key="result.id">
-                  <v-layout d-flex row>
-                    <v-flex xs2>
-                      <v-img :src="result.coverImage.extraLarge"></v-img>
-                    </v-flex>
-                    <v-flex xs10>
-                      <v-layout row wrap>
-                        <v-flex xs10>
-                          <h3 class="title">{{ result.title.romaji }}</h3>
-                          <h3 class="subheading">{{ result.title.native }}</h3>
-                        </v-flex>
-                        <v-flex xs2>
-                          <h3 v-if="!result.mediaListEntry">{{ result.episodes }} episodes</h3>
-                          <h3 v-else>{{ result.mediaListEntry.progress }} / {{ result.episodes || '?' }}</h3>
-
-                          <div>
-                            <template v-if="result.mediaListEntry">
-                              <v-icon color="green">mdi-account</v-icon> {{ result.mediaListEntry.score }}
-                            </template>
-                            <v-icon color="yellow lighten-1">mdi-account-group</v-icon> {{ result.averageScore || 'n.a.' }}
-                          </div>
-                        </v-flex>
-
-                        <!-- <v-flex xs2 offset-xs10 align-center="">
-                          <template v-if="result.mediaListEntry">
-                            <v-icon color="green">mdi-account</v-icon> {{ result.mediaListEntry.score }}
-                          </template>
-
-                          <v-icon small color="yellow lighten-1">mdi-star</v-icon>
-
-                          <v-icon>mdi-account-group</v-icon> {{ result.averageScore }}
-                        </v-flex> -->
-
-                        <!-- <v-flex xs10>
-                          <h3>{{ result.title.native }}</h3>
-                        </v-flex>
-
-                        <v-flex xs12>
-                          <h3>{{ result.title.english }}</h3>
-                        </v-flex> -->
-                      </v-layout>
-                    </v-flex>
-                  </v-layout>
+                <v-flex xs12>
+                  <v-container fluid class="pa-3">
+                    <v-layout row wrap>
+                      <v-flex xs12>
+                        <template v-if="result.mediaListEntry">
+                          <ProgressCircle
+                            :entryId="result.mediaListEntry.id"
+                            :status="result.mediaListEntry.status"
+                            :progressPercentage="0"
+                            :currentProgress="result.mediaListEntry.progress"
+                            :episodeAmount="result.episodes || '?'"
+                            @increase="() => {}" />
+                        </template>
+                        <template v-else>
+                          <ProgressCircle
+                            :entryId="0"
+                            :status="null"
+                            :progressPercentage="0"
+                            :currentProgress="0"
+                            :episodeAmount="result.episodes || '?'"
+                            @increase="() => {}" />
+                        </template>
+                      </v-flex>
+<!--
+                      <v-flex xs8>
+                        <v-layout align-center justify-end row wrap>
+                          <v-flex xs12>
+                          </v-flex>
+                          <v-flex xs12>
+                          </v-flex>
+                        </v-layout>
+                      </v-flex> -->
+                    </v-layout>
+                  </v-container>
                 </v-flex>
               </v-layout>
-            </v-container>
+              <v-card-actions>
+                <AdultToolTip v-if="result.isAdult" />
+                <v-layout align-center justify-end>
+                  <template v-if="result.mediaListEntry">
+                    <v-icon color="green" class="pr-1">mdi-account</v-icon>{{ result.mediaListEntry.score }}
+                    <v-divider vertical class="mx-2"></v-divider>
+                  </template>
+                  <v-icon color="yellow lighten-1" class="pr-1">mdi-account-group</v-icon>{{ result.averageScore || 'n.a.' }}
+                </v-layout>
+              </v-card-actions>
+            </v-card>
           </v-flex>
         </v-layout>
       </v-card-text>
@@ -95,11 +96,15 @@
 </template>
 
 <script lang="ts">
+import ListImage from '@/components/AniList/ListElements/ListImage.vue';
+import ProgressCircle from '@/components/AniList/ListElements/ProgressCircle.vue';
 import API from '@/modules/AniList/API';
 import { AniListListStatus, IAniListSearchResult } from '@/modules/AniList/types';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: { ListImage, ProgressCircle },
+})
 export default class Search extends Vue {
   private searchInput: string = '';
   private searchResults: IAniListSearchResult[] = [];

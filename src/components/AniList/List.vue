@@ -13,7 +13,7 @@
       </v-container>
     </v-flex>
     <template v-if="!isLoading">
-      <v-flex d-flex xs3 v-for="item in listData" :key="item.id">
+      <v-flex d-flex xs3 lg3 xl2 v-for="item in listData" :key="item.id">
         <v-card class="ma-1">
           <v-layout row wrap>
             <v-flex xs12>

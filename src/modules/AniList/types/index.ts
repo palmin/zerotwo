@@ -539,4 +539,5 @@ export interface IAniListSearchResult {
   episodes: number;
   isAdult: boolean;
   mediaListEntry: IAniListEntry;
+  nextAiringEpisode: IAniListNextAiringEpisode;
 }

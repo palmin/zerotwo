@@ -61,7 +61,7 @@
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on: toolTip }">
-              <v-btn flat exact :to="{ name: 'Planning' }" v-on="{ ...toolTip }"><v-icon color="white darken-4">mdi-playlist-plus</v-icon> ({{ planningAmount }})</v-btn>
+              <v-btn flat exact :to="{ name: 'Planning' }" v-on="{ ...toolTip }"><v-icon>mdi-playlist-plus</v-icon> ({{ planningAmount }})</v-btn>
             </template>
             <span>{{ $t('menu.planning') }}</span>
           </v-tooltip>
@@ -86,7 +86,7 @@
         <v-progress-circular size="16" width="2" indeterminate></v-progress-circular>
       </v-btn>
 
-      <v-btn flat icon v-if="isMediaPage || isSettingsPage" @click="navigateBack">
+      <v-btn flat icon v-if="isMediaPage || isSettingsPage || isSearchablePage" @click="navigateBack">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
@@ -132,7 +132,7 @@
         <template v-slot:activator="{ on: toolTip }">
           <v-btn flat icon v-on="{ ...toolTip }" @click="refreshData" v-if="isAuthenticated">
             <v-progress-circular :rotate="-90" :width="2" color="success" :value="timeUntilRefreshPercentage">
-              <v-icon style="vertical-align: text-top" size="18" color="white">mdi-sync {{ isLoading ? 'mdi-spin' : '' }}</v-icon>
+              <v-icon style="vertical-align: text-top" size="18">mdi-sync {{ isLoading ? 'mdi-spin' : '' }}</v-icon>
             </v-progress-circular>
           </v-btn>
         </template>

@@ -49,7 +49,7 @@
                           <ProgressCircle
                             :entryId="result.mediaListEntry.id"
                             :status="result.mediaListEntry.status"
-                            :progressPercentage="0"
+                            :progressPercentage="result.progressPercentage"
                             :currentProgress="result.mediaListEntry.progress"
                             :episodeAmount="result.episodes || '?'"
                             @increase="() => {}" />
@@ -96,6 +96,7 @@
 </template>
 
 <script lang="ts">
+import AdultToolTip from '@/components/AniList/ListElements/AdultToolTip.vue';
 import ListImage from '@/components/AniList/ListElements/ListImage.vue';
 import ProgressCircle from '@/components/AniList/ListElements/ProgressCircle.vue';
 import API from '@/modules/AniList/API';
@@ -103,7 +104,7 @@ import { AniListListStatus, IAniListSearchResult } from '@/modules/AniList/types
 import { Component, Vue, Watch } from 'vue-property-decorator';
 
 @Component({
-  components: { ListImage, ProgressCircle },
+  components: { AdultToolTip, ListImage, ProgressCircle },
 })
 export default class Search extends Vue {
   private searchInput: string = '';
@@ -159,7 +160,17 @@ export default class Search extends Vue {
     };
 
     try {
-      this.searchResults = await API.searchAnime(this.searchInput, filters) || [];
+      const results = await API.searchAnime(this.searchInput, filters) || [];
+
+      this.searchResults = results.map((result) => {
+        if (result.mediaListEntry) {
+          return Object.assign({}, {
+            progressPercentage: this.calculateProgressPercentage(result),
+          }, result);
+        }
+
+        return result;
+      });
     } catch (error) {
       this.$notify({
         type: 'error',
@@ -167,6 +178,43 @@ export default class Search extends Vue {
         text: error,
       });
     }
+  }
+
+  private calculateProgressPercentage(entry: IAniListSearchResult): number {
+    if (!entry.mediaListEntry) {
+      return 0;
+    }
+
+    const { episodes, nextAiringEpisode } = entry;
+    const currentProgress = entry.mediaListEntry.progress;
+
+    if (!currentProgress) {
+      return 0;
+    }
+
+    // Check if max episode amount is known
+    if (episodes) {
+      return currentProgress / episodes * 100;
+    }
+
+    // We don't know the exact amount of episodes
+    // But we might know how many episodes have been aired so far
+    // so we can calculate the percentage of the currently available episodes
+    // and then add some buffer
+    if (nextAiringEpisode && nextAiringEpisode.episode) {
+      // We have to substract one here as that episode isn't aired yet
+      const episode = nextAiringEpisode.episode - 1 > 0
+        ? nextAiringEpisode.episode - 1
+        : 1;
+
+      // We choose only 80 percent here, as we are unaware of the episode amount
+      return currentProgress / episode * 80;
+    }
+
+    // Just return 75% if we have a non-zero progress but
+    // neither through the next airing episode nor through the episode amount
+    // we can determine our status.
+    return 75;
   }
 
   @Watch('genreValues')

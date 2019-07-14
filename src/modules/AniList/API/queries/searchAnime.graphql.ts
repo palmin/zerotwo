@@ -13,6 +13,9 @@ query searchAnime({0}) {
         extraLarge
       }
       episodes
+      nextAiringEpisode {
+        episode
+      }
       isAdult
       mediaListEntry {
         id

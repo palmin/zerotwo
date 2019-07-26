@@ -21,13 +21,13 @@
                 <v-flex xs2>
                   <v-combobox v-model="genreValues" :items="genres" clearable :search-input.sync="genreSearch" hide-selected hint="Max. 3" label="Genres" multiple persistent-hint small-chips>
                     <template v-slot:no-data>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>
                             No genre matching "<strong>{{ genreSearch }}</strong>". Press <kbd>enter</kbd> to create it.
-                          </v-list-tile-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                          </v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
                     </template>
                   </v-combobox>
                 </v-flex>
@@ -42,7 +42,7 @@
                   <ListImage :imageLink="result.coverImage.extraLarge" :aniListId="result.id" :name="result.title.romaji" />
                 </v-flex>
                 <v-flex xs12>
-                  <v-container fluid class="pa-3">
+                  <v-container fluid class="pa-4">
                     <v-layout row wrap>
                       <v-flex xs12>
                         <template v-if="result.mediaListEntry">

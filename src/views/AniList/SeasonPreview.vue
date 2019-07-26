@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-layout row wrap>
-      <v-flex d-flex xs3 v-for="item in preparedMedia" :key="item.id">
+      <v-flex d-flex xs3 lg3 xl2 v-for="item in preparedMedia" :key="item.id">
         <v-card hover class="ma-1" :to="{ name: 'DetailView', params: { id: item.id } }">
           <v-layout row wrap>
             <v-flex xs12 class="pl-1">
@@ -45,7 +45,7 @@
                   <template v-if="item.isAdult">
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-btn flat icon v-on="on">
+                        <v-btn text icon v-on="on">
                           <v-icon color="error">mdi-alert</v-icon>
                         </v-btn>
                       </template>
@@ -56,7 +56,7 @@
               </v-flex>
               <v-flex xs11>
                 <v-layout row fill-height align-end justify-end>
-                  <v-btn flat :disabled="item.isLocked">
+                  <v-btn text :disabled="item.isLocked">
                     <v-icon left color="success">mdi-library-plus</v-icon>
                     {{ $t('system.actions.addToPlanToWatch') }}
                   </v-btn>

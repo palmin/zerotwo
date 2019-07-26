@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="darkMode" id="app">
+  <v-app id="app">
     <main>
       <Navigation />
       <router-view :key="$route.path" />
@@ -45,12 +45,19 @@ export default class App extends Vue {
     moment.locale(this.$i18n.locale);
   }
 
+  @Watch('darkMode')
+  public darkModeChanged(newValue: boolean) {
+    this.$vuetify.theme.dark = newValue;
+  }
+
   private created() {
     if (!this.locale) {
       appStore.setLanguage(remote.app.getLocale());
     } else {
       this.$i18n.locale = this.locale;
     }
+
+    this.$vuetify.theme.dark = appStore.darkMode;
 
     moment.locale(this.$i18n.locale);
   }

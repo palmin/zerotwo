@@ -1,60 +1,58 @@
 <template>
-  <v-layout row wrap>
-    <v-flex xs12 v-show="isLoading" align-self-center>
-      <div class="display-3 text-xs-center ma-4">
-        {{ $t('system.actions.loading') }}
-      </div>
-    </v-flex>
-    <v-flex xs12 v-if="!listData.length && !isLoading">
-      <v-container>
-        <div class="headline text-xs-center">
-          {{ $t('$vuetify.noDataText') }}
+  <v-container fluid class="pt-0 pb-0 px-1" fill-height>
+    <v-layout wrap>
+      <v-flex xs12 v-show="isLoading" align-self-center>
+        <div class="display-3 text-center ma-6">
+          {{ $t('system.actions.loading') }}
         </div>
-      </v-container>
-    </v-flex>
-    <template v-if="!isLoading">
-      <v-flex d-flex xs3 lg3 xl2 v-for="item in listData" :key="item.id">
-        <v-card class="ma-1">
-          <v-layout row wrap>
-            <v-flex xs12>
-              <ListImage :imageLink="item.imageLink" :aniListId="item.aniListId" :name="item.name" />
-            </v-flex>
-            <v-flex xs12>
-              <v-container fluid class="pa-3">
-                <v-layout row wrap>
-                  <v-flex xs4>
-                    <ProgressCircle
-                      :entryId="item.id"
-                      :status="status"
-                      :progressPercentage="item.progressPercentage"
-                      :currentProgress="item.currentProgress"
-                      :episodeAmount="item.episodeAmount"
-                      @increase="increaseCurrentEpisodeProgress" />
-                  </v-flex>
-
-                  <v-flex xs8>
-                    <v-layout align-center justify-end row wrap>
-                      <v-flex xs12>
-                        <EpisodeState :status="item.mediaStatus" :nextEpisode="item.nextEpisode" />
-                      </v-flex>
-                      <v-flex xs12>
-                        <MissingEpisodes :nextAiringEpisode="item.nextAiringEpisode" :currentProgress="item.currentProgress" />
-                      </v-flex>
-                    </v-layout>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-flex>
-          </v-layout>
-          <v-card-actions>
-            <AdultToolTip v-if="item.forAdults" />
-            <StarRating :score="item.score" :ratingStarAmount="ratingStarAmount" :scoreStars="item.scoreStars" />
-          </v-card-actions>
-        </v-card>
       </v-flex>
-    </template>
-    <v-snackbar v-model="isSnackbarVisible" top :color="snackbarColor" :timeout="3500">{{ snackbarText }}</v-snackbar>
-  </v-layout>
+      <v-flex xs12 v-if="!listData.length && !isLoading">
+        <v-container>
+          <div class="headline text-center">
+            {{ $t('$vuetify.noDataText') }}
+          </div>
+        </v-container>
+      </v-flex>
+      <template v-if="!isLoading">
+        <v-flex xs3 lg3 xl2 v-for="item in listData" :key="item.id">
+          <v-card class="ma-1">
+            <ListImage :imageLink="item.imageLink" :aniListId="item.aniListId" :name="item.name" />
+
+            <v-card-text>
+              <v-layout wrap>
+                <v-flex xs4>
+                  <ProgressCircle
+                    :entryId="item.id"
+                    :status="status"
+                    :progressPercentage="item.progressPercentage"
+                    :currentProgress="item.currentProgress"
+                    :episodeAmount="item.episodeAmount"
+                    @increase="increaseCurrentEpisodeProgress" />
+                </v-flex>
+
+                <v-flex xs8>
+                  <v-layout align-center justify-end wrap>
+                    <v-flex xs12>
+                      <EpisodeState :status="item.mediaStatus" :nextEpisode="item.nextEpisode" />
+                    </v-flex>
+                    <v-flex xs12>
+                      <MissingEpisodes :nextAiringEpisode="item.nextAiringEpisode" :currentProgress="item.currentProgress" />
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
+            </v-card-text>
+
+            <v-card-actions>
+              <AdultToolTip v-if="item.forAdults" />
+              <StarRating :score="item.score" :ratingStarAmount="ratingStarAmount" :scoreStars="item.scoreStars" />
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </template>
+      <v-snackbar v-model="isSnackbarVisible" top :color="snackbarColor" :timeout="3500">{{ snackbarText }}</v-snackbar>
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -73,6 +71,15 @@ import ListImage from './ListElements/ListImage.vue';
 import MissingEpisodes from './ListElements/MissingEpisodes.vue';
 import ProgressCircle from './ListElements/ProgressCircle.vue';
 import StarRating from './ListElements/StarRating.vue';
+
+interface UpdatePayloadProperties {
+  id: number | null;
+  title: string | null;
+  status: AniListListStatus | null;
+  progress: number | null;
+  score: number | null;
+  changeFrom: number;
+}
 
 @Component({
   components: {
@@ -358,7 +365,7 @@ export default class List extends Vue {
 
     const entries = chain(this.updatePayload)
       .groupBy((value) => value.id)
-      .map((group) => reduce((group), (accumulator, item) =>
+      .map((group) => reduce((group), (accumulator: UpdatePayloadProperties, item: UpdatePayloadProperties) =>
         (item.changeFrom > accumulator.changeFrom ? item : accumulator), {
           id: null,
           title: null,

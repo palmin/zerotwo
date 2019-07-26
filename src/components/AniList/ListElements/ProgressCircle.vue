@@ -3,7 +3,7 @@
     <div class="episodeCount">{{ currentProgress }}</div>
     <div class="episodeDivider"></div>
     <div class="episodeAmount" :class="{ complete: completedList }">{{ episodeAmount }}</div>
-    <v-btn class="episodeIncrease" v-if="!completedList" small flat icon color="success" @click="increaseEpisodeCounter"><v-icon size="18">mdi-plus</v-icon></v-btn>
+    <v-btn class="episodeIncrease" v-if="!completedList" small text icon color="success" @click="increaseEpisodeCounter"><v-icon size="18">mdi-plus</v-icon></v-btn>
   </v-progress-circular>
 </template>
 
@@ -64,8 +64,8 @@ export default class ProgressCircle extends Vue {
   .episodeCount {
     font-size: 15pt;
     position: absolute;
-    top: -27px;
-    left: -25px;
+    top: 15px;
+    left: 12px;
     z-index: 1;
     width: 50px;
     text-align: center;
@@ -74,8 +74,8 @@ export default class ProgressCircle extends Vue {
   .episodeDivider {
     font-size: 15pt;
     position: absolute;
-    top: -18px;
-    left: -5px;
+    top: 23px;
+    left: 33px;
     transform: scaleX(5);
     text-align: center;
     z-index: 2;
@@ -87,8 +87,8 @@ export default class ProgressCircle extends Vue {
 
   .episodeAmount {
     position: absolute;
-    top: 7px;
-    left: -25px;
+    top: 44px;
+    left: 12px;
     z-index: 3;
     text-align: center;
     width: 50px;
@@ -97,8 +97,8 @@ export default class ProgressCircle extends Vue {
 
   .episodeIncrease {
     position: absolute;
-    top: 5px;
-    left: -12.5px;
+    top: 44px;
+    left: 24px;
     width: 25px;
     height: 25px;
     z-index: 4;

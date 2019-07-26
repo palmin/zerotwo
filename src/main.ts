@@ -4,7 +4,7 @@ import Vuetify from 'vuetify';
 
 // Components
 import App from './App.vue';
-import { mediaDetection, startRPC } from './discord';
+// import { mediaDetection, startRPC } from './discord';
 import { i18n } from './i18n';
 import router from './router';
 import { store } from './store';
@@ -14,19 +14,23 @@ import '@/assets/scss/extra.scss';
 import '@mdi/font/css/materialdesignicons.css';
 import 'vuetify/dist/vuetify.min.css';
 
-Vue.use(Vuetify, {
-  iconfont: 'mdi',
-  lang: { t: (key: string, ...params: any) => i18n.t(key, params) },
+Vue.use(Vuetify);
+
+const vuetify = new Vuetify({
+  icons: {
+    iconfont: 'mdi',
+  },
 });
 
 Vue.use(Notification);
 
 Vue.config.productionTip = false;
 
-mediaDetection();
-startRPC();
+// mediaDetection();
+// startRPC();
 
 new Vue({
+  vuetify,
   router,
   store,
   i18n,

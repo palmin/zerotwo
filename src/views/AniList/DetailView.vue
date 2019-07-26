@@ -56,67 +56,67 @@
                 <v-flex xs6>
                   <v-card>
                     <v-list dense two-line>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.romajiTitle') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.title }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.romajiTitle') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.nativeTitle }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.nativeTitle') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.nativeTitle }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.nativeTitle') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.englishTitle }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.englishTitle') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.englishTitle }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.englishTitle') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.episodes }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.episodes') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.episodes }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.episodes') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile v-if="item.synonyms">
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.synonyms }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.synonyms') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item v-if="item.synonyms">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.synonyms }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.synonyms') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile v-if="item.genres">
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.genres }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.genres') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item v-if="item.genres">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.genres }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.genres') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item.airingTime }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.airingTime') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.airingTime }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.airingTime') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ $t('detailView.score', [item.score, 100]) }}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{ $t('detailView.scoreLabel') }}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('detailView.score', [item.score, 100]) }}</v-list-item-title>
+                          <v-list-item-subtitle>{{ $t('detailView.scoreLabel') }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
 
-                      <v-list-tile color="red" v-if="item.isAdult">
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ $t('detailView.adult') }}</v-list-tile-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item color="red" v-if="item.isAdult">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('detailView.adult') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
                     </v-list>
                   </v-card>
                 </v-flex>
@@ -136,9 +136,8 @@
 
                     <v-card-actions v-if="item.listEntry">
                       <v-layout column>
-                        <v-flex d-flex>
+                        <v-flex>
                           <v-select
-                            box
                             dense
                             full-width
                             v-model="item.listEntry.status"
@@ -148,9 +147,9 @@
                           ></v-select>
                         </v-flex>
 
-                        <v-flex d-flex>
+                        <v-flex>
                           <v-text-field
-                            box
+                            outlined
                             :mask="getMask(item.episodes)"
                             :suffix="`/ ${item.episodes}`"
                             full-width
@@ -160,18 +159,17 @@
                           ></v-text-field>
                         </v-flex>
 
-                        <v-flex d-flex>
+                        <v-flex>
                           <v-text-field
                             v-if="scoreSystem === POINT_100"
                             suffix="/ 100"
-                            box
                             full-width
                             v-model="item.listEntry.score"
                             :label="$t('detailView.ownScore')"
                             :rules="[rules.required]"
                           ></v-text-field>
 
-                          <div class="text-xs-center ma-auto" v-if="scoreSystem !== POINT_100">
+                          <div class="text-center ma-auto" v-if="scoreSystem !== POINT_100">
                             <div class="body-1 text-xs-left pl-1">
                               {{ $t('detailView.ownScore') }} ({{ item.listEntry.score }})
                             </div>
@@ -209,16 +207,16 @@
                           </div>
                         </v-flex>
 
-                        <v-flex d-flex>
-                          <v-layout row>
-                            <v-flex d-flex>
-                              <v-btn flat color="success" @click="saveChanges">
+                        <v-flex>
+                          <v-layout>
+                            <v-flex>
+                              <v-btn text block color="success" @click="saveChanges">
                                 <v-icon left>mdi-content-save</v-icon>
                                 {{ $t('system.actions.save') }}
                               </v-btn>
                             </v-flex>
-                            <v-flex d-flex>
-                              <v-btn flat color="error">
+                            <v-flex>
+                              <v-btn text block color="error">
                                 <v-icon left>mdi-delete</v-icon>
                                 {{ $t('system.actions.remove') }}
                               </v-btn>
@@ -229,7 +227,7 @@
                     </v-card-actions>
 
                     <v-card-actions v-else>
-                      <v-btn flat color="success" block>
+                      <v-btn text color="success" block>
                         <v-icon left>mdi-library-plus</v-icon>
                         {{ $t('system.actions.add') }}
                       </v-btn>
@@ -258,35 +256,35 @@
                 <v-list>
                   <v-list-group v-model="streamingEpisodesExpanded">
                     <template v-slot:activator>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ $t('detailView.streamingSubheader') }}</v-list-tile-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('detailView.streamingSubheader') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
                     </template>
 
-                    <v-list-tile v-for="episode in item.streamingEpisodes" :key="episode.url">
-                      <v-list-tile-content>
-                        <v-list-tile-title>{{ episode.title }}</v-list-tile-title>
-                        <v-list-tile-sub-title>{{ episode.site }}</v-list-tile-sub-title>
-                      </v-list-tile-content>
+                    <v-list-item v-for="episode in item.streamingEpisodes" :key="episode.url">
+                      <v-list-item-content>
+                        <v-list-item-title>{{ episode.title }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ episode.site }}</v-list-item-subtitle>
+                      </v-list-item-content>
 
-                      <v-list-tile-action>
+                      <v-list-item-action>
                         <v-icon @click="openInBrowser(episode.url)" color="yellow">mdi-open-in-new</v-icon>
-                      </v-list-tile-action>
-                    </v-list-tile>
+                      </v-list-item-action>
+                    </v-list-item>
                   </v-list-group>
 
-                  <v-list-tile v-if="item.nextAiringEpisode && item.nextAiringEpisode.episode">
-                    <v-list-tile-content>
-                      <v-list-tile-title>{{ item.nextAiringEpisode.episode }}</v-list-tile-title>
-                      <v-list-tile-sub-title>{{ getReadableDateByTimestamp(item.nextAiringEpisode.airingAt) || $t('system.alerts.noInformation') }}</v-list-tile-sub-title>
-                    </v-list-tile-content>
+                  <v-list-item v-if="item.nextAiringEpisode && item.nextAiringEpisode.episode">
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.nextAiringEpisode.episode }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ getReadableDateByTimestamp(item.nextAiringEpisode.airingAt) || $t('system.alerts.noInformation') }}</v-list-item-subtitle>
+                    </v-list-item-content>
 
-                    <v-list-tile-action>
+                    <v-list-item-action>
                       <v-icon @click="openInBrowser(episode.url)" color="yellow">mdi-open-in-new</v-icon>
-                    </v-list-tile-action>
-                  </v-list-tile>
+                    </v-list-item-action>
+                  </v-list-item>
                 </v-list>
               </v-card>
             </v-flex>

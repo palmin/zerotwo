@@ -2,29 +2,29 @@
   <v-content>
     <v-card>
       <v-card-text>
-        <v-tabs grow fluid>
+        <v-tabs v-model="tabs" grow fluid>
           <v-tab v-for="tab in settingsTabs" :key="tab.key" :disabled="tab.disabled" ripple>{{ tab.value }}</v-tab>
 
-          <v-tabs-items>
+          <v-tabs-items v-model="tabs">
             <v-tab-item key="appSettings">
               <v-card flat>
                 <v-container fluid>
-                  <v-layout row wrap>
+                  <v-layout wrap>
                     <v-flex xs5>
                       <v-select
                       :items="languages"
                       item-text="original"
                       :value="this._locale"
-                      :label="this.$t('system.settings.appSettings.chooseLanguage')"
+                      :label="$t('system.settings.appSettings.chooseLanguage')"
                       @change="setLanguage">
                         <template v-slot:selection="data">
                           {{ data.item.original }} ({{ data.item.english }})
                         </template>
                         <template v-slot:item="data">
-                          <v-list-tile-content>
-                            <v-list-tile-title>{{ data.item.original }}</v-list-tile-title>
-                            <v-list-tile-sub-title>{{ data.item.english }}</v-list-tile-sub-title>
-                          </v-list-tile-content>
+                          <v-list-item-content>
+                            <v-list-item-title>{{ data.item.original }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ data.item.english }}</v-list-item-subtitle>
+                          </v-list-item-content>
                         </template>
                       </v-select>
                     </v-flex>
@@ -45,7 +45,7 @@
                       {{ $t('system.actions.login') }}
                     </v-btn>
                   </v-layout>
-                  <v-layout fill-height row v-else>
+                  <v-layout fill-height v-else>
                     <v-flex xs4>
                       {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
                     </v-flex>
@@ -66,11 +66,11 @@
 
             <v-tab-item key="about">
               <v-card flat>
-                <v-container fluid>
-                  <v-layout align-center justify-center row wrap>
+                <v-container fluid fill-height>
+                  <v-layout align-center justify-center wrap fill-height>
                     <v-flex xs12>
-                      <h2 class="display-3 text-xs-center">{{ $t('system.settings.aboutZeroTwo.version') }}</h2>
-                      <h3 class="display-2 text-xs-center">{{ currentAppVersion }}</h3>
+                      <h2 class="display-3 text-center">{{ $t('system.settings.aboutZeroTwo.version') }}</h2>
+                      <h3 class="display-2 text-center">{{ currentAppVersion }}</h3>
                     </v-flex>
                     <v-flex xs4>
                       <a href="#" class="headline" @click="openPage(Pages.GITHUB)">
@@ -125,6 +125,7 @@ enum Pages {
 @Component
 export default class Settings extends Vue {
   private _locale: string = '';
+  private tabs = null;
   private githubPage: URL = new URL('https://github.com/nicoaiko/zerotwo');
   private discordPage: URL = new URL('https://discord.gg/sTpR4Gw');
   private zeroTwoPage: URL = new URL('https://www.zerotwo.org');

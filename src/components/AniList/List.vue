@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pt-0 pb-0 px-1" fill-height>
+  <v-container fluid class="py-0 px-1" fill-height>
     <v-layout wrap>
       <v-flex xs12 v-show="isLoading" align-self-center>
         <div class="display-3 text-center ma-6">

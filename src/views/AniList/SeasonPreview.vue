@@ -1,83 +1,55 @@
 <template>
   <v-content>
-    <v-layout row wrap>
-      <v-flex d-flex xs3 lg3 xl2 v-for="item in preparedMedia" :key="item.id">
-        <v-card hover class="ma-1" :to="{ name: 'DetailView', params: { id: item.id } }">
-          <v-layout row wrap>
-            <v-flex xs12 class="pl-1">
-              <v-img
-                :src="item.coverImage"
-                height="250px"
-                position="50% 35%"
-              >
-                <template v-slot:placeholder>
-                  <v-layout
-                    fill-height
-                    align-center
-                    justify-center
-                    ma-0
-                  >
-                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                  </v-layout>
-                </template>
-                <v-container fill-height fluid>
-                  <v-layout fill-height>
-                    <v-flex xs12 align-end flexbox>
-                      <span class="title shadowed">{{ item.name }}</span>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-img>
-            </v-flex>
-            <v-flex xs12>
-              <v-card-title primary-title>
-                <div>
-                  <span class="grey--text">{{ $tc('seasonPreview.episodes', item.episodes) }}</span>
-                  <div class="grey--text">{{ $t('seasonPreview.startDate') }} {{ item.startDate }}</div>
-                </div>
-              </v-card-title>
-            </v-flex>
-          </v-layout>
-          <v-card-actions>
-            <v-layout row wrap>
-              <v-flex xs1>
-                <v-layout row fill-height align-start justify-start>
-                  <template v-if="item.isAdult">
+    <v-container fluid class="py-0 px-1" fill-height>
+      <v-layout wrap>
+        <v-flex xs3 lg3 xl2 v-for="item in preparedMedia" :key="item.id">
+          <v-card hover class="ma-1">
+            <ListImage :imageLink="item.coverImage" :name="item.name" :aniListId="item.id" />
+
+            <v-card-text>
+              <v-layout row fill-height align-center>
+                <v-layout column class="px-2" justify-start>
+                  <v-flex class="subtitle-1 grey--text">{{ $tc('seasonPreview.episodes', item.episodes) }}</v-flex>
+                  <v-flex class="subtitle-1 grey--text">{{ $t('seasonPreview.startDate') }} {{ item.startDate }}</v-flex>
+                </v-layout>
+
+                <template v-if="item.isAdult">
+                  <v-flex class="mx-2 text-right">
+                    <v-divider vertical inset></v-divider>
+
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-btn text icon v-on="on">
-                          <v-icon color="error">mdi-alert</v-icon>
-                        </v-btn>
+                        <v-icon large color="error" v-on="on">mdi-alert</v-icon>
                       </template>
                       <span>{{ $t('system.alerts.adultContent') }}</span>
                     </v-tooltip>
-                  </template>
-                </v-layout>
-              </v-flex>
-              <v-flex xs11>
-                <v-layout row fill-height align-end justify-end>
-                  <v-btn text :disabled="item.isLocked">
-                    <v-icon left color="success">mdi-library-plus</v-icon>
-                    {{ $t('system.actions.addToPlanToWatch') }}
-                  </v-btn>
-                </v-layout>
-              </v-flex>
-            </v-layout>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
+                  </v-flex>
+                </template>
+              </v-layout>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn block text :disabled="item.isLocked">
+                <v-icon left color="success">mdi-library-plus</v-icon>
+                {{ $t('system.actions.addToPlanToWatch') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-content>
 </template>
 
 <script lang="ts">
+import ListImage from '@/components/AniList/ListElements/ListImage.vue';
 import API from '@/modules/AniList/API';
 import { AniListSeason, IAniListSeasonPreviewMedia } from '@/modules/AniList/types';
 import { chain } from 'lodash';
 import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component
+@Component({ components: { ListImage }})
 export default class SeasonPreview extends Vue {
   private media: IAniListSeasonPreviewMedia[] = [];
   private seasonYear: number = new Date().getUTCFullYear();

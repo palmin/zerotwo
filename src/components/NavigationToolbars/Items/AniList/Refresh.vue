@@ -2,7 +2,7 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on: toolTip }">
       <v-btn text icon v-on="{ ...toolTip }" @click="refreshData" v-if="isAuthenticated">
-        <v-progress-circular :rotate="-90" :width="2" color="success" :value="timeUntilRefreshPercentage">
+        <v-progress-circular :rotate="-90" :width="2" :color="colorCode" :value="timeUntilRefreshPercentage">
           <v-icon style="vertical-align: text-top" size="18">mdi-sync {{ isLoading ? 'mdi-spin' : '' }}</v-icon>
         </v-progress-circular>
       </v-btn>
@@ -27,6 +27,16 @@ export default class Refresh extends Vue {
 
   private get isLoading(): boolean {
     return appStore.isLoading;
+  }
+
+  private get colorCode(): string {
+    if (this.timeUntilRefreshPercentage < 60 && this.timeUntilRefreshPercentage > 30) {
+      return 'warning';
+    } else if (this.timeUntilRefreshPercentage < 30) {
+      return 'error';
+    } else {
+      return 'success';
+    }
   }
 
   private get timeUntilRefresh(): string {

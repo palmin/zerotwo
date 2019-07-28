@@ -1,4 +1,6 @@
-import { app, BrowserWindow, Menu, protocol } from 'electron';
+import {
+  app, BrowserWindow, Menu, protocol,
+} from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
 import Log from '../log';
 import './AniList';

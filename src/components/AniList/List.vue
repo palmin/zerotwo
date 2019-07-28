@@ -1,12 +1,23 @@
 <template>
-  <v-container fluid class="py-0 px-1" fill-height>
+  <v-container
+    fluid
+    class="py-0 px-1"
+    fill-height
+  >
     <v-layout wrap>
-      <v-flex xs12 v-show="isLoading" align-self-center>
+      <v-flex
+        v-show="isLoading"
+        xs12
+        align-self-center
+      >
         <div class="display-3 text-center ma-6">
           {{ $t('system.actions.loading') }}
         </div>
       </v-flex>
-      <v-flex xs12 v-if="!listData.length && !isLoading">
+      <v-flex
+        v-if="!listData.length && !isLoading"
+        xs12
+      >
         <v-container>
           <div class="headline text-center">
             {{ $t('$vuetify.noDataText') }}
@@ -14,29 +25,50 @@
         </v-container>
       </v-flex>
       <template v-if="!isLoading">
-        <v-flex xs3 lg3 xl2 v-for="item in listData" :key="item.id">
+        <v-flex
+          v-for="item in listData"
+          :key="item.id"
+          xs3
+          lg3
+          xl2
+        >
           <v-card class="ma-1">
-            <ListImage :imageLink="item.imageLink" :aniListId="item.aniListId" :name="item.name" />
+            <ListImage
+              :image-link="item.imageLink"
+              :ani-list-id="item.aniListId"
+              :name="item.name"
+            />
 
             <v-card-text>
               <v-layout wrap>
                 <v-flex xs4>
                   <ProgressCircle
-                    :entryId="item.id"
+                    :entry-id="item.id"
                     :status="status"
-                    :progressPercentage="item.progressPercentage"
-                    :currentProgress="item.currentProgress"
-                    :episodeAmount="item.episodeAmount"
-                    @increase="increaseCurrentEpisodeProgress" />
+                    :progress-percentage="item.progressPercentage"
+                    :current-progress="item.currentProgress"
+                    :episode-amount="item.episodeAmount"
+                    @increase="increaseCurrentEpisodeProgress"
+                  />
                 </v-flex>
 
                 <v-flex xs8>
-                  <v-layout align-center justify-end wrap>
+                  <v-layout
+                    align-center
+                    justify-end
+                    wrap
+                  >
                     <v-flex xs12>
-                      <EpisodeState :status="item.mediaStatus" :nextEpisode="item.nextEpisode" />
+                      <EpisodeState
+                        :status="item.mediaStatus"
+                        :next-episode="item.nextEpisode"
+                      />
                     </v-flex>
                     <v-flex xs12>
-                      <MissingEpisodes :nextAiringEpisode="item.nextAiringEpisode" :currentProgress="item.currentProgress" />
+                      <MissingEpisodes
+                        :next-airing-episode="item.nextAiringEpisode"
+                        :current-progress="item.currentProgress"
+                      />
                     </v-flex>
                   </v-layout>
                 </v-flex>
@@ -45,12 +77,23 @@
 
             <v-card-actions>
               <AdultToolTip v-if="item.forAdults" />
-              <StarRating :score="item.score" :ratingStarAmount="ratingStarAmount" :scoreStars="item.scoreStars" />
+              <StarRating
+                :score="item.score"
+                :rating-star-amount="ratingStarAmount"
+                :score-stars="item.scoreStars"
+              />
             </v-card-actions>
           </v-card>
         </v-flex>
       </template>
-      <v-snackbar v-model="isSnackbarVisible" top :color="snackbarColor" :timeout="3500">{{ snackbarText }}</v-snackbar>
+      <v-snackbar
+        v-model="isSnackbarVisible"
+        top
+        :color="snackbarColor"
+        :timeout="3500"
+      >
+        {{ snackbarText }}
+      </v-snackbar>
     </v-layout>
   </v-container>
 </template>
@@ -63,7 +106,9 @@ import { RawLocation } from 'vue-router';
 
 // Custom Components
 import API from '@/modules/AniList/API';
-import { AniListListStatus, AniListMediaStatus, AniListScoreFormat, IAniListEntry } from '@/modules/AniList/types';
+import {
+  AniListListStatus, AniListMediaStatus, AniListScoreFormat, IAniListEntry,
+} from '@/modules/AniList/types';
 import { aniListStore, appStore } from '@/store';
 import AdultToolTip from './ListElements/AdultToolTip.vue';
 import EpisodeState from './ListElements/EpisodeState.vue';
@@ -95,13 +140,20 @@ export default class List extends Vue {
   // private listData: any[] = [];
   // TODO: Make this a non-static number via Store
   private startAmount: number = 20;
+
   private currentIndex: number = 0;
+
   // Contains the Timer ID
   private updateTimer: NodeJS.Timeout | null = null;
+
   private updatePayload: any[] = [];
+
   private updateInterval = 750;
+
   private snackbarColor: string = 'success';
+
   private isSnackbarVisible: boolean = false;
+
   private snackbarText: string = '';
 
   @Prop()
@@ -122,7 +174,7 @@ export default class List extends Vue {
       return [];
     }
 
-    const listElement = aniListStore.aniListData.lists.find((list) => list.status === this.status);
+    const listElement = aniListStore.aniListData.lists.find(list => list.status === this.status);
 
     if (!listElement) {
       return [];
@@ -166,7 +218,7 @@ export default class List extends Vue {
     });
 
     newEntries = chain(newEntries)
-      .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
+      .orderBy(entry => entry.name.toLowerCase(), ['asc'])
       .slice(0, this.startAmount + this.currentIndex)
       .value();
 
@@ -181,8 +233,8 @@ export default class List extends Vue {
 
     // Infinite Scrolling
     window.onscroll = async () => {
-      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
+      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight
+        === document.documentElement.offsetHeight;
       if (bottomOfWindow) {
         this.currentIndex += this.startAmount;
       }
@@ -269,8 +321,8 @@ export default class List extends Vue {
   }
 
   private calculateProgressPercentage(entry: IAniListEntry): number {
-    const episodes = entry.media.episodes;
-    const nextAiringEpisode = entry.media.nextAiringEpisode;
+    const { episodes } = entry.media;
+    const { nextAiringEpisode } = entry.media;
     const currentProgress = entry.progress;
 
     if (!currentProgress) {
@@ -303,7 +355,7 @@ export default class List extends Vue {
   }
 
   private calculateMissingEpisodes(entry: IAniListEntry): number | null {
-    const nextAiringEpisode = entry.media.nextAiringEpisode;
+    const { nextAiringEpisode } = entry.media;
     const currentProgress = entry.progress;
 
     // We don't care about episodes that are not airing anymore.
@@ -321,7 +373,7 @@ export default class List extends Vue {
   }
 
   private increaseCurrentEpisodeProgress(entryId: number): void {
-    const listEntry = this.listData.find((entry) => entry.id === entryId);
+    const listEntry = this.listData.find(entry => entry.id === entryId);
 
     if (!listEntry) {
       return;
@@ -364,17 +416,16 @@ export default class List extends Vue {
     }
 
     const entries = chain(this.updatePayload)
-      .groupBy((value) => value.id)
-      .map((group) => reduce((group), (accumulator: UpdatePayloadProperties, item: UpdatePayloadProperties) =>
-        (item.changeFrom > accumulator.changeFrom ? item : accumulator), {
-          id: null,
-          title: null,
-          status: null,
-          progress: null,
-          score: null,
-          changeFrom: 0,
-        }))
-      .filter((group) => !!group.id)
+      .groupBy(value => value.id)
+      .map(group => reduce((group), (accumulator: UpdatePayloadProperties, item: UpdatePayloadProperties) => (item.changeFrom > accumulator.changeFrom ? item : accumulator), {
+        id: null,
+        title: null,
+        status: null,
+        progress: null,
+        score: null,
+        changeFrom: 0,
+      }))
+      .filter(group => !!group.id)
       .value();
 
     if (isEmpty(entries)) {
@@ -382,7 +433,9 @@ export default class List extends Vue {
     }
 
     await Promise.all(entries.map(async (entry) => {
-      const { id, title, status, progress, score } = entry;
+      const {
+        id, title, status, progress, score,
+      } = entry;
 
       if (!id || progress === null) {
         return;
@@ -406,9 +459,9 @@ export default class List extends Vue {
         });
       }
     }))
-    .finally(() => {
-      this.updatePayload = [];
-    });
+      .finally(() => {
+        this.updatePayload = [];
+      });
   }
 }
 </script>

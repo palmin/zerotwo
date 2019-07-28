@@ -1,4 +1,6 @@
-import { action, getter, Module, mutation, VuexModule } from 'vuex-class-component';
+import {
+  action, getter, Module, mutation, VuexModule,
+} from 'vuex-class-component';
 
 // Custom components
 import Log from '@/log';
@@ -23,11 +25,13 @@ export class AniListStore extends VuexModule {
    * @var {IAniListMediaListCollection} _aniListData contains the logged in user's lists
    */
   private _aniListData: IAniListMediaListCollection = { lists: [] };
+
   /**
    * @private
    * @var {number} _refreshRate contains the amount of minutes until the app refreshes the user's lists
    */
   private _refreshRate: number = 15;
+
   /**
    * @private
    * @var {IAniListSession} _session contains the user's session
@@ -53,11 +57,13 @@ export class AniListStore extends VuexModule {
       },
     },
   };
+
   /**
    * @private
    * @var {IAniListActivity[]} _latestActivities contains the current user's latest activities
    */
   private _latestActivities: IAniListActivity[] = [];
+
   /**
    * @private
    * @var {string | null} _currentMediaTitle contains the title of the currently viewing media
@@ -146,7 +152,7 @@ export class AniListStore extends VuexModule {
     }
 
     try {
-      const accessToken = this.session.accessToken;
+      const { accessToken } = this.session;
       const user = await API.getUser(accessToken);
 
       const userName = (user as IAniListUser).name;

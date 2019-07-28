@@ -1,9 +1,9 @@
+import { RouteConfig } from 'vue-router';
 import { AniListListStatus } from '@/modules/AniList/types';
 import AniList from '@/views/AniList/AniList.vue';
 import DetailView from '@/views/AniList/DetailView.vue';
 import Home from '@/views/AniList/Home.vue';
 import SeasonPreview from '@/views/AniList/SeasonPreview.vue';
-import { RouteConfig } from 'vue-router';
 
 const routes: RouteConfig[] = [{
   path: '/aniList',

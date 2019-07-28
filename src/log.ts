@@ -44,18 +44,21 @@ class Log {
    * @var {string} stdoutLogFileName contains the file name of the standard out logs
    */
   private readonly stdoutLogFileName: string;
+
   /**
    * @private
    * @readonly
    * @var {string} errorLogFileName contains the file name of the error logs
    */
   private readonly errorLogFileName: string;
+
   /**
    * @private
    * @readonly
    * @var {string} warningLogFileName contains the file name of the warning logs
    */
   private readonly warningLogFileName: string;
+
   /**
    * @private
    * @readonly

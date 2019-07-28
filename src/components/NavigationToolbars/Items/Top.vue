@@ -1,7 +1,13 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on: toolTip }">
-      <v-btn text icon v-if="isSortingPage" v-on="{ ...toolTip }" @click="jumpToTop">
+      <v-btn
+        v-if="isSortingPage"
+        text
+        icon
+        v-on="{ ...toolTip }"
+        @click="jumpToTop"
+      >
         <v-icon>mdi-arrow-up</v-icon>
       </v-btn>
     </template>

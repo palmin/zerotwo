@@ -1,4 +1,6 @@
-import { action, getter, Module, mutation, VuexModule } from 'vuex-class-component';
+import {
+  action, getter, Module, mutation, VuexModule,
+} from 'vuex-class-component';
 
 /**
  * @module AppStore This store contains general data about the app.
@@ -10,12 +12,14 @@ export class AppStore extends VuexModule {
    * @var {string} _locale contains the locale string
    */
   private _locale?: string = process.env.VUE_APP_I18N_FALLBACK_LOCALE;
+
   /**
    * @private
    * @var {boolean} _darkMode toggles the dark or light mode
    * @default true
    */
   private _darkMode: boolean = true;
+
   /**
    * @private
    * @var {boolean} _loading toggles the loading state

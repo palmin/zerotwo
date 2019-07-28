@@ -1,7 +1,10 @@
 <template>
   <v-content>
     <v-card v-if="isAuthenticated">
-      <v-card-text class="background" :style="`background-image: url(${currentUser.bannerImage})`">
+      <v-card-text
+        class="background"
+        :style="`background-image: url(${currentUser.bannerImage})`"
+      >
         <v-container fluid>
           <v-flex xs2>
             <ProfileImage />
@@ -11,9 +14,14 @@
     </v-card>
     <v-card v-if="isAuthenticated">
       <v-card-text>
-        <v-container fluid fill-height>
+        <v-container
+          fluid
+          fill-height
+        >
           <v-flex xs6>
-            <div class="title">{{ $t('system.aniList.activities') }}</div>
+            <div class="title">
+              {{ $t('system.aniList.activities') }}
+            </div>
             <Activities />
           </v-flex>
         </v-container>
@@ -22,13 +30,18 @@
     <v-card v-if="!isAuthenticated">
       <v-card-title primary-title>
         <div>
-          <div class="headline">{{ $t('system.alerts.unauthenticated') }}</div>
+          <div class="headline">
+            {{ $t('system.alerts.unauthenticated') }}
+          </div>
           <span class="subheading">{{ $t('system.aniList.howToAuthenticate.header') }}</span>
         </div>
       </v-card-title>
       <v-card-text>
         <div class="body-2">
-          <p v-for="(item, index) in $t('system.aniList.howToAuthenticate.text')" :key="index">
+          <p
+            v-for="(item, index) in $t('system.aniList.howToAuthenticate.text')"
+            :key="index"
+          >
             {{ item }}
           </p>
         </div>
@@ -38,10 +51,10 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import Activities from '@/components/AniList/Activities.vue';
 import ProfileImage from '@/components/AniList/ProfileImage.vue';
 import { aniListStore } from '@/store';
-import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
@@ -65,4 +78,3 @@ export default class Home extends Vue {
   background-size: cover;
 }
 </style>
-

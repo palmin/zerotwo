@@ -1,12 +1,15 @@
 <template>
-  <span class="info--text" v-if="missingEpisodes">
+  <span
+    v-if="missingEpisodes"
+    class="info--text"
+  >
     {{ $tc('system.aniList.missingEpisodes', missingEpisodes, [missingEpisodes]) }}
   </span>
 </template>
 
 <script lang="ts">
-import { IAniListEntry, IAniListNextAiringEpisode } from '@/modules/AniList/types';
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { IAniListEntry, IAniListNextAiringEpisode } from '@/modules/AniList/types';
 
 @Component
 export default class MissingEpisodes extends Vue {

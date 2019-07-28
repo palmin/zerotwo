@@ -1,9 +1,18 @@
 <template>
-  <v-menu v-model="sortMenu" :close-on-content-click="false" offset-y>
+  <v-menu
+    v-model="sortMenu"
+    :close-on-content-click="false"
+    offset-y
+  >
     <template v-slot:activator="{ on: sortWindow }">
       <v-tooltip bottom>
         <template v-slot:activator="{ on: toolTip }">
-          <v-btn text icon v-if="isSortingPage" v-on="{ ...toolTip, ...sortWindow }">
+          <v-btn
+            v-if="isSortingPage"
+            text
+            icon
+            v-on="{ ...toolTip, ...sortWindow }"
+          >
             <v-icon>mdi-sort</v-icon>
           </v-btn>
         </template>
@@ -12,8 +21,14 @@
     </template>
     <v-card>
       <v-container fluid>
-        <v-flex xs12 d-flex>
-          <v-select :items="['Name']" label="Sort by"></v-select>
+        <v-flex
+          xs12
+          d-flex
+        >
+          <v-select
+            :items="['Name']"
+            label="Sort by"
+          />
         </v-flex>
       </v-container>
     </v-card>

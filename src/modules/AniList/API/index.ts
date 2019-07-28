@@ -18,16 +18,6 @@ import {
   IAniListUser,
 } from '../types';
 
-const axios: AxiosInstance = Axios.create({
-  baseURL: 'https://graphql.anilist.co/',
-  timeout: 60000,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  },
-});
-
 // Queries
 import getAnimeInfo from './queries/getAnimeInfo.graphql';
 import getLatestActivities from './queries/getLatestActivities.graphql';
@@ -41,6 +31,16 @@ import searchAnime from './queries/searchAnime.graphql';
 import setEpisodeProgress from './mutations/setEpisodeProgress.graphql';
 import updateEntry from './mutations/updateEntry.graphql';
 
+const axios: AxiosInstance = Axios.create({
+  baseURL: 'https://graphql.anilist.co/',
+  timeout: 60000,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+});
+
 /**
  * @class AniListAPI
  * @description Contains only static functions to connect to AniList's API
@@ -51,10 +51,10 @@ export default class AniListAPI {
    * @static
    * @param {string} userName contains the name of the user
    * @param {AniListType} type contains the type of media
-   * @returns {Promise<IAniListMediaListCollection | void>} User's Media list collection or nothing
+   * @returns {Promise<IAniListMediaListCollection | null>} User's Media list collection or nothing
    */
   // tslint:disable-next-line max-line-length
-  public static async getUserList(userName: string, type: AniListType, accessToken: string): Promise<IAniListMediaListCollection | void> {
+  public static async getUserList(userName: string, type: AniListType, accessToken: string): Promise<IAniListMediaListCollection | null> {
     try {
       const headers = { Authorization: `Bearer ${accessToken}` };
       const response = await axios.post('/', {
@@ -72,16 +72,16 @@ export default class AniListAPI {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getUserList'], error);
     }
 
-    return;
+    return null;
   }
 
   /**
    * @function getUser
    * @static
    * @param {string} accessToken contains the access token to use AniList's API
-   * @returns {Promise<IAniListUser | void>} User's data or nothing
+   * @returns {Promise<IAniListUser | null>} User's data or nothing
    */
-  public static async getUser(accessToken: string): Promise<IAniListUser | void> {
+  public static async getUser(accessToken: string): Promise<IAniListUser | null> {
     try {
       const headers = { Authorization: `Bearer ${accessToken}` };
       const response = await axios.post('/', { query: getUser }, { headers });
@@ -91,11 +91,10 @@ export default class AniListAPI {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getUser'], error);
     }
 
-    return;
+    return null;
   }
 
-  // tslint:disable-next-line max-line-length
-  public static async getLatestActivities(userId: number, page: number = 0, perPage: number = 0): Promise<IAniListActivity[] | void> {
+  public static async getLatestActivities(userId: number, page: number = 0, perPage: number = 0): Promise<IAniListActivity[] | null> {
     try {
       const response = await axios.post('/', {
         query: getLatestActivities,
@@ -110,9 +109,10 @@ export default class AniListAPI {
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getLatestActivities'], error);
     }
+
+    return null;
   }
 
-  // tslint:disable-next-line max-line-length
   public static async getSeasonPreview(seasonYear: number, season: AniListSeason): Promise<IAniListSeasonPreview | null> {
     try {
       const response = await axios.post('/', {
@@ -123,7 +123,7 @@ export default class AniListAPI {
         },
       });
 
-      const media: IAniListSeasonPreviewMedia[] = response.data.data.page.media;
+      const { media } = response.data.data.page;
 
       return {
         season,
@@ -137,7 +137,7 @@ export default class AniListAPI {
     return null;
   }
 
-  public static async getAnimeInfo(aniListId: number): Promise<IAniListMedia | void> {
+  public static async getAnimeInfo(aniListId: number): Promise<IAniListMedia | null> {
     try {
       const response = await axios.post('/', {
         query: getAnimeInfo,
@@ -152,6 +152,8 @@ export default class AniListAPI {
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'getAnimeInfo'], error);
     }
+
+    return null;
   }
 
   public static async getListEntryByMediaId(mediaId: number): Promise<IAniListEntry | null> {
@@ -165,7 +167,7 @@ export default class AniListAPI {
         },
       }, { headers });
 
-      const media = response.data.data.media;
+      const { media } = response.data.data;
       const listEntry = media.mediaListEntry || {};
       listEntry.media = omit(media, 'mediaListEntry');
 
@@ -237,7 +239,7 @@ export default class AniListAPI {
             return false;
           }
 
-          return filters.listStatus.find((filter) => filter === e.mediaListEntry.status);
+          return filters.listStatus.find(filter => filter === e.mediaListEntry.status);
         });
 
         return results;
@@ -253,7 +255,6 @@ export default class AniListAPI {
 
   // Mutations
 
-  // tslint:disable-next-line max-line-length
   public static async updateEntry(entryId: number, progress: number, score: number, status: AniListListStatus): Promise<void> {
     try {
       const { accessToken } = aniListStore.session;
@@ -314,11 +315,4 @@ export default class AniListAPI {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'setEntryCompleted'], error);
     }
   }
-
-  /**
-   * @constructor
-   * @private
-   * @description Empty private constructor
-   */
-  private constructor() {}
 }

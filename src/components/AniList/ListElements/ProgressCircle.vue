@@ -1,15 +1,43 @@
 <template>
-  <v-progress-circular class="episodeProgress" color="success" :value="progressPercentage" :indeterminate="indeterminate" size="75" rotate="-90">
-    <div class="episodeCount">{{ currentProgress }}</div>
-    <div class="episodeDivider"></div>
-    <div class="episodeAmount" :class="{ complete: completedList }">{{ episodeAmount }}</div>
-    <v-btn class="episodeIncrease" v-if="!completedList" small text icon color="success" @click="increaseEpisodeCounter"><v-icon size="18">mdi-plus</v-icon></v-btn>
+  <v-progress-circular
+    class="episodeProgress"
+    color="success"
+    :value="progressPercentage"
+    :indeterminate="indeterminate"
+    size="75"
+    rotate="-90"
+  >
+    <div class="episodeCount">
+      {{ currentProgress }}
+    </div>
+    <div class="episodeDivider" />
+    <div
+      class="episodeAmount"
+      :class="{ complete: completedList }"
+    >
+      {{ episodeAmount }}
+    </div>
+    <v-btn
+      v-if="!completedList"
+      class="episodeIncrease"
+      small
+      text
+      icon
+      color="success"
+      @click="increaseEpisodeCounter"
+    >
+      <v-icon size="18">
+        mdi-plus
+      </v-icon>
+    </v-btn>
   </v-progress-circular>
 </template>
 
 <script lang="ts">
+import {
+  Component, Emit, Prop, Vue, Watch,
+} from 'vue-property-decorator';
 import { AniListListStatus } from '@/modules/AniList/types';
-import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator';
 
 type AlphaNumerical = number | string;
 

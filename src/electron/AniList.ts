@@ -52,7 +52,7 @@ ipcMain.on('aniListOAuth', (event: any, action: string) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Accept: 'application/json',
           },
           json: {
             grant_type: 'authorization_code',
@@ -68,8 +68,8 @@ ipcMain.on('aniListOAuth', (event: any, action: string) => {
             event.sender.send('aniListOAuthReply', body.access_token);
             try {
               window.close();
-            } catch (error) {
-              Log.log(Log.getErrorSeverity(), ['electron', 'aniList', 'authorization', 'window-close'], error.message);
+            } catch (closingError) {
+              Log.log(Log.getErrorSeverity(), ['electron', 'aniList', 'authorization', 'window-close'], closingError.message);
             }
           } else {
             Log.log(Log.getErrorSeverity(), ['electron', 'aniList', 'authorization'], error);

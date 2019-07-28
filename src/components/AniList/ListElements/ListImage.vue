@@ -3,8 +3,8 @@
     :src="imageLink"
     height="250px"
     position="50% 35%"
-    @click.native="moveToDetails(aniListId)"
     class="pointerCursor"
+    @click.native="moveToDetails(aniListId)"
   >
     <template v-slot:placeholder>
       <v-layout
@@ -13,12 +13,22 @@
         justify-center
         ma-0
       >
-        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+        <v-progress-circular
+          indeterminate
+          color="grey lighten-5"
+        />
       </v-layout>
     </template>
-    <v-container fill-height fluid>
+    <v-container
+      fill-height
+      fluid
+    >
       <v-layout fill-height>
-        <v-flex xs12 align-end flexbox>
+        <v-flex
+          xs12
+          align-end
+          flexbox
+        >
           <span class="title shadowed">{{ name }}</span>
         </v-flex>
       </v-layout>

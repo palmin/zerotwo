@@ -1,7 +1,13 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on: toolTip }">
-      <v-btn text icon v-if="isMediaPage || isSettingsPage || isSearchablePage" v-on="{ ...toolTip }" @click="navigateBack">
+      <v-btn
+        v-if="isMediaPage || isSettingsPage || isSearchablePage"
+        text
+        icon
+        v-on="{ ...toolTip }"
+        @click="navigateBack"
+      >
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
     </template>
@@ -10,7 +16,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import {
+  Component, Prop, Vue, Watch,
+} from 'vue-property-decorator';
 import { Route } from 'vue-router';
 
 @Component
@@ -47,4 +55,3 @@ export default class Back extends Vue {
   }
 }
 </script>
-

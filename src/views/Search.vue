@@ -2,24 +2,67 @@
   <v-content>
     <v-card>
       <v-card-text>
-        <v-layout row wrap>
+        <v-layout
+          row
+          wrap
+        >
           <v-flex xs12>
-            <v-container fluid fill-height grid-list-md>
-              <v-layout row wrap>
+            <v-container
+              fluid
+              fill-height
+              grid-list-md
+            >
+              <v-layout
+                row
+                wrap
+              >
                 <v-flex xs6>
-                  <v-text-field v-model="searchInput" @keyup.enter="search" label="Search Query" prepend-icon="mdi-magnify"></v-text-field>
+                  <v-text-field
+                    v-model="searchInput"
+                    label="Search Query"
+                    prepend-icon="mdi-magnify"
+                    @keyup.enter="search"
+                  />
                 </v-flex>
 
                 <v-flex xs2>
-                  <v-select v-model="adultContentValue" :items="adultContent" label="Adult content" hint="Keep clear to search for both adult content and non-adult content." persistent-hint clearable></v-select>
+                  <v-select
+                    v-model="adultContentValue"
+                    :items="adultContent"
+                    label="Adult content"
+                    hint="Keep clear to search for both adult content and non-adult content."
+                    persistent-hint
+                    clearable
+                  />
                 </v-flex>
 
                 <v-flex xs2>
-                  <v-select label="In List" v-model="listValues" :items="listStatus" hint="Keep clear to also search for media that is not yet in your list" clearable persistent-hint multiple chips small-chips></v-select>
+                  <v-select
+                    v-model="listValues"
+                    label="In List"
+                    :items="listStatus"
+                    hint="Keep clear to also search for media that is not yet in your list"
+                    clearable
+                    persistent-hint
+                    multiple
+                    chips
+                    small-chips
+                  />
                 </v-flex>
 
                 <v-flex xs2>
-                  <v-combobox v-model="genreValues" :items="genres" clearable :search-input.sync="genreSearch" hide-selected hint="Max. 3" label="Genres" multiple persistent-hint small-chips>
+                  <v-combobox
+                    v-model="genreValues"
+                    :items="genres"
+                    clearable
+                    :search-input.sync="genreSearch"
+                    hide-selected
+                    hint="Max. 3"
+                    label="Genres"
+                    multiple
+                    persistent-hint
+                    small-chips
+                  >
                     <template v-slot:no-data>
                       <v-list-item>
                         <v-list-item-content>
@@ -35,36 +78,58 @@
             </v-container>
           </v-flex>
 
-          <v-flex d-flex xs3 lg3 xl2 v-for="result in searchResults" :key="result.id">
+          <v-flex
+            v-for="result in searchResults"
+            :key="result.id"
+            d-flex
+            xs3
+            lg3
+            xl2
+          >
             <v-card class="ma-1">
-              <v-layout row wrap>
+              <v-layout
+                row
+                wrap
+              >
                 <v-flex xs12>
-                  <ListImage :imageLink="result.coverImage.extraLarge" :aniListId="result.id" :name="result.title.romaji" />
+                  <ListImage
+                    :image-link="result.coverImage.extraLarge"
+                    :ani-list-id="result.id"
+                    :name="result.title.romaji"
+                  />
                 </v-flex>
                 <v-flex xs12>
-                  <v-container fluid class="pa-4">
-                    <v-layout row wrap>
+                  <v-container
+                    fluid
+                    class="pa-4"
+                  >
+                    <v-layout
+                      row
+                      wrap
+                    >
                       <v-flex xs12>
                         <template v-if="result.mediaListEntry">
                           <ProgressCircle
-                            :entryId="result.mediaListEntry.id"
+                            :entry-id="result.mediaListEntry.id"
                             :status="result.mediaListEntry.status"
-                            :progressPercentage="result.progressPercentage"
-                            :currentProgress="result.mediaListEntry.progress"
-                            :episodeAmount="result.episodes || '?'"
-                            @increase="() => {}" />
+                            :progress-percentage="result.progressPercentage"
+                            :current-progress="result.mediaListEntry.progress"
+                            :episode-amount="result.episodes || '?'"
+                            @increase="() => {}"
+                          />
                         </template>
                         <template v-else>
                           <ProgressCircle
-                            :entryId="0"
+                            :entry-id="0"
                             :status="null"
-                            :progressPercentage="0"
-                            :currentProgress="0"
-                            :episodeAmount="result.episodes || '?'"
-                            @increase="() => {}" />
+                            :progress-percentage="0"
+                            :current-progress="0"
+                            :episode-amount="result.episodes || '?'"
+                            @increase="() => {}"
+                          />
                         </template>
                       </v-flex>
-<!--
+                      <!--
                       <v-flex xs8>
                         <v-layout align-center justify-end row wrap>
                           <v-flex xs12>
@@ -79,12 +144,28 @@
               </v-layout>
               <v-card-actions>
                 <AdultToolTip v-if="result.isAdult" />
-                <v-layout align-center justify-end>
+                <v-layout
+                  align-center
+                  justify-end
+                >
                   <template v-if="result.mediaListEntry">
-                    <v-icon color="green" class="pr-1">mdi-account</v-icon>{{ result.mediaListEntry.score }}
-                    <v-divider vertical class="mx-2"></v-divider>
+                    <v-icon
+                      color="green"
+                      class="pr-1"
+                    >
+                      mdi-account
+                    </v-icon>{{ result.mediaListEntry.score }}
+                    <v-divider
+                      vertical
+                      class="mx-2"
+                    />
                   </template>
-                  <v-icon color="yellow lighten-1" class="pr-1">mdi-account-group</v-icon>{{ result.averageScore || 'n.a.' }}
+                  <v-icon
+                    color="yellow lighten-1"
+                    class="pr-1"
+                  >
+                    mdi-account-group
+                  </v-icon>{{ result.averageScore || 'n.a.' }}
                 </v-layout>
               </v-card-actions>
             </v-card>
@@ -96,18 +177,19 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import AdultToolTip from '@/components/AniList/ListElements/AdultToolTip.vue';
 import ListImage from '@/components/AniList/ListElements/ListImage.vue';
 import ProgressCircle from '@/components/AniList/ListElements/ProgressCircle.vue';
 import API from '@/modules/AniList/API';
 import { AniListListStatus, IAniListSearchResult } from '@/modules/AniList/types';
-import { Component, Vue, Watch } from 'vue-property-decorator';
 
 @Component({
   components: { AdultToolTip, ListImage, ProgressCircle },
 })
 export default class Search extends Vue {
   private searchInput: string = '';
+
   private searchResults: IAniListSearchResult[] = [];
 
   private listStatus = [{
@@ -144,8 +226,11 @@ export default class Search extends Vue {
   }];
 
   private listValues: AniListListStatus[] = [];
+
   private genreValues = [];
+
   private adultContentValue = null;
+
   private genreSearch = null;
 
   private async search() {

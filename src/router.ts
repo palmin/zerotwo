@@ -1,8 +1,8 @@
+import Vue from 'vue';
+import Router from 'vue-router';
 import AniList from '@/routes/AniList';
 import Search from '@/views/Search.vue';
 import Settings from '@/views/Settings.vue';
-import Vue from 'vue';
-import Router from 'vue-router';
 
 Vue.use(Router);
 

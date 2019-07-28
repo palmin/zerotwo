@@ -2,8 +2,19 @@
   <v-content>
     <v-card>
       <v-card-text>
-        <v-tabs v-model="tabs" grow fluid>
-          <v-tab v-for="tab in settingsTabs" :key="tab.key" :disabled="tab.disabled" ripple>{{ tab.value }}</v-tab>
+        <v-tabs
+          v-model="tabs"
+          grow
+          fluid
+        >
+          <v-tab
+            v-for="tab in settingsTabs"
+            :key="tab.key"
+            :disabled="tab.disabled"
+            ripple
+          >
+            {{ tab.value }}
+          </v-tab>
 
           <v-tabs-items v-model="tabs">
             <v-tab-item key="appSettings">
@@ -12,11 +23,12 @@
                   <v-layout wrap>
                     <v-flex xs5>
                       <v-select
-                      :items="languages"
-                      item-text="original"
-                      :value="this._locale"
-                      :label="$t('system.settings.appSettings.chooseLanguage')"
-                      @change="setLanguage">
+                        :items="languages"
+                        item-text="original"
+                        :value="_locale"
+                        :label="$t('system.settings.appSettings.chooseLanguage')"
+                        @change="setLanguage"
+                      >
                         <template v-slot:selection="data">
                           {{ data.item.original }} ({{ data.item.english }})
                         </template>
@@ -29,8 +41,16 @@
                       </v-select>
                     </v-flex>
 
-                    <v-flex xs5 offset-xs2 justify-center align-center>
-                      <v-switch v-model="darkMode" :label="$t('system.settings.appSettings.darkMode')"></v-switch>
+                    <v-flex
+                      xs5
+                      offset-xs2
+                      justify-center
+                      align-center
+                    >
+                      <v-switch
+                        v-model="darkMode"
+                        :label="$t('system.settings.appSettings.darkMode')"
+                      />
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -40,24 +60,35 @@
             <v-tab-item key="aniList">
               <v-card flat>
                 <v-container fluid>
-                  <v-layout fill-height justify-center align-center v-if="!isAuthenticated">
-                    <v-btn color="primary" @click="loginToAniList">
+                  <v-layout
+                    v-if="!isAuthenticated"
+                    fill-height
+                    justify-center
+                    align-center
+                  >
+                    <v-btn
+                      color="primary"
+                      @click="loginToAniList"
+                    >
                       {{ $t('system.actions.login') }}
                     </v-btn>
                   </v-layout>
-                  <v-layout fill-height v-else>
+                  <v-layout
+                    v-else
+                    fill-height
+                  >
                     <v-flex xs4>
                       {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
                     </v-flex>
                     <v-flex xs4>
                       <v-text-field
-                        type="number"
                         v-model="currentAniListRefreshRate"
+                        type="number"
                         :min="5"
                         :label="$t('system.settings.aniList.refreshRate')"
                         :suffix="$t('system.settings.aniList.refreshRateSuffix')"
-                        :hint="$t('system.settings.aniList.refreshRateHint')">
-                      </v-text-field>
+                        :hint="$t('system.settings.aniList.refreshRateHint')"
+                      />
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -66,25 +97,58 @@
 
             <v-tab-item key="about">
               <v-card flat>
-                <v-container fluid fill-height>
-                  <v-layout align-center justify-center wrap fill-height>
+                <v-container
+                  fluid
+                  fill-height
+                >
+                  <v-layout
+                    align-center
+                    justify-center
+                    wrap
+                    fill-height
+                  >
                     <v-flex xs12>
-                      <h2 class="display-3 text-center">{{ $t('system.settings.aboutZeroTwo.version') }}</h2>
-                      <h3 class="display-2 text-center">{{ currentAppVersion }}</h3>
+                      <h2 class="display-3 text-center">
+                        {{ $t('system.settings.aboutZeroTwo.version') }}
+                      </h2>
+                      <h3 class="display-2 text-center">
+                        {{ currentAppVersion }}
+                      </h3>
                     </v-flex>
                     <v-flex xs4>
-                      <a href="#" class="headline" @click="openPage(Pages.GITHUB)">
-                        <v-img :src="require('@/assets/logos/github-logo.png')" alt="GitHub" />
+                      <a
+                        href="#"
+                        class="headline"
+                        @click="openPage(Pages.GITHUB)"
+                      >
+                        <v-img
+                          :src="require('@/assets/logos/github-logo.png')"
+                          alt="GitHub"
+                        />
                       </a>
                     </v-flex>
                     <v-flex xs4>
-                      <a href="#" class="headline" @click="openPage(Pages.DISCORD)">
-                        <v-img :src="require('@/assets/logos/discord-blurple-logo.png')" alt="Discord" />
+                      <a
+                        href="#"
+                        class="headline"
+                        @click="openPage(Pages.DISCORD)"
+                      >
+                        <v-img
+                          :src="require('@/assets/logos/discord-blurple-logo.png')"
+                          alt="Discord"
+                        />
                       </a>
                     </v-flex>
                     <v-flex xs4>
-                      <a href="#" class="headline" @click="openPage(Pages.ZEROTWO)">
-                        <v-img :src="require('@/assets/logos/ZeroTwoAppIcon_1024.png')" alt="ZeroTwo" />
+                      <a
+                        href="#"
+                        class="headline"
+                        @click="openPage(Pages.ZEROTWO)"
+                      >
+                        <v-img
+                          :src="require('@/assets/logos/ZeroTwoAppIcon_1024.png')"
+                          alt="ZeroTwo"
+                        />
                       </a>
                     </v-flex>
                   </v-layout>
@@ -92,7 +156,6 @@
               </v-card>
             </v-tab-item>
           </v-tabs-items>
-
         </v-tabs>
       </v-card-text>
     </v-card>
@@ -125,9 +188,13 @@ enum Pages {
 @Component
 export default class Settings extends Vue {
   private _locale: string = '';
+
   private tabs = null;
+
   private githubPage: URL = new URL('https://github.com/nicoaiko/zerotwo');
+
   private discordPage: URL = new URL('https://discord.gg/sTpR4Gw');
+
   private zeroTwoPage: URL = new URL('https://www.zerotwo.org');
 
   /**
@@ -183,7 +250,7 @@ export default class Settings extends Vue {
   }
 
   private get languages(): any {
-    const messages = this.$i18n.messages;
+    const { messages } = this.$i18n;
     const languages = map(messages, (value, key) => {
       const locale = key;
       const original = value.originalReading;

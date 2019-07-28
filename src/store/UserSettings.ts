@@ -1,4 +1,6 @@
-import { getter, Module, mutation, VuexModule } from 'vuex-class-component';
+import {
+  getter, Module, mutation, VuexModule,
+} from 'vuex-class-component';
 
 /**
  * @description This is a testing module to get to know Vuex in Typescript better.

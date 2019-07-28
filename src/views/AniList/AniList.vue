@@ -1,7 +1,13 @@
 <template>
   <v-content>
-    <v-layout fill-height fluid>
-      <v-flex xs12 fill-height>
+    <v-layout
+      fill-height
+      fluid
+    >
+      <v-flex
+        xs12
+        fill-height
+      >
         <List :status="status" />
       </v-flex>
     </v-layout>

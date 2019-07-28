@@ -1,11 +1,21 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap>
+    <v-layout
+      row
+      wrap
+    >
       <template v-for="(activity, index) in activities">
-        <v-flex d-flex xs12 :key="activity.id">
+        <v-flex
+          :key="activity.id"
+          d-flex
+          xs12
+        >
           {{ activity.media.title.userPreferred }} {{ activity.status }} {{ activity.progress }}
         </v-flex>
-        <v-divider v-if="index + 1 < activities.length" :key="`divider-${activity.id}`"></v-divider>
+        <v-divider
+          v-if="index + 1 < activities.length"
+          :key="`divider-${activity.id}`"
+        />
       </template>
     </v-layout>
   </v-container>
@@ -25,4 +35,3 @@ export default class Activities extends Vue {
   }
 }
 </script>
-

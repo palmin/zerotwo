@@ -1,6 +1,16 @@
 <template>
-  <v-layout align-center justify-end>
-    ({{ score }})<v-rating :length="ratingStarAmount" half-increments dense small readonly :value="scoreStars"></v-rating>
+  <v-layout
+    align-center
+    justify-end
+  >
+    ({{ score }})<v-rating
+      :length="ratingStarAmount"
+      half-increments
+      dense
+      small
+      readonly
+      :value="scoreStars"
+    />
   </v-layout>
 </template>
 

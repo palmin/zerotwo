@@ -1,6 +1,9 @@
 <template>
   <v-content>
-    <v-layout row wrap>
+    <v-layout
+      row
+      wrap
+    >
       <template v-if="!item">
         <v-flex xs12>
           <v-layout
@@ -9,13 +12,23 @@
             justify-center
             ma-0
           >
-            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            />
           </v-layout>
         </v-flex>
       </template>
       <template v-if="item">
-        <v-flex xs12 v-if="item.bannerImage">
-          <v-img :src="item.bannerImage" height="250px" position="50% 35%">
+        <v-flex
+          v-if="item.bannerImage"
+          xs12
+        >
+          <v-img
+            :src="item.bannerImage"
+            height="250px"
+            position="50% 35%"
+          >
             <template v-slot:placeholder>
               <v-layout
                 fill-height
@@ -23,17 +36,30 @@
                 justify-center
                 ma-0
               >
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                />
               </v-layout>
             </template>
           </v-img>
         </v-flex>
       </template>
     </v-layout>
-    <v-container fluid grid-list-md>
-      <v-layout row wrap fill-height>
+    <v-container
+      fluid
+      grid-list-md
+    >
+      <v-layout
+        row
+        wrap
+        fill-height
+      >
         <template v-if="item">
-          <v-layout row wrap>
+          <v-layout
+            row
+            wrap
+          >
             <v-flex xs3>
               <v-card>
                 <v-img :src="item.coverImage">
@@ -44,7 +70,10 @@
                       justify-center
                       ma-0
                     >
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      />
                     </v-layout>
                   </template>
                 </v-img>
@@ -52,10 +81,16 @@
             </v-flex>
 
             <v-flex xs9>
-              <v-layout row wrap>
+              <v-layout
+                row
+                wrap
+              >
                 <v-flex xs6>
                   <v-card>
-                    <v-list dense two-line>
+                    <v-list
+                      dense
+                      two-line
+                    >
                       <v-list-item>
                         <v-list-item-content>
                           <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -112,7 +147,10 @@
                         </v-list-item-content>
                       </v-list-item>
 
-                      <v-list-item color="red" v-if="item.isAdult">
+                      <v-list-item
+                        v-if="item.isAdult"
+                        color="red"
+                      >
                         <v-list-item-content>
                           <v-list-item-title>{{ $t('detailView.adult') }}</v-list-item-title>
                         </v-list-item-content>
@@ -138,86 +176,102 @@
                       <v-layout column>
                         <v-flex>
                           <v-select
+                            v-model="item.listEntry.status"
                             dense
                             full-width
-                            v-model="item.listEntry.status"
                             :items="listStatusses"
                             :label="$t('detailView.ownStatus')"
                             :rules="[rules.required]"
-                          ></v-select>
+                          />
                         </v-flex>
 
                         <v-flex>
                           <v-text-field
+                            v-model="item.listEntry.progress"
                             outlined
                             :mask="getMask(item.episodes)"
                             :suffix="`/ ${item.episodes}`"
                             full-width
-                            v-model="item.listEntry.progress"
                             :label="$t('detailView.ownProgress')"
                             :rules="[rules.required]"
-                          ></v-text-field>
+                          />
                         </v-flex>
 
                         <v-flex>
                           <v-text-field
                             v-if="scoreSystem === POINT_100"
+                            v-model="item.listEntry.score"
                             suffix="/ 100"
                             full-width
-                            v-model="item.listEntry.score"
                             :label="$t('detailView.ownScore')"
                             :rules="[rules.required]"
-                          ></v-text-field>
+                          />
 
-                          <div class="text-center ma-auto" v-if="scoreSystem !== POINT_100">
+                          <div
+                            v-if="scoreSystem !== POINT_100"
+                            class="text-center ma-auto"
+                          >
                             <div class="body-1 text-xs-left pl-1">
                               {{ $t('detailView.ownScore') }} ({{ item.listEntry.score }})
                             </div>
                             <v-rating
                               v-if="scoreSystem === POINT_10_DECIMAL"
+                              v-model="item.listEntry.score"
                               length="10"
                               hover
                               half-increments
-                              v-model="item.listEntry.score"
-                            ></v-rating>
+                            />
 
                             <v-rating
                               v-if="scoreSystem === POINT_10"
+                              v-model="item.listEntry.score"
                               length="10"
                               hover
                               dense
-                              v-model="item.listEntry.score"
-                            ></v-rating>
+                            />
 
                             <v-rating
                               v-if="scoreSystem === POINT_5"
+                              v-model="item.listEntry.score"
                               length="5"
                               hover
                               dense
-                              v-model="item.listEntry.score"
-                            ></v-rating>
+                            />
 
                             <v-rating
                               v-if="scoreSystem === POINT_3"
+                              v-model="item.listEntry.score"
                               length="3"
                               hover
                               dense
-                              v-model="item.listEntry.score"
-                            ></v-rating>
+                            />
                           </div>
                         </v-flex>
 
                         <v-flex>
                           <v-layout>
                             <v-flex>
-                              <v-btn text block color="success" @click="saveChanges">
-                                <v-icon left>mdi-content-save</v-icon>
+                              <v-btn
+                                text
+                                block
+                                color="success"
+                                @click="saveChanges"
+                              >
+                                <v-icon left>
+                                  mdi-content-save
+                                </v-icon>
                                 {{ $t('system.actions.save') }}
                               </v-btn>
                             </v-flex>
                             <v-flex>
-                              <v-btn text block color="error">
-                                <v-icon left>mdi-delete</v-icon>
+                              <v-btn
+                                text
+                                block
+                                color="error"
+                              >
+                                <v-icon left>
+                                  mdi-delete
+                                </v-icon>
                                 {{ $t('system.actions.remove') }}
                               </v-btn>
                             </v-flex>
@@ -227,8 +281,14 @@
                     </v-card-actions>
 
                     <v-card-actions v-else>
-                      <v-btn text color="success" block>
-                        <v-icon left>mdi-library-plus</v-icon>
+                      <v-btn
+                        text
+                        color="success"
+                        block
+                      >
+                        <v-icon left>
+                          mdi-library-plus
+                        </v-icon>
                         {{ $t('system.actions.add') }}
                       </v-btn>
                     </v-card-actions>
@@ -246,7 +306,8 @@
                     </h3>
                   </div>
                 </v-card-title>
-                <v-card-text v-html="item.description">
+                <v-card-text>
+                  {{ item.description }}
                 </v-card-text>
               </v-card>
             </v-flex>
@@ -263,14 +324,22 @@
                       </v-list-item>
                     </template>
 
-                    <v-list-item v-for="episode in item.streamingEpisodes" :key="episode.url">
+                    <v-list-item
+                      v-for="episode in item.streamingEpisodes"
+                      :key="episode.url"
+                    >
                       <v-list-item-content>
                         <v-list-item-title>{{ episode.title }}</v-list-item-title>
                         <v-list-item-subtitle>{{ episode.site }}</v-list-item-subtitle>
                       </v-list-item-content>
 
                       <v-list-item-action>
-                        <v-icon @click="openInBrowser(episode.url)" color="yellow">mdi-open-in-new</v-icon>
+                        <v-icon
+                          color="yellow"
+                          @click="openInBrowser(episode.url)"
+                        >
+                          mdi-open-in-new
+                        </v-icon>
                       </v-list-item-action>
                     </v-list-item>
                   </v-list-group>
@@ -282,7 +351,12 @@
                     </v-list-item-content>
 
                     <v-list-item-action>
-                      <v-icon @click="openInBrowser(episode.url)" color="yellow">mdi-open-in-new</v-icon>
+                      <v-icon
+                        color="yellow"
+                        @click="openInBrowser(episode.url)"
+                      >
+                        mdi-open-in-new
+                      </v-icon>
                     </v-list-item-action>
                   </v-list-item>
                 </v-list>
@@ -296,23 +370,32 @@
 </template>
 
 <script lang="ts">
-import API from '@/modules/AniList/API';
-import { AniListListStatus, AniListScoreFormat, IAniListEntry, IAniListMedia } from '@/modules/AniList/types';
-import { aniListStore, appStore } from '@/store';
 import { shell } from 'electron';
 import { chain, isNumber } from 'lodash';
 import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator';
+import { aniListStore, appStore } from '@/store';
+import {
+  AniListListStatus, AniListScoreFormat, IAniListEntry, IAniListMedia,
+} from '@/modules/AniList/types';
+import API from '@/modules/AniList/API';
 
 @Component
 export default class DetailView extends Vue {
   private entry: IAniListEntry | null = null;
+
   private streamingEpisodesExpanded: boolean = false;
+
   private readonly POINT_100 = AniListScoreFormat.POINT_100;
+
   private readonly POINT_10_DECIMAL = AniListScoreFormat.POINT_10_DECIMAL;
+
   private readonly POINT_10 = AniListScoreFormat.POINT_10;
+
   private readonly POINT_5 = AniListScoreFormat.POINT_5;
+
   private readonly POINT_3 = AniListScoreFormat.POINT_3;
+
   private readonly listStatusses = [{
     text: this.$root.$t('listStatusses.watching'),
     value: AniListListStatus.CURRENT,
@@ -332,6 +415,7 @@ export default class DetailView extends Vue {
     text: this.$root.$t('listStatusses.repeating'),
     value: AniListListStatus.REPEATING,
   }];
+
   private readonly rules = {
     required: (value: any) => !!value || this.$root.$t('system.rules.required'),
   };
@@ -340,7 +424,7 @@ export default class DetailView extends Vue {
     if (!this.entry || !this.entry.media) {
       return null;
     }
-    const media = this.entry.media;
+    const { media } = this.entry;
     const startDate = this.getReadableDate(media.startDate);
     const endDate = this.getReadableDate(media.endDate);
     const startDateBeforeNow: boolean = this.isStartDateBeforeNow(media.startDate);
@@ -407,7 +491,7 @@ export default class DetailView extends Vue {
       return null;
     }
 
-    const scoreFormat = aniListStore.session.user.mediaListOptions.scoreFormat;
+    const { scoreFormat } = aniListStore.session.user.mediaListOptions;
 
     return scoreFormat === AniListScoreFormat.POINT_3
       ? AniListScoreFormat.POINT_3
@@ -423,9 +507,8 @@ export default class DetailView extends Vue {
   private getMask(input: number | string): string | undefined {
     if (!isNumber(input)) {
       return '#####';
-    } else {
-      return '#'.repeat(input);
     }
+    return '#'.repeat(input);
   }
 
   // tslint:disable-next-line max-line-length
@@ -434,15 +517,14 @@ export default class DetailView extends Vue {
 
     if (!year && !month && !day) {
       return false;
-    } else if (year && !month && !day) {
+    } if (year && !month && !day) {
       return now.isBefore(moment(year, 'YYYY'));
-    } else if (year && month && !day) {
+    } if (year && month && !day) {
       return now.isBefore(moment(`${month}-${year}`, 'M-YYYY'));
-    } else if (year && month && day) {
+    } if (year && month && day) {
       return now.isBefore(moment(`${day}-${month}-${year}`, 'D-M-YYYY'));
-    } else {
-      return false;
     }
+    return false;
   }
 
   // tslint:disable-next-line max-line-length
@@ -492,10 +574,10 @@ export default class DetailView extends Vue {
   private async saveChanges(): Promise<void> {
     await appStore.setLoadingState(true);
     if (this.item && this.item.listEntry) {
-      const status = this.item.listEntry.status;
-      const progress = this.item.listEntry.progress;
-      const score = this.item.listEntry.score;
-      const entryId = this.item.entryId;
+      const { status } = this.item.listEntry;
+      const { progress } = this.item.listEntry;
+      const { score } = this.item.listEntry;
+      const { entryId } = this.item;
 
       try {
         await API.updateEntry(entryId, progress, score, status);

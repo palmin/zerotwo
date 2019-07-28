@@ -1,37 +1,51 @@
 <template>
-  <v-app-bar app fixed flat dense>
+  <v-app-bar
+    app
+    fixed
+    flat
+    dense
+  >
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn text v-on="on">
-          <v-icon left>mdi-menu</v-icon>
+        <v-btn
+          text
+          v-on="on"
+        >
+          <v-icon left>
+            mdi-menu
+          </v-icon>
           {{ currentRouteName }}
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in menuItems" :key="index" @click="navigateTo(item.location)">
+        <v-list-item
+          v-for="(item, index) in menuItems"
+          :key="index"
+          @click="navigateTo(item.location)"
+        >
           <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
 
-    <v-spacer></v-spacer>
+    <v-spacer />
 
     <template v-if="!isMediaPage && isAniListRoute">
       <AniListToolbar />
 
-      <v-spacer></v-spacer>
+      <v-spacer />
     </template>
 
     <template v-if="isSeasonPreviewPage">
       <SeasonPreviewToolbar />
 
-      <v-spacer></v-spacer>
+      <v-spacer />
     </template>
 
     <template v-if="isMediaPage">
       <MediaToolbar />
 
-      <v-spacer></v-spacer>
+      <v-spacer />
     </template>
 
     <v-toolbar-items>
@@ -46,7 +60,6 @@
 
       <SettingsButton />
     </v-toolbar-items>
-
   </v-app-bar>
 </template>
 
@@ -109,7 +122,7 @@ export default class Navigation extends Vue {
   }
 
   private get currentRouteName(): string {
-    const routeName = this.$route.meta.routeName;
+    const { routeName } = this.$route.meta;
 
     return this.$t(`system.routes.${routeName}`) as string;
   }

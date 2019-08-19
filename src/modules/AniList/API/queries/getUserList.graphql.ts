@@ -1,6 +1,6 @@
 export default `
 query GetListByUsername($userName: String!, $type: MediaType!) {
-  list: MediaListCollection(userName: $userName, type: $type) {
+  list: MediaListCollection(userName: $userName, type: $type, forceSingleCompletedList: true) {
     lists {
       status
       entries {

@@ -1,6 +1,13 @@
 {
   "originalReading": "English",
   "englishReading": "English",
+  "seasons": {
+    "spring": "Spring",
+    "summer": "Summer",
+    "fall": "Fall",
+    "autumn": "Autumn",
+    "winter": "Winter"
+  },
   "system": {
     "actions": {
       "add": "Add",

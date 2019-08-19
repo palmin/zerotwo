@@ -13,6 +13,7 @@
       "add": "Add",
       "addToPlanToWatch": "Add to plan to watch",
       "back": "Back",
+      "fastSearch": "Search... \u23ce",
       "loading": "Loading...",
       "login": "Login",
       "remove": "Remove",
@@ -76,6 +77,24 @@
     },
     "rules": {
       "required": "This input must be filled."
+    },
+    "search": {
+      "searchQuery": "Search...",
+      "adultContent": {
+        "label": "Adult content",
+        "hint": "Keep clear to search for both adult and non-adult content",
+        "onlyNonAdult": "Only non-adult content",
+        "onlyAdult": "Only adult content"
+      },
+      "inList": {
+        "label": "In List",
+        "hint": "Keep clear to also search for media that is not yet in your list"
+      },
+      "genres": {
+        "label": "Genres",
+        "hint": "Max. 3",
+        "noMatch": "No genre matching \"<strong>{0}</strong>\". Press <kbd>enter</kbd> to create it."
+      }
     },
     "settings": {
       "aboutZeroTwo": {

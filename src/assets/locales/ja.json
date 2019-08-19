@@ -13,6 +13,7 @@
       "add": "追加",
       "addToPlanToWatch": "見る予定リストに追加",
       "back": "戻る",
+      "fastSearch": "検索する・・・ \u23ce",
       "loading": "通信中・・・",
       "login": "ログイン",
       "remove": "削除",
@@ -76,6 +77,24 @@
     },
     "rules": {
       "required": "入力必要です！"
+    },
+    "search": {
+      "searchQuery": "検索・・・",
+      "adultContent": {
+        "label": "１８禁",
+        "hint": "１８禁コンテンツと普通のを探したければ、空白のままにしてください。",
+        "onlyNonAdult": "不１８禁コンテンツのみ",
+        "onlyAdult": "１８禁コンテンツのみ"
+      },
+      "inList": {
+        "label": "リストの中",
+        "hint": "リストにありませんコンテンツを探したければ、空白のままにしてください。"
+      },
+      "genres": {
+        "label": "ジャンル",
+        "hint": "最大３つ",
+        "noMatch": "ジャンル「<strong>{0}</strong>」が見つかりません。<kbd>ENTER</kbd>キーを押して、追加してください。"
+      }
     },
     "settings": {
       "aboutZeroTwo": {

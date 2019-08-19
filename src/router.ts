@@ -25,6 +25,9 @@ export default new Router({
         searchablePage: true,
         routeName: 'search',
       },
+      children: [{
+        path: ':query',
+      }],
     },
     {
       path: '*',

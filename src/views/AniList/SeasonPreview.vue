@@ -67,8 +67,19 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn block text @click="addMediaToPlanList(item)" :disabled="item.isLocked || item.inList" :loading="appLoading">
-                <v-icon left color="success">mdi-library-plus</v-icon>
+              <v-btn
+                block
+                text
+                :disabled="item.isLocked || item.inList"
+                :loading="appLoading"
+                @click="addMediaToPlanList(item)"
+              >
+                <v-icon
+                  left
+                  color="success"
+                >
+                  mdi-library-plus
+                </v-icon>
                 {{ $t('system.actions.addToPlanToWatch') }}
               </v-btn>
             </v-card-actions>
@@ -80,25 +91,24 @@
 </template>
 
 <script lang="ts">
-import ListImage from '@/components/AniList/ListElements/ListImage.vue';
-import eventBus from '@/eventBus';
-import Log from '@/log';
-import API from '@/modules/AniList/API';
-import { AniListListStatus, AniListSeason, IAniListEntry, IAniListSeasonPreviewMedia } from '@/modules/AniList/types';
-import { aniListStore, appStore } from '@/store';
 import { chain } from 'lodash';
 import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator';
 import ListImage from '@/components/AniList/ListElements/ListImage.vue';
+import eventBus from '@/eventBus';
+import Log from '@/log';
 import API from '@/modules/AniList/API';
-import { AniListSeason, IAniListSeasonPreviewMedia } from '@/modules/AniList/types';
+import {
+  AniListListStatus, AniListSeason, IAniListEntry, IAniListSeasonPreviewMedia,
+} from '@/modules/AniList/types';
+import { aniListStore, appStore } from '@/store';
 
 interface UpdateSeasonProperties {
   year: number;
   season: AniListSeason;
 }
 
-@Component({ components: { ListImage }})
+@Component({ components: { ListImage } })
 export default class SeasonPreview extends Vue {
   private media: IAniListSeasonPreviewMedia[] = [];
 
@@ -112,7 +122,7 @@ export default class SeasonPreview extends Vue {
 
   private get preparedMedia() {
     return chain(this.media)
-      .filter((item) => !item.isAdult || (item.isAdult && aniListStore.allowAdultContent))
+      .filter(item => !item.isAdult || (item.isAdult && aniListStore.allowAdultContent))
       .map((item) => {
         const outputFormat = item.startDate.day
           ? this.$t('system.dates.full') as string
@@ -121,8 +131,7 @@ export default class SeasonPreview extends Vue {
             : item.startDate.year
               ? this.$t('system.dates.yearOnly') as string
               : undefined;
-        const usersListStatus = !!aniListStore.aniListData.lists.find((list) =>
-          !!list.entries.find((entry: IAniListEntry) => entry.media.id === item.id));
+        const usersListStatus = !!aniListStore.aniListData.lists.find(list => !!list.entries.find((entry: IAniListEntry) => entry.media.id === item.id));
 
         let dateFormat = '';
         let itemDate = '';
@@ -196,6 +205,7 @@ export default class SeasonPreview extends Vue {
       const response = await API.addEntry(item.id, AniListListStatus.PLANNING);
 
       if (response) {
+        // eslint-disable-next-line no-param-reassign
         item.inList = true;
 
         // We don't want to reload everytime a media is added to planned list
@@ -205,7 +215,6 @@ export default class SeasonPreview extends Vue {
         await aniListStore.setRefreshRate(0.5);
         await aniListStore.restartRefreshTimer();
         await aniListStore.setRefreshRate(tempRefreshRate);
-
       }
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['SeasonPreview', 'addMediaToPlanList'], error);

@@ -13,6 +13,7 @@
       "add": "Hinzufügen",
       "addToPlanToWatch": "Zur Plan-Liste hinzufügen",
       "back": "Zurück",
+      "fastSearch": "Suchen... \u23ce",
       "loading": "Lädt...",
       "login": "Login",
       "remove": "Entfernen",
@@ -76,6 +77,24 @@
     },
     "rules": {
       "required": "Diese Eingabe muss ausgefüllt werden."
+    },
+    "search": {
+      "searchQuery": "Suchbegriff...",
+      "adultContent": {
+        "label": "18+-Inhalte",
+        "hint": "Leer lassen, um ungefiltert Inhalte zu suchen",
+        "onlyNonAdult": "Nur jugendfreie Inhalte",
+        "onlyAdult": "Nur Inhalte ab 18+"
+      },
+      "inList": {
+        "label": "In Liste...",
+        "hint": "Leer lassen, um auch nicht eingetragene Inhalte zu suchen"
+      },
+      "genres": {
+        "label": "Genres",
+        "hint": "Maximal 3 auf einmal",
+        "noMatch": "Kein Genre \"<strong>{0}</strong>\" gefunden. Drücke <kbd>Enter</kbd>, um es hinzuzufügen."
+      }
     },
     "settings": {
       "aboutZeroTwo": {

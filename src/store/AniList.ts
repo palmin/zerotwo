@@ -138,6 +138,11 @@ export class AniListStore extends VuexModule {
     return this._timeUntilRefresh;
   }
 
+  @getter
+  public get allowAdultContent(): boolean {
+    return this._session.user.options.displayAdultContent;
+  }
+
   /**
    * @action
    * @async

@@ -67,9 +67,13 @@ export default class ListImage extends Vue {
 .shadowed {
   color: #FFF;
   text-shadow:
-    -1px 1px 2px #000,
-    1px 1px 2px #000,
-    1px -1px 0 #000,
-    -1px -1px 0 #000;
+    -1px 1px 4px #000,
+    -2px 2px 4px #000,
+    1px 1px 4px #000,
+    2px 2px 4px #000,
+    1px -1px 4px #000,
+    2px -2px 4px #000,
+    -1px -1px 4px #000,
+    -2px -2px 4px #000;
 }
 </style>

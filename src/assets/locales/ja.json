@@ -1,6 +1,13 @@
 {
   "originalReading": "日本語",
   "englishReading": "Japanese",
+  "seasons": {
+    "spring": "春",
+    "summer": "夏",
+    "fall": "秋",
+    "autumn": "秋",
+    "winter": "冬"
+  },
   "system": {
     "actions": {
       "add": "追加",

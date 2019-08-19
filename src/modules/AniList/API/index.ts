@@ -28,6 +28,7 @@ import getUserList from './queries/getUserList.graphql';
 import searchAnime from './queries/searchAnime.graphql';
 
 // Mutations
+import addEntry from './mutations/addEntry.graphql';
 import setEpisodeProgress from './mutations/setEpisodeProgress.graphql';
 import updateEntry from './mutations/updateEntry.graphql';
 
@@ -255,6 +256,28 @@ export default class AniListAPI {
 
   // Mutations
 
+  public static async addEntry(mediaId: number, status: AniListListStatus): Promise<boolean> {
+    try {
+      const { accessToken } = aniListStore.session;
+      const headers = { Authorization: `Bearer ${accessToken}` };
+
+      const response = await axios.post('/', {
+        query: addEntry,
+        variables: {
+          mediaId,
+          status,
+        },
+      }, { headers });
+
+      return !!response.data.data.response.media;
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'addEntry'], error);
+    }
+
+    return false;
+  }
+
+  // tslint:disable-next-line max-line-length
   public static async updateEntry(entryId: number, progress: number, score: number, status: AniListListStatus): Promise<void> {
     try {
       const { accessToken } = aniListStore.session;

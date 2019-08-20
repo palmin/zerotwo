@@ -110,10 +110,18 @@
         "chooseLanguage": "言語を選択してください (Choose language)",
         "darkMode": "ダークモード"
       },
+      "changelog": {
+        "new": "追加",
+        "fix": "直し",
+        "remove": "削除",
+        "version": "バージョン",
+        "changesIn": "{0}の最新更新情報"
+      },
       "menu": {
         "about": "ゼロツーについて",
         "aniList": "AniList",
-        "appSettings": "環境設定"
+        "appSettings": "環境設定",
+        "changelog": "最新更新情報"
       }
     }
   },

@@ -110,10 +110,18 @@
         "chooseLanguage": "Sprache wählen (Choose language)",
         "darkMode": "Dunkles App-Design"
       },
+      "changelog": {
+        "new": "NEU",
+        "fix": "BEHOBEN",
+        "remove": "ENTFERNT",
+        "version": "Version",
+        "changesIn": "Neuste Änderungen in {0}"
+      },
       "menu": {
         "about": "Über ZeroTwo",
         "aniList": "AniList",
-        "appSettings": "App-Einstellungen"
+        "appSettings": "App-Einstellungen",
+        "changelog": "Letzte Änderungen"
       }
     }
   },

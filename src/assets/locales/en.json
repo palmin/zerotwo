@@ -110,10 +110,18 @@
         "chooseLanguage": "Choose language",
         "darkMode": "Dark mode"
       },
+      "changelog": {
+        "new": "NEW",
+        "fix": "FIX",
+        "remove": "REMOVE",
+        "version": "Version",
+        "changesIn": "Latest changes in {0}"
+      },
       "menu": {
         "about": "About ZeroTwo",
         "aniList": "AniList",
-        "appSettings": "App Settings"
+        "appSettings": "App Settings",
+        "changelog": "Latest changes"
       }
     }
   },

@@ -65,6 +65,14 @@
         "text": "変更は更新出来ませんでした！AniListや自分のインターネットへの接続をチェックして下さい。"
       }
     },
+    "homepage": {
+      "completed": "{0}を終了しました",
+      "plansToWatch": "{0}を予定リストに追加しました",
+      "watchedEpisode": "{0}の第{1}話を見ました",
+      "dropped": "{0}を中止しました",
+      "rewatchedEpisode": "{0}の第{1}話を再見しました",
+      "paused": "{0}を一時的中止しました"
+    },
     "modules": {
       "aniList": "AniList"
     },

@@ -9,6 +9,9 @@ query GetActivities($page: Int!, $perPage: Int!, $userId: Int!) {
           title {
             userPreferred
           }
+          coverImage {
+            extraLarge
+          }
         }
         progress
         status

@@ -18,7 +18,7 @@
           fluid
           fill-height
         >
-          <v-flex xs6>
+          <v-flex xs12>
             <div class="title">
               {{ $t('system.aniList.activities') }}
             </div>

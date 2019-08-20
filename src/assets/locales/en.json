@@ -33,7 +33,7 @@
       "unknown": "Unknown"
     },
     "aniList": {
-      "activities": "Activities",
+      "activities": "Latest Activities",
       "airingFinished": "Airing finished",
       "currentProgress": "{0} / {1}",
       "howToAuthenticate": {
@@ -64,6 +64,14 @@
         "title": "Update failed",
         "text": "The committed update could not be synchronized! Check AniList availability or the internet connection!"
       }
+    },
+    "homepage": {
+      "completed": "Completed {0}",
+      "plansToWatch": "Plans to watch {0}",
+      "watchedEpisode": "Watched episode {1} of {0}",
+      "dropped": "Dropped {0}",
+      "rewatchedEpisode": "Rewatched episode {1} of {0}",
+      "paused": "Paused {0}"
     },
     "modules": {
       "aniList": "AniList"

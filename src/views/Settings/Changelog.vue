@@ -92,15 +92,15 @@ export default class ChangelogSettings extends Vue {
     return this.$i18n.locale;
   }
 
-  private get englishNew(): string[] {
+  private get englishNew() {
     return latestChangelog.NEW;
   }
 
-  private get englishFix(): string[] {
+  private get englishFix() {
     return latestChangelog.FIX;
   }
 
-  private get englishRemove(): string[] {
+  private get englishRemove() {
     return latestChangelog.REMOVE;
   }
 }

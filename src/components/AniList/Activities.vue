@@ -1,37 +1,61 @@
 <template>
-  <v-container fluid>
-    <v-layout
-      row
-      wrap
-    >
-      <template v-for="(activity, index) in activities">
-        <v-flex
-          :key="activity.id"
-          d-flex
-          xs12
-        >
-          {{ activity.media.title.userPreferred }} {{ activity.status }} {{ activity.progress }}
-        </v-flex>
-        <v-divider
-          v-if="index + 1 < activities.length"
-          :key="`divider-${activity.id}`"
-        />
-      </template>
+  <v-container
+    fluid
+    grid-list-xl
+  >
+    <v-layout wrap>
+      <v-flex
+        v-for="activity in activities"
+        :key="activity.id"
+        xl2
+        lg3
+        xs3
+      >
+        <v-card>
+          <ListImage
+            :image-link="activity.coverImage"
+            :ani-list-id="activity.mediaId"
+            name=""
+          />
+
+          <v-card-text>
+            <template v-if="activity.completed">
+              {{ $t('system.homepage.completed', [activity.title]) }}
+            </template>
+            <template v-else-if="activity.plansToWatch">
+              {{ $t('system.homepage.plansToWatch', [activity.title]) }}
+            </template>
+            <template v-else-if="activity.watchedEpisode">
+              {{ $t('system.homepage.watchedEpisode', [activity.title, activity.progress]) }}
+            </template>
+          </v-card-text>
+        </v-card>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script lang="ts">
+import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator';
-
-// Custom Components
+import ListImage from '@/components/AniList/ListElements/ListImage.vue';
 import { IAniListActivity } from '@/modules/AniList/types';
 import { aniListStore } from '@/store';
 
-@Component
+@Component({ components: { ListImage } })
 export default class Activities extends Vue {
-  private get activities(): IAniListActivity[] {
-    return aniListStore.latestActivities;
+  private get activities() {
+    return aniListStore.latestActivities.map(activity => ({
+      mediaId: activity.media.id,
+      title: activity.media.title.userPreferred,
+      progress: activity.progress,
+      createdAt: moment(activity.createdAt).fromNow(),
+      coverImage: activity.media.coverImage.extraLarge,
+      // Status
+      watchedEpisode: activity.status === 'watched episode',
+      completed: activity.status === 'completed',
+      plansToWatch: activity.status === 'plans to watch',
+    }));
   }
 }
 </script>

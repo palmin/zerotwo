@@ -459,6 +459,10 @@ export interface IAniListActivity {
    * @var {number} createdAt contains the date of the activity as a timestamp
    */
   createdAt: number;
+  /**
+   * @var {IAniListCoverImage} coverImage contains data about the media's covers
+   */
+  coverImage: IAniListCoverImage;
 }
 
 /**

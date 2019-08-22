@@ -10,20 +10,14 @@
       <v-layout class="px-1 py-2">
         <v-flex xs4>
           <div class="headline">
-            <v-icon
-              large
-              color="blue darken-1"
-            >
+            <v-icon large color="blue darken-1">
               mdi-rocket
             </v-icon>
             {{ $t('system.settings.changelog.new') }}
           </div>
 
           <v-list>
-            <v-list-item
-              v-for="(item, index) in englishNew"
-              :key="`new-${index}`"
-            >
+            <v-list-item v-for="(item, index) in englishNew" :key="`new-${index}`">
               <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
             </v-list-item>
           </v-list>
@@ -31,20 +25,14 @@
 
         <v-flex xs4>
           <div class="headline">
-            <v-icon
-              large
-              color="warning"
-            >
+            <v-icon large color="warning">
               mdi-bandage
             </v-icon>
             {{ $t('system.settings.changelog.fix') }}
           </div>
 
           <v-list>
-            <v-list-item
-              v-for="(item, index) in englishFix"
-              :key="`fix-${index}`"
-            >
+            <v-list-item v-for="(item, index) in englishFix" :key="`fix-${index}`">
               <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
             </v-list-item>
           </v-list>
@@ -52,20 +40,14 @@
 
         <v-flex xs4>
           <div class="headline">
-            <v-icon
-              large
-              color="error"
-            >
+            <v-icon large color="error">
               mdi-delete
             </v-icon>
             {{ $t('system.settings.changelog.remove') }}
           </div>
 
           <v-list>
-            <v-list-item
-              v-for="(item, index) in englishRemove"
-              :key="`remove-${index}`"
-            >
+            <v-list-item v-for="(item, index) in englishRemove" :key="`remove-${index}`">
               <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
             </v-list-item>
           </v-list>

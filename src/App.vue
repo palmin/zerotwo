@@ -3,7 +3,7 @@
     <main>
       <Navigation />
       <router-view :key="$route.path" />
-      <notifications position="top center" />
+      <ZeroTwoNotifications position="top center" />
     </main>
   </v-app>
 </template>
@@ -16,11 +16,13 @@ import { validLanguageCodes } from './i18n';
 import { aniListStore, appStore } from './store';
 
 // Components
-import Navigation from './components/Navigation.vue';
+import Navigation from '@/components/Navigation.vue';
+import ZeroTwoNotifications from '@/components/Notifications.vue';
 
 @Component({
   components: {
     Navigation,
+    ZeroTwoNotifications,
   },
 })
 export default class App extends Vue {

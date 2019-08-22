@@ -1,40 +1,17 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-container
-        fluid
-        fill-height
-        grid-list-xl
-      >
-        <v-layout
-          v-if="!isAuthenticated"
-          fill-height
-          justify-center
-          align-center
-        >
-          <v-btn
-            color="primary"
-            @click="loginToAniList"
-          >
+      <v-container fluid fill-height grid-list-xl>
+        <v-layout v-if="!isAuthenticated" fill-height justify-center align-center>
+          <v-btn color="primary" @click="loginToAniList">
             {{ $t('system.actions.login') }}
           </v-btn>
         </v-layout>
-        <v-layout
-          v-else
-          fill-height
-          justify-center
-          align-center
-        >
-          <v-flex
-            xs5
-            text-center
-          >
+        <v-layout v-else fill-height justify-center align-center>
+          <v-flex xs5 text-center>
             {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
           </v-flex>
-          <v-flex
-            xs5
-            offset-xs2
-          >
+          <v-flex xs5 offset-xs2>
             <v-text-field
               v-model="currentAniListRefreshRate"
               type="number"

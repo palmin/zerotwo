@@ -1,8 +1,5 @@
 <template>
-  <span
-    v-if="missingEpisodes"
-    class="info--text"
-  >
+  <span v-if="missingEpisodes" class="info--text">
     {{ $tc('system.aniList.missingEpisodes', missingEpisodes, [missingEpisodes]) }}
   </span>
 </template>

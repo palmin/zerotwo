@@ -1,10 +1,6 @@
 <template>
   <v-content>
-    <v-container
-      fluid
-      class="py-0 px-1"
-      fill-height
-    >
+    <v-container fluid class="py-0 px-1" fill-height>
       <v-layout wrap>
         <v-flex
           v-for="item in preparedMedia"
@@ -13,27 +9,12 @@
           lg3
           xl2
         >
-          <v-card
-            hover
-            class="ma-1"
-          >
-            <ListImage
-              :image-link="item.coverImage"
-              :name="item.name"
-              :ani-list-id="item.id"
-            />
+          <v-card hover class="ma-1">
+            <ListImage :image-link="item.coverImage" :name="item.name" :ani-list-id="item.id" />
 
             <v-card-text>
-              <v-layout
-                row
-                fill-height
-                align-center
-              >
-                <v-layout
-                  column
-                  class="px-2"
-                  justify-start
-                >
+              <v-layout row fill-height align-center>
+                <v-layout column class="px-2" justify-start>
                   <v-flex class="subtitle-1 grey--text">
                     {{ $tc('seasonPreview.episodes', item.episodes) }}
                   </v-flex>
@@ -44,18 +25,11 @@
 
                 <template v-if="item.isAdult">
                   <v-flex class="mx-2 text-right">
-                    <v-divider
-                      vertical
-                      inset
-                    />
+                    <v-divider vertical inset />
 
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-icon
-                          large
-                          color="error"
-                          v-on="on"
-                        >
+                        <v-icon large color="error" v-on="on">
                           mdi-alert
                         </v-icon>
                       </template>
@@ -74,10 +48,7 @@
                 :loading="appLoading"
                 @click="addMediaToPlanList(item)"
               >
-                <v-icon
-                  left
-                  color="success"
-                >
+                <v-icon left color="success">
                   mdi-library-plus
                 </v-icon>
                 {{ $t('system.actions.addToPlanToWatch') }}

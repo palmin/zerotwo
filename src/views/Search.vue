@@ -1,26 +1,13 @@
 <template>
   <v-content>
-    <v-layout
-      fill-height
-      fluid
-    >
-      <v-flex
-        xs12
-        fill-height
-      >
-        <v-container
-          fluid
-          fill-height
-          class="px-0 py-0"
-        >
+    <v-layout fill-height fluid>
+      <v-flex xs12 fill-height>
+        <v-container fluid fill-height class="px-0 py-0">
           <v-layout wrap>
             <v-flex xs12>
               <v-card class="no-border-radius">
                 <v-card-text>
-                  <v-container
-                    fluid
-                    grid-list-md
-                  >
+                  <v-container fluid grid-list-md>
                     <v-layout>
                       <v-flex xs6>
                         <v-text-field
@@ -140,26 +127,14 @@
                           </v-tooltip>
                         </v-flex>
                         <v-flex grow>
-                          <v-layout
-                            align-center
-                            justify-end
-                          >
+                          <v-layout align-center justify-end>
                             <template v-if="result.mediaListEntry">
-                              <v-icon
-                                color="green"
-                                class="pr-1"
-                              >
+                              <v-icon color="green" class="pr-1">
                                 mdi-account
                               </v-icon>{{ result.mediaListEntry.score }}
-                              <v-divider
-                                vertical
-                                class="mx-2"
-                              />
+                              <v-divider vertical class="mx-2" />
                             </template>
-                            <v-icon
-                              color="yellow lighten-1"
-                              class="pr-1"
-                            >
+                            <v-icon color="yellow lighten-1" class="pr-1">
                               mdi-account-group
                             </v-icon>{{ result.averageScore || 'n.a.' }}
                           </v-layout>

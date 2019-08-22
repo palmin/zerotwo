@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    fluid
-    grid-list-xl
-  >
+  <v-container fluid grid-list-xl>
     <v-layout wrap>
       <v-flex
         v-for="activity in activities"
@@ -12,11 +9,7 @@
         xs3
       >
         <v-card>
-          <ListImage
-            :image-link="activity.coverImage"
-            :ani-list-id="activity.mediaId"
-            name=""
-          />
+          <ListImage :image-link="activity.coverImage" :ani-list-id="activity.mediaId" name="" />
 
           <v-card-text>
             <template v-if="activity.completed">

@@ -48,7 +48,9 @@
       "notification": {
         "title": "更新成功",
         "completeUpdateText": "{0}を成功にエピソード{1}に終了して、更新しました。",
-        "simpleUpdateText": "{0}を成功にエピソード{1}に更新しました。"
+        "simpleUpdateText": "{0}を成功にエピソード{1}に更新しました。",
+        "addedToList": "{0}を成功にリストに追加しました。",
+        "removeEntry": "{0}を成功にリストから削除しました。"
       },
       "notYetAired": "まだ放送していませんでした。",
       "nextAiringEpisode": "第{0}話は{1}に放送開始"
@@ -138,7 +140,10 @@
     "startDate": "放送開始日："
   },
   "detailView": {
-    "airedOn": "{0}～{1}",
+    "airedOn": "{0}に放送された",
+    "airedOnTo": "{0}～{1}",
+    "airesFromTo": "{0}〜{1}に放送される",
+    "airesOn": "{0}に放送開始",
     "airingStartedOn": "{0}に始まりました",
     "airingStartsOnDay": "{0}に始まる",
     "airingStartsInMonthYear": "{0}に始まる",

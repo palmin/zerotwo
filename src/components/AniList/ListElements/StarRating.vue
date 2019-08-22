@@ -1,8 +1,5 @@
 <template>
-  <v-layout
-    align-center
-    justify-end
-  >
+  <v-layout align-center justify-end>
     ({{ score }})<v-rating
       :length="ratingStarAmount"
       half-increments

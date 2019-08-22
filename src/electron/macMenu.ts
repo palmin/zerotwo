@@ -50,7 +50,7 @@ export default () => Menu.buildFromTemplate([
       {
         label: 'Create a Bug Issue on GitHub',
         click() {
-          const content = encodeURIComponent(`# BUG REPORT\n\n*Please specify the bug you want to report.*\n\n___\n\nZeroTwo v${version}\n\n${os.platform()} ${os.release()}`); // tslint:disable-line max-line-length
+          const content = encodeURIComponent(`# BUG REPORT\n\n*Please specify the bug you want to report.*\n\n___\n\nZeroTwo v${version}\n\n${os.platform()} ${os.release()}`);
           const url = `https://github.com/NicoAiko/zerotwo/issues/new?labels=bug🐞&body=${content}`;
           shell.openExternal(url);
         },

@@ -1,15 +1,8 @@
 <template>
-  <v-layout
-    align-start
-    justify-start
-  >
+  <v-layout align-start justify-start>
     <v-tooltip top>
       <template v-slot:activator="{ on }">
-        <v-icon
-          class="pointerCursor"
-          color="error"
-          v-on="on"
-        >
+        <v-icon class="pointerCursor" color="error" v-on="on">
           mdi-alert
         </v-icon>
       </template>

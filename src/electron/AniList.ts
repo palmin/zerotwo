@@ -33,7 +33,7 @@ const windowParams: Electron.BrowserWindowConstructorOptions = {
 ipcMain.on('aniListOAuth', (event: any, action: string) => {
   if (action === 'getToken') {
     const redirectUri = encodeURIComponent(oauthConfig.redirectUri);
-    const url = format(`${oauthConfig.authorizationUrl}?client_id=${oauthConfig.clientId}&response_type=code&redirect_uri=${redirectUri}`); // tslint:disable-line max-line-length
+    const url = format(`${oauthConfig.authorizationUrl}?client_id=${oauthConfig.clientId}&response_type=code&redirect_uri=${redirectUri}`);
 
     const window = new BrowserWindow(windowParams);
     window.loadURL(url);
@@ -77,8 +77,8 @@ ipcMain.on('aniListOAuth', (event: any, action: string) => {
         });
       };
 
-      window.webContents.on('will-navigate', (windowEvent: any, oauthUrl: string) => oauthFunction(windowEvent, oauthUrl)); // tslint:disable-line max-line-length
-      window.webContents.on('will-redirect', (windowEvent: any, oauthUrl: string) => oauthFunction(windowEvent, oauthUrl)); // tslint:disable-line max-line-length
+      window.webContents.on('will-navigate', (windowEvent: any, oauthUrl: string) => oauthFunction(windowEvent, oauthUrl));
+      window.webContents.on('will-redirect', (windowEvent: any, oauthUrl: string) => oauthFunction(windowEvent, oauthUrl));
     });
   }
 });

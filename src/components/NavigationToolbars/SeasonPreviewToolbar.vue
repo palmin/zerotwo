@@ -1,13 +1,20 @@
 <template>
   <v-toolbar-items>
+    <v-btn text icon @click="previousYear">
+      <v-icon>mdi-arrow-left</v-icon>
+    </v-btn>
+
     <v-text-field
       v-model="year"
       solo
       flat
-      text
       :placeholder="currentYear"
       @keydown.enter="updateSeasonPreview"
     />
+
+    <v-btn text icon @click="nextYear">
+      <v-icon>mdi-arrow-right</v-icon>
+    </v-btn>
 
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
@@ -41,7 +48,7 @@ interface SeasonItemProperties {
 
 @Component
 export default class SeasonPreviewToolbar extends Vue {
-  private year!: string;
+  private year: string = '0';
 
   private items!: SeasonItemProperties[];
 
@@ -50,11 +57,11 @@ export default class SeasonPreviewToolbar extends Vue {
   private get currentYear(): string {
     const date = new Date();
 
-    return date.getFullYear().toString();
+    return date.getUTCFullYear().toString();
   }
 
   private created(): void {
-    this.year = new Date().getUTCFullYear().toString();
+    this.year = this.currentYear;
     this.items = [{
       title: this.$t('seasons.winter').toString(),
       value: AniListSeason.WINTER,
@@ -71,6 +78,32 @@ export default class SeasonPreviewToolbar extends Vue {
 
     const currentSeasonValue = this.getCurrentSeason();
     this.selectedSeason = this.items.find(item => item.value === currentSeasonValue) as SeasonItemProperties;
+  }
+
+  private previousYear(): void {
+    let yearAsNumber = parseInt(this.year, 10);
+
+    if (!yearAsNumber) {
+      yearAsNumber = new Date().getUTCFullYear() - 1;
+    } else {
+      yearAsNumber -= 1;
+    }
+
+    this.year = yearAsNumber.toString();
+    this.updateSeasonPreview();
+  }
+
+  private nextYear(): void {
+    let yearAsNumber = parseInt(this.year, 10);
+
+    if (!yearAsNumber) {
+      yearAsNumber = new Date().getUTCFullYear() + 1;
+    } else {
+      yearAsNumber += 1;
+    }
+
+    this.year = yearAsNumber.toString();
+    this.updateSeasonPreview();
   }
 
   private changeSelection(item: SeasonItemProperties): void {

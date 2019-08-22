@@ -56,6 +56,9 @@
             </v-card-actions>
           </v-card>
         </v-flex>
+        <v-flex v-if="!preparedMedia.length" xs12 text-center class="display-2 ma-4">
+          {{ $t('$vuetify.noDataText') }}
+        </v-flex>
       </v-layout>
     </v-container>
   </v-content>
@@ -145,6 +148,7 @@ export default class SeasonPreview extends Vue {
   private async created() {
     // Listen to event
     eventBus.$on('updateSeason', async (season: UpdateSeasonProperties) => {
+      await appStore.setLoadingState(true);
       try {
         const preview = await API.getSeasonPreview(season.year, season.season);
         if (!preview) {
@@ -155,6 +159,7 @@ export default class SeasonPreview extends Vue {
       } catch (error) {
         this.media = [];
       }
+      await appStore.setLoadingState(false);
     });
 
     try {

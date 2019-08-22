@@ -1,6 +1,6 @@
 <template>
   <v-toolbar-items>
-    <v-btn text icon @click="previousYear">
+    <v-btn text icon :disabled="!navigationEnabled" @click="previousYear">
       <v-icon>mdi-arrow-left</v-icon>
     </v-btn>
 
@@ -12,7 +12,7 @@
       @keydown.enter="updateSeasonPreview"
     />
 
-    <v-btn text icon @click="nextYear">
+    <v-btn text icon :disabled="!navigationEnabled" @click="nextYear">
       <v-icon>mdi-arrow-right</v-icon>
     </v-btn>
 
@@ -54,6 +54,8 @@ export default class SeasonPreviewToolbar extends Vue {
 
   private selectedSeason!: SeasonItemProperties;
 
+  private navigationEnabled: boolean = true;
+
   private get currentYear(): string {
     const date = new Date();
 
@@ -90,6 +92,11 @@ export default class SeasonPreviewToolbar extends Vue {
     }
 
     this.year = yearAsNumber.toString();
+    this.navigationEnabled = false;
+    setTimeout(() => {
+      this.navigationEnabled = true;
+    }, 2000);
+
     this.updateSeasonPreview();
   }
 
@@ -103,6 +110,11 @@ export default class SeasonPreviewToolbar extends Vue {
     }
 
     this.year = yearAsNumber.toString();
+    this.navigationEnabled = false;
+    setTimeout(() => {
+      this.navigationEnabled = true;
+    }, 2000);
+
     this.updateSeasonPreview();
   }
 

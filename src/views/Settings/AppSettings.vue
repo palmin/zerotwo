@@ -1,11 +1,7 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-container
-        fluid
-        fill-height
-        grid-list-xl
-      >
+      <v-container fluid fill-height grid-list-xl>
         <v-layout>
           <v-flex xs5>
             <v-select
@@ -27,16 +23,8 @@
             </v-select>
           </v-flex>
 
-          <v-flex
-            xs5
-            offset-xs2
-            justify-center
-            align-center
-          >
-            <v-switch
-              v-model="darkMode"
-              :label="$t('system.settings.appSettings.darkMode')"
-            />
+          <v-flex xs5 offset-xs2 justify-center align-center>
+            <v-switch v-model="darkMode" :label="$t('system.settings.appSettings.darkMode')" />
           </v-flex>
         </v-layout>
       </v-container>

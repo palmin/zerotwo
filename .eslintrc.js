@@ -18,6 +18,13 @@ module.exports = {
     'no-nested-ternary': [0],
     'no-plusplus': [0],
     'import/no-cycle': [0],
+    'vue/max-attributes-per-line': ['error', {
+      singleline: 4,
+      multiline: {
+        max: 1,
+        allowFirstLine: false,
+      },
+    }],
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',

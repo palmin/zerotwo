@@ -11,10 +11,7 @@
       {{ currentProgress }}
     </div>
     <div class="episodeDivider" />
-    <div
-      class="episodeAmount"
-      :class="{ complete: completedList }"
-    >
+    <div class="episodeAmount" :class="{ complete: completedList }">
       {{ episodeAmount }}
     </div>
     <v-btn

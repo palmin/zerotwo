@@ -31,6 +31,7 @@ import searchAnime from './queries/searchAnime.graphql';
 import addEntry from './mutations/addEntry.graphql';
 import setEpisodeProgress from './mutations/setEpisodeProgress.graphql';
 import updateEntry from './mutations/updateEntry.graphql';
+import removeEntry from './mutations/removeEntry.graphql';
 
 const axios: AxiosInstance = Axios.create({
   baseURL: 'https://graphql.anilist.co/',
@@ -54,7 +55,6 @@ export default class AniListAPI {
    * @param {AniListType} type contains the type of media
    * @returns {Promise<IAniListMediaListCollection | null>} User's Media list collection or nothing
    */
-  // tslint:disable-next-line max-line-length
   public static async getUserList(userName: string, type: AniListType, accessToken: string): Promise<IAniListMediaListCollection | null> {
     try {
       const headers = { Authorization: `Bearer ${accessToken}` };
@@ -180,7 +180,6 @@ export default class AniListAPI {
     return null;
   }
 
-  // tslint:disable-next-line max-line-length
   public static async searchAnime(query: string, filters: { isAdult: boolean | null, listStatus: AniListListStatus[], genres: string[] }): Promise<IAniListSearchResult[] | null> {
     try {
       const { accessToken } = aniListStore.session;
@@ -256,7 +255,7 @@ export default class AniListAPI {
 
   // Mutations
 
-  public static async addEntry(mediaId: number, status: AniListListStatus): Promise<boolean> {
+  public static async addEntry(mediaId: number, status: AniListListStatus, score?: number, progress?: number): Promise<boolean> {
     try {
       const { accessToken } = aniListStore.session;
       const headers = { Authorization: `Bearer ${accessToken}` };
@@ -266,6 +265,8 @@ export default class AniListAPI {
         variables: {
           mediaId,
           status,
+          score,
+          progress,
         },
       }, { headers });
 
@@ -277,8 +278,7 @@ export default class AniListAPI {
     return false;
   }
 
-  // tslint:disable-next-line max-line-length
-  public static async updateEntry(entryId: number, progress: number, score: number, status: AniListListStatus): Promise<void> {
+  public static async updateEntry(entryId: number, progress: number, score: number, status: AniListListStatus): Promise<boolean> {
     try {
       const { accessToken } = aniListStore.session;
       const headers = { Authorization: `Bearer ${accessToken}` };
@@ -292,9 +292,33 @@ export default class AniListAPI {
           status,
         },
       }, { headers });
+
+      return true;
     } catch (error) {
       Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'updateEntry'], error);
     }
+
+    return false;
+  }
+
+  public static async removeEntry(entryId: number): Promise<boolean> {
+    try {
+      const { accessToken } = aniListStore.session;
+      const headers = { Authorization: `Bearer ${accessToken}` };
+
+      await axios.post('/', {
+        query: removeEntry,
+        variables: {
+          entryId,
+        },
+      }, { headers });
+
+      return true;
+    } catch (error) {
+      Log.log(Log.getErrorSeverity(), ['aniList', 'api', 'removeEntry'], error);
+    }
+
+    return false;
   }
 
   public static async setEntryProgress(entryId: number, progress: number): Promise<void> {

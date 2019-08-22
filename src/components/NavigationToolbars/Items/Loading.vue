@@ -1,15 +1,6 @@
 <template>
-  <v-btn
-    v-if="isLoading"
-    text
-    small
-    icon
-  >
-    <v-progress-circular
-      size="16"
-      width="2"
-      indeterminate
-    />
+  <v-btn v-if="isLoading" text small icon>
+    <v-progress-circular size="16" width="2" indeterminate />
   </v-btn>
 </template>
 

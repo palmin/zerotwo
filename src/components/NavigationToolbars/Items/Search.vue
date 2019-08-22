@@ -1,12 +1,7 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on: toolTip }">
-      <v-btn
-        text
-        icon
-        :to="{ name: 'Search' }"
-        v-on="{ ...toolTip }"
-      >
+      <v-btn text icon :to="{ name: 'Search' }" v-on="{ ...toolTip }">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 

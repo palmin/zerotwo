@@ -1,23 +1,12 @@
 <template>
-  <v-container
-    fluid
-    class="py-0 px-1"
-    fill-height
-  >
+  <v-container fluid class="py-0 px-1" fill-height>
     <v-layout wrap>
-      <v-flex
-        v-show="isLoading"
-        xs12
-        align-self-center
-      >
+      <v-flex v-show="isLoading" xs12 align-self-center>
         <div class="display-3 text-center ma-6">
           {{ $t('system.actions.loading') }}
         </div>
       </v-flex>
-      <v-flex
-        v-if="!listData.length && !isLoading"
-        xs12
-      >
+      <v-flex v-if="!listData.length && !isLoading" xs12>
         <v-container>
           <div class="headline text-center">
             {{ $t('$vuetify.noDataText') }}
@@ -33,11 +22,7 @@
           xl2
         >
           <v-card class="ma-1">
-            <ListImage
-              :image-link="item.imageLink"
-              :ani-list-id="item.aniListId"
-              :name="item.name"
-            />
+            <ListImage :image-link="item.imageLink" :ani-list-id="item.aniListId" :name="item.name" />
 
             <v-card-text>
               <v-layout wrap>
@@ -53,22 +38,12 @@
                 </v-flex>
 
                 <v-flex xs8>
-                  <v-layout
-                    align-center
-                    justify-end
-                    wrap
-                  >
+                  <v-layout align-center justify-end wrap>
                     <v-flex xs12>
-                      <EpisodeState
-                        :status="item.mediaStatus"
-                        :next-episode="item.nextEpisode"
-                      />
+                      <EpisodeState :status="item.mediaStatus" :next-episode="item.nextEpisode" />
                     </v-flex>
                     <v-flex xs12>
-                      <MissingEpisodes
-                        :next-airing-episode="item.nextAiringEpisode"
-                        :current-progress="item.currentProgress"
-                      />
+                      <MissingEpisodes :next-airing-episode="item.nextAiringEpisode" :current-progress="item.currentProgress" />
                     </v-flex>
                   </v-layout>
                 </v-flex>
@@ -77,21 +52,12 @@
 
             <v-card-actions>
               <AdultToolTip v-if="item.forAdults" />
-              <StarRating
-                :score="item.score"
-                :rating-star-amount="ratingStarAmount"
-                :score-stars="item.scoreStars"
-              />
+              <StarRating :score="item.score" :rating-star-amount="ratingStarAmount" :score-stars="item.scoreStars" />
             </v-card-actions>
           </v-card>
         </v-flex>
       </template>
-      <v-snackbar
-        v-model="isSnackbarVisible"
-        top
-        :color="snackbarColor"
-        :timeout="3500"
-      >
+      <v-snackbar v-model="isSnackbarVisible" top :color="snackbarColor" :timeout="3500">
         {{ snackbarText }}
       </v-snackbar>
     </v-layout>
@@ -137,7 +103,6 @@ interface UpdatePayloadProperties {
   },
 })
 export default class List extends Vue {
-  // private listData: any[] = [];
   // TODO: Make this a non-static number via Store
   private startAmount: number = 20;
 
@@ -226,11 +191,6 @@ export default class List extends Vue {
   }
 
   private async created() {
-    // const entries = await this.getData(0);
-    // if (entries.length) {
-    //   this.listData = entries;
-    // }
-
     // Infinite Scrolling
     window.onscroll = async () => {
       const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight
@@ -240,64 +200,6 @@ export default class List extends Vue {
       }
     };
   }
-
-  // private async prepareEntry(entry: IAniListEntry) {
-  //   const { media } = entry;
-  //   const scoreStars = this.getScoreStarValue(entry.score);
-  //   const imageLink = media.coverImage.extraLarge;
-
-  //   const nextEpisode = media.nextAiringEpisode
-  //     ? this.$root.$t(
-  //       'system.aniList.nextAiringEpisode',
-  //       [
-  //         media.nextAiringEpisode.episode,
-  //         moment(media.nextAiringEpisode.airingAt, 'X').fromNow(),
-  //       ],
-  //     )
-  //     : null;
-  //   const progressPercentage = this.calculateProgressPercentage(entry);
-  //   const missingEpisodes = this.calculateMissingEpisodes(entry);
-
-  //   return {
-  //     aniListId: media.id,
-  //     currentProgress: entry.progress,
-  //     entry,
-  //     episodeAmount: media.episodes || '?',
-  //     forAdults: media.isAdult,
-  //     id: entry.id,
-  //     imageLink,
-  //     missingEpisodes,
-  //     name: media.title.userPreferred,
-  //     nextAiringEpisode: media.nextAiringEpisode,
-  //     nextEpisode,
-  //     progressPercentage,
-  //     score: entry.score,
-  //     scoreStars,
-  //     status: media.status,
-  //   };
-  // }
-
-  // private async getData(startValue: number): Promise<any> {
-  //   if (!aniListStore.aniListData.lists.length) {
-  //     return [];
-  //   }
-
-  //   const listElement = aniListStore.aniListData.lists.find((list) => list.status === this.status);
-
-  //   // If we can't find our list, just return empty.
-  //   if (!listElement) {
-  //     return [];
-  //   }
-
-  //   let newEntries = await Promise.all(listElement.entries.map((entry) => this.prepareEntry(entry)));
-
-  //   newEntries = chain(newEntries)
-  //     .orderBy((entry) => entry.name.toLowerCase(), ['asc'])
-  //     .slice(startValue, this.startAmount + startValue)
-  //     .value();
-
-  //   return newEntries;
-  // }
 
   private getScoreStarValue(score: number): number {
     if (!score) {

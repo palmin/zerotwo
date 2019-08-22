@@ -11,10 +11,7 @@
 
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn
-          text
-          v-on="on"
-        >
+        <v-btn text v-on="on">
           {{ selectedSeason.title }}
           <v-icon right>
             mdi-menu-down
@@ -22,11 +19,7 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click="changeSelection(item)"
-        >
+        <v-list-item v-for="(item, index) in items" :key="index" @click="changeSelection(item)">
           {{ item.title }}
         </v-list-item>
       </v-list>

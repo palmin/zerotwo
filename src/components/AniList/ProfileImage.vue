@@ -1,30 +1,11 @@
 <template>
-  <v-layout
-    column
-    fill-height
-    d-flex
-    align-center
-  >
+  <v-layout column fill-height d-flex align-center>
     <v-flex xs12>
-      <v-avatar
-        size="128"
-        tile
-      >
-        <v-img
-          :src="avatarUrl"
-          :alt="userName"
-        >
+      <v-avatar size="128" tile>
+        <v-img :src="avatarUrl" :alt="userName">
           <template v-slot:placeholder>
-            <v-layout
-              fill-height
-              align-center
-              justify-center
-              ma-0
-            >
-              <v-progress-circular
-                indeterminate
-                color="grey lighten-5"
-              />
+            <v-layout fill-height align-center justify-center ma-0>
+              <v-progress-circular indeterminate color="grey lighten-5" />
             </v-layout>
           </template>
         </v-img>

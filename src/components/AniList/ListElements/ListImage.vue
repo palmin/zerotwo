@@ -7,28 +7,13 @@
     @click.native="moveToDetails(aniListId)"
   >
     <template v-slot:placeholder>
-      <v-layout
-        fill-height
-        align-center
-        justify-center
-        ma-0
-      >
-        <v-progress-circular
-          indeterminate
-          color="grey lighten-5"
-        />
+      <v-layout fill-height align-center justify-center ma-0>
+        <v-progress-circular indeterminate color="grey lighten-5" />
       </v-layout>
     </template>
-    <v-container
-      fill-height
-      fluid
-    >
+    <v-container fill-height fluid>
       <v-layout fill-height>
-        <v-flex
-          xs12
-          align-end
-          flexbox
-        >
+        <v-flex xs12 align-end flexbox>
           <span class="title shadowed">{{ name }}</span>
         </v-flex>
       </v-layout>

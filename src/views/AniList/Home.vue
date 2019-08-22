@@ -1,10 +1,7 @@
 <template>
   <v-content>
     <v-card v-if="isAuthenticated">
-      <v-card-text
-        class="background"
-        :style="`background-image: url(${currentUser.bannerImage})`"
-      >
+      <v-card-text class="background" :style="`background-image: url(${currentUser.bannerImage})`">
         <v-container fluid>
           <v-flex xs2>
             <ProfileImage />
@@ -14,10 +11,7 @@
     </v-card>
     <v-card v-if="isAuthenticated">
       <v-card-text>
-        <v-container
-          fluid
-          fill-height
-        >
+        <v-container fluid fill-height>
           <v-flex xs12>
             <div class="title">
               {{ $t('system.aniList.activities') }}
@@ -38,10 +32,7 @@
       </v-card-title>
       <v-card-text>
         <div class="body-2">
-          <p
-            v-for="(item, index) in $t('system.aniList.howToAuthenticate.text')"
-            :key="index"
-          >
+          <p v-for="(item, index) in $t('system.aniList.howToAuthenticate.text')" :key="index">
             {{ item }}
           </p>
         </div>

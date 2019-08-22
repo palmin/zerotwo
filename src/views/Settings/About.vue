@@ -1,16 +1,8 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-container
-        fluid
-        fill-height
-      >
-        <v-layout
-          align-center
-          justify-center
-          wrap
-          fill-height
-        >
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center wrap fill-height>
           <v-flex xs12>
             <h2 class="display-3 text-center">
               {{ $t('system.settings.aboutZeroTwo.version') }}
@@ -19,63 +11,24 @@
               {{ currentAppVersion }}
             </h3>
           </v-flex>
-          <v-flex
-            xs2
-          >
-            <a
-              href="#"
-              class="headline"
-              @click="openGitHub"
-            >
-              <v-img
-                :src="require('@/assets/logos/github-logo.png')"
-                alt="GitHub"
-              />
+          <v-flex xs2>
+            <a href="#" class="headline" @click="openGitHub">
+              <v-img :src="require('@/assets/logos/github-logo.png')" alt="GitHub" />
             </a>
           </v-flex>
-          <v-flex
-            xs2
-            offset-xs1
-          >
-            <a
-              href="#"
-              class="headline"
-              @click="openDiscord"
-            >
-              <v-img
-                :src="require('@/assets/logos/discord-blurple-logo.png')"
-                alt="Discord"
-              />
+          <v-flex xs2 offset-xs1>
+            <a href="#" class="headline" @click="openDiscord">
+              <v-img :src="require('@/assets/logos/discord-blurple-logo.png')" alt="Discord" />
             </a>
           </v-flex>
-          <v-flex
-            xs2
-            offset-xs1
-          >
-            <a
-              href="#"
-              class="headline"
-              @click="openZeroTwo"
-            >
-              <v-img
-                :src="require('@/assets/logos/ZeroTwoAppIcon_1024.png')"
-                alt="ZeroTwo"
-              />
+          <v-flex xs2 offset-xs1>
+            <a href="#" class="headline" @click="openZeroTwo">
+              <v-img :src="require('@/assets/logos/ZeroTwoAppIcon_1024.png')" alt="ZeroTwo" />
             </a>
           </v-flex>
-          <v-flex
-            xs2
-            offset-xs1
-          >
-            <a
-              href="#"
-              class="headline"
-              @click="openAniList"
-            >
-              <v-img
-                :src="require('@/assets/logos/AniListLogo.svg')"
-                alt="AniList"
-              />
+          <v-flex xs2 offset-xs1>
+            <a href="#" class="headline" @click="openAniList">
+              <v-img :src="require('@/assets/logos/AniListLogo.svg')" alt="AniList" />
             </a>
           </v-flex>
         </v-layout>

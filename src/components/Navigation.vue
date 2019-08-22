@@ -7,10 +7,7 @@
   >
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn
-          text
-          v-on="on"
-        >
+        <v-btn text v-on="on">
           <v-icon left>
             mdi-menu
           </v-icon>
@@ -18,11 +15,7 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item
-          v-for="(item, index) in menuItems"
-          :key="index"
-          @click="navigateTo(item.location)"
-        >
+        <v-list-item v-for="(item, index) in menuItems" :key="index" @click="navigateTo(item.location)">
           <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
         </v-list-item>
       </v-list>

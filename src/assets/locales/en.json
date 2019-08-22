@@ -48,7 +48,9 @@
       "notification": {
         "title": "Synchronization successful",
         "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
-        "simpleUpdateText": "{0} was successfully synchronized to episode {1}."
+        "simpleUpdateText": "{0} was successfully synchronized to episode {1}.",
+        "addedToList": "{0} was successfully added to your list.",
+        "removeEntry": "{0} was successfully removed from your list."
       },
       "notYetAired": "Not yet aired",
       "nextAiringEpisode": "Episode {0} is airing {1}"
@@ -138,7 +140,10 @@
     "startDate": "Start of airing:"
   },
   "detailView": {
-    "airedOn": "{0} until {1}",
+    "airedOn": "Aired on {0}",
+    "airedOnTo": "{0} until {1}",
+    "airesFromTo": "Aires from {0} to {1}",
+    "airesOn": "Aires on {0}",
     "airingStartedOn": "Started on {0}",
     "airingStartsOnDay": "Starts on {0}",
     "airingStartsInMonthYear": "Starts in {0}",

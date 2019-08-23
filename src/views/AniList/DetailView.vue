@@ -26,12 +26,12 @@
               </v-layout>
             </v-flex>
 
-            <v-flex xs8>
-              <Description :item="item" />
+            <v-flex xs12>
+              <StreamingService :item="item" />
             </v-flex>
 
-            <v-flex xs4>
-              <StreamingService :item="item" />
+            <v-flex xs12>
+              <Description :item="item" />
             </v-flex>
           </v-layout>
         </template>

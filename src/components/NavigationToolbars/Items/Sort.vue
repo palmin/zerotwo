@@ -131,31 +131,31 @@ export default class Sort extends Vue {
       case 'Planning':
       case 'Paused':
         items.push({
-          text: this.$t('system.sorting.title') as string,
+          text: this.$t('components.sorting.title') as string,
           value: 'title',
         }, {
-          text: this.$t('system.sorting.score') as string,
+          text: this.$t('components.sorting.score') as string,
           value: 'score',
         }, {
-          text: this.$t('system.sorting.progress') as string,
+          text: this.$t('components.sorting.progress') as string,
           value: 'progressPercentage',
         }, {
-          text: this.$t('system.sorting.startingDate') as string,
+          text: this.$t('components.sorting.startingDate') as string,
           value: 'startDate',
         }, {
-          text: this.$t('system.sorting.episodeAmount') as string,
+          text: this.$t('components.sorting.episodeAmount') as string,
           value: 'episodeAmount',
         });
         break;
       case 'SeasonPreview':
         items.push({
-          text: this.$t('system.sorting.title') as string,
+          text: this.$t('components.sorting.title') as string,
           value: 'title',
         }, {
-          text: this.$t('system.sorting.startingDate') as string,
+          text: this.$t('components.sorting.startingDate') as string,
           value: 'startDateTimestamp',
         }, {
-          text: this.$t('system.sorting.episodeAmount') as string,
+          text: this.$t('components.sorting.episodeAmount') as string,
           value: 'episodes',
         });
         break;

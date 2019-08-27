@@ -1,14 +1,57 @@
 {
   "originalReading": "English",
   "englishReading": "English",
-  "seasons": {
-    "spring": "Spring",
-    "summer": "Summer",
-    "fall": "Fall",
-    "autumn": "Autumn",
-    "winter": "Winter"
+  "actions": {
+    "add": "Add",
+    "addToPlanToWatch": "Add to plan to watch",
+    "back": "Back",
+    "fastSearch": "Search... \u23ce",
+    "loading": "Loading...",
+    "login": "Login",
+    "remove": "Remove",
+    "reset": "Reset",
+    "save": "Save",
+    "search": "Search",
+    "sort": "Sort & Filter",
+    "toPageTop": "Jump to top"
   },
-  "system": {
+  "alerts": {
+    "adultContent": "This media is considered adult content! Viewer Discretion Advised.",
+    "noDescription": "No description available.",
+    "noEnglishTitle": "No English title available.",
+    "noInformation": "No information available.",
+    "noSynonyms": "No synonyms available.",
+    "notYetInList": "This media is not yet in your list.",
+    "unauthenticated": "You are not authenticated!",
+    "unknown": "Unknown"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "Update failed",
+      "text": "The committed update could not be synchronized! Check AniList availability or the internet connection!"
+    }
+  },
+  "menus": {
+    "aniList": {
+      "completed": "Completed",
+      "dropped": "Dropped",
+      "home": "Home",
+      "paused": "Paused",
+      "planning": "Planning",
+      "repeating": "Repeating",
+      "seasonPreview": "Season Preview",
+      "watching": "Watching"
+    },
+    "search": "Detailed Search",
+    "settings": {
+      "title": "Settings",
+      "about": "About ZeroTwo",
+      "aniList": "AniList",
+      "appSettings": "App Settings",
+      "changelog": "Latest changes"
+    }
+  },
+  "components": {
     "sorting": {
       "directions": {
         "ascending": "Ascending",
@@ -20,86 +63,61 @@
       "progress": "Progress",
       "startingDate": "Starting date",
       "episodeAmount": "Episode amount"
-    },
-    "actions": {
-      "add": "Add",
-      "addToPlanToWatch": "Add to plan to watch",
-      "back": "Back",
-      "fastSearch": "Search... \u23ce",
-      "loading": "Loading...",
-      "login": "Login",
-      "remove": "Remove",
-      "reset": "Reset",
-      "save": "Save",
-      "search": "Search",
-      "sort": "Sort & Filter",
-      "toPageTop": "Jump to top"
-    },
-    "alerts": {
-      "adultContent": "This media is considered adult content! Viewer Discretion Advised.",
-      "noDescription": "No description available.",
-      "noEnglishTitle": "No English title available.",
-      "noInformation": "No information available.",
-      "noSynonyms": "No synonyms available.",
-      "notYetInList": "This media is not yet in your list.",
-      "unauthenticated": "You are not authenticated!",
-      "unknown": "Unknown"
-    },
+    }
+  },
+  "pages": {
     "aniList": {
-      "activities": "Latest Activities",
-      "airingFinished": "Airing finished",
-      "currentProgress": "{0} / {1}",
-      "howToAuthenticate": {
-        "header": "How to login:",
-        "text": [
-          "Please navigate to the settings page (cog in the right-hand corner) and then to the \"AniList\" tab.",
-          "There you will find a \"Login\" button which will open an AniList login window.",
-          "After inputting the login data the window will close and login process should be done successfully."
-        ]
+      "home": {
+        "activities": {
+          "headline": "Latest Activities",
+          "completed": "Completed {0}",
+          "plansToWatch": "Plans to watch {0}",
+          "watchedEpisode": "Watched episode {1} of {0}",
+          "dropped": "Dropped {0}",
+          "rewatchedEpisode": "Rewatched episode {1} of {0}",
+          "paused": "Paused {0}"
+        },
+        "howToAuthenticate": {
+          "header": "How to login:",
+          "text": [
+            "Please navigate to the settings page (cog in the right-hand corner) and then to the \"AniList\" tab.",
+            "There you will find a \"Login\" button which will open an AniList login window.",
+            "After inputting the login data the window will close and login process should be done successfully."
+          ]
+        }
       },
-      "missingEpisodes": "One episode to watch | {count} episodes to watch",
-      "notification": {
-        "title": "Synchronization successful",
-        "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
-        "simpleUpdateText": "{0} was successfully synchronized to episode {1}.",
-        "addedToList": "{0} was successfully added to your list.",
-        "removeEntry": "{0} was successfully removed from your list."
+      "list": {
+        "airingFinished": "Airing finished",
+        "missingEpisodes": "One episode to watch | {count} episodes to watch",
+        "notYetAired": "Not yet aired",
+        "nextAiringEpisode": "Episode {0} is airing {1}"
       },
-      "notYetAired": "Not yet aired",
-      "nextAiringEpisode": "Episode {0} is airing {1}"
-    },
-    "dates": {
-      "full": "MMMM Do YYYY",
-      "monthAndYear": "MMMM YYYY",
-      "yearOnly": "YYYY",
-      "dateUnknown": "Date unknown"
-    },
-    "errors": {
-      "updateFailed": {
-        "title": "Update failed",
-        "text": "The committed update could not be synchronized! Check AniList availability or the internet connection!"
+      "detailView": {
+        "airedOn": "Aired on {0}",
+        "airedOnTo": "{0} until {1}",
+        "airesFromTo": "Aires from {0} to {1}",
+        "airesOn": "Aires on {0}",
+        "airingStartedOn": "Started on {0}",
+        "airingStartsOnDay": "Starts on {0}",
+        "airingStartsInMonthYear": "Starts in {0}",
+        "airingStartsInYear": "Starts in {0}",
+        "airingTime": "Airing time",
+        "airingWithUnknownStart": "? - {0}",
+        "description": "Description",
+        "englishTitle": "English title",
+        "episodes": "Episodes",
+        "genres": "Genres",
+        "nativeTitle": "Native title",
+        "ownInformation": "Information of your list",
+        "ownProgress": "Progress",
+        "ownStatus": "Status",
+        "ownScore": "Score",
+        "romajiTitle": "Rōmaji title",
+        "score": "{0} / {1} points",
+        "scoreLabel": "Average score",
+        "streamingSubheader": "Streaming services",
+        "synonyms": "Synonyms"
       }
-    },
-    "homepage": {
-      "completed": "Completed {0}",
-      "plansToWatch": "Plans to watch {0}",
-      "watchedEpisode": "Watched episode {1} of {0}",
-      "dropped": "Dropped {0}",
-      "rewatchedEpisode": "Rewatched episode {1} of {0}",
-      "paused": "Paused {0}"
-    },
-    "modules": {
-      "aniList": "AniList"
-    },
-    "routes": {
-      "aniList": "AniList",
-      "detailView": "Detail View",
-      "search": "Search",
-      "seasonPreview": "Season Preview",
-      "settings": "Settings"
-    },
-    "rules": {
-      "required": "This input must be filled."
     },
     "search": {
       "searchQuery": "Search...",
@@ -118,6 +136,10 @@
         "hint": "Max. 3",
         "noMatch": "No genre matching \"<strong>{0}</strong>\". Press <kbd>enter</kbd> to create it."
       }
+    },
+    "seasonPreview": {
+      "episodes": "? episodes | 1 episode | {count} episodes",
+      "startDate": "Start of airing:"
     },
     "settings": {
       "aboutZeroTwo": {
@@ -139,63 +161,55 @@
         "remove": "REMOVE",
         "version": "Version",
         "changesIn": "Latest changes in {0}"
-      },
-      "menu": {
-        "about": "About ZeroTwo",
-        "aniList": "AniList",
-        "appSettings": "App Settings",
-        "changelog": "Latest changes"
       }
     }
   },
-  "seasonPreview": {
-    "episodes": "? episodes | 1 episode | {count} episodes",
-    "startDate": "Start of airing:"
-  },
-  "detailView": {
-    "airedOn": "Aired on {0}",
-    "airedOnTo": "{0} until {1}",
-    "airesFromTo": "Aires from {0} to {1}",
-    "airesOn": "Aires on {0}",
-    "airingStartedOn": "Started on {0}",
-    "airingStartsOnDay": "Starts on {0}",
-    "airingStartsInMonthYear": "Starts in {0}",
-    "airingStartsInYear": "Starts in {0}",
-    "airingTime": "Airing time",
-    "airingWithUnknownStart": "? - {0}",
-    "description": "Description",
-    "englishTitle": "English title",
-    "episodes": "Episodes",
-    "genres": "Genres",
-    "nativeTitle": "Native title",
-    "ownInformation": "Information of your list",
-    "ownProgress": "Progress",
-    "ownStatus": "Status",
-    "ownScore": "Score",
-    "romajiTitle": "Rōmaji title",
-    "score": "{0} / {1} points",
-    "scoreLabel": "Average score",
-    "streamingSubheader": "Streaming services",
-    "synonyms": "Synonyms"
-  },
-  "listStatusses": {
-    "completed": "Completed",
-    "dropped": "Dropped",
-    "paused": "Paused",
-    "planning": "Planning",
-    "repeating": "Repeating",
-    "watching": "Watching"
-  },
-  "menu": {
-    "completed": "Completed",
-    "dropped": "Dropped",
-    "home": "Home",
-    "paused": "Paused",
-    "planning": "Planning",
-    "repeating": "Repeating",
+  "routes": {
+    "aniList": "AniList",
+    "detailView": "Detail View",
+    "search": "Search",
     "seasonPreview": "Season Preview",
-    "settings": "Settings",
-    "watching": "Watching"
+    "settings": "Settings"
+  },
+  "notifications": {
+    "aniList": {
+      "title": "Synchronization successful",
+      "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
+      "simpleUpdateText": "{0} was successfully synchronized to episode {1}.",
+      "addedToList": "{0} was successfully added to your list.",
+      "removeEntry": "{0} was successfully removed from your list."
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "Completed",
+        "dropped": "Dropped",
+        "paused": "Paused",
+        "planning": "Planning",
+        "repeating": "Repeating",
+        "watching": "Watching"
+      },
+      "seasons": {
+        "spring": "Spring",
+        "summer": "Summer",
+        "fall": "Fall",
+        "autumn": "Autumn",
+        "winter": "Winter"
+      }
+    },
+    "dates": {
+      "full": "MMMM Do YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Date unknown"
+    },
+    "rules": {
+      "required": "This input must be filled."
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
   },
   "$vuetify": {
     "noDataText": "No data"

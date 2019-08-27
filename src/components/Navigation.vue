@@ -99,10 +99,10 @@ import TopButton from './NavigationToolbars/Items/Top.vue';
 })
 export default class Navigation extends Vue {
   private menuItems: Array<{ title: string, location: RawLocation }> = [{
-    title: 'system.modules.aniList',
+    title: 'misc.modules.aniList',
     location: { name: 'Home' },
   }, {
-    title: 'menu.seasonPreview',
+    title: 'menus.aniList.seasonPreview',
     location: { name: 'SeasonPreview' },
   }];
 
@@ -117,7 +117,7 @@ export default class Navigation extends Vue {
   private get currentRouteName(): string {
     const { routeName } = this.$route.meta;
 
-    return this.$t(`system.routes.${routeName}`) as string;
+    return this.$t(`routes.${routeName}`) as string;
   }
 
   private get isAniListRoute(): boolean {

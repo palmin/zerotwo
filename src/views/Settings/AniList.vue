@@ -4,21 +4,21 @@
       <v-container fluid fill-height grid-list-xl>
         <v-layout v-if="!isAuthenticated" fill-height justify-center align-center>
           <v-btn color="primary" @click="loginToAniList">
-            {{ $t('system.actions.login') }}
+            {{ $t('actions.login') }}
           </v-btn>
         </v-layout>
         <v-layout v-else fill-height justify-center align-center>
           <v-flex xs5 text-center>
-            {{ $t('system.settings.aniList.loggedInAs', [currentUser.name]) }}
+            {{ $t('pages.settings.aniList.loggedInAs', [currentUser.name]) }}
           </v-flex>
           <v-flex xs5 offset-xs2>
             <v-text-field
               v-model="currentAniListRefreshRate"
               type="number"
               :min="5"
-              :label="$t('system.settings.aniList.refreshRate')"
-              :suffix="$t('system.settings.aniList.refreshRateSuffix')"
-              :hint="$t('system.settings.aniList.refreshRateHint')"
+              :label="$t('pages.settings.aniList.refreshRate')"
+              :suffix="$t('pages.settings.aniList.refreshRateSuffix')"
+              :hint="$t('pages.settings.aniList.refreshRateHint')"
               persistent-hint
             />
           </v-flex>

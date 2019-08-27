@@ -8,7 +8,7 @@
               :items="languages"
               item-text="original"
               :value="_locale"
-              :label="$t('system.settings.appSettings.chooseLanguage')"
+              :label="$t('pages.settings.appSettings.chooseLanguage')"
               @change="setLanguage"
             >
               <template v-slot:selection="data">
@@ -24,7 +24,7 @@
           </v-flex>
 
           <v-flex xs5 offset-xs2 justify-center align-center>
-            <v-switch v-model="darkMode" :label="$t('system.settings.appSettings.darkMode')" />
+            <v-switch v-model="darkMode" :label="$t('pages.settings.appSettings.darkMode')" />
           </v-flex>
         </v-layout>
       </v-container>

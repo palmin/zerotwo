@@ -11,7 +11,7 @@
         <v-icon>mdi-settings</v-icon>
       </v-btn>
     </template>
-    <span>{{ $t('menu.settings') }}</span>
+    <span>{{ $t('menus.settings.title') }}</span>
   </v-tooltip>
 </template>
 

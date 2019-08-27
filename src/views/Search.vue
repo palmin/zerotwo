@@ -12,7 +12,7 @@
                       <v-flex xs6>
                         <v-text-field
                           v-model="searchInput"
-                          :label="$t('system.search.searchQuery')"
+                          :label="$t('pages.search.searchQuery')"
                           prepend-icon="mdi-magnify"
                           @keyup.enter="search"
                         />
@@ -22,8 +22,8 @@
                         <v-select
                           v-model="adultContentValue"
                           :items="adultContent"
-                          :label="$t('system.search.adultContent.label')"
-                          :hint="$t('system.search.adultContent.hint')"
+                          :label="$t('pages.search.adultContent.label')"
+                          :hint="$t('pages.search.adultContent.hint')"
                           persistent-hint
                           clearable
                         />
@@ -32,9 +32,9 @@
                       <v-flex xs2>
                         <v-select
                           v-model="listValues"
-                          :label="$t('system.search.inList.label')"
+                          :label="$t('pages.search.inList.label')"
                           :items="listStatus"
-                          :hint="$t('system.search.inList.hint')"
+                          :hint="$t('pages.search.inList.hint')"
                           clearable
                           persistent-hint
                           multiple
@@ -50,8 +50,8 @@
                           clearable
                           :search-input.sync="genreSearch"
                           hide-selected
-                          :label="$t('system.search.genres.label')"
-                          :hint="$t('system.search.genres.hint')"
+                          :label="$t('pages.search.genres.label')"
+                          :hint="$t('pages.search.genres.hint')"
                           multiple
                           persistent-hint
                           small-chips
@@ -60,7 +60,7 @@
                             <v-list-item>
                               <v-list-item-content>
                                 <!-- eslint-disable-next-line vue/no-v-html -->
-                                <v-list-item-title v-html="$t('system.search.genres.noMatch', [genreSearch])" />
+                                <v-list-item-title v-html="$t('pages.search.genres.noMatch', [genreSearch])" />
                               </v-list-item-content>
                             </v-list-item>
                           </template>
@@ -123,7 +123,7 @@
                                 mdi-alert
                               </v-icon>
                             </template>
-                            <span>{{ $t('system.alerts.adultContent') }}</span>
+                            <span>{{ $t('alerts.adultContent') }}</span>
                           </v-tooltip>
                         </v-flex>
                         <v-flex grow>
@@ -209,22 +209,22 @@ export default class Search extends Vue {
   private searchResults: IAniListSearchResult[] = [];
 
   private listStatus = [{
-    text: this.$root.$t('listStatusses.watching'),
+    text: this.$root.$t('misc.aniList.listStatusses.watching'),
     value: AniListListStatus.CURRENT,
   }, {
-    text: this.$root.$t('listStatusses.completed'),
+    text: this.$root.$t('misc.aniList.listStatusses.completed'),
     value: AniListListStatus.COMPLETED,
   }, {
-    text: this.$root.$t('listStatusses.dropped'),
+    text: this.$root.$t('misc.aniList.listStatusses.dropped'),
     value: AniListListStatus.DROPPED,
   }, {
-    text: this.$root.$t('listStatusses.paused'),
+    text: this.$root.$t('misc.aniList.listStatusses.paused'),
     value: AniListListStatus.PAUSED,
   }, {
-    text: this.$root.$t('listStatusses.planning'),
+    text: this.$root.$t('misc.aniList.listStatusses.planning'),
     value: AniListListStatus.PLANNING,
   }, {
-    text: this.$root.$t('listStatusses.repeating'),
+    text: this.$root.$t('misc.aniList.listStatusses.repeating'),
     value: AniListListStatus.REPEATING,
   }];
 
@@ -234,10 +234,10 @@ export default class Search extends Vue {
   ];
 
   private adultContent = [{
-    text: this.$root.$t('system.search.adultContent.onlyNonAdult'),
+    text: this.$root.$t('pages.search.adultContent.onlyNonAdult'),
     value: false,
   }, {
-    text: this.$root.$t('system.search.adultContent.onlyAdult'),
+    text: this.$root.$t('pages.search.adultContent.onlyAdult'),
     value: true,
   }];
 

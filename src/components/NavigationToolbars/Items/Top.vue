@@ -11,7 +11,7 @@
         <v-icon>mdi-arrow-up</v-icon>
       </v-btn>
     </template>
-    <span>{{ $t('system.actions.toPageTop') }}</span>
+    <span>{{ $t('actions.toPageTop') }}</span>
   </v-tooltip>
 </template>
 

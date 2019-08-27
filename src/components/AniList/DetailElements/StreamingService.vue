@@ -1,6 +1,6 @@
 <template>
   <v-card v-if="item.streamingEpisodes.length">
-    <v-card-title>{{ $t('detailView.streamingSubheader') }}</v-card-title>
+    <v-card-title>{{ $t('pages.aniList.detailView.streamingSubheader') }}</v-card-title>
     <v-slide-group show-arrows>
       <v-slide-item v-if="item.nextAiringEpisode && item.nextAiringEpisode.episode">
         <v-card class="ma-4" width="400">
@@ -11,7 +11,7 @@
                   <v-flex xs12 align-end flexbox>
                     <span class="title shadowed text-wrap">{{ item.nextAiringEpisode.episodetitle }}</span>
                     <div class="subtitle shadowed">
-                      {{ getReadableDateByTimestamp(item.nextAiringEpisode.airingAt) || $t('system.alerts.noInformation') }}
+                      {{ getReadableDateByTimestamp(item.nextAiringEpisode.airingAt) || $t('alerts.noInformation') }}
                     </div>
                   </v-flex>
                 </v-layout>
@@ -84,7 +84,7 @@ export default class StreamingService extends Vue {
       return null;
     }
 
-    const format = this.$t('system.dates.full') as string;
+    const format = this.$t('misc.dates.full') as string;
 
     const formattedMoment = moment(timestamp, 'X');
     if (!formattedMoment.isValid()) {

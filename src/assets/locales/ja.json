@@ -1,14 +1,57 @@
 {
   "originalReading": "日本語",
   "englishReading": "Japanese",
-  "seasons": {
-    "spring": "春",
-    "summer": "夏",
-    "fall": "秋",
-    "autumn": "秋",
-    "winter": "冬"
+  "actions": {
+    "add": "追加",
+    "addToPlanToWatch": "見る予定リストに追加",
+    "back": "戻る",
+    "fastSearch": "検索する・・・ \u23ce",
+    "loading": "通信中・・・",
+    "login": "ログイン",
+    "remove": "削除",
+    "reset": "リセット",
+    "save": "保存",
+    "search": "検索",
+    "sort": "並べる＆フィルタリング",
+    "toPageTop": "トップへ"
   },
-  "system": {
+  "alerts": {
+    "adultContent": "１８禁コンテンツです！ご注意下さい！",
+    "noDescription": "内容説明はありません。",
+    "noEnglishTitle": "英語のタイトルはありません。",
+    "noInformation": "情報がありません。",
+    "noSynonyms": "シノニムはありません。",
+    "notYetInList": "このメディアはまだ、リストにはありません。",
+    "unauthenticated": "まだログインしませんでした！",
+    "unknown": "未知"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "更新失敗",
+      "text": "変更は更新出来ませんでした！AniListや自分のインターネットへの接続をチェックして下さい。"
+    }
+  },
+  "menus": {
+    "aniList": {
+      "completed": "終了",
+      "dropped": "中止",
+      "home": "ホーム",
+      "paused": "一時的中止",
+      "planning": "予定",
+      "repeating": "再見",
+      "seasonPreview": "シーズン予告",
+      "watching": "見る中"
+    },
+    "search": "詳細検索",
+    "settings": {
+      "title": "環境設定",
+      "about": "ゼロツーについて",
+      "aniList": "AniList",
+      "appSettings": "環境設定",
+      "changelog": "最新更新情報"
+    }
+  },
+  "components": {
     "sorting": {
       "directions": {
         "ascending": "昇順",
@@ -20,35 +63,21 @@
       "progress": "進行",
       "startingDate": "放送開始日",
       "episodeAmount": "エピソード数"
-    },
-    "actions": {
-      "add": "追加",
-      "addToPlanToWatch": "見る予定リストに追加",
-      "back": "戻る",
-      "fastSearch": "検索する・・・ \u23ce",
-      "loading": "通信中・・・",
-      "login": "ログイン",
-      "remove": "削除",
-      "reset": "リセット",
-      "save": "保存",
-      "search": "検索",
-      "sort": "並べる＆フィルタリング",
-      "toPageTop": "トップへ"
-    },
-    "alerts": {
-      "adultContent": "１８禁コンテンツです！ご注意下さい！",
-      "noDescription": "内容説明はありません。",
-      "noEnglishTitle": "英語のタイトルはありません。",
-      "noInformation": "情報がありません。",
-      "noSynonyms": "シノニムはありません。",
-      "notYetInList": "このメディアはまだ、リストにはありません。",
-      "unauthenticated": "まだログインしませんでした！",
-      "unknown": "未知"
-    },
+    }
+  },
+  "pages": {
     "aniList": {
-      "activities": "最近の更新",
-      "airingFinished": "放送終了",
-      "currentProgress": "{0} / {1}",
+      "home": {
+        "activities": {
+          "headline": "最近の更新",
+          "completed": "{0}を終了しました",
+          "plansToWatch": "{0}を予定リストに追加しました",
+          "watchedEpisode": "{0}の第{1}話を見ました",
+          "dropped": "{0}を中止しました",
+          "rewatchedEpisode": "{0}の第{1}話を再見しました",
+          "paused": "{0}を一時的中止しました"
+        }
+      },
       "howToAuthenticate": {
         "header": "身分確認（ログイン方法）：",
         "text": [
@@ -57,49 +86,38 @@
           "ログインデータを入力して成功に完成しましたはずです。"
         ]
       },
-      "missingEpisodes": "１つのエピソードが見残る | {count}つのエピソードが見残る",
-      "notification": {
-        "title": "更新成功",
-        "completeUpdateText": "{0}を成功にエピソード{1}に終了して、更新しました。",
-        "simpleUpdateText": "{0}を成功にエピソード{1}に更新しました。",
-        "addedToList": "{0}を成功にリストに追加しました。",
-        "removeEntry": "{0}を成功にリストから削除しました。"
+      "list": {
+        "airingFinished": "放送終了",
+        "missingEpisodes": "１つのエピソードが見残る | {count}つのエピソードが見残る",
+        "notYetAired": "まだ放送していませんでした。",
+        "nextAiringEpisode": "第{0}話は{1}に放送開始"
       },
-      "notYetAired": "まだ放送していませんでした。",
-      "nextAiringEpisode": "第{0}話は{1}に放送開始"
-    },
-    "dates": {
-      "full": "YYYY年MM月DD日",
-      "monthAndYear": "YYYY年MM月",
-      "yearOnly": "YYYY年",
-      "dateUnknown": "不明"
-    },
-    "errors": {
-      "updateFailed": {
-        "title": "更新失敗",
-        "text": "変更は更新出来ませんでした！AniListや自分のインターネットへの接続をチェックして下さい。"
+      "detailView": {
+        "airedOn": "{0}に放送された",
+        "airedOnTo": "{0}～{1}",
+        "airesFromTo": "{0}〜{1}に放送される",
+        "airesOn": "{0}に放送開始",
+        "airingStartedOn": "{0}に始まりました",
+        "airingStartsOnDay": "{0}に始まる",
+        "airingStartsInMonthYear": "{0}に始まる",
+        "airingStartsInYear": "{0}に始まる",
+        "airingTime": "最初放送",
+        "airingWithUnknownStart": "？ - {0}",
+        "description": "内容",
+        "englishTitle": "英語のタイトル",
+        "episodes": "エピソード数",
+        "genres": "ジャンル",
+        "nativeTitle": "ネイティブ・タイトル",
+        "ownInformation": "自分のリストの情報",
+        "ownProgress": "進行",
+        "ownStatus": "ステータス",
+        "ownScore": "スコア",
+        "romajiTitle": "ローマ字・タイトル",
+        "score": "{1}点満点の{0}点",
+        "scoreLabel": "平均値点",
+        "streamingSubheader": "放送サービス（英語）",
+        "synonyms": "シノニム"
       }
-    },
-    "homepage": {
-      "completed": "{0}を終了しました",
-      "plansToWatch": "{0}を予定リストに追加しました",
-      "watchedEpisode": "{0}の第{1}話を見ました",
-      "dropped": "{0}を中止しました",
-      "rewatchedEpisode": "{0}の第{1}話を再見しました",
-      "paused": "{0}を一時的中止しました"
-    },
-    "modules": {
-      "aniList": "AniList"
-    },
-    "routes": {
-      "aniList": "AniList",
-      "detailView": "インフォーメーション",
-      "search": "検索",
-      "seasonPreview": "シーズン予告",
-      "settings": "環境設定"
-    },
-    "rules": {
-      "required": "入力必要です！"
     },
     "search": {
       "searchQuery": "検索・・・",
@@ -118,6 +136,10 @@
         "hint": "最大３つ",
         "noMatch": "ジャンル「<strong>{0}</strong>」が見つかりません。<kbd>ENTER</kbd>キーを押して、追加してください。"
       }
+    },
+    "seasonPreview": {
+      "episodes": "エピソード数：？ | エピソード数：1 | エピソード数：{count}",
+      "startDate": "放送開始日："
     },
     "settings": {
       "aboutZeroTwo": {
@@ -139,63 +161,55 @@
         "remove": "削除",
         "version": "バージョン",
         "changesIn": "{0}の最新更新情報"
-      },
-      "menu": {
-        "about": "ゼロツーについて",
-        "aniList": "AniList",
-        "appSettings": "環境設定",
-        "changelog": "最新更新情報"
       }
     }
   },
-  "seasonPreview": {
-    "episodes": "エピソード数：？ | エピソード数：1 | エピソード数：{count}",
-    "startDate": "放送開始日："
-  },
-  "detailView": {
-    "airedOn": "{0}に放送された",
-    "airedOnTo": "{0}～{1}",
-    "airesFromTo": "{0}〜{1}に放送される",
-    "airesOn": "{0}に放送開始",
-    "airingStartedOn": "{0}に始まりました",
-    "airingStartsOnDay": "{0}に始まる",
-    "airingStartsInMonthYear": "{0}に始まる",
-    "airingStartsInYear": "{0}に始まる",
-    "airingTime": "最初放送",
-    "airingWithUnknownStart": "？ - {0}",
-    "description": "内容",
-    "englishTitle": "英語のタイトル",
-    "episodes": "エピソード数",
-    "genres": "ジャンル",
-    "nativeTitle": "ネイティブ・タイトル",
-    "ownInformation": "自分のリストの情報",
-    "ownProgress": "進行",
-    "ownStatus": "ステータス",
-    "ownScore": "スコア",
-    "romajiTitle": "ローマ字・タイトル",
-    "score": "{1}点満点の{0}点",
-    "scoreLabel": "平均値点",
-    "streamingSubheader": "放送サービス（英語）",
-    "synonyms": "シノニム"
-  },
-  "listStatusses": {
-    "completed": "終了",
-    "dropped": "中止",
-    "paused": "一時的中止",
-    "planning": "予定",
-    "repeating": "再見",
-    "watching": "見る中"
-  },
-  "menu": {
-    "completed": "終了",
-    "dropped": "中止",
-    "home": "ホーム",
-    "paused": "一時的中止",
-    "planning": "予定",
-    "repeating": "再見",
+  "routes": {
+    "aniList": "AniList",
+    "detailView": "インフォーメーション",
+    "search": "検索",
     "seasonPreview": "シーズン予告",
-    "settings": "環境設定",
-    "watching": "見る中"
+    "settings": "環境設定"
+  },
+  "notifications": {
+    "aniList": {
+      "title": "更新成功",
+      "completeUpdateText": "{0}を成功にエピソード{1}に終了して、更新しました。",
+      "simpleUpdateText": "{0}を成功にエピソード{1}に更新しました。",
+      "addedToList": "{0}を成功にリストに追加しました。",
+      "removeEntry": "{0}を成功にリストから削除しました。"
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "終了",
+        "dropped": "中止",
+        "paused": "一時的中止",
+        "planning": "予定",
+        "repeating": "再見",
+        "watching": "見る中"
+      },
+      "seasons": {
+        "spring": "春",
+        "summer": "夏",
+        "fall": "秋",
+        "autumn": "秋",
+        "winter": "冬"
+      }
+    },
+    "dates": {
+      "full": "YYYY年MM月DD日",
+      "monthAndYear": "YYYY年MM月",
+      "yearOnly": "YYYY年",
+      "dateUnknown": "不明"
+    },
+    "rules": {
+      "required": "入力必要です！"
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
   },
   "$vuetify": {
     "noDataText": "データ無し"

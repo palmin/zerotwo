@@ -10,11 +10,11 @@
         v-model="searchInput"
         solo
         flat
-        :placeholder="$t('system.actions.fastSearch')"
+        :placeholder="$t('actions.fastSearch')"
         @keypress.enter="startSearch"
       />
     </template>
-    <span>{{ $t('system.actions.search') }}</span>
+    <span>{{ $t('menus.search') }}</span>
   </v-tooltip>
 </template>
 

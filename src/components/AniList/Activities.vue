@@ -13,13 +13,13 @@
 
           <v-card-text>
             <template v-if="activity.completed">
-              {{ $t('system.homepage.completed', [activity.title]) }}
+              {{ $t('pages.aniList.home.activities.completed', [activity.title]) }}
             </template>
             <template v-else-if="activity.plansToWatch">
-              {{ $t('system.homepage.plansToWatch', [activity.title]) }}
+              {{ $t('pages.aniList.home.activities.plansToWatch', [activity.title]) }}
             </template>
             <template v-else-if="activity.watchedEpisode">
-              {{ $t('system.homepage.watchedEpisode', [activity.title, activity.progress]) }}
+              {{ $t('pages.aniList.home.activities.watchedEpisode', [activity.title, activity.progress]) }}
             </template>
           </v-card-text>
         </v-card>

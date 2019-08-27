@@ -1,6 +1,6 @@
 <template>
   <span v-if="missingEpisodes" class="info--text">
-    {{ $tc('system.aniList.missingEpisodes', missingEpisodes, [missingEpisodes]) }}
+    {{ $tc('pages.aniList.list.missingEpisodes', missingEpisodes, [missingEpisodes]) }}
   </span>
 </template>
 

@@ -6,7 +6,7 @@
           <v-icon>mdi-home</v-icon>
         </v-btn>
       </template>
-      <span>{{ $t('menu.home') }}</span>
+      <span>{{ $t('menus.aniList.home') }}</span>
     </v-tooltip>
 
     <template v-if="isAuthenticated">
@@ -18,7 +18,7 @@
             </v-icon> ({{ watchingAmount }})
           </v-btn>
         </template>
-        <span>{{ $t('menu.watching') }}</span>
+        <span>{{ $t('menus.aniList.watching') }}</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -29,7 +29,7 @@
             </v-icon> ({{ repeatingAmount }})
           </v-btn>
         </template>
-        <span>{{ $t('menu.repeating') }}</span>
+        <span>{{ $t('menus.aniList.repeating') }}</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -40,7 +40,7 @@
             </v-icon> ({{ completedAmount }})
           </v-btn>
         </template>
-        <span>{{ $t('menu.completed') }}</span>
+        <span>{{ $t('menus.aniList.completed') }}</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -51,7 +51,7 @@
             </v-icon> ({{ pausedAmount }})
           </v-btn>
         </template>
-        <span>{{ $t('menu.paused') }}</span>
+        <span>{{ $t('menus.aniList.paused') }}</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -62,7 +62,7 @@
             </v-icon> ({{ droppedAmount }})
           </v-btn>
         </template>
-        <span>{{ $t('menu.dropped') }}</span>
+        <span>{{ $t('menus.aniList.dropped') }}</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -71,7 +71,7 @@
             <v-icon>mdi-playlist-plus</v-icon> ({{ planningAmount }})
           </v-btn>
         </template>
-        <span>{{ $t('menu.planning') }}</span>
+        <span>{{ $t('menus.aniList.planning') }}</span>
       </v-tooltip>
     </template>
   </v-toolbar-items>

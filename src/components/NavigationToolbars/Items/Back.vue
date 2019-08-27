@@ -11,7 +11,7 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
     </template>
-    <span>{{ $t('system.actions.back') }}</span>
+    <span>{{ $t('actions.back') }}</span>
   </v-tooltip>
 </template>
 

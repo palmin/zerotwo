@@ -2,7 +2,7 @@
   <v-tab-item :key="tabKey">
     <v-card flat>
       <div class="display-1">
-        {{ $t('system.settings.changelog.changesIn', [version]) }}
+        {{ $t('pages.settings.changelog.changesIn', [version]) }}
       </div>
 
       <v-divider />
@@ -13,7 +13,7 @@
             <v-icon large color="blue darken-1">
               mdi-rocket
             </v-icon>
-            {{ $t('system.settings.changelog.new') }}
+            {{ $t('pages.settings.changelog.new') }}
           </div>
 
           <v-list>
@@ -28,7 +28,7 @@
             <v-icon large color="warning">
               mdi-bandage
             </v-icon>
-            {{ $t('system.settings.changelog.fix') }}
+            {{ $t('pages.settings.changelog.fix') }}
           </div>
 
           <v-list>
@@ -43,7 +43,7 @@
             <v-icon large color="error">
               mdi-delete
             </v-icon>
-            {{ $t('system.settings.changelog.remove') }}
+            {{ $t('pages.settings.changelog.remove') }}
           </div>
 
           <v-list>

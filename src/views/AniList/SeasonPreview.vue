@@ -16,10 +16,10 @@
               <v-layout row fill-height align-center>
                 <v-layout column class="px-2" justify-start>
                   <v-flex class="subtitle-1 grey--text">
-                    {{ $tc('seasonPreview.episodes', item.episodes) }}
+                    {{ $tc('pages.seasonPreview.episodes', item.episodes) }}
                   </v-flex>
                   <v-flex class="subtitle-1 grey--text">
-                    {{ $t('seasonPreview.startDate') }} {{ item.startDate }}
+                    {{ $t('pages.seasonPreview.startDate') }} {{ item.startDate }}
                   </v-flex>
                 </v-layout>
 
@@ -33,7 +33,7 @@
                           mdi-alert
                         </v-icon>
                       </template>
-                      <span>{{ $t('system.alerts.adultContent') }}</span>
+                      <span>{{ $t('alerts.adultContent') }}</span>
                     </v-tooltip>
                   </v-flex>
                 </template>
@@ -51,7 +51,7 @@
                 <v-icon left color="success">
                   mdi-library-plus
                 </v-icon>
-                {{ $t('system.actions.addToPlanToWatch') }}
+                {{ $t('actions.addToPlanToWatch') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -128,11 +128,11 @@ export default class SeasonPreview extends Vue {
       .filter(item => !item.isAdult || (item.isAdult && aniListStore.allowAdultContent))
       .map((item) => {
         const outputFormat = item.startDate.day
-          ? this.$t('system.dates.full') as string
+          ? this.$t('misc.dates.full') as string
           : item.startDate.month
-            ? this.$t('system.dates.monthAndYear') as string
+            ? this.$t('misc.dates.monthAndYear') as string
             : item.startDate.year
-              ? this.$t('system.dates.yearOnly') as string
+              ? this.$t('misc.dates.yearOnly') as string
               : undefined;
         const usersListStatus = !!aniListStore.aniListData.lists.find(list => !!list.entries.find((entry: IAniListEntry) => entry.media.id === item.id));
 
@@ -155,7 +155,7 @@ export default class SeasonPreview extends Vue {
         }
         const startDateTimestamp = moment(itemDate, dateFormat).format('X');
         const startDate = moment(itemDate, dateFormat).format(outputFormat)
-          || this.$t('system.dates.dateUnknown');
+          || this.$t('misc.dates.dateUnknown');
         const coverImage = item.coverImage.extraLarge;
 
         return {

@@ -65,16 +65,16 @@ export default class SeasonPreviewToolbar extends Vue {
   private created(): void {
     this.year = this.currentYear;
     this.items = [{
-      title: this.$t('seasons.winter').toString(),
+      title: this.$t('misc.aniList.seasons.winter').toString(),
       value: AniListSeason.WINTER,
     }, {
-      title: this.$t('seasons.spring').toString(),
+      title: this.$t('misc.aniList.seasons.spring').toString(),
       value: AniListSeason.SPRING,
     }, {
-      title: this.$t('seasons.summer').toString(),
+      title: this.$t('misc.aniList.seasons.summer').toString(),
       value: AniListSeason.SUMMER,
     }, {
-      title: this.$t('seasons.fall').toString(),
+      title: this.$t('misc.aniList.seasons.fall').toString(),
       value: AniListSeason.FALL,
     }];
 

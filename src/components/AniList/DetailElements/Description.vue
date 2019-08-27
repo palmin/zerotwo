@@ -3,7 +3,7 @@
     <v-card-title primary-title>
       <div>
         <h3 class="headline">
-          {{ $t('detailView.description') }}
+          {{ $t('pages.aniList.detailView.description') }}
         </h3>
       </div>
     </v-card-title>

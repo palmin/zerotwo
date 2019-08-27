@@ -16,25 +16,25 @@
             <v-icon>mdi-sort</v-icon>
           </v-btn>
         </template>
-        <span>{{ $t('system.actions.sort') }}</span>
+        <span>{{ $t('actions.sort') }}</span>
       </v-tooltip>
     </template>
     <v-card width="400">
-      <v-card-title>{{ $t('system.actions.sort') }}</v-card-title>
+      <v-card-title>{{ $t('actions.sort') }}</v-card-title>
       <v-container fluid grid-list-md>
         <v-layout>
           <v-flex xs8>
             <v-select
               v-model="sortItem"
               :items="sortingItems"
-              :label="$t('system.sorting.sortingLabel')"
+              :label="$t('components.sorting.sortingLabel')"
               @change="changeSorting"
             />
           </v-flex>
           <v-flex xs4>
             <v-radio-group v-model="direction" column @change="changeDirection">
-              <v-radio :label="$t('system.sorting.directions.ascending')" value="asc" />
-              <v-radio :label="$t('system.sorting.directions.descending')" value="desc" />
+              <v-radio :label="$t('components.sorting.directions.ascending')" value="asc" />
+              <v-radio :label="$t('components.sorting.directions.descending')" value="desc" />
             </v-radio-group>
           </v-flex>
         </v-layout>
@@ -51,8 +51,8 @@
               clearable
               :search-input.sync="genreSearch"
               hide-selected
-              :label="$t('system.search.genres.label')"
-              :hint="$t('system.search.genres.hint')"
+              :label="$t('pages.search.genres.label')"
+              :hint="$t('pages.search.genres.hint')"
               multiple
               persistent-hint
               small-chips
@@ -63,7 +63,7 @@
                 <v-list-item>
                   <v-list-item-content>
                     <!-- eslint-disable-next-line vue/no-v-html -->
-                    <v-list-item-title v-html="$t('system.search.genres.noMatch', [genreSearch])" />
+                    <v-list-item-title v-html="$t('pages.search.genres.noMatch', [genreSearch])" />
                   </v-list-item-content>
                 </v-list-item>
               </template>
@@ -77,7 +77,7 @@
           <v-icon left>
             mdi-restore
           </v-icon>
-          {{ $t('system.actions.reset') }}
+          {{ $t('actions.reset') }}
         </v-btn>
       </v-card-actions>
     </v-card>

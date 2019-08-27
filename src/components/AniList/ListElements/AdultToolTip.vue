@@ -6,7 +6,7 @@
           mdi-alert
         </v-icon>
       </template>
-      <span>{{ $t('system.alerts.adultContent') }}</span>
+      <span>{{ $t('alerts.adultContent') }}</span>
     </v-tooltip>
   </v-layout>
 </template>

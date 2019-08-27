@@ -3,7 +3,7 @@
     <v-layout wrap>
       <v-flex v-show="isLoading" xs12 align-self-center>
         <div class="display-3 text-center ma-6">
-          {{ $t('system.actions.loading') }}
+          {{ $t('actions.loading') }}
         </div>
       </v-flex>
       <v-flex v-if="!listData.length && !isLoading" xs12>
@@ -159,7 +159,7 @@ export default class List extends Vue {
 
       const nextEpisode = media.nextAiringEpisode
         ? this.$root.$t(
-          'system.aniList.nextAiringEpisode',
+          'pages.aniList.list.nextAiringEpisode',
           [
             media.nextAiringEpisode.episode,
             moment(media.nextAiringEpisode.airingAt, 'X').fromNow(),
@@ -381,15 +381,15 @@ export default class List extends Vue {
         await aniListStore.refreshLists();
         await appStore.setLoadingState(false);
         this.$notify({
-          title: this.$t('system.aniList.notification.title') as string,
-          text: this.$t('system.aniList.notification.completeUpdateText', [title, progress]) as string,
+          title: this.$t('notifications.anilist.title') as string,
+          text: this.$t('notifications.anilist.completeUpdateText', [title, progress]) as string,
         });
       } else {
         await API.setEntryProgress(id, progress);
         await aniListStore.refreshLists();
         this.$notify({
-          title: this.$t('system.aniList.notification.title') as string,
-          text: this.$t('system.aniList.notification.simpleUpdateText', [title, progress]) as string,
+          title: this.$t('notifications.anilist.title') as string,
+          text: this.$t('notifications.anilist.simpleUpdateText', [title, progress]) as string,
         });
       }
     }))

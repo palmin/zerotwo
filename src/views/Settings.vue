@@ -69,28 +69,28 @@ export default class Settings extends Vue {
   private get appSettingsTab(): ISettingTab {
     return {
       key: 'appSettings',
-      value: this.$t('system.settings.menu.appSettings'),
+      value: this.$t('menus.settings.menu.appSettings'),
     };
   }
 
   private get aniListTab(): ISettingTab {
     return {
       key: 'aniList',
-      value: this.$t('system.settings.menu.aniList'),
+      value: this.$t('menus.settings.menu.aniList'),
     };
   }
 
   private get aboutTab(): ISettingTab {
     return {
       key: 'about',
-      value: this.$t('system.settings.menu.about'),
+      value: this.$t('menus.settings.menu.about'),
     };
   }
 
   private get changelogTab(): ISettingTab {
     return {
       key: 'changelog',
-      value: this.$t('system.settings.menu.changelog'),
+      value: this.$t('menus.settings.menu.changelog'),
     };
   }
 }

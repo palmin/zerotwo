@@ -1,10 +1,10 @@
 <template>
   <v-card :loading="loading">
     <v-card-title primary-title>
-      {{ $t('detailView.ownInformation') }}
+      {{ $t('pages.aniList.detailView.ownInformation') }}
     </v-card-title>
     <v-card-text v-if="!item.listEntry">
-      {{ $t('system.alerts.notYetInList') }}
+      {{ $t('alerts.notYetInList') }}
     </v-card-text>
 
     <v-container grid-list-md fluid>
@@ -14,7 +14,7 @@
             v-model="status"
             dense
             :items="listStatusses"
-            :label="$t('detailView.ownStatus')"
+            :label="$t('pages.aniList.detailView.ownStatus')"
             :rules="[rules.required]"
             @change="checkStatus"
           />
@@ -25,7 +25,7 @@
             v-model="progress"
             :mask="getMask(item.episodes)"
             :suffix="`/ ${item.episodes}`"
-            :label="$t('detailView.ownProgress')"
+            :label="$t('pages.aniList.detailView.ownProgress')"
             :rules="[rules.required]"
           />
         </v-flex>
@@ -35,13 +35,13 @@
             v-if="scoreSystem === POINT_100"
             v-model="score"
             suffix="/ 100"
-            :label="$t('detailView.ownScore')"
+            :label="$t('pages.aniList.detailView.ownScore')"
             :rules="[rules.required]"
           />
 
           <div v-if="scoreSystem !== POINT_100" class="text-center ma-auto">
             <div class="body-1 text-xs-left pl-1">
-              {{ $t('detailView.ownScore') }} ({{ score }})
+              {{ $t('pages.aniList.detailView.ownScore') }} ({{ score }})
             </div>
             <v-rating
               v-if="scoreSystem === POINT_10_DECIMAL"
@@ -86,7 +86,7 @@
             <v-icon left>
               mdi-content-save
             </v-icon>
-            {{ $t('system.actions.save') }}
+            {{ $t('actions.save') }}
           </v-btn>
         </v-flex>
         <v-flex>
@@ -94,7 +94,7 @@
             <v-icon left>
               mdi-delete
             </v-icon>
-            {{ $t('system.actions.remove') }}
+            {{ $t('actions.remove') }}
           </v-btn>
         </v-flex>
       </v-layout>
@@ -105,7 +105,7 @@
         <v-icon left>
           mdi-library-plus
         </v-icon>
-        {{ $t('system.actions.add') }}
+        {{ $t('actions.add') }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -141,27 +141,27 @@ export default class UserListSettings extends Vue {
   private readonly POINT_3 = AniListScoreFormat.POINT_3;
 
   private readonly listStatusses = [{
-    text: this.$root.$t('listStatusses.watching'),
+    text: this.$root.$t('misc.aniList.listStatusses.watching'),
     value: AniListListStatus.CURRENT,
   }, {
-    text: this.$root.$t('listStatusses.completed'),
+    text: this.$root.$t('misc.aniList.listStatusses.completed'),
     value: AniListListStatus.COMPLETED,
   }, {
-    text: this.$root.$t('listStatusses.dropped'),
+    text: this.$root.$t('misc.aniList.listStatusses.dropped'),
     value: AniListListStatus.DROPPED,
   }, {
-    text: this.$root.$t('listStatusses.paused'),
+    text: this.$root.$t('misc.aniList.listStatusses.paused'),
     value: AniListListStatus.PAUSED,
   }, {
-    text: this.$root.$t('listStatusses.planning'),
+    text: this.$root.$t('misc.aniList.listStatusses.planning'),
     value: AniListListStatus.PLANNING,
   }, {
-    text: this.$root.$t('listStatusses.repeating'),
+    text: this.$root.$t('misc.aniList.listStatusses.repeating'),
     value: AniListListStatus.REPEATING,
   }];
 
   private readonly rules = {
-    required: (value: any) => !!value || this.$root.$t('system.rules.required'),
+    required: (value: any) => !!value || this.$root.$t('misc.rules.required'),
   };
 
   private created() {
@@ -220,13 +220,13 @@ export default class UserListSettings extends Vue {
         if (update) {
           if (status === AniListListStatus.COMPLETED) {
             this.$notify({
-              title: this.$t('system.aniList.notification.title') as string,
-              text: this.$t('system.aniList.notification.completeUpdateText', [this.item.userPreferredTitle, this.progress]) as string,
+              title: this.$t('notifications.aniList.successTitle') as string,
+              text: this.$t('notifications.aniList.completeUpdateText', [this.item.userPreferredTitle, this.progress]) as string,
             });
           } else {
             this.$notify({
-              title: this.$t('system.aniList.notification.title') as string,
-              text: this.$t('system.aniList.notification.simpleUpdateText', [this.item.userPreferredTitle, this.progress]) as string,
+              title: this.$t('notifications.aniList.successTitle') as string,
+              text: this.$t('notifications.aniList.simpleUpdateText', [this.item.userPreferredTitle, this.progress]) as string,
             });
           }
           aniListStore.refreshLists();
@@ -234,8 +234,8 @@ export default class UserListSettings extends Vue {
         }
       } catch (error) {
         this.$notify({
-          title: this.$t('system.errors.updateFailed.title') as string,
-          text: this.$t('system.errors.updateFailed.text') as string,
+          title: this.$t('errors.updateFailed.title') as string,
+          text: this.$t('errors.updateFailed.text') as string,
           type: 'error',
         });
       }
@@ -254,8 +254,8 @@ export default class UserListSettings extends Vue {
 
       if (await API.removeEntry(entryId)) {
         this.$notify({
-          title: this.$t('system.aniList.notification.title') as string,
-          text: this.$t('system.aniList.notification.removeEntry', [this.item.userPreferredTitle]) as string,
+          title: this.$t('notifications.aniList.successTitle') as string,
+          text: this.$t('notifications.aniList.removeEntry', [this.item.userPreferredTitle]) as string,
         });
         this.$emit('updated');
       } else {
@@ -263,8 +263,8 @@ export default class UserListSettings extends Vue {
       }
     } catch (error) {
       this.$notify({
-        title: this.$t('system.errors.updateFailed.title') as string,
-        text: this.$t('system.errors.updateFailed.text') as string,
+        title: this.$t('errors.updateFailed.title') as string,
+        text: this.$t('errors.updateFailed.text') as string,
         type: 'error',
       });
     }
@@ -291,8 +291,8 @@ export default class UserListSettings extends Vue {
 
       if (await API.addEntry(mediaId, status, score, progress)) {
         this.$notify({
-          title: this.$t('system.aniList.notification.title') as string,
-          text: this.$t('system.aniList.notification.addedToList', [this.item.userPreferredTitle]) as string,
+          title: this.$t('notifications.aniList.successTitle') as string,
+          text: this.$t('notifications.aniList.addedToList', [this.item.userPreferredTitle]) as string,
         });
         aniListStore.refreshLists();
         this.$emit('updated');
@@ -301,8 +301,8 @@ export default class UserListSettings extends Vue {
       }
     } catch (error) {
       this.$notify({
-        title: this.$t('system.errors.updateFailed.title') as string,
-        text: this.$t('system.errors.updateFailed.text') as string,
+        title: this.$t('errors.updateFailed.title') as string,
+        text: this.$t('errors.updateFailed.text') as string,
         type: 'error',
       });
     }

@@ -154,10 +154,10 @@ export default class DetailView extends Vue {
       airingTime,
       bannerImage: media.bannerImage,
       coverImage: media.coverImage.extraLarge,
-      description: media.description || this.$t('system.alerts.noDescription'),
-      englishTitle: media.title.english || this.$t('system.alerts.noEnglishTitle'),
+      description: media.description || this.$t('alerts.noDescription'),
+      englishTitle: media.title.english || this.$t('alerts.noEnglishTitle'),
       entryId: this.entry.id,
-      episodes: media.episodes || this.$t('system.alerts.unknown'),
+      episodes: media.episodes || this.$t('alerts.unknown'),
       genres,
       listEntry,
       mediaId: media.id,
@@ -195,18 +195,18 @@ export default class DetailView extends Vue {
     }
 
     if (year && !month && !day) {
-      format = this.$t('system.dates.yearOnly') as string;
+      format = this.$t('misc.dates.yearOnly') as string;
 
       return moment(year, 'YYYY').format(format);
     }
 
     if (year && month && !day) {
-      format = this.$t('system.dates.monthAndYear') as string;
+      format = this.$t('misc.dates.monthAndYear') as string;
 
       return moment(`${month}-${year}`, 'M-YYYY').format(format);
     }
 
-    format = this.$t('system.dates.full') as string;
+    format = this.$t('misc.dates.full') as string;
 
     return moment(`${day}-${month}-${year}`, 'D-M-YYYY').format(format);
   }
@@ -217,36 +217,36 @@ export default class DetailView extends Vue {
     if (startDate && endDate) {
       if (startDateBeforeNow) {
         if (startDate === endDate) {
-          airingTime = this.$t('detailView.airesOn', [startDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airesOn', [startDate]) as string;
         } else {
-          airingTime = this.$t('detailView.airesFromTo', [startDate, endDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airesFromTo', [startDate, endDate]) as string;
         }
       } else if (!startDateBeforeNow && endDateBeforeNow) {
-        airingTime = this.$t('detailView.airesFromTo', [startDate, endDate]) as string;
+        airingTime = this.$t('pages.aniList.detailView.airesFromTo', [startDate, endDate]) as string;
       } else {
         // eslint-disable-next-line no-lonely-if
         if (startDate === endDate) {
-          airingTime = this.$t('detailView.airedOn', [startDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airedOn', [startDate]) as string;
         } else {
-          airingTime = this.$t('detailView.airedOnTo', [startDate, endDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airedOnTo', [startDate, endDate]) as string;
         }
       }
     } else if (startDate && !endDate) {
       if (startDateBeforeNow) {
         if (media.startDate.day) {
-          airingTime = this.$t('detailView.airingStartsOnDay', [startDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airingStartsOnDay', [startDate]) as string;
         } else if (media.startDate.month) {
-          airingTime = this.$t('detailView.airingStartsInMonthYear', [startDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airingStartsInMonthYear', [startDate]) as string;
         } else {
-          airingTime = this.$t('detailView.airingStartsInYear', [startDate]) as string;
+          airingTime = this.$t('pages.aniList.detailView.airingStartsInYear', [startDate]) as string;
         }
       } else {
-        airingTime = this.$t('detailView.airingStartedOn', [startDate]) as string;
+        airingTime = this.$t('pages.aniList.detailView.airingStartedOn', [startDate]) as string;
       }
     } else if (!startDate && endDate) {
-      airingTime = this.$t('detailView.airingWithUnknownStart', [endDate]) as string;
+      airingTime = this.$t('pages.aniList.detailView.airingWithUnknownStart', [endDate]) as string;
     } else {
-      airingTime = this.$t('system.dates.dateUnknown') as string;
+      airingTime = this.$t('misc.dates.dateUnknown') as string;
     }
 
     return airingTime;

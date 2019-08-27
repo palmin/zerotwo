@@ -14,7 +14,7 @@
         <v-container fluid fill-height>
           <v-flex xs12>
             <div class="title">
-              {{ $t('system.aniList.activities') }}
+              {{ $t('pages.aniList.home.activities.headline') }}
             </div>
             <Activities />
           </v-flex>
@@ -25,14 +25,14 @@
       <v-card-title primary-title>
         <div>
           <div class="headline">
-            {{ $t('system.alerts.unauthenticated') }}
+            {{ $t('alerts.unauthenticated') }}
           </div>
-          <span class="subheading">{{ $t('system.aniList.howToAuthenticate.header') }}</span>
+          <span class="subheading">{{ $t('pages.aniList.home.howToAuthenticate.header') }}</span>
         </div>
       </v-card-title>
       <v-card-text>
         <div class="body-2">
-          <p v-for="(item, index) in $t('system.aniList.howToAuthenticate.text')" :key="index">
+          <p v-for="(item, index) in $t('pages.aniList.home.howToAuthenticate.text')" :key="index">
             {{ item }}
           </p>
         </div>

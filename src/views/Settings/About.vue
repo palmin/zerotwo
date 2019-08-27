@@ -5,7 +5,7 @@
         <v-layout align-center justify-center wrap fill-height>
           <v-flex xs12>
             <h2 class="display-3 text-center">
-              {{ $t('system.settings.aboutZeroTwo.version') }}
+              {{ $t('pages.settings.aboutZeroTwo.version') }}
             </h2>
             <h3 class="display-2 text-center">
               {{ currentAppVersion }}

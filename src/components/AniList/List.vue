@@ -22,7 +22,7 @@
           xl2
         >
           <v-card class="ma-1">
-            <ListImage :image-link="item.imageLink" :ani-list-id="item.aniListId" :name="item.name" />
+            <ListImage :image-link="item.imageLink" :ani-list-id="item.aniListId" :name="item.title" />
 
             <v-card-text>
               <v-layout wrap>
@@ -65,12 +65,13 @@
 </template>
 
 <script lang="ts">
-import { chain, isEmpty, reduce } from 'lodash';
+import {
+  chain, isEmpty, reduce, get, includes,
+} from 'lodash';
 import moment from 'moment';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { RawLocation } from 'vue-router';
-
-// Custom Components
+import EventBus from '@/eventBus';
 import API from '@/modules/AniList/API';
 import {
   AniListListStatus, AniListMediaStatus, AniListScoreFormat, IAniListEntry,
@@ -121,6 +122,12 @@ export default class List extends Vue {
 
   private snackbarText: string = '';
 
+  private sortDirection: string = 'asc';
+
+  private sortBy: string = 'title';
+
+  private genreFilters: string[] = [];
+
   @Prop()
   private readonly status!: AniListListStatus;
 
@@ -162,28 +169,44 @@ export default class List extends Vue {
       const progressPercentage = this.calculateProgressPercentage(entry);
       const missingEpisodes = this.calculateMissingEpisodes(entry);
 
+      const { year, month, day } = entry.media.startDate;
+
       return {
         aniListId: media.id,
         currentProgress: entry.progress,
         entry,
         episodeAmount: media.episodes || '?',
         forAdults: media.isAdult,
+        genres: media.genres,
         id: entry.id,
         imageLink,
         mediaStatus: media.status,
         missingEpisodes,
-        name: media.title.userPreferred,
         nextAiringEpisode: media.nextAiringEpisode,
         nextEpisode,
         progressPercentage,
         score: entry.score,
         scoreStars,
+        startDate: new Date(year, month, day),
         status: entry.status,
+        title: media.title.userPreferred,
       };
     });
 
+    const sortDirection = this.sortDirection === 'asc' ? 'asc' : 'desc';
+
+    // @TODO: Give entry a type!
+    const filterGenres = (entry: any): boolean => {
+      if (!this.genreFilters.length) {
+        return true;
+      }
+
+      return this.genreFilters.every(genre => includes(entry.genres, genre));
+    };
+
     newEntries = chain(newEntries)
-      .orderBy(entry => entry.name.toLowerCase(), ['asc'])
+      .filter(filterGenres)
+      .orderBy(entry => get(entry, this.sortBy), [sortDirection])
       .slice(0, this.startAmount + this.currentIndex)
       .value();
 
@@ -199,6 +222,15 @@ export default class List extends Vue {
         this.currentIndex += this.startAmount;
       }
     };
+
+    EventBus.$on('changeSorting', (item: { sortBy: string, direction: string }) => {
+      this.sortBy = item.sortBy;
+      this.sortDirection = item.direction;
+    });
+
+    EventBus.$on('changeFiltering', (item: { genres: string[] }) => {
+      this.genreFilters = item.genres;
+    });
   }
 
   private getScoreStarValue(score: number): number {

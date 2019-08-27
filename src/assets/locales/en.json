@@ -9,6 +9,18 @@
     "winter": "Winter"
   },
   "system": {
+    "sorting": {
+      "directions": {
+        "ascending": "Ascending",
+        "descending": "Descending"
+      },
+      "sortingLabel": "Sort by",
+      "title": "Title",
+      "score": "Score",
+      "progress": "Progress",
+      "startingDate": "Starting date",
+      "episodeAmount": "Episode amount"
+    },
     "actions": {
       "add": "Add",
       "addToPlanToWatch": "Add to plan to watch",
@@ -17,9 +29,10 @@
       "loading": "Loading...",
       "login": "Login",
       "remove": "Remove",
+      "reset": "Reset",
       "save": "Save",
       "search": "Search",
-      "sort": "Sort",
+      "sort": "Sort & Filter",
       "toPageTop": "Jump to top"
     },
     "alerts": {

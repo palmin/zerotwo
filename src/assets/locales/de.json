@@ -9,6 +9,18 @@
     "winter": "Winter"
   },
   "system": {
+    "sorting": {
+      "directions": {
+        "ascending": "Aufsteigend",
+        "descending": "Absteigend"
+      },
+      "sortingLabel": "Sortieren nach",
+      "title": "Titel",
+      "score": "Bewertung",
+      "progress": "Fortschritt",
+      "startingDate": "Serienstart",
+      "episodeAmount": "Folgenanzahl"
+    },
     "actions": {
       "add": "Hinzufügen",
       "addToPlanToWatch": "Zur Plan-Liste hinzufügen",
@@ -17,9 +29,10 @@
       "loading": "Lädt...",
       "login": "Login",
       "remove": "Entfernen",
+      "reset": "Zurücksetzen",
       "save": "Speichern",
       "search": "Suchen",
-      "sort": "Sortieren",
+      "sort": "Sortieren & Filtern",
       "toPageTop": "Zum Anfang springen"
     },
     "alerts": {

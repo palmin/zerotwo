@@ -10,7 +10,7 @@
           xl2
         >
           <v-card hover class="ma-1">
-            <ListImage :image-link="item.coverImage" :name="item.name" :ani-list-id="item.id" />
+            <ListImage :image-link="item.coverImage" :name="item.title" :ani-list-id="item.id" />
 
             <v-card-text>
               <v-layout row fill-height align-center>
@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import { chain } from 'lodash';
+import { chain, includes, get } from 'lodash';
 import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator';
 import ListImage from '@/components/AniList/ListElements/ListImage.vue';
@@ -82,7 +82,19 @@ interface UpdateSeasonProperties {
   season: AniListSeason;
 }
 
-@Component({ components: { ListImage } })
+@Component({
+  components: {
+    ListImage,
+  },
+  beforeRouteUpdate(to, from, next) {
+    eventBus.$emit('resetAllSorts');
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    eventBus.$emit('resetAllSorts');
+    next();
+  },
+})
 export default class SeasonPreview extends Vue {
   private media: IAniListSeasonPreviewMedia[] = [];
 
@@ -90,11 +102,28 @@ export default class SeasonPreview extends Vue {
 
   private season: AniListSeason = this.getCurrentSeason();
 
+  private sortDirection: string = 'asc';
+
+  private sortBy: string = 'title';
+
+  private genreFilters: string[] = [];
+
   private get appLoading(): boolean {
     return appStore.isLoading;
   }
 
   private get preparedMedia() {
+    const sortDirection = this.sortDirection === 'asc' ? 'asc' : 'desc';
+
+    // @TODO: Give entry a type!
+    const filterGenres = (entry: any): boolean => {
+      if (!this.genreFilters.length) {
+        return true;
+      }
+
+      return this.genreFilters.every(genre => includes(entry.genres, genre));
+    };
+
     return chain(this.media)
       .filter(item => !item.isAdult || (item.isAdult && aniListStore.allowAdultContent))
       .map((item) => {
@@ -134,18 +163,29 @@ export default class SeasonPreview extends Vue {
           inList: usersListStatus,
           isAdult: item.isAdult,
           isLocked: item.isLocked,
-          name: item.title.userPreferred,
+          title: item.title.userPreferred,
           coverImage,
           episodes: item.episodes || 0,
+          genres: item.genres,
           startDateTimestamp,
           startDate,
         };
       })
-      .orderBy(['startDateTimestamp'], ['asc'])
+      .filter(filterGenres)
+      .orderBy(entry => get(entry, this.sortBy), [sortDirection])
       .value();
   }
 
   private async created() {
+    eventBus.$on('changeSorting', (item: { sortBy: string, direction: string }) => {
+      this.sortBy = item.sortBy;
+      this.sortDirection = item.direction;
+    });
+
+    eventBus.$on('changeFiltering', (item: { genres: string[] }) => {
+      this.genreFilters = item.genres;
+    });
+
     // Listen to event
     eventBus.$on('updateSeason', async (season: UpdateSeasonProperties) => {
       await appStore.setLoadingState(true);

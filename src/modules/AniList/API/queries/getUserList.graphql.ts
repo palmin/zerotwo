@@ -28,6 +28,7 @@ query GetListByUsername($userName: String!, $type: MediaType!) {
             month
             day
           }
+          genres
           season
           status
           format

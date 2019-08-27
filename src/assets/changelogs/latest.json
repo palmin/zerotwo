@@ -24,6 +24,11 @@
       "de": "In-App einsehbare Änderungen zur neusten Version",
       "en": "In-app visible changelog",
       "ja": "アプリ内に最新更新情報が見える"
+    },
+    {
+      "de": "Filterung nach Genres",
+      "en": "Filtering by Genre",
+      "ja": "ジャンルのフィルタリングを追加"
     }
   ],
   "FIX": [

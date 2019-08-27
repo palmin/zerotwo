@@ -23,7 +23,7 @@
       <v-card-title>{{ $t('actions.sort') }}</v-card-title>
       <v-container fluid grid-list-md>
         <v-layout>
-          <v-flex xs8>
+          <v-flex xs7>
             <v-select
               v-model="sortItem"
               :items="sortingItems"
@@ -31,7 +31,7 @@
               @change="changeSorting"
             />
           </v-flex>
-          <v-flex xs4>
+          <v-flex xs5>
             <v-radio-group v-model="direction" column @change="changeDirection">
               <v-radio :label="$t('components.sorting.directions.ascending')" value="asc" />
               <v-radio :label="$t('components.sorting.directions.descending')" value="desc" />

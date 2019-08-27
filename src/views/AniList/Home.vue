@@ -3,9 +3,19 @@
     <v-card v-if="isAuthenticated">
       <v-card-text class="background" :style="`background-image: url(${currentUser.bannerImage})`">
         <v-container fluid>
-          <v-flex xs2>
-            <ProfileImage />
-          </v-flex>
+          <v-layout>
+            <v-flex xs2>
+              <ProfileImage />
+            </v-flex>
+
+            <v-flex xs2 offset-xs8>
+              <v-img
+                :elevation="12"
+                :src="require('@/assets/logos/Ko-fi-Support-Button.png')"
+                @click="openSupportPage"
+              />
+            </v-flex>
+          </v-layout>
         </v-container>
       </v-card-text>
     </v-card>
@@ -42,6 +52,7 @@
 </template>
 
 <script lang="ts">
+import { shell } from 'electron';
 import { Component, Vue } from 'vue-property-decorator';
 import Activities from '@/components/AniList/Activities.vue';
 import ProfileImage from '@/components/AniList/ProfileImage.vue';
@@ -60,6 +71,10 @@ export default class Home extends Vue {
 
   private get isAuthenticated(): boolean {
     return aniListStore.isAuthenticated;
+  }
+
+  private openSupportPage(): void {
+    shell.openExternal('https://ko-fi.com/H2H3128IU');
   }
 }
 </script>

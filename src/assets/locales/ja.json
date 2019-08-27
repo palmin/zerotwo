@@ -9,6 +9,18 @@
     "winter": "冬"
   },
   "system": {
+    "sorting": {
+      "directions": {
+        "ascending": "昇順",
+        "descending": "降順"
+      },
+      "sortingLabel": "並べる",
+      "title": "タイトル",
+      "score": "スコア",
+      "progress": "進行",
+      "startingDate": "放送開始日",
+      "episodeAmount": "エピソード数"
+    },
     "actions": {
       "add": "追加",
       "addToPlanToWatch": "見る予定リストに追加",
@@ -17,9 +29,10 @@
       "loading": "通信中・・・",
       "login": "ログイン",
       "remove": "削除",
+      "reset": "リセット",
       "save": "保存",
       "search": "検索",
-      "sort": "並べる",
+      "sort": "並べる＆フィルタリング",
       "toPageTop": "トップへ"
     },
     "alerts": {

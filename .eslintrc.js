@@ -1,36 +1,32 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 8,
-  },
   env: {
-    browser: true,
     node: true,
-    jquery: true,
   },
-  extends: 'airbnb-base',
-  globals: {
-    __static: true,
-  },
-  plugins: ['html'],
+  extends: [
+    'plugin:vue/recommended',
+    '@vue/airbnb',
+    '@vue/typescript',
+  ],
   rules: {
-    'global-require': 0,
-    'import/no-unresolved': 0,
-    'no-param-reassign': 0,
-    'no-shadow': 0,
-    'import/extensions': 0,
-    'import/newline-after-import': 0,
-    'no-multi-assign': 0,
-    'object-curly-newline': ['error', {
-      'ObjectExpression': { 'multiline': true },
-      'ObjectPattern': { 'multiline': true },
-      'ImportDeclaration': 'never',
-      'ExportDeclaration': { 'multiline': true, 'minProperties': 3 }
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'class-methods-use-this': [0],
+    'import/no-extraneous-dependencies': [0],
+    'no-underscore-dangle': [0],
+    'max-len': [0],
+    'no-nested-ternary': [0],
+    'no-plusplus': [0],
+    'import/no-cycle': [0],
+    'vue/max-attributes-per-line': ['error', {
+      singleline: 4,
+      multiline: {
+        max: 1,
+        allowFirstLine: false,
+      },
     }],
-    // allow debugger during development
-    'no-unused-vars': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
-}
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+  },
+};

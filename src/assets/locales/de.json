@@ -1,0 +1,217 @@
+{
+  "originalReading": "Deutsch",
+  "englishReading": "German",
+  "actions": {
+    "add": "Hinzufügen",
+    "addToPlanToWatch": "Zur Plan-Liste hinzufügen",
+    "back": "Zurück",
+    "fastSearch": "Suchen... \u23ce",
+    "loading": "Lädt...",
+    "login": "Login",
+    "remove": "Entfernen",
+    "reset": "Zurücksetzen",
+    "save": "Speichern",
+    "search": "Suchen",
+    "sort": "Sortieren & Filtern",
+    "toPageTop": "Zum Anfang springen"
+  },
+  "alerts": {
+    "adultContent": "Dieses Element ist für Jugendliche unter 18 Jahren ungeeignet!",
+    "noDescription": "Keine Beschreibung vorhanden.",
+    "noEnglishTitle": "Kein englischer Titel verfügbar.",
+    "noInformation": "Keine Informationen verfügbar.",
+    "noSynonyms": "Keine Synonyme vorhanden.",
+    "notYetInList": "Dieses Element ist noch nicht in deiner Liste.",
+    "unauthenticated": "Du bist nicht eingeloggt!",
+    "unknown": "Unbekannt"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "Synchronisation fehlgeschlagen",
+      "text": "Die geplante Änderung konnte nicht synchronisiert werden! Bitte überprüfe deine Internetverbindung und die Erreichbarkeit von AniList."
+    }
+  },
+  "menus": {
+    "aniList": {
+      "completed": "Abgeschlossen",
+      "dropped": "Abgebrochen",
+      "home": "Home",
+      "paused": "Pausiert",
+      "planning": "Geplant",
+      "repeating": "Wiederholend",
+      "seasonPreview": "Saison-Vorschau",
+      "watching": "Laufend"
+    },
+    "search": "Erweiterte Suche",
+    "settings": {
+      "title": "Einstellungen",
+      "about": "Über ZeroTwo",
+      "aniList": "AniList",
+      "appSettings": "App-Einstellungen",
+      "changelog": "Letzte Änderungen"
+    }
+  },
+  "components": {
+    "sorting": {
+      "directions": {
+        "ascending": "Aufsteigend",
+        "descending": "Absteigend"
+      },
+      "sortingLabel": "Sortieren nach",
+      "title": "Titel",
+      "score": "Bewertung",
+      "progress": "Fortschritt",
+      "startingDate": "Serienstart",
+      "episodeAmount": "Folgenanzahl"
+    }
+  },
+  "pages": {
+    "aniList": {
+      "home": {
+        "activities": {
+          "headline": "Neuste Aktivitäten",
+          "completed": "{0} fertig geguckt",
+          "plansToWatch": "{0} zur Plan-Liste hinzugefügt",
+          "watchedEpisode": "Folge {1} von {0} geguckt",
+          "dropped": "{0} abgebrochen",
+          "rewatchedEpisode": "Folge {1} von {0} wiederholt",
+          "paused": "{0} pausiert"
+        },
+        "howToAuthenticate": {
+          "header": "Wie man sich einloggt:",
+          "text": [
+            "Navigiere bitte auf die Einstellungsseite (Zahnrad rechts oben) und auf \"AniList\".",
+            "Dort findest du einen \"Login\"-Button, der einen von AniList erstellten Login-Dialog öffnet.",
+            "Nach Eingabe der Login-Daten schließt sich das Fenster wieder und der Login-Prozess sollte erfolgreich abgeschlossen sein."
+          ]
+        }
+      },
+      "list": {
+        "airingFinished": "Ausstrahlung beendet",
+        "missingEpisodes": "Noch eine Folge gucken | Noch {count} Folgen gucken",
+        "notYetAired": "Noch nicht ausgestrahlt",
+        "nextAiringEpisode": "Ausstrahlung von Episode {0} {1}"
+      },
+      "detailView": {
+        "airedOn": "Wurde am {0} ausgestrahlt",
+        "airedOnTo": "{0} bis {1}",
+        "airesFromTo": "Startet am {0} bis {1}",
+        "airesOn": "Wird am {0} ausgestrahlt",
+        "airingStartedOn": "Startete am {0}",
+        "airingStartsOnDay": "Startet am {0}",
+        "airingStartsInMonthYear": "Startet im {0}",
+        "airingStartsInYear": "Startet {0}",
+        "airingTime": "Ausstrahlung",
+        "airingWithUnknownStart": "? - {0}",
+        "description": "Beschreibung",
+        "englishTitle": "Englischer Titel",
+        "episodes": "Episoden",
+        "genres": "Genres",
+        "nativeTitle": "Originaltitel",
+        "ownInformation": "Informationen auf eigener Liste",
+        "ownProgress": "Fortschritt",
+        "ownStatus": "Status",
+        "ownScore": "Bewertung",
+        "romajiTitle": "Rōmaji-Titel",
+        "score": "{0} / {1} Punkte",
+        "scoreLabel": "Durchschnittliche Bewertung",
+        "streamingSubheader": "Streaminganbieter (engl.)",
+        "synonyms": "Synonyme"
+      }
+    },
+    "search": {
+      "searchQuery": "Suchbegriff...",
+      "adultContent": {
+        "label": "18+-Inhalte",
+        "hint": "Leer lassen, um ungefiltert Inhalte zu suchen",
+        "onlyNonAdult": "Nur jugendfreie Inhalte",
+        "onlyAdult": "Nur Inhalte ab 18+"
+      },
+      "inList": {
+        "label": "In Liste...",
+        "hint": "Leer lassen, um auch nicht eingetragene Inhalte zu suchen"
+      },
+      "genres": {
+        "label": "Genres",
+        "hint": "Maximal 3 auf einmal",
+        "noMatch": "Kein Genre \"<strong>{0}</strong>\" gefunden. Drücke <kbd>Enter</kbd>, um es hinzuzufügen."
+      }
+    },
+    "seasonPreview": {
+      "episodes": "? Episoden | 1 Episode | {count} Episoden",
+      "startDate": "Serienstart:"
+    },
+    "settings": {
+      "aboutZeroTwo": {
+        "version": "Version"
+      },
+      "aniList": {
+        "loggedInAs": "Eingeloggt als {0}",
+        "refreshRate": "Aktualisierungsintervall",
+        "refreshRateSuffix": "Minuten",
+        "refreshRateHint": "Dieses Intervall bestimmt die Dauer (in Minuten) bis zur nächsten Synchronisation mit dem AniList-Server. Änderungen des Intervalls treten nach der nächsten Synchronisation in Kraft."
+      },
+      "appSettings": {
+        "chooseLanguage": "Sprache wählen (Choose language)",
+        "darkMode": "Dunkles App-Design"
+      },
+      "changelog": {
+        "new": "NEU",
+        "fix": "BEHOBEN",
+        "remove": "ENTFERNT",
+        "version": "Version",
+        "changesIn": "Neuste Änderungen in {0}"
+      }
+    }
+  },
+  "routes": {
+    "aniList": "AniList",
+    "detailView": "Detail-Ansicht",
+    "search": "Suche",
+    "seasonPreview": "Saison-Vorschau",
+    "settings": "Einstellungen"
+  },
+  "notifications": {
+    "aniList": {
+      "successTitle": "Synchronisation erfolgreich",
+      "completeUpdateText": "{0} wurde mit Episode {1} abgeschlossen und erfolgreich synchronisiert.",
+      "simpleUpdateText": "{0} wurde erfolgreich auf Episode {1} synchronisiert.",
+      "addedToList": "{0} wurde erfolgreich zur Liste hinzugefügt.",
+      "removeEntry": "{0} wurde erfolgreich von der Liste entfernt."
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "Abgeschlossen",
+        "dropped": "Abgebrochen",
+        "paused": "Pausiert",
+        "planning": "Geplant",
+        "repeating": "Wiederholend",
+        "watching": "Laufend"
+      },
+      "seasons": {
+        "spring": "Frühling",
+        "summer": "Sommer",
+        "fall": "Herbst",
+        "autumn": "Herbst",
+        "winter": "Winter"
+      }
+    },
+    "dates": {
+      "full": "DD. MMMM YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Datum unbekannt"
+    },
+    "rules": {
+      "required": "Diese Eingabe muss ausgefüllt werden."
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
+  },
+  "$vuetify": {
+    "noDataText": "Keine Daten"
+  }
+}

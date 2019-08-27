@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: bold;
+  font-style: normal;
+  src: url("../fonts/NotoSansCJKjp-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Nutito";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Nunito-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-weight: bold;
+  font-style: normal;
+  src: url("../fonts/Nunito-SemiBold.ttf") format("truetype");
+}
+
+* {
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &[class^='display-'] {
+    font-family: 'Nunito', 'Noto Sans', Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  }
+}

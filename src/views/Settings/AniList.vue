@@ -2,14 +2,29 @@
   <v-tab-item :key="tabKey">
     <v-card flat>
       <v-container fluid fill-height grid-list-xl>
-        <v-layout v-if="!isAuthenticated" fill-height justify-center align-center>
+        <v-layout
+          v-if="!isAuthenticated"
+          class="ma-4"
+          fill-height
+          justify-center
+          align-center
+        >
           <v-btn color="primary" @click="loginToAniList">
             {{ $t('actions.login') }}
           </v-btn>
         </v-layout>
         <v-layout v-else fill-height justify-center align-center>
           <v-flex xs5 text-center>
-            {{ $t('pages.settings.aniList.loggedInAs', [currentUser.name]) }}
+            <v-layout column>
+              <v-flex>
+                {{ $t('pages.settings.aniList.loggedInAs', [currentUser.name]) }}
+              </v-flex>
+              <v-flex>
+                <v-btn color="red darken-2" @click="logout">
+                  {{ $t('actions.logout') }}
+                </v-btn>
+              </v-flex>
+            </v-layout>
           </v-flex>
           <v-flex xs5 offset-xs2>
             <v-text-field
@@ -60,6 +75,20 @@ export default class AniListSettings extends Vue {
     if (!aniListStore.isAuthenticated) {
       ipcRenderer.send('aniListOAuth', 'getToken');
     }
+  }
+
+  private async logout() {
+    if (!aniListStore.isAuthenticated) {
+      return;
+    }
+
+    await appStore.setLoadingState(true);
+
+    await aniListStore.logout();
+
+    await appStore.setLoadingState(false);
+
+    this.$router.push({ name: 'Home' });
   }
 }
 </script>

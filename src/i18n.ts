@@ -21,6 +21,7 @@ function loadLocaleMessages(): LocaleMessages {
 export const validLanguageCodes: string[] = [
   'de',
   'en',
+  'fr',
   'ja',
 ];
 

@@ -44,7 +44,7 @@
               <v-btn
                 block
                 text
-                :disabled="item.isLocked || item.inList"
+                :disabled="item.isLocked || item.inList || !isAuthenticated"
                 :loading="appLoading"
                 @click="addMediaToPlanList(item)"
               >
@@ -110,6 +110,10 @@ export default class SeasonPreview extends Vue {
 
   private get appLoading(): boolean {
     return appStore.isLoading;
+  }
+
+  private get isAuthenticated(): boolean {
+    return aniListStore.isAuthenticated;
   }
 
   private get preparedMedia() {

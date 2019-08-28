@@ -47,7 +47,7 @@
       <BackButton />
       <TopButton />
       <SortButton />
-      <SearchButton />
+      <SearchButton v-if="isAuthenticated" />
 
       <AniListRefresh />
 
@@ -124,6 +124,10 @@ export default class Navigation extends Vue {
     const currentRoute = this.$route.path;
 
     return currentRoute.startsWith('/aniList');
+  }
+
+  private get isAuthenticated(): boolean {
+    return aniListStore.isAuthenticated;
   }
 
   private navigateTo(location: RawLocation) {

@@ -195,6 +195,17 @@ export class AniListStore extends VuexModule {
     }
   }
 
+  @action()
+  public async logout(): Promise<void> {
+    await this.destroyRefreshTimer();
+
+    await this.setCurrentMediaTitle(null);
+    await this.setSession('');
+    await this.setRefreshRate(15);
+    this._setAniListData({ lists: [] });
+    this._setLatestActivities([]);
+  }
+
   /**
    * @action
    * @async

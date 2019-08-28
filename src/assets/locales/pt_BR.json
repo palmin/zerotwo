@@ -1,0 +1,217 @@
+{
+  "originalReading": "Português (Brasil)",
+  "englishReading": "Portuguese (Brazil)",
+  "actions": {
+    "add": "Adicionar",
+    "addToPlanToWatch": "Add to plan to watch",
+    "back": "Voltar",
+    "fastSearch": "Pesquisar... \u23ce",
+    "loading": "Carregando...",
+    "login": "Login",
+    "remove": "Remover",
+    "reset": "Reiniciar",
+    "save": "Salvar",
+    "search": "Pesquisar",
+    "sort": "Ordenar & Filtrar",
+    "toPageTop": "Ir para o topo"
+  },
+  "alerts": {
+    "adultContent": "Esta mídia contém conteúdo adulto! Discrição do Espectador é aconselhada ",
+    "noDescription": "Nenhuma descrição disponivel.",
+    "noEnglishTitle": "Nenhum título em inglês disponível.",
+    "noInformation": "Nenhuma informação disponivel",
+    "noSynonyms": "Não há sinônimos disponíveis.",
+    "notYetInList": "Este conteúdo ainda não está na sua lista.",
+    "unauthenticated": "Você não está autenticado!",
+    "unknown": "Desconhecido"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "A atualização falhou",
+      "text": "A atualização submetida não pôde ser sincronizada! Verifique a disponibilidade do AniList ou a sua conexão com a internet!"
+    }
+  },
+  "menus": {
+    "aniList": {
+      "completed": "Completado(a)",
+      "dropped": "Dropado",
+      "home": "Página inicial",
+      "paused": "Pausado",
+      "planning": "Planejando",
+      "repeating": "Repetindo",
+      "seasonPreview": "Preview da Temporada",
+      "watching": "Assistindo"
+    },
+    "search": "Pesquisa Detalhada",
+    "settings": {
+      "title": "Configurações",
+      "about": "Sobre ZeroTwo",
+      "aniList": "AniList",
+      "appSettings": "Configurações do aplicativo",
+      "changelog": "Últimas mudanças"
+    }
+  },
+  "components": {
+    "sorting": {
+      "directions": {
+        "ascending": "Crescente",
+        "descending": "Decrescente"
+      },
+      "sortingLabel": "Ordenar por",
+      "title": "Título",
+      "score": "Score",
+      "progress": "Progresso",
+      "startingDate": "Data de início",
+      "episodeAmount": "Quantidade de Episódios"
+    }
+  },
+  "pages": {
+    "aniList": {
+      "home": {
+        "activities": {
+          "headline": "Atividades mais recentes",
+          "completed": "Completado {0}",
+          "plansToWatch": "Planeja assistir {0}",
+          "watchedEpisode": "Assistido episódio {1} de {0}",
+          "dropped": "Dropou {0}",
+          "rewatchedEpisode": "Reassistindo episódio {1} of {0}",
+          "paused": "Pausou {0}"
+        },
+        "howToAuthenticate": {
+          "header": "Como fazer o login:",
+          "text": [
+            "Por favor, navegue para as configurações (engrenagem no canto direito) e depois para a aba do \"AniList\".",
+            "Lá você encontrará o botão de \"Login\"  que abrirá uma janela de login do AniList.",
+            "Depois de introduzir os seus dados, a janela será fechada e o processo de login deve ser feito com sucesso."
+          ]
+        }
+      },
+      "list": {
+        "airingFinished": "Transmissão finalizada",
+        "missingEpisodes": "Um episódio para assistir | {count} episódios para assistir",
+        "notYetAired": "Ainda não foi ao ar",
+        "nextAiringEpisode": "Episódio {0} is airing {1}"
+      },
+      "detailView": {
+        "airedOn": "Foi ao ar em {0}",
+        "airedOnTo": "{0} até {1}",
+        "airesFromTo": "Foi ao ar {0} até {1}",
+        "airesOn": "Foi ao ar em {0}",
+        "airingStartedOn": "Começou em {0}",
+        "airingStartsOnDay": "Começa em {0}",
+        "airingStartsInMonthYear": "Começa em {0}",
+        "airingStartsInYear": "Começa em {0}",
+        "airingTime": "Tempo de transmissão",
+        "airingWithUnknownStart": "? - {0}",
+        "description": "Descrição",
+        "englishTitle": "Título em Inglês",
+        "episodes": "Episódios",
+        "genres": "Gêneros",
+        "nativeTitle": "Título Nativo",
+        "ownInformation": "Informação da sua lista",
+        "ownProgress": "Progresso",
+        "ownStatus": "Status",
+        "ownScore": "Pontuação",
+        "romajiTitle": "Titlo em Rōmaji",
+        "score": "{0} / {1} pontos",
+        "scoreLabel": "Nota média",
+        "streamingSubheader": "Serviços de Streaming",
+        "synonyms": "Sinônimos"
+      }
+    },
+    "search": {
+      "searchQuery": "Pesquisar...",
+      "adultContent": {
+        "label": "Conteúdo Adulto",
+        "hint": "Mantenha-se livre para pesquisar conteúdo adulto e não-adulto",
+        "onlyNonAdult": "Apenas Conteúdo não-adulto",
+        "onlyAdult": "Apenas Conteúdo adulto"
+      },
+      "inList": {
+        "label": "Na Lista",
+        "hint": "Fique claro para também procurar por conteúdo que ainda não está em sua lista"
+      },
+      "genres": {
+        "label": "Gêneros",
+        "hint": "Max. 3",
+        "noMatch": "Nenhum gênero combina \"<strong>{0}</strong>\". Aperte <kbd>enter</kbd> para criá-lo."
+      }
+    },
+    "seasonPreview": {
+      "episodes": "? episódios | 1 episódio | {count} episódios",
+      "startDate": "Data de lançamento:"
+    },
+    "settings": {
+      "aboutZeroTwo": {
+        "version": "Versão"
+      },
+      "aniList": {
+        "loggedInAs": "Logado como {0}",
+        "refreshRate": "Taxa de atualização",
+        "refreshRateSuffix": "minutos",
+        "refreshRateHint": "Este intervalo determina a quantidade de minutos até a próxima sincronização com os servidores da AniList. Mudanças no intervalo serão aplicadas após a próxima sincronização."
+      },
+      "appSettings": {
+        "chooseLanguage": "Escolha o idioma",
+        "darkMode": "Modo escuro"
+      },
+      "changelog": {
+        "new": "NOVIDADES",
+        "fix": "CORREÇÕES",
+        "remove": "REMOVIDO",
+        "version": "Versão",
+        "changesIn": "Últimas mudanças no {0}"
+      }
+    }
+  },
+  "routes": {
+    "aniList": "AniList",
+    "detailView": "Visão detalhada",
+    "search": "Pesquisar",
+    "seasonPreview": "Season Preview",
+    "settings": "Configurações"
+  },
+  "notifications": {
+    "aniList": {
+      "title": "Sincronização bem sucedida",
+      "completeUpdateText": "{0} foi completado com sucesso com a sincronização para o episódio {1}.",
+      "simpleUpdateText": "{0} foi sincronizado com sucesso para o episódio {1}.",
+      "addedToList": "{0} foi adicionado com sucesso à sua lista.",
+      "removeEntry": "{0} foi removido com sucesso à sua lista."
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "Completado(a)",
+        "dropped": "Dropado",
+        "paused": "Pausado",
+        "planning": "Planejando",
+        "repeating": "Repetindo",
+        "watching": "Assistindo"
+      },
+      "seasons": {
+        "spring": "Primavera",
+        "summer": "Verão",
+        "fall": "Outono",
+        "autumn": "Outono",
+        "winter": "Inverno"
+      }
+    },
+    "dates": {
+      "full": "MMMM Do YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Data desconhecida"
+    },
+    "rules": {
+      "required": "Está parte deve ser preenchida."
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
+  },
+  "$vuetify": {
+    "noDataText": "Nenhum dado"
+  }
+}

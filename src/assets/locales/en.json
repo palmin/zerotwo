@@ -49,7 +49,8 @@
       "about": "About ZeroTwo",
       "aniList": "AniList",
       "appSettings": "App Settings",
-      "changelog": "Latest changes"
+      "changelog": "Latest changes",
+      "specialThanks": "Special Thanks"
     }
   },
   "components": {
@@ -162,7 +163,9 @@
         "remove": "REMOVE",
         "version": "Version",
         "changesIn": "Latest changes in {0}"
-      }
+      },
+      "specialThanks": "Special Thanks",
+      "supporters": "Supporters"
     }
   },
   "routes": {

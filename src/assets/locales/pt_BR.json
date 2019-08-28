@@ -3,11 +3,12 @@
   "englishReading": "Portuguese (Brazil)",
   "actions": {
     "add": "Adicionar",
-    "addToPlanToWatch": "Add to plan to watch",
+    "addToPlanToWatch": "Planejar para assistir",
     "back": "Voltar",
     "fastSearch": "Pesquisar... \u23ce",
     "loading": "Carregando...",
     "login": "Login",
+    "logout": "Logout",
     "remove": "Remover",
     "reset": "Reiniciar",
     "save": "Salvar",
@@ -48,7 +49,8 @@
       "about": "Sobre ZeroTwo",
       "aniList": "AniList",
       "appSettings": "Configurações do aplicativo",
-      "changelog": "Últimas mudanças"
+      "changelog": "Últimas mudanças",
+      "specialThanks": "Agradecimentos especiais"
     }
   },
   "components": {
@@ -90,7 +92,7 @@
         "airingFinished": "Transmissão finalizada",
         "missingEpisodes": "Um episódio para assistir | {count} episódios para assistir",
         "notYetAired": "Ainda não foi ao ar",
-        "nextAiringEpisode": "Episódio {0} is airing {1}"
+        "nextAiringEpisode": "Episódio {0} será transmitido {1}"
       },
       "detailView": {
         "airedOn": "Foi ao ar em {0}",
@@ -161,14 +163,16 @@
         "remove": "REMOVIDO",
         "version": "Versão",
         "changesIn": "Últimas mudanças no {0}"
-      }
+      },
+      "specialThanks": "Agradecimentos especiais",
+      "supporters": "Apoiadores"
     }
   },
   "routes": {
     "aniList": "AniList",
     "detailView": "Visão detalhada",
     "search": "Pesquisar",
-    "seasonPreview": "Season Preview",
+    "seasonPreview": "Preview da Temporada",
     "settings": "Configurações"
   },
   "notifications": {

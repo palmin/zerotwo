@@ -84,7 +84,6 @@ export default class SpecialThanksSettings extends Vue {
   }
 
   private get getSpecialThanks() {
-    console.log(specialThanks);
     return specialThanks;
   }
 

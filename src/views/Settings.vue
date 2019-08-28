@@ -20,6 +20,8 @@
             <About :tab-key="aboutTab.key" />
 
             <Changelog :tab-key="changelogTab.key" />
+
+            <SpecialThanks :tab-key="specialThanksTab.key" />
           </v-tabs-items>
         </v-tabs>
       </v-card-text>
@@ -34,6 +36,7 @@ import AppSettings from './Settings/AppSettings.vue';
 import AniList from './Settings/AniList.vue';
 import About from './Settings/About.vue';
 import Changelog from './Settings/Changelog.vue';
+import SpecialThanks from './Settings/SpecialThanks.vue';
 
 interface ISettingTab {
   key: string;
@@ -47,6 +50,7 @@ interface ISettingTab {
     AniList,
     AppSettings,
     Changelog,
+    SpecialThanks,
   },
 })
 export default class Settings extends Vue {
@@ -63,6 +67,7 @@ export default class Settings extends Vue {
       this.aniListTab,
       this.aboutTab,
       this.changelogTab,
+      this.specialThanksTab,
     ];
   }
 
@@ -91,6 +96,13 @@ export default class Settings extends Vue {
     return {
       key: 'changelog',
       value: this.$t('menus.settings.changelog'),
+    };
+  }
+
+  private get specialThanksTab(): ISettingTab {
+    return {
+      key: 'specialThanks',
+      value: this.$t('menus.settings.specialThanks'),
     };
   }
 }

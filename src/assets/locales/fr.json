@@ -8,6 +8,7 @@
     "fastSearch": "Chercher... \u23ce",
     "loading": "Chargement...",
     "login": "Connexion",
+    "logout": "Déconnexion",
     "remove": "Supprimer",
     "reset": "Remise à zéro",
     "save": "Sauvegarder",
@@ -48,7 +49,8 @@
       "about": "À propos de ZeroTwo",
       "aniList": "AniList",
       "appSettings": "Paramètres de l'App",
-      "changelog": "Derniers changement"
+      "changelog": "Derniers changement",
+      "specialThanks": "Remerciement spécial"
     }
   },
   "components": {
@@ -161,7 +163,9 @@
         "remove": "SUPPRIMÉ",
         "version": "Version",
         "changesIn": "Dernier changements dans {0}"
-      }
+      },
+      "specialThanks": "Remerciements",
+      "supporters": "Supporters"
     }
   },
   "routes": {

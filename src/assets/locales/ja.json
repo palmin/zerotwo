@@ -49,7 +49,8 @@
       "about": "ゼロツーについて",
       "aniList": "AniList",
       "appSettings": "環境設定",
-      "changelog": "最新更新情報"
+      "changelog": "最新更新情報",
+      "specialThanks": "特別挨拶"
     }
   },
   "components": {
@@ -162,7 +163,9 @@
         "remove": "削除",
         "version": "バージョン",
         "changesIn": "{0}の最新更新情報"
-      }
+      },
+      "specialThanks": "特別挨拶",
+      "supporters": "サポーター"
     }
   },
   "routes": {

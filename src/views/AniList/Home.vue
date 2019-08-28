@@ -10,7 +10,7 @@
 
             <v-flex xs2 offset-xs8>
               <v-img
-                :elevation="12"
+                class="pointer-on-hover"
                 :src="require('@/assets/logos/Ko-fi-Support-Button.png')"
                 @click="openSupportPage"
               />
@@ -74,7 +74,7 @@ export default class Home extends Vue {
   }
 
   private openSupportPage(): void {
-    shell.openExternal('https://ko-fi.com/H2H3128IU');
+    shell.openExternal('https://ko-fi.com/nicoaiko');
   }
 }
 </script>
@@ -82,5 +82,8 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 .background {
   background-size: cover;
+}
+.pointer-on-hover:hover {
+  cursor: pointer;
 }
 </style>

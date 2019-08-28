@@ -24,7 +24,6 @@ export const validLanguageCodes: string[] = [
   'fr',
   'ja',
   'pt_BR',
-  'zh-CN',
 ];
 
 export const i18n = new VueI18n({

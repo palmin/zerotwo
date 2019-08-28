@@ -9,7 +9,7 @@
 
           <v-divider />
 
-          <v-layout class="px-1 py-2">
+          <v-layout class="px-1 py-2" wrap>
             <template v-for="(item, index) in getSpecialThanks">
               <v-flex :key="`thanks-icon-${index}`" xs1>
                 <v-icon>mdi-{{ item.icon }}</v-icon>
@@ -33,7 +33,7 @@
 
           <v-divider />
 
-          <v-layout class="px-1 py-2">
+          <v-layout class="px-1 py-2" wrap>
             <template v-for="(item, index) in getSupporters">
               <v-flex :key="`support-icon-${index}`" xs1>
                 <v-icon>mdi-{{ item.icon }}</v-icon>

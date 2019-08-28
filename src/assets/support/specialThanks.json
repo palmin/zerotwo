@@ -7,4 +7,13 @@
     "ja": "フランス語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction française."
   }
+}, {
+  "icon": "translate",
+  "name": "fror",
+  "message": {
+    "en": "for providing the Portuguese (Brazil) localisation.",
+    "de": "für das Bereitstellen einer brasilianisch-portugiesischen Übersetzung.",
+    "ja": "ブラジル語の翻訳を作ったこと。",
+    "fr": "pour avoir préparé la traduction brésilienne."
+  }
 }]

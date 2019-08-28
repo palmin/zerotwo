@@ -5,15 +5,17 @@
     "en": "for providing the French localisation.",
     "de": "für das Bereitstellen einer französischen Übersetzung.",
     "ja": "フランス語の翻訳を作ったこと。",
-    "fr": "pour avoir préparé la traduction française."
+    "fr": "pour avoir préparé la traduction française.",
+    "pt_BR": "por fornecer a tradução em Francês."
   }
 }, {
-  "icon": "translate",
-  "name": "fror",
-  "message": {
-    "en": "for providing the Portuguese (Brazil) localisation.",
-    "de": "für das Bereitstellen einer brasilianisch-portugiesischen Übersetzung.",
-    "ja": "ブラジル語の翻訳を作ったこと。",
-    "fr": "pour avoir préparé la traduction brésilienne."
-  }
-}]
+    "icon": "translate",
+    "name": "fror",
+    "message": {
+      "en": "for providing the Portuguese (Brazil) localisation.",
+      "de": "für das Bereitstellen einer brasilianisch-portugiesischen Übersetzung.",
+      "ja": "ブラジル語の翻訳を作ったこと。",
+      "fr": "pour avoir préparé la traduction brésilienne.",
+      "pt_BR": "por fornecer a tradução em Português do Brasil."
+    }
+  }]

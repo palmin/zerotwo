@@ -5,48 +5,48 @@
       "en": "Complete new design via Vuetify v2",
       "fr": "Termine le nouveau design via Vuetify v2",
       "ja": "「Ｖｕｅｔｉｆｙ」バージョン２を使って、新デザイン",
-      "zh-cn": "利用Vuetify v2全新设计",
-      "pt_BR": "Um completo novo design via Vuetify v2"
+      "pt_BR": "Um completo novo design via Vuetify v2",
+      "zh_CN": "利用Vuetify v2进行了全新设计"
     },
     {
       "de": "Verbesserte Suche",
       "en": "Improved search experience",
       "fr": "Améliore l'expérience de recherche",
       "ja": "検索機能を改正",
-      "zh-cn": "改善了搜索功能",
-      "pt_BR": "Experiência de pesquisa melhorada"
+      "pt_BR": "Experiência de pesquisa melhorada",
+      "zh_CN": "改善了搜索功能"
     },
     {
       "de": "Saison-Vorschau",
       "en": "Season preview built-in",
       "fr": "Intégration de la pré-visualisation de saison",
       "ja": "シーズン予告機能を追加",
-      "zh-cn": "加入了季度预告",
-      "pt_BR": "Preview da Temporada embutido"
+      "pt_BR": "Preview da Temporada embutido",
+      "zh_CN": "加入了季度预告"
     },
     {
       "de": "Homepage mit den neusten Aktivitäten des Nutzers",
       "en": "Homepage with latest activities",
       "fr": "Page d'accueil avec les dernières activités",
       "ja": "ユーザの最新情報ホームページを追加",
-      "zh-cn": "加入了个人主页（含“最新动态”）",
-      "pt_BR": "Página inicial com as últimas atividades"
+      "pt_BR": "Página inicial com as últimas atividades",
+      "zh_CN": "加入了含“最新动态”的个人主页"
     },
     {
       "de": "In-App einsehbare Änderungen zur neusten Version",
       "en": "In-app visible changelog",
       "fr": "Journal des modifications visible dans l'App",
       "ja": "アプリ内に最新更新情報が見える",
-      "zh-cn": "可在程序内查看“最近更新”日志",
-      "pt_BR": "Changelog visível no aplicativo"
+      "pt_BR": "Changelog visível no aplicativo",
+      "zh_CN": "可在程序内查看“最近更新”日志"
     },
     {
       "de": "Filterung nach Genres",
       "en": "Filtering by Genre",
       "fr": "Filtre par genre",
       "ja": "ジャンルのフィルタリングを追加",
-      "zh-cn": "加入了通过类型筛选",
-      "pt_BR": "Filtragem por Género"
+      "pt_BR": "Filtragem por Género",
+      "zh_CN": "加入了通过类型筛选"
     }
   ],
   "FIX": [
@@ -55,16 +55,16 @@
       "en": "Split complete list on AniList is now fully supported",
       "fr": "Séparation de la liste Complète d'AniList est maintenent entièrement supporté",
       "ja": "「ＡｎｉＬｉｓｔ」に設定できる「終了リストを分ける」はサポートします",
-      "zh-cn": "已完全支持AniList上的拆分式完整列表",
-      "pt_BR": "A lista completa dividida no AniList agora é totalmente suportada"
+      "pt_BR": "A lista completa dividida no AniList agora é totalmente suportada",
+      "zh_CN": "完全支持AniList上的拆分式完整列表"
     },
     {
       "de": "Sortieren nun über diverse Parameter möglich",
       "en": "Sorting via various parameters",
       "fr": "Tri par divers paramètres",
       "ja": "リストアイテムの並べ替えはタイトル以外にも出来るになりました",
-      "zh-cn": "现在可通过各种参数对列表进行排序",
-      "pt_BR": "Ordenação através de vários parâmetros"
+      "pt_BR": "Ordenação através de vários parâmetros",
+      "zh_CN": "现在可通过各种参数对列表进行排序"
     }
   ],
   "REMOVE": [
@@ -73,8 +73,8 @@
       "en": "Support for MyAnimeList has been terminated",
       "fr": "MyAnimeList n'est plus supporté",
       "ja": "「ＭｙＡｎｉｍｅＬｉｓｔ」はもうサポートしていません",
-      "zh-cn": "已停止对MyAnimeList的技术支持",
-      "pt_BR": "Suporte para o MyAnimeList foi terminado"
+      "pt_BR": "Suporte para o MyAnimeList foi terminado",
+      "zh_CN": "停止对MyAnimeList的技术支持"
     }
   ],
   "version": "v0.7.0"

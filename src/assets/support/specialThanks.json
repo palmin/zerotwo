@@ -7,7 +7,7 @@
     "ja": "フランス語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction française.",
     "pt_BR": "por fornecer a tradução em Francês.",
-    "zh_CN": "为软件提供法语翻译。"
+    "zh_CN": "提供了法语翻译。"
   }
 }, {
   "icon": "translate",
@@ -18,7 +18,7 @@
     "ja": "ブラジル語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction brésilienne.",
     "pt_BR": "por fornecer a tradução em Português do Brasil.",
-    "zh_CN": "为软件提供葡萄牙语（巴西）翻译。"
+    "zh_CN": "提供了葡萄牙语（巴西）翻译。"
   }
 }, {
   "icon": "translate",
@@ -29,6 +29,6 @@
     "ja": "中国語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction chinoise.",
     "pt_BR": "por fornecer a tradução em chinês.",
-    "zh_CN": "为软件提供中国语翻译。"
+    "zh_CN": "提供了简体中文翻译。"
   }
 }]

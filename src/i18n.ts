@@ -19,9 +19,11 @@ function loadLocaleMessages(): LocaleMessages {
 }
 
 export const validLanguageCodes: string[] = [
+  'ar',
   'de',
   'en',
   'fr',
+  'id',
   'ja',
   'pt_BR',
   'zh_CN',

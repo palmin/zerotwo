@@ -6,7 +6,8 @@
     "de": "für das Bereitstellen einer französischen Übersetzung.",
     "ja": "フランス語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction française.",
-    "pt_BR": "por fornecer a tradução em Francês."
+    "pt_BR": "por fornecer a tradução em Francês.",
+    "zh_CN": "为软件提供法语翻译。"
   }
 }, {
     "icon": "translate",
@@ -16,6 +17,7 @@
       "de": "für das Bereitstellen einer brasilianisch-portugiesischen Übersetzung.",
       "ja": "ブラジル語の翻訳を作ったこと。",
       "fr": "pour avoir préparé la traduction brésilienne.",
-      "pt_BR": "por fornecer a tradução em Português do Brasil."
+      "pt_BR": "por fornecer a tradução em Português do Brasil.",
+      "zh_CN": "为软件提供葡萄牙语（巴西）翻译。"
     }
   }]

@@ -4,6 +4,7 @@
       "de": "Komplett neues Design via Vuetify v2",
       "en": "Complete new design via Vuetify v2",
       "fr": "Termine le nouveau design via Vuetify v2",
+      "id": "Menyelesaikan desain baru melalui Vuetify v2",
       "ja": "「Ｖｕｅｔｉｆｙ」バージョン２を使って、新デザイン",
       "pt_BR": "Um completo novo design via Vuetify v2",
       "zh_CN": "利用Vuetify v2进行了全新设计"
@@ -12,6 +13,7 @@
       "de": "Verbesserte Suche",
       "en": "Improved search experience",
       "fr": "Améliore l'expérience de recherche",
+      "id": "Pengembangan pengalaman dalam pencarian",
       "ja": "検索機能を改正",
       "pt_BR": "Experiência de pesquisa melhorada",
       "zh_CN": "改善了搜索功能"
@@ -20,6 +22,7 @@
       "de": "Saison-Vorschau",
       "en": "Season preview built-in",
       "fr": "Intégration de la pré-visualisation de saison",
+      "id": "Integrasi pada pratinjau musim",
       "ja": "シーズン予告機能を追加",
       "pt_BR": "Preview da Temporada embutido",
       "zh_CN": "加入了季度预告"
@@ -28,6 +31,7 @@
       "de": "Homepage mit den neusten Aktivitäten des Nutzers",
       "en": "Homepage with latest activities",
       "fr": "Page d'accueil avec les dernières activités",
+      "id": "Laman utama dengan aktivitas terbaru",
       "ja": "ユーザの最新情報ホームページを追加",
       "pt_BR": "Página inicial com as últimas atividades",
       "zh_CN": "加入了含“最新动态”的个人主页"
@@ -36,6 +40,7 @@
       "de": "In-App einsehbare Änderungen zur neusten Version",
       "en": "In-app visible changelog",
       "fr": "Journal des modifications visible dans l'App",
+      "id": "Penambatan tampilan riwayat perubahan dalam aplikasi",
       "ja": "アプリ内に最新更新情報が見える",
       "pt_BR": "Changelog visível no aplicativo",
       "zh_CN": "可在程序内查看“最近更新”日志"
@@ -44,6 +49,7 @@
       "de": "Filterung nach Genres",
       "en": "Filtering by Genre",
       "fr": "Filtre par genre",
+      "id": "Saring berdasarkan genre",
       "ja": "ジャンルのフィルタリングを追加",
       "pt_BR": "Filtragem por Género",
       "zh_CN": "加入了通过类型筛选"
@@ -54,6 +60,7 @@
       "de": "Aufgeteilte Komplettliste auf AniList wird nun unterstützt",
       "en": "Split complete list on AniList is now fully supported",
       "fr": "Séparation de la liste Complète d'AniList est maintenent entièrement supporté",
+      "id": "Pemisahan daftar selesai pada AniList sekarang telah didukung penuh",
       "ja": "「ＡｎｉＬｉｓｔ」に設定できる「終了リストを分ける」はサポートします",
       "pt_BR": "A lista completa dividida no AniList agora é totalmente suportada",
       "zh_CN": "完全支持AniList上的拆分式完整列表"
@@ -62,6 +69,7 @@
       "de": "Sortieren nun über diverse Parameter möglich",
       "en": "Sorting via various parameters",
       "fr": "Tri par divers paramètres",
+      "id": "Pengurutan melalui berbagai pengaturan",
       "ja": "リストアイテムの並べ替えはタイトル以外にも出来るになりました",
       "pt_BR": "Ordenação através de vários parâmetros",
       "zh_CN": "现在可通过各种参数对列表进行排序"
@@ -72,6 +80,7 @@
       "de": "MyAnimeList wird nun nicht mehr unterstützt",
       "en": "Support for MyAnimeList has been terminated",
       "fr": "MyAnimeList n'est plus supporté",
+      "id": "Dukungan untuk MyAnimeList telah dihapus",
       "ja": "「ＭｙＡｎｉｍｅＬｉｓｔ」はもうサポートしていません",
       "pt_BR": "Suporte para o MyAnimeList foi terminado",
       "zh_CN": "停止对MyAnimeList的技术支持"

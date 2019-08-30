@@ -4,6 +4,7 @@
   "message": {
     "en": "for providing the French localisation.",
     "de": "für das Bereitstellen einer französischen Übersetzung.",
+    "id": "untuk memberikan lokasisasi bahsa Perancis",
     "ja": "フランス語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction française.",
     "pt_BR": "por fornecer a tradução em Francês.",
@@ -15,6 +16,7 @@
   "message": {
     "en": "for providing the Portuguese (Brazil) localisation.",
     "de": "für das Bereitstellen einer brasilianisch-portugiesischen Übersetzung.",
+    "id": "untuk memberikan lokalisasi bahasa Portugis Brazil",
     "ja": "ブラジル語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction brésilienne.",
     "pt_BR": "por fornecer a tradução em Português do Brasil.",
@@ -26,6 +28,7 @@
   "message": {
     "en": "for providing the Simplified Chinese localisation.",
     "de": "für das Bereitstellen einer chinesischen Übersetzung.",
+    "id": "untuk memberikan lokalisasi bahasa China Mandarin",
     "ja": "中国語の翻訳を作ったこと。",
     "fr": "pour avoir préparé la traduction chinoise.",
     "pt_BR": "por fornecer a tradução em chinês.",

@@ -12,7 +12,7 @@ Vue.use(Vuex);
 
 const vuexPersist = new VuexPersistence<any>({
   storage: localForage,
-  asyncStorage: false,
+  asyncStorage: true,
   key: 'zerotwo_store',
 });
 

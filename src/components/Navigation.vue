@@ -5,26 +5,6 @@
     flat
     dense
   >
-    <!-- <v-menu offset-y>
-      <template v-slot:activator="{ on }">
-        <v-btn class="d-none d-md-flex" text v-on="on">
-          <v-icon left>
-            mdi-menu
-          </v-icon>
-          {{ currentRouteName }}
-        </v-btn>
-      </template>
-      <v-list d-none d-md-flex>
-        <v-list-item
-          v-for="(item, index) in menuItems"
-          :key="index"
-          @click="navigateTo(item.location)"
-        >
-          <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu> -->
-
     <v-navigation-drawer
       v-model="navigationDrawer"
       temporary
@@ -62,9 +42,7 @@
 
     <v-app-bar-nav-icon @click.stop="navigationDrawer = !navigationDrawer" />
 
-    <v-toolbar-title>
-      {{ currentRouteName }}
-    </v-toolbar-title>
+    <v-toolbar-title @click.stop="navigationDrawer = !navigationDrawer" v-text="currentRouteName" />
 
     <v-spacer />
 

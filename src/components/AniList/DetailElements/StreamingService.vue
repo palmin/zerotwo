@@ -30,7 +30,7 @@
       </v-slide-item>
 
       <v-slide-item v-for="episode in item.streamingEpisodes" :key="episode.url">
-        <v-card width="400" class="ma-4" @click="openInBrowser(episode.url)">
+        <v-card :width="$vuetify.breakpoint.mdAndUp ? 350 : 250" class="ma-4" @click="openInBrowser(episode.url)">
           <v-img :src="episode.thumbnail">
             <template v-slot:placeholder>
               <v-layout fill-height align-center justify-center ma-0>
@@ -64,7 +64,6 @@
 </template>
 
 <script lang="ts">
-import { shell } from 'electron';
 import moment from 'moment';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
@@ -76,7 +75,7 @@ export default class StreamingService extends Vue {
   private streamingEpisodesExpanded: boolean = false;
 
   private openInBrowser(link: string) {
-    shell.openExternal(link);
+    window.open(link, '_blank');
   }
 
   private getReadableDateByTimestamp(timestamp?: number): string | null {

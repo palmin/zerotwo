@@ -6,36 +6,51 @@
         <BannerImage v-if="item && item.bannerImage" :item="item" />
       </v-flex>
     </v-layout>
-    <v-container fluid grid-list-md>
-      <v-layout wrap fill-height>
+    <v-container fluid>
+      <v-row dense>
         <template v-if="item">
-          <v-layout wrap>
-            <v-flex xs3>
-              <CoverImage :cover-image="item.coverImage" />
-            </v-flex>
+          <v-col
+            class="d-none d-md-flex"
+            :md="3"
+            :lg="3"
+            :xl="3"
+          >
+            <CoverImage :cover-image="item.coverImage" />
+          </v-col>
 
-            <v-flex xs9>
-              <v-layout wrap>
-                <v-flex xs6>
-                  <MediaDetails :item="item" />
-                </v-flex>
+          <v-col :cols="12" :md="9">
+            <v-row dense>
+              <v-col
+                :cols="12"
+                :sm="6"
+                :order="2"
+                :order-md="1"
+                :class="$vuetify.breakpoint.mdAndUp ? 'py-0' : ''"
+              >
+                <MediaDetails :item="item" />
+              </v-col>
 
-                <v-flex xs6>
-                  <UserListSettings :item="item" @updated="updateItem" />
-                </v-flex>
-              </v-layout>
-            </v-flex>
+              <v-col
+                :cols="12"
+                :sm="6"
+                :order="1"
+                :order-md="2"
+                :class="$vuetify.breakpoint.mdAndUp ? 'py-0' : ''"
+              >
+                <UserListSettings :item="item" @updated="updateItem" />
+              </v-col>
+            </v-row>
+          </v-col>
 
-            <v-flex xs12>
-              <StreamingService :item="item" />
-            </v-flex>
+          <v-col :cols="12">
+            <StreamingService :item="item" />
+          </v-col>
 
-            <v-flex xs12>
-              <Description :item="item" />
-            </v-flex>
-          </v-layout>
+          <v-col :cols="12">
+            <Description :item="item" />
+          </v-col>
         </template>
-      </v-layout>
+      </v-row>
     </v-container>
   </v-content>
 </template>

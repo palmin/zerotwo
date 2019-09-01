@@ -1,7 +1,7 @@
-import { ipcRenderer } from 'electron';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersistence from 'vuex-persist';
+import localForage from 'localforage';
 
 // Custom Stores
 import { aniListModule, AniListStore } from './AniList';
@@ -10,7 +10,13 @@ import { UserSettings, userSettingsModule } from './UserSettings';
 
 Vue.use(Vuex);
 
-export const store = new Vuex.Store({
+const vuexPersist = new VuexPersistence<any>({
+  storage: localForage,
+  asyncStorage: true,
+  key: 'zerotwo_store',
+});
+
+export const store = new Vuex.Store<any>({
   state: {},
   modules: {
     aniListModule,
@@ -18,7 +24,7 @@ export const store = new Vuex.Store({
     userSettingsModule,
   },
   // To keep mutated changes in local Storage
-  plugins: [new VuexPersistence().plugin],
+  plugins: [vuexPersist.plugin],
 });
 
 /**
@@ -34,12 +40,3 @@ export const appStore = AppStore.CreateProxy(store, AppStore) as AppStore;
  * @module AniListStore This module contains all data concerning AniList
  */
 export const aniListStore = AniListStore.CreateProxy(store, AniListStore) as AniListStore;
-
-/**
- * @event aniListOAuthReply
- * @description This event triggers when the authentication to AniList was successful
- */
-ipcRenderer.on('aniListOAuthReply', (event: any, accessToken: string) => {
-  aniListStore.setSession(accessToken);
-  aniListStore.refreshAniListData();
-});

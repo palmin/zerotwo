@@ -5,7 +5,9 @@
         <v-flex
           v-for="item in preparedMedia"
           :key="item.id"
-          xs3
+          xs12
+          sm6
+          md4
           lg3
           xl2
         >

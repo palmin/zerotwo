@@ -4,9 +4,11 @@
       <v-flex
         v-for="activity in activities"
         :key="activity.id"
-        xl2
+        xs12
+        sm6
+        md4
         lg3
-        xs3
+        xl2
       >
         <v-card>
           <ListImage :image-link="activity.coverImage" :ani-list-id="activity.mediaId" name="" />

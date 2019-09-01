@@ -17,7 +17,9 @@
         <v-flex
           v-for="item in listData"
           :key="item.id"
-          xs3
+          xs12
+          sm6
+          md4
           lg3
           xl2
         >
@@ -333,7 +335,7 @@ export default class List extends Vue {
     const entry = {
       id: listEntry.id,
       mediaId: listEntry.aniListId,
-      title: listEntry.name,
+      title: listEntry.title,
       progress: listEntry.currentProgress,
       status: listEntry.status,
       score: listEntry.score,
@@ -381,15 +383,15 @@ export default class List extends Vue {
         await aniListStore.refreshLists();
         await appStore.setLoadingState(false);
         this.$notify({
-          title: this.$t('notifications.anilist.title') as string,
-          text: this.$t('notifications.anilist.completeUpdateText', [title, progress]) as string,
+          title: this.$t('notifications.aniList.successTitle') as string,
+          text: this.$t('notifications.aniList.completeUpdateText', [title, progress]) as string,
         });
       } else {
         await API.setEntryProgress(id, progress);
         await aniListStore.refreshLists();
         this.$notify({
-          title: this.$t('notifications.anilist.title') as string,
-          text: this.$t('notifications.anilist.simpleUpdateText', [title, progress]) as string,
+          title: this.$t('notifications.aniList.successTitle') as string,
+          text: this.$t('notifications.aniList.simpleUpdateText', [title, progress]) as string,
         });
       }
     }))

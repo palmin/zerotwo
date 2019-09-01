@@ -1,8 +1,8 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-layout class="px-1 py-2">
-        <v-flex xs6>
+      <v-layout wrap class="px-1 py-2">
+        <v-flex xs12 sm12 md6>
           <div class="display-1">
             {{ $t('pages.settings.specialThanks') }}
           </div>
@@ -26,7 +26,7 @@
           </v-layout>
         </v-flex>
 
-        <v-flex xs6>
+        <v-flex xs12 sm12 md6>
           <div class="display-1">
             {{ $t('pages.settings.supporters') }}
           </div>
@@ -69,7 +69,6 @@
 </template>
 
 <script lang="ts">
-import { shell } from 'electron';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import specialThanks from '@/assets/support/specialThanks.json';
 import supporters from '@/assets/support/supporters.json';
@@ -92,7 +91,7 @@ export default class SpecialThanksSettings extends Vue {
   }
 
   private OpenKofiPage(): void {
-    shell.openExternal('https://ko-fi.com/nicoaiko');
+    window.open('https://ko-fi.com/nicoaiko', '_blank');
   }
 }
 </script>

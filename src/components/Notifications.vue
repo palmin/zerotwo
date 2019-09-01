@@ -2,7 +2,6 @@
   <notifications
     classes="zerotwo-notifications"
     position="top center"
-    width="500"
   />
 </template>
 

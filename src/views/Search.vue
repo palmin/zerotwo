@@ -8,8 +8,14 @@
               <v-card class="no-border-radius">
                 <v-card-text>
                   <v-container fluid grid-list-md>
-                    <v-layout>
-                      <v-flex xs6>
+                    <v-layout wrap>
+                      <v-flex
+                        xs12
+                        sm12
+                        md6
+                        lg6
+                        xl6
+                      >
                         <v-text-field
                           v-model="searchInput"
                           :label="$t('pages.search.searchQuery')"
@@ -18,7 +24,13 @@
                         />
                       </v-flex>
 
-                      <v-flex xs2>
+                      <v-flex
+                        xs12
+                        sm12
+                        md2
+                        lg2
+                        xl2
+                      >
                         <v-select
                           v-model="adultContentValue"
                           :items="adultContent"
@@ -29,7 +41,13 @@
                         />
                       </v-flex>
 
-                      <v-flex xs2>
+                      <v-flex
+                        xs12
+                        sm12
+                        md2
+                        lg2
+                        xl2
+                      >
                         <v-select
                           v-model="listValues"
                           :label="$t('pages.search.inList.label')"
@@ -43,7 +61,13 @@
                         />
                       </v-flex>
 
-                      <v-flex xs2>
+                      <v-flex
+                        xs12
+                        sm12
+                        md2
+                        lg2
+                        xl2
+                      >
                         <v-combobox
                           v-model="genreValues"
                           :items="genres"
@@ -75,7 +99,9 @@
             <v-flex
               v-for="result in searchResults"
               :key="result.id"
-              xs3
+              xs12
+              sm6
+              md4
               lg3
               xl2
             >

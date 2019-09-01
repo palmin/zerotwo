@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Next list update in: {0}"
+    },
     "aniList": {
       "completed": "已看完",
       "dropped": "已弃坑",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "主页",
+      "watching": "观看中",
+      "repeating": "重温中",
+      "completed": "已看完",
+      "paused": "已搁置",
+      "dropped": "已弃坑",
+      "planning": "计划中"
+    },
     "detailView": "详细视图",
     "search": "搜索",
     "seasonPreview": "季度预告",
@@ -177,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "更新成功",
+      "successTitle": "更新成功",
       "completeUpdateText": "已成功将 {0} 全部看完并更新记录至第{1}话。",
       "simpleUpdateText": "已成功将 {0} 更新记录至第{1}话",
       "addedToList": "已成功将 {0} 添加至您的列表。",

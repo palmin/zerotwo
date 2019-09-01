@@ -19,11 +19,11 @@
         <span>{{ $t('actions.sort') }}</span>
       </v-tooltip>
     </template>
-    <v-card width="400">
+    <v-card>
       <v-card-title>{{ $t('actions.sort') }}</v-card-title>
       <v-container fluid grid-list-md>
-        <v-layout>
-          <v-flex xs7>
+        <v-layout wrap>
+          <v-flex xs12 sm7>
             <v-select
               v-model="sortItem"
               :items="sortingItems"
@@ -31,7 +31,7 @@
               @change="changeSorting"
             />
           </v-flex>
-          <v-flex xs5>
+          <v-flex xs12 sm5>
             <v-radio-group v-model="direction" column @change="changeDirection">
               <v-radio :label="$t('components.sorting.directions.ascending')" value="asc" />
               <v-radio :label="$t('components.sorting.directions.descending')" value="desc" />

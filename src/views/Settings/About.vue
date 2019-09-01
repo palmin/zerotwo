@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts">
-import { shell } from 'electron';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { version } from '../../../package.json';
 
@@ -60,19 +59,19 @@ export default class AboutSettings extends Vue {
   }
 
   private openGitHub() {
-    shell.openExternal(this.githubPage.toString());
+    window.open(this.githubPage.toString(), '_blank');
   }
 
   private openDiscord() {
-    shell.openExternal(this.discordPage.toString());
+    window.open(this.discordPage.toString(), '_blank');
   }
 
   private openZeroTwo() {
-    shell.openExternal(this.zeroTwoPage.toString());
+    window.open(this.zeroTwoPage.toString(), '_blank');
   }
 
   private openAniList() {
-    shell.openExternal(this.aniListPage.toString());
+    window.open(this.aniListPage.toString(), '_blank');
   }
 }
 </script>

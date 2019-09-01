@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "次のリスト更新： {0}"
+    },
     "aniList": {
       "completed": "終了",
       "dropped": "中止",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "ホーム",
+      "watching": "見る中",
+      "repeating": "再見",
+      "completed": "終了",
+      "paused": "一時的中止",
+      "dropped": "中止",
+      "planning": "予定"
+    },
     "detailView": "インフォーメーション",
     "search": "検索",
     "seasonPreview": "シーズン予告",
@@ -177,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "更新成功",
+      "successTitle": "更新成功",
       "completeUpdateText": "{0}を成功にエピソード{1}に終了して、更新しました。",
       "simpleUpdateText": "{0}を成功にエピソード{1}に更新しました。",
       "addedToList": "{0}を成功にリストに追加しました。",

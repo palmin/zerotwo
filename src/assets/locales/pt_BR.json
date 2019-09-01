@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Next list update in: {0}"
+    },
     "aniList": {
       "completed": "Completado(a)",
       "dropped": "Dropado",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "Página inicial",
+      "watching": "Assistindo",
+      "repeating": "Repetindo",
+      "completed": "Completado(a)",
+      "paused": "Pausado",
+      "dropped": "Dropado",
+      "planning": "Planejando"
+    },
     "detailView": "Visão detalhada",
     "search": "Pesquisar",
     "seasonPreview": "Preview da Temporada",
@@ -177,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "Sincronização bem sucedida",
+      "successTitle": "Sincronização bem sucedida",
       "completeUpdateText": "{0} foi completado com sucesso com a sincronização para o episódio {1}.",
       "simpleUpdateText": "{0} foi sincronizado com sucesso para o episódio {1}.",
       "addedToList": "{0} foi adicionado com sucesso à sua lista.",

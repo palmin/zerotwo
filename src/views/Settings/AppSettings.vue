@@ -2,12 +2,16 @@
   <v-tab-item :key="tabKey">
     <v-card flat>
       <v-container fluid fill-height grid-list-xl>
-        <v-layout>
-          <v-flex xs5>
+        <v-layout wrap>
+          <v-flex
+            xs12
+            sm5
+          >
             <v-select
               :items="languages"
               item-text="original"
               :value="_locale"
+              dense
               :label="$t('pages.settings.appSettings.chooseLanguage')"
               @change="setLanguage"
             >
@@ -23,7 +27,13 @@
             </v-select>
           </v-flex>
 
-          <v-flex xs5 offset-xs2 justify-center align-center>
+          <v-flex
+            xs12
+            sm5
+            offset-sm2
+            justify-center
+            align-center
+          >
             <v-switch v-model="darkMode" :label="$t('pages.settings.appSettings.darkMode')" />
           </v-flex>
         </v-layout>

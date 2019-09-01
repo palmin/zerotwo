@@ -1,14 +1,18 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <div class="display-1">
+      <div class="display-1 pt-4">
         {{ $t('pages.settings.changelog.changesIn', [version]) }}
       </div>
 
       <v-divider />
 
-      <v-layout class="px-1 py-2">
-        <v-flex xs4>
+      <v-layout wrap class="px-1 py-2">
+        <v-flex
+          xs12
+          sm12
+          md4
+        >
           <div class="headline">
             <v-icon large color="blue darken-1">
               mdi-rocket
@@ -23,7 +27,11 @@
           </v-list>
         </v-flex>
 
-        <v-flex xs4>
+        <v-flex
+          xs12
+          sm12
+          md4
+        >
           <div class="headline">
             <v-icon large color="warning">
               mdi-bandage
@@ -38,7 +46,11 @@
           </v-list>
         </v-flex>
 
-        <v-flex xs4>
+        <v-flex
+          xs12
+          sm12
+          md4
+        >
           <div class="headline">
             <v-icon large color="error">
               mdi-delete

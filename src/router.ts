@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import Router, { Route } from 'vue-router';
 import AniList from '@/routes/AniList';
 import Search from '@/views/Search.vue';
 import Settings from '@/views/Settings.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     ...AniList,
     {
@@ -35,3 +35,5 @@ export default new Router({
     },
   ],
 });
+
+export default router;

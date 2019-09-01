@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Next list update in: {0}"
+    },
     "aniList": {
       "completed": "Terminé",
       "dropped": "Abandonné",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "Accueil",
+      "watching": "En cours de visionnage",
+      "repeating": "En cours de re-visionnage",
+      "completed": "Terminé",
+      "paused": "En pause",
+      "dropped": "Abandonné",
+      "planning": "Planifié"
+    },
     "detailView": "Vue détaillée",
     "search": "Chercher",
     "seasonPreview": "Aperçu de la saison",
@@ -177,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "Synchronisation réussite",
+      "successTitle": "Synchronisation réussite",
       "completeUpdateText": "{0} a été terminé avec succès avec la synchronisation jusque à l'épisode {1}.",
       "simpleUpdateText": "{0} a été synchonisé avec succès jusque à l'épisode {1}.",
       "addedToList": "{0} a été ajouté avec succès à votre liste.",
@@ -191,8 +202,8 @@
         "dropped": "Abandonné",
         "paused": "En pause",
         "planning": "Planifié",
-        "repeating": "En cours de re-visionage",
-        "watching": "En cours de visionage"
+        "repeating": "En cours de re-visionnage",
+        "watching": "En cours de visionnage"
       },
       "seasons": {
         "spring": "Printemps",

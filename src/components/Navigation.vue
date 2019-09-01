@@ -5,40 +5,85 @@
     flat
     dense
   >
-    <v-menu offset-y>
+    <!-- <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn text v-on="on">
+        <v-btn class="d-none d-md-flex" text v-on="on">
           <v-icon left>
             mdi-menu
           </v-icon>
           {{ currentRouteName }}
         </v-btn>
       </template>
-      <v-list>
-        <v-list-item v-for="(item, index) in menuItems" :key="index" @click="navigateTo(item.location)">
+      <v-list d-none d-md-flex>
+        <v-list-item
+          v-for="(item, index) in menuItems"
+          :key="index"
+          @click="navigateTo(item.location)"
+        >
           <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
+
+    <v-navigation-drawer
+      v-model="navigationDrawer"
+      temporary
+      app
+    >
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            {{ currentRouteName }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ $t('menus.navigationDrawer.timeUntilNextRefresh', [timeUntilRefresh]) }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider />
+
+      <v-list dense nav shaped>
+        <v-list-item-group v-model="item" color="primary">
+          <v-list-item
+            v-for="(item, index) in menuItems"
+            :key="index"
+            @click="navigateTo(item.location)"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon" />
+            </v-list-item-icon>
+
+            <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar-nav-icon @click.stop="navigationDrawer = !navigationDrawer" />
+
+    <v-toolbar-title>
+      {{ currentRouteName }}
+    </v-toolbar-title>
 
     <v-spacer />
 
     <template v-if="!isMediaPage && isAniListRoute">
-      <AniListToolbar />
+      <AniListToolbar class="d-none d-lg-flex" />
 
-      <v-spacer />
+      <v-spacer class="d-none d-lg-flex" />
     </template>
 
     <template v-if="isSeasonPreviewPage">
-      <SeasonPreviewToolbar />
+      <SeasonPreviewToolbar class="d-none d-lg-flex" />
 
-      <v-spacer />
+      <v-spacer class="d-none d-lg-flex" />
     </template>
 
     <template v-if="isMediaPage">
-      <MediaToolbar />
+      <MediaToolbar class="d-none d-lg-flex" />
 
-      <v-spacer />
+      <v-spacer class="d-none d-lg-flex" />
     </template>
 
     <v-toolbar-items>
@@ -98,12 +143,50 @@ import TopButton from './NavigationToolbars/Items/Top.vue';
   },
 })
 export default class Navigation extends Vue {
-  private menuItems: Array<{ title: string, location: RawLocation }> = [{
-    title: 'misc.modules.aniList',
+  private navigationDrawer: boolean = false;
+
+  private item = 0;
+
+  private menuItems: Array<{ title: string, location: RawLocation, routeName: string, icon: string }> = [{
+    title: 'menus.aniList.home',
     location: { name: 'Home' },
+    routeName: 'Home',
+    icon: 'mdi-home',
   }, {
     title: 'menus.aniList.seasonPreview',
     location: { name: 'SeasonPreview' },
+    routeName: 'SeasonPreview',
+    icon: 'mdi-calendar-month',
+  }, {
+    title: 'menus.aniList.watching',
+    location: { name: 'Watching' },
+    routeName: 'Watching',
+    icon: 'mdi-play',
+  }, {
+    title: 'menus.aniList.repeating',
+    location: { name: 'Repeating' },
+    routeName: 'Repeating',
+    icon: 'mdi-repeat',
+  }, {
+    title: 'menus.aniList.completed',
+    location: { name: 'Completed' },
+    routeName: 'Completed',
+    icon: 'mdi-check',
+  }, {
+    title: 'menus.aniList.paused',
+    location: { name: 'Paused' },
+    routeName: 'Paused',
+    icon: 'mdi-pause',
+  }, {
+    title: 'menus.aniList.dropped',
+    location: { name: 'Dropped' },
+    routeName: 'Dropped',
+    icon: 'mdi-stop',
+  }, {
+    title: 'menus.aniList.planning',
+    location: { name: 'Planning' },
+    routeName: 'Planning',
+    icon: 'mdi-format-list-checks',
   }];
 
   private get isMediaPage(): boolean {
@@ -130,8 +213,25 @@ export default class Navigation extends Vue {
     return aniListStore.isAuthenticated;
   }
 
+  private get timeUntilRefresh(): string {
+    const time = aniListStore.timeUntilRefresh * 1000;
+
+    return moment(time).format('mm:ss');
+  }
+
+  private created() {
+    const currentRouteName = this.$route.name;
+    this.item = this.menuItems.findIndex(item => item.routeName === currentRouteName);
+  }
+
   private navigateTo(location: RawLocation) {
     this.$router.push(location);
+  }
+
+  @Watch('currentRouteName')
+  public routeChanged() {
+    const currentRouteName = this.$route.name;
+    this.item = this.menuItems.findIndex(item => item.routeName === currentRouteName);
   }
 }
 </script>

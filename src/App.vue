@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <main>
-      <Navigation />
+      <Navigation @navigationDrawerUpdated="navigationDrawer = !navigationDrawer" />
       <router-view :key="$route.path" />
       <ZeroTwoNotifications position="top center" />
     </main>
@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts">
-import { remote } from 'electron';
 import moment from 'moment';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { validLanguageCodes } from './i18n';
@@ -34,6 +33,22 @@ export default class App extends Vue {
     return appStore.darkMode;
   }
 
+  public get loggedIntoAniList(): boolean {
+    return aniListStore.isAuthenticated;
+  }
+
+  @Watch('loggedIntoAniList')
+  public async loggedInStateChanged(newState: boolean) {
+    if (newState) {
+      await appStore.setLoadingState(true);
+      await aniListStore.refreshAniListData();
+      await aniListStore.restartRefreshTimer();
+      await appStore.setLoadingState(false);
+    } else {
+      await aniListStore.destroyRefreshTimer();
+    }
+  }
+
   /**
    * @description Watches changes of locale
    * @see {@link store/App.ts}
@@ -54,7 +69,11 @@ export default class App extends Vue {
 
   private created() {
     if (!this.locale) {
-      appStore.setLanguage(remote.app.getLocale());
+      if (window.navigator.languages && window.navigator.languages.length) {
+        appStore.setLanguage(window.navigator.languages[0]);
+      } else {
+        appStore.setLanguage(window.navigator.language);
+      }
     } else {
       this.$i18n.locale = this.locale;
     }
@@ -65,14 +84,14 @@ export default class App extends Vue {
   }
 
   private async beforeMount() {
-    await appStore.setLoadingState(true);
+    // await appStore.setLoadingState(true);
 
-    if (aniListStore.isAuthenticated) {
-      await aniListStore.refreshAniListData();
-      await aniListStore.restartRefreshTimer();
-    }
+    // if (aniListStore.isAuthenticated) {
+    //   await aniListStore.refreshAniListData();
+    //   await aniListStore.restartRefreshTimer();
+    // }
 
-    await appStore.setLoadingState(false);
+    // await appStore.setLoadingState(false);
   }
 
   private async beforeDestroy() {

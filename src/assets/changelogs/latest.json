@@ -47,6 +47,22 @@
       "ja": "ジャンルのフィルタリングを追加",
       "pt_BR": "Filtragem por Género",
       "zh_CN": "加入了通过类型筛选"
+    },
+    {
+      "de": "Web-App ersetzt bisherige Electron-App",
+      "en": "Web app replaces Electron app",
+      "fr": "(to be translated) Web app replaces Electron app",
+      "ja": "エレクトロンのアプリの代わりに、ウェブアプリに変わりました",
+      "pt_BR": "(to be translated) Web app replaces Electron app",
+      "zh_CN": "(to be translated) Web app replaces Electron app"
+    },
+    {
+      "de": "Unterstützung für Französisch und brasilianisches Portugiesisch",
+      "en": "French and Portuguese (Brazil) are supported",
+      "fr": "(to be translated) French and Portuguese (Brazil) are supported",
+      "ja": "フランス語とブラジル語を追加しました",
+      "pt_BR": "(to be translated) French and Portuguese (Brazil) are supported",
+      "zh_CN": "(to be translated) French and Portuguese (Brazil) are supported"
     }
   ],
   "FIX": [

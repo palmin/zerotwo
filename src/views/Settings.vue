@@ -2,7 +2,7 @@
   <v-content>
     <v-card>
       <v-card-text>
-        <v-tabs v-model="tabs" grow fluid>
+        <v-tabs v-model="tabs" grow>
           <v-tab
             v-for="tab in settingsTabs"
             :key="tab.key"

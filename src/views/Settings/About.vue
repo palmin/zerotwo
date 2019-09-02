@@ -1,7 +1,7 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-container fluid fill-height>
+      <v-container fill-height>
         <v-layout align-center justify-center wrap fill-height>
           <v-flex xs12>
             <h2 class="display-3 text-center">

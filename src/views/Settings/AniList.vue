@@ -1,7 +1,7 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-container fluid fill-height grid-list-xl>
+      <v-container fill-height grid-list-xl>
         <v-layout
           v-if="!isAuthenticated"
           class="ma-4"

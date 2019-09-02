@@ -23,6 +23,15 @@
             <template v-else-if="activity.watchedEpisode">
               {{ $t('pages.aniList.home.activities.watchedEpisode', [activity.title, activity.progress]) }}
             </template>
+            <template v-else-if="activity.dropped">
+              {{ $t('pages.aniList.home.activities.dropped', [activity.title]) }}
+            </template>
+            <template v-else-if="activity.paused">
+              {{ $t('pages.aniList.home.activities.pausedWatching', [activity.title]) }}
+            </template>
+            <template v-else-if="activity.rewatched">
+              {{ $t('pages.aniList.home.activities.rewatched', [activity.title, activity.progress]) }}
+            </template>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -50,6 +59,9 @@ export default class Activities extends Vue {
       watchedEpisode: activity.status === 'watched episode',
       completed: activity.status === 'completed',
       plansToWatch: activity.status === 'plans to watch',
+      dropped: activity.status === 'dropped',
+      paused: activity.status === 'paused watching',
+      rewatched: activity.status === 'rewatched',
     }));
   }
 }

@@ -81,7 +81,7 @@ import { aniListStore } from '@/store';
   },
 })
 export default class Home extends Vue {
-  private created() {
+  private async beforeMount() {
     if ('login' in this.$route.query) {
       const { access_token: accessToken } = this.$route.query;
 
@@ -89,7 +89,7 @@ export default class Home extends Vue {
         this.$router.replace({ name: 'Home' });
       }
 
-      aniListStore.setSession(accessToken as string);
+      await aniListStore.setSession(accessToken as string);
       this.$router.replace({ name: 'Home' });
     }
   }

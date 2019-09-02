@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Notification from 'vue-notification';
 import Vuetify from 'vuetify';
+import './registerServiceWorker';
 
 // Components
 import App from './App.vue';

@@ -10,13 +10,13 @@ import { UserSettings, userSettingsModule } from './UserSettings';
 
 Vue.use(Vuex);
 
-const vuexPersist = new VuexPersistence<any>({
+const vuexPersist = new VuexPersistence({
   storage: localForage,
   asyncStorage: true,
   key: 'zerotwo_store',
 });
 
-export const store = new Vuex.Store<any>({
+export const store: any = new Vuex.Store({
   state: {},
   modules: {
     aniListModule,

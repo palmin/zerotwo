@@ -80,7 +80,7 @@
           "watchedEpisode": "Watched episode {1} of {0}",
           "dropped": "Dropped {0}",
           "rewatchedEpisode": "Rewatched episode {1} of {0}",
-          "paused": "Paused {0}"
+          "pausedWatching": "Paused {0}"
         },
         "howToAuthenticate": {
           "header": "How to login:",

@@ -80,7 +80,7 @@
           "watchedEpisode": "{0}の第{1}話を見ました",
           "dropped": "{0}を中止しました",
           "rewatchedEpisode": "{0}の第{1}話を再見しました",
-          "paused": "{0}を一時的中止しました"
+          "pausedWatching": "{0}を一時的中止しました"
         }
       },
       "howToAuthenticate": {

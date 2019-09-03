@@ -80,7 +80,7 @@
           "watchedEpisode": "Folge {1} von {0} geguckt",
           "dropped": "{0} abgebrochen",
           "rewatchedEpisode": "Folge {1} von {0} wiederholt",
-          "paused": "{0} pausiert"
+          "pausedWatching": "{0} pausiert"
         },
         "howToAuthenticate": {
           "header": "Wie man sich einloggt:",

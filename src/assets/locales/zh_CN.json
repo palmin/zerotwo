@@ -80,7 +80,7 @@
           "watchedEpisode": "已看 {0} 的第 {1} 话",
           "dropped": "放弃看 {0}",
           "rewatchedEpisode": "重温 {0} 的第 {1} 话",
-          "paused": "暂时不看 {0}"
+          "pausedWatching": "暂时不看 {0}"
         },
         "howToAuthenticate": {
           "header": "如何登录：",

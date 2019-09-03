@@ -80,7 +80,7 @@
           "watchedEpisode": "Assistido episódio {1} de {0}",
           "dropped": "Dropou {0}",
           "rewatchedEpisode": "Reassistindo episódio {1} of {0}",
-          "paused": "Pausou {0}"
+          "pausedWatching": "Pausou {0}"
         },
         "howToAuthenticate": {
           "header": "Como fazer o login:",

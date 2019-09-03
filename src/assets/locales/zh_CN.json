@@ -3,7 +3,7 @@
   "englishReading": "Simplified Chinese",
   "actions": {
     "add": "添加",
-    "addToPlanToWatch": "添加至“计划观看”",
+    "addToPlanToWatch": "添加至“计划中”",
     "back": "返回",
     "fastSearch": "搜索…… \u23ce",
     "loading": "加载中……",
@@ -18,7 +18,7 @@
   },
   "alerts": {
     "adultContent": "该作品可能含有 R-18 内容！建议您在查看时注意场合。",
-    "noDescription": "无可用的简介。",
+    "noDescription": "无可用的说明。",
     "noEnglishTitle": "无可用的英文名。",
     "noInformation": "无可用的信息。",
     "noSynonyms": "无可用的别名。",
@@ -43,7 +43,7 @@
       "paused": "已搁置",
       "planning": "计划中",
       "repeating": "重温中",
-      "seasonPreview": "新番预告",
+      "seasonPreview": "每季番组一览",
       "watching": "观看中"
     },
     "search": "详细搜索",
@@ -108,7 +108,7 @@
         "airingStartsInYear": "将于 {0} 开始放送",
         "airingTime": "放送时间",
         "airingWithUnknownStart": "? ～ {0}",
-        "description": "简介",
+        "description": "说明",
         "englishTitle": "英文名",
         "episodes": "总话数",
         "genres": "类型",
@@ -183,7 +183,7 @@
     },
     "detailView": "详细视图",
     "search": "搜索",
-    "seasonPreview": "新番预告",
+    "seasonPreview": "每季番组一览",
     "settings": "设置"
   },
   "notifications": {

@@ -1,10 +1,10 @@
 <template>
-  <v-card>
+  <v-card class="d-flex">
     <v-img :src="coverImage">
       <template v-slot:placeholder>
-        <v-layout fill-height align-center justify-center ma-0>
+        <v-row align="center" justify="center" ma-0>
           <v-progress-circular indeterminate color="grey lighten-5" />
-        </v-layout>
+        </v-row>
       </template>
     </v-img>
   </v-card>

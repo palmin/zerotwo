@@ -8,7 +8,7 @@
       "ja": "「Ｖｕｅｔｉｆｙ」バージョン２を使って、新デザイン",
       "ms": "Merekabentuk baru melalui Vuetify v2",
       "pt_BR": "Um completo novo design via Vuetify v2",
-      "zh_CN": "利用Vuetify v2进行了全新设计"
+      "zh_CN": "使用 Vuetify v2 对 App 进行了全新设计"
     },
     {
       "de": "Verbesserte Suche",
@@ -28,7 +28,7 @@
       "ja": "シーズン予告機能を追加",
       "ms": "Pratonton musim yang terbina dalam",
       "pt_BR": "Preview da Temporada embutido",
-      "zh_CN": "加入了季度预告"
+      "zh_CN": "加入了每季番组一览"
     },
     {
       "de": "Homepage mit den neusten Aktivitäten des Nutzers",
@@ -58,7 +58,23 @@
       "ja": "ジャンルのフィルタリングを追加",
       "ms": "Penapis mengikuti genre",
       "pt_BR": "Filtragem por Género",
-      "zh_CN": "加入了通过类型筛选"
+      "zh_CN": "筛选方式新增了“类型”选项"
+    },
+    {
+      "de": "Web-App ersetzt bisherige Electron-App",
+      "en": "Web app replaces Electron app",
+      "fr": "(to be translated) Web app replaces Electron app",
+      "ja": "エレクトロンのアプリの代わりに、ウェブアプリに変わりました",
+      "pt_BR": "(to be translated) Web app replaces Electron app",
+      "zh_CN": "用网页版 App 替代了 Electron 版 App"
+    },
+    {
+      "de": "Unterstützung für Französisch und brasilianisches Portugiesisch",
+      "en": "French and Portuguese (Brazil) are supported",
+      "fr": "(to be translated) French and Portuguese (Brazil) are supported",
+      "ja": "フランス語とブラジル語を追加しました",
+      "pt_BR": "(to be translated) French and Portuguese (Brazil) are supported",
+      "zh_CN": "添加了法语和葡萄牙语（巴西）翻译"
     }
   ],
   "FIX": [
@@ -70,7 +86,7 @@
       "ja": "「ＡｎｉＬｉｓｔ」に設定できる「終了リストを分ける」はサポートします",
       "ms": "Pemecahan senarai selesai AniList kini disokong sepenuhnya",
       "pt_BR": "A lista completa dividida no AniList agora é totalmente suportada",
-      "zh_CN": "完全支持AniList上的拆分式完整列表"
+      "zh_CN": "完全支持 AniList 上的拆分式完整列表"
     },
     {
       "de": "Sortieren nun über diverse Parameter möglich",
@@ -92,7 +108,7 @@
       "ja": "「ＭｙＡｎｉｍｅＬｉｓｔ」はもうサポートしていません",
       "ms": "Penyokongan terhadap MyAnimeList kini dipadamkan",
       "pt_BR": "Suporte para o MyAnimeList foi terminado",
-      "zh_CN": "停止对MyAnimeList的技术支持"
+      "zh_CN": "停止对 MyAnimeList 的支持"
     }
   ],
   "version": "v0.7.0"

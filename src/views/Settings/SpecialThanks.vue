@@ -1,55 +1,61 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-layout class="px-1 py-2">
-        <v-flex xs6>
-          <div class="display-1">
-            {{ $t('pages.settings.specialThanks') }}
-          </div>
-
-          <v-divider />
-
-          <v-layout class="px-1 py-2" wrap>
-            <template v-for="(item, index) in getSpecialThanks">
-              <v-flex :key="`thanks-icon-${index}`" xs1>
-                <v-icon>mdi-{{ item.icon }}</v-icon>
+      <v-container fill-height grid-list-xl>
+        <v-layout wrap class="px-1 py-2">
+          <v-flex xs12 sm12 md6>
+            <v-layout class="px-1 py-2" wrap>
+              <v-flex xs12 class="display-1">
+                {{ $t('pages.settings.specialThanks') }}
               </v-flex>
+            </v-layout>
 
-              <v-flex :key="`thanks-name-${index}`" xs4>
-                {{ item.name }}
+            <v-divider />
+
+            <v-layout class="px-1 py-2" wrap>
+              <template v-for="(item, index) in getSpecialThanks">
+                <v-flex :key="`thanks-icon-${index}`" xs1>
+                  <v-icon>mdi-{{ item.icon }}</v-icon>
+                </v-flex>
+
+                <v-flex :key="`thanks-name-${index}`" xs4>
+                  {{ item.name }}
+                </v-flex>
+
+                <v-flex :key="`thanks-message-${index}`" xs7>
+                  {{ item.message[currentLanguage] || item.message.en }}
+                </v-flex>
+              </template>
+            </v-layout>
+          </v-flex>
+
+          <v-flex xs12 sm12 md6>
+            <v-layout class="px-1 py-2" wrap>
+              <v-flex xs12 class="display-1">
+                {{ $t('pages.settings.supporters') }}
               </v-flex>
+            </v-layout>
 
-              <v-flex :key="`thanks-message-${index}`" xs7>
-                {{ item.message[currentLanguage] || item.message.en }}
-              </v-flex>
-            </template>
-          </v-layout>
-        </v-flex>
+            <v-divider />
 
-        <v-flex xs6>
-          <div class="display-1">
-            {{ $t('pages.settings.supporters') }}
-          </div>
+            <v-layout class="px-1 py-2" wrap>
+              <template v-for="(item, index) in getSupporters">
+                <v-flex :key="`support-icon-${index}`" xs1>
+                  <v-icon>mdi-{{ item.icon }}</v-icon>
+                </v-flex>
 
-          <v-divider />
+                <v-flex :key="`support-name-${index}`" xs4>
+                  {{ item.name }}
+                </v-flex>
 
-          <v-layout class="px-1 py-2" wrap>
-            <template v-for="(item, index) in getSupporters">
-              <v-flex :key="`support-icon-${index}`" xs1>
-                <v-icon>mdi-{{ item.icon }}</v-icon>
-              </v-flex>
-
-              <v-flex :key="`support-name-${index}`" xs4>
-                {{ item.name }}
-              </v-flex>
-
-              <v-flex :key="`support-message-${index}`" xs7>
-                {{ item.message[currentLanguage] || item.message.en }}
-              </v-flex>
-            </template>
-          </v-layout>
-        </v-flex>
-      </v-layout>
+                <v-flex :key="`support-message-${index}`" xs7>
+                  {{ item.message[currentLanguage] || item.message.en }}
+                </v-flex>
+              </template>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-container>
 
       <v-card-actions>
         <v-layout justify-end>
@@ -69,7 +75,6 @@
 </template>
 
 <script lang="ts">
-import { shell } from 'electron';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import specialThanks from '@/assets/support/specialThanks.json';
 import supporters from '@/assets/support/supporters.json';
@@ -92,7 +97,7 @@ export default class SpecialThanksSettings extends Vue {
   }
 
   private OpenKofiPage(): void {
-    shell.openExternal('https://ko-fi.com/nicoaiko');
+    window.open('https://ko-fi.com/nicoaiko', '_blank');
   }
 }
 </script>

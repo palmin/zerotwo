@@ -1,58 +1,75 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <div class="display-1">
-        {{ $t('pages.settings.changelog.changesIn', [version]) }}
-      </div>
+      <v-container>
+        <v-row justify="center">
+          <v-col :cols="12">
+            <v-row justify="center">
+              <v-col :cols="12" class="display-1 text-center">
+                {{ $t('pages.settings.changelog.changesIn', [version]) }}
+              </v-col>
+            </v-row>
 
-      <v-divider />
+            <v-divider />
 
-      <v-layout class="px-1 py-2">
-        <v-flex xs4>
-          <div class="headline">
-            <v-icon large color="blue darken-1">
-              mdi-rocket
-            </v-icon>
-            {{ $t('pages.settings.changelog.new') }}
-          </div>
+            <v-row justify="center" class="px-1 py-2">
+              <v-col
+                :cols="12"
+                :md="4"
+              >
+                <div class="headline">
+                  <v-icon large color="blue darken-1">
+                    mdi-rocket
+                  </v-icon>
+                  {{ $t('pages.settings.changelog.new') }}
+                </div>
 
-          <v-list>
-            <v-list-item v-for="(item, index) in englishNew" :key="`new-${index}`">
-              <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-flex>
+                <v-list>
+                  <v-list-item v-for="(item, index) in englishNew" :key="`new-${index}`">
+                    <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-col>
 
-        <v-flex xs4>
-          <div class="headline">
-            <v-icon large color="warning">
-              mdi-bandage
-            </v-icon>
-            {{ $t('pages.settings.changelog.fix') }}
-          </div>
+              <v-col
+                :cols="12"
+                :md="4"
+              >
+                <div class="headline">
+                  <v-icon large color="warning">
+                    mdi-bandage
+                  </v-icon>
+                  {{ $t('pages.settings.changelog.fix') }}
+                </div>
 
-          <v-list>
-            <v-list-item v-for="(item, index) in englishFix" :key="`fix-${index}`">
-              <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-flex>
+                <v-list>
+                  <v-list-item v-for="(item, index) in englishFix" :key="`fix-${index}`">
+                    <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-col>
 
-        <v-flex xs4>
-          <div class="headline">
-            <v-icon large color="error">
-              mdi-delete
-            </v-icon>
-            {{ $t('pages.settings.changelog.remove') }}
-          </div>
+              <v-col
+                :cols="12"
+                :md="4"
+              >
+                <div class="headline">
+                  <v-icon large color="error">
+                    mdi-delete
+                  </v-icon>
+                  {{ $t('pages.settings.changelog.remove') }}
+                </div>
 
-          <v-list>
-            <v-list-item v-for="(item, index) in englishRemove" :key="`remove-${index}`">
-              <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-flex>
-      </v-layout>
+                <v-list>
+                  <v-list-item v-for="(item, index) in englishRemove" :key="`remove-${index}`">
+                    <v-list-item-content>{{ item[currentLanguage] || item.en }}</v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card>
   </v-tab-item>
 </template>

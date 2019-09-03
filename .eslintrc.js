@@ -18,6 +18,7 @@ module.exports = {
     'no-nested-ternary': [0],
     'no-plusplus': [0],
     'import/no-cycle': [0],
+    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
     'vue/max-attributes-per-line': ['error', {
       singleline: 4,
       multiline: {

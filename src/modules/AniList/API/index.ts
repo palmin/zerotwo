@@ -37,7 +37,6 @@ const axios: AxiosInstance = Axios.create({
   baseURL: 'https://graphql.anilist.co/',
   timeout: 60000,
   headers: {
-    'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },

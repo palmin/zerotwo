@@ -5,6 +5,7 @@
         v-if="isSortingPage"
         text
         icon
+        class="d-none d-md-flex"
         v-on="{ ...toolTip }"
         @click="jumpToTop"
       >

@@ -1,7 +1,7 @@
 <template>
   <v-tab-item :key="tabKey">
     <v-card flat>
-      <v-container fluid fill-height>
+      <v-container fill-height>
         <v-layout align-center justify-center wrap fill-height>
           <v-flex xs12>
             <h2 class="display-3 text-center">
@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts">
-import { shell } from 'electron';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { version } from '../../../package.json';
 
@@ -60,19 +59,19 @@ export default class AboutSettings extends Vue {
   }
 
   private openGitHub() {
-    shell.openExternal(this.githubPage.toString());
+    window.open(this.githubPage.toString(), '_blank');
   }
 
   private openDiscord() {
-    shell.openExternal(this.discordPage.toString());
+    window.open(this.discordPage.toString(), '_blank');
   }
 
   private openZeroTwo() {
-    shell.openExternal(this.zeroTwoPage.toString());
+    window.open(this.zeroTwoPage.toString(), '_blank');
   }
 
   private openAniList() {
-    shell.openExternal(this.aniListPage.toString());
+    window.open(this.aniListPage.toString(), '_blank');
   }
 }
 </script>

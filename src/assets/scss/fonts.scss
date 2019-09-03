@@ -22,6 +22,6 @@
 * {
   &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
   &[class^='display-'] {
-    font-family: 'Nunito', 'Noto Sans', Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+    font-family: 'Nunito', Lato, 'Helvetica Neue', 'Hiragino Sans GB', 'SimHei', Arial, Helvetica, 'Noto Sans', sans-serif !important;
   }
 }

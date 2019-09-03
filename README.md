@@ -1,5 +1,5 @@
 # ZeroTwo
-Electron - Vue.js Anime Tracker (__currently only supporting AniList__)
+Vue.js Anime Tracker (__currently only supporting AniList__)
 
 ---
 
@@ -31,24 +31,16 @@ You only have to login to AniList and the fun can begin!
 # install dependencies
 npm install
 
-# Open Electron app in development mode
+## !! Check .env.local sample file and create your own .env file!
+
+# Generate app in development mode
 npm run serve
 
-# build electron application for production
+# build application for production
 npm run build
 
 # lint all files in `src/`
 npm run lint
-```
-
-## Installation issues
-For installation issues with the `electron-builder` you have to set the environment variable `ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES` to `true`
-```bash
-# sample for unix based shells
-ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES="true" npm i
-
-# sample for windows powershell
-$env:ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES="true"; npm i
 ```
 
 ---

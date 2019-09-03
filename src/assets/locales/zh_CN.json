@@ -3,7 +3,7 @@
   "englishReading": "Simplified Chinese",
   "actions": {
     "add": "添加",
-    "addToPlanToWatch": "添加至“计划观看”",
+    "addToPlanToWatch": "添加至“计划中”",
     "back": "返回",
     "fastSearch": "搜索…… \u23ce",
     "loading": "加载中……",
@@ -17,22 +17,25 @@
     "toPageTop": "返回顶部"
   },
   "alerts": {
-    "adultContent": "该作品含有成人内容！建议您在查看时注意场合。",
-    "noDescription": "无可用的内容。",
-    "noEnglishTitle": "无可用的英文名称。",
+    "adultContent": "该作品可能含有 R-18 内容！建议您在查看时注意场合。",
+    "noDescription": "无可用的说明。",
+    "noEnglishTitle": "无可用的英文名。",
     "noInformation": "无可用的信息。",
     "noSynonyms": "无可用的别名。",
-    "notYetInList": "该作品不在您的列表内。",
-    "unauthenticated": "您尚未通过身份验证！",
+    "notYetInList": "该作品尚不在您的列表内。",
+    "unauthenticated": "您尚未登录！",
     "unknown": "未知"
   },
   "errors": {
     "updateFailed": {
       "title": "更新失败",
-      "text": "无法提交更新！请检查AniList的服务器是否可用或您的网络连接是否畅通！"
+      "text": "无法提交更新！请检查 AniList 的服务器是否可用或您的网络连接是否畅通！"
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "列表刷新倒计时：{0}"
+    },
     "aniList": {
       "completed": "已看完",
       "dropped": "已弃坑",
@@ -40,13 +43,13 @@
       "paused": "已搁置",
       "planning": "计划中",
       "repeating": "重温中",
-      "seasonPreview": "季度预告",
+      "seasonPreview": "每季番组一览",
       "watching": "观看中"
     },
     "search": "详细搜索",
     "settings": {
       "title": "设置",
-      "about": "关于ZeroTwo",
+      "about": "关于 ZeroTwo",
       "aniList": "AniList",
       "appSettings": "软件设置",
       "changelog": "最近更新",
@@ -64,7 +67,7 @@
       "score": "评分",
       "progress": "进度",
       "startingDate": "放送日期",
-      "episodeAmount": "集数"
+      "episodeAmount": "总话数"
     }
   },
   "pages": {
@@ -74,40 +77,40 @@
           "headline": "最新动态",
           "completed": "已看完 {0}",
           "plansToWatch": "准备看 {0}",
-          "watchedEpisode": "已看 {0} 的第{1}话",
+          "watchedEpisode": "已看 {0} 的第 {1} 话",
           "dropped": "放弃看 {0}",
-          "rewatchedEpisode": "重温 {0} 的第{1}话",
+          "rewatchedEpisode": "重温 {0} 的第 {1} 话",
           "paused": "暂时不看 {0}"
         },
         "howToAuthenticate": {
           "header": "如何登录：",
           "text": [
-            "请打开设置页面（右上角的齿轮图标），然后前往“AniList”选项卡。",
-            "你会看到一个“登录”按钮，点击此按钮会打开AniList的登录窗口。",
-            "在提交登录数据后，窗口会自动关闭，且程序将成功完成登录过程。"
+            "请打开设置页面（右上角齿轮图标），然后切换至 “AniList” 选项卡。",
+            "其中有一个“登录”按钮，点击此按钮以打开 AniList 的登录窗口。",
+            "提交登录数据后，登录窗口会自动关闭。登录完成！"
           ]
         }
       },
       "list": {
         "airingFinished": "放送完毕",
-        "missingEpisodes": "有1话尚未观看 | 有{count}话尚未观看",
+        "missingEpisodes": "有 1 话尚未观看 | 有 {count} 话尚未观看",
         "notYetAired": "尚未放送",
-        "nextAiringEpisode": "第{0}话将于{1}放送"
+        "nextAiringEpisode": "第 {0} 话将于 {1} 放送"
       },
       "detailView": {
-        "airedOn": "已于{0}上映",
-        "airedOnTo": "已于{0}～{1}放送",
-        "airesFromTo": "将于{0}～{1}放送",
-        "airesOn": "将于{0}上映",
-        "airingStartedOn": "已于{0}开始放送",
-        "airingStartsOnDay": "将于{0}开始放送",
-        "airingStartsInMonthYear": "将于{0}开始放送",
-        "airingStartsInYear": "将于{0}开始放送",
+        "airedOn": "已于 {0} 上映",
+        "airedOnTo": "已于 {0} ～ {1} 放送",
+        "airesFromTo": "将于 {0} ～ {1} 放送",
+        "airesOn": "将于 {0} 上映",
+        "airingStartedOn": "已于 {0} 开始放送",
+        "airingStartsOnDay": "将于 {0} 开始放送",
+        "airingStartsInMonthYear": "将于 {0} 开始放送",
+        "airingStartsInYear": "将于 {0} 开始放送",
         "airingTime": "放送时间",
-        "airingWithUnknownStart": "?～{0}",
-        "description": "内容",
+        "airingWithUnknownStart": "? ～ {0}",
+        "description": "说明",
         "englishTitle": "英文名",
-        "episodes": "集数",
+        "episodes": "总话数",
         "genres": "类型",
         "nativeTitle": "原名",
         "ownInformation": "您的列表信息",
@@ -115,7 +118,7 @@
         "ownStatus": "状态",
         "ownScore": "评分",
         "romajiTitle": "罗马音名",
-        "score": "{0}/{1}分",
+        "score": "{0} / {1} 分",
         "scoreLabel": "平均分",
         "streamingSubheader": "流媒体服务",
         "synonyms": "别名"
@@ -124,10 +127,10 @@
     "search": {
       "searchQuery": "搜索……",
       "adultContent": {
-        "label": "成人内容",
-        "hint": "留空以同时搜索成人和非成人内容",
-        "onlyNonAdult": "仅非成人内容",
-        "onlyAdult": "仅成人内容"
+        "label": "R-18 内容",
+        "hint": "留空以同时搜索全年龄内容和 R-18 内容",
+        "onlyNonAdult": "仅全年龄内容",
+        "onlyAdult": "仅 R-18 内容"
       },
       "inList": {
         "label": "列表内",
@@ -135,23 +138,23 @@
       },
       "genres": {
         "label": "类型",
-        "hint": "最多3种",
-        "noMatch": "无匹配 “<strong>{0}</strong>” 的类型。按<kbd>Enter</kbd>键以创建。"
+        "hint": "最多 3 种",
+        "noMatch": "无匹配 “<strong>{0}</strong>” 的类型。按 <kbd>Enter</kbd> 键以创建。"
       }
     },
     "seasonPreview": {
-      "episodes": "?话 | 1话 | {count}话",
+      "episodes": "共 ? 话 | 共 1 话 | 共 {count} 话",
       "startDate": "开始放映于："
     },
     "settings": {
       "aboutZeroTwo": {
-        "version": "版本号"
+        "version": "版本"
       },
       "aniList": {
-        "loggedInAs": "已登录为 {0}",
+        "loggedInAs": "{0} 已登录",
         "refreshRate": "刷新率",
         "refreshRateSuffix": "分钟",
-        "refreshRateHint": "此项用于调整程序与AniList服务器每两次同步之间的时间间隔（分钟）。每次修改将于下次同步后生效。"
+        "refreshRateHint": "此项用于调整本程序与 AniList 服务器每两次同步之间的时间间隔。每次修改将于下次同步后生效。"
       },
       "appSettings": {
         "chooseLanguage": "语言选择",
@@ -161,25 +164,33 @@
         "new": "新增",
         "fix": "修复",
         "remove": "移除",
-        "version": "版本号",
-        "changesIn": "在 {0} 中的新变化"
+        "version": "版本",
+        "changesIn": "在 {0} 版本中的新变化"
       },
       "specialThanks": "特别鸣谢",
       "supporters": "赞助者"
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "主页",
+      "watching": "观看中",
+      "repeating": "重温中",
+      "completed": "已看完",
+      "paused": "已搁置",
+      "dropped": "已弃坑",
+      "planning": "计划中"
+    },
     "detailView": "详细视图",
     "search": "搜索",
-    "seasonPreview": "季度预告",
+    "seasonPreview": "每季番组一览",
     "settings": "设置"
   },
   "notifications": {
     "aniList": {
-      "title": "更新成功",
-      "completeUpdateText": "已成功将 {0} 全部看完并更新记录至第{1}话。",
-      "simpleUpdateText": "已成功将 {0} 更新记录至第{1}话",
+      "successTitle": "更新成功",
+      "completeUpdateText": "已成功将 {0} 全部看完并更新记录至第 {1} 话。",
+      "simpleUpdateText": "已成功将 {0} 更新记录至第 {1} 话",
       "addedToList": "已成功将 {0} 添加至您的列表。",
       "removeEntry": "已成功将 {0} 从您的列表中移除。"
     }

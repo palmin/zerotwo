@@ -5,7 +5,9 @@
         <v-flex
           v-for="item in preparedMedia"
           :key="item.id"
-          xs3
+          xs12
+          sm6
+          md4
           lg3
           xl2
         >
@@ -49,7 +51,7 @@
                 @click="addMediaToPlanList(item)"
               >
                 <v-icon left color="success">
-                  mdi-library-plus
+                  mdi-playlist-plus
                 </v-icon>
                 {{ $t('actions.addToPlanToWatch') }}
               </v-btn>

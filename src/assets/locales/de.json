@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Nächste Aktualisierung in: {0}"
+    },
     "aniList": {
       "completed": "Abgeschlossen",
       "dropped": "Abgebrochen",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "Home",
+      "watching": "Laufend",
+      "repeating": "Wiederholend",
+      "completed": "Abgeschlossen",
+      "paused": "Pausiert",
+      "dropped": "Abgebrochen",
+      "planning": "Geplant"
+    },
     "detailView": "Detail-Ansicht",
     "search": "Suche",
     "seasonPreview": "Saison-Vorschau",

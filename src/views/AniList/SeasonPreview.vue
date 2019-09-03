@@ -51,7 +51,7 @@
                 @click="addMediaToPlanList(item)"
               >
                 <v-icon left color="success">
-                  mdi-library-plus
+                  mdi-playlist-plus
                 </v-icon>
                 {{ $t('actions.addToPlanToWatch') }}
               </v-btn>

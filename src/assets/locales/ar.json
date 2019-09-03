@@ -33,14 +33,17 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "تحديث القائمة التالية فى: {0}"
+    },
     "aniList": {
       "completed": "منتهى",
       "dropped": "إسقاط",
-      "home": "Home",
+      "home": "الصحفة الرئيسية",
       "paused": "توقف",
       "planning": "خطة المشاهدة",
       "repeating": "تكرار",
-      "seasonPreview": "Season Preview",
+      "seasonPreview": "معاينة الموسم",
       "watching": "مشاهدة"
     },
     "search": "بحث مفصل",
@@ -50,7 +53,7 @@
       "aniList": "AniList",
       "appSettings": "إعدادات التطبيقات",
       "changelog": "أحدث التغييرات",
-      "specialThanks": "Special Thanks"
+      "specialThanks": "شكر خاص"
     }
   },
   "components": {
@@ -63,28 +66,28 @@
       "title": "الاسم",
       "score": "النتيجة",
       "progress": "التقدم",
-      "startingDate": "Starting date",
-      "episodeAmount": "Episode amount"
+      "startingDate": "تاريخ البدء",
+      "episodeAmount": "كمية أحداث"
     }
   },
   "pages": {
     "aniList": {
       "home": {
         "activities": {
-          "headline": "Latest Activities",
-          "completed": "Completed {0}",
-          "plansToWatch": "Plans to watch {0}",
-          "watchedEpisode": "Watched episode {1} of {0}",
-          "dropped": "Dropped {0}",
-          "rewatchedEpisode": "Rewatched episode {1} of {0}",
-          "paused": "Paused {0}"
+          "headline": "أحدث الأنشطة",
+          "completed": "منجز {0}",
+          "plansToWatch": "مخطط للمشاهدة {0}",
+          "watchedEpisode": "شاهد الحديث {1} من {0}",
+          "dropped": "توقفت {0}",
+          "rewatchedEpisode": "حلق المشاهدة الحديث {1} من {0}",
+          "paused": "توقف {0}"
         },
         "howToAuthenticate": {
-          "header": "How to login:",
+          "header": "خطوة لتسجيل الدخول:",
           "text": [
-            "Please navigate to the settings page (cog in the right-hand corner) and then to the \"AniList\" tab.",
-            "There you will find a \"Login\" button which will open an AniList login window.",
-            "After inputting the login data the window will close and login process should be done successfully."
+            "يرجى الانتقل إلى صحيفة الإعدادات (سن العجلة فى زاوية العليا اليمنى) وانتقال الى تبويب \"AniList\".",
+            "هناك ستجب زر \"تسجيل الدخول\" الذي سيفتح موقع دخول AniList.",
+            "بعد إدخال بيانات تسجيل الدخول، سيتم إغلاق الموقع وإتمام عملية تسجيل الدخول."
           ]
         }
       },

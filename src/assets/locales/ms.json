@@ -3,54 +3,54 @@
   "englishReading": "Malay",
   "actions": {
     "add": "Tambah",
-    "addToPlanToWatch": "Tambahkan ke daftar Direncanakan",
+    "addToPlanToWatch": "Tambahkan ke senarai Dirancangkan",
     "back": "Kembali",
     "fastSearch": "Mencari... \u23ce",
-    "loading": "Memuat...",
+    "loading": "Memuatkan...",
     "login": "Masuk",
     "logout": "Keluar",
     "remove": "Hapus",
-    "reset": "Reset",
+    "reset": "Tetapkan Semula",
     "save": "Simpan",
     "search": "Cari",
-    "sort": "Urutkan & Saring",
+    "sort": "Isih & Tapis",
     "toPageTop": "Lompat ke atas"
   },
   "alerts": {
-    "adultContent": "Media ini dianggap konten dewasa! Kebijakan Pemirsa Disarankan.",
-    "noDescription": "Tidak ada deskripsi yang tersedia.",
-    "noEnglishTitle": "Tidak ada judul Inggris yang tersedia.",
-    "noInformation": "Tidak ada informasi yang tersedia.",
-    "noSynonyms": "Tidak ada sinonim yang tersedia.",
-    "notYetInList": "Media ini belum terdaftar di list kamu.",
-    "unauthenticated": "Kamu tidak ter-otentikasi!",
-    "unknown": "Tidak Diketahui"
+    "adultContent": "Media ini dianggap kandungan dewasa! Kebijakan Penonton Disyorkan.",
+    "noDescription": "Tiada perihalan yang tersedia.",
+    "noEnglishTitle": "Tiada tajuk Bahasa Inggeris yang tersedia.",
+    "noInformation": "Tiada maklumat tersedia.",
+    "noSynonyms": "Tiada sinonim tersedia.",
+    "notYetInList": "Media ini belum disenaraikan dalam senarai anda.",
+    "unauthenticated": "Anda belum disahkan!",
+    "unknown": "Tidak diketahui"
   },
   "errors": {
     "updateFailed": {
-      "title": "Pembaharuan gagal",
-      "text": "The committed update could not be synchronized! Check AniList availability or the internet connection!"
+      "title": "Kemas kini gagal",
+      "text": "Kemas kini yang komited tidak boleh disegerakkan! Semak ketersediaan AniList atau sambungan internet!"
     }
   },
   "menus": {
     "aniList": {
       "completed": "Selesai",
-      "dropped": "Dihentikan",
+      "dropped": "Berhenti",
       "home": "Beranda",
       "paused": "Ditahan",
-      "planning": "Direncanakan",
+      "planning": "Dirancangkan",
       "repeating": "Mengulang",
-      "seasonPreview": "Pratinjau Musim",
+      "seasonPreview": "Pratonton Musim",
       "watching": "Sedang Menonton"
     },
-    "search": "Detailed Search",
+    "search": "Carian Terperinci",
     "settings": {
-      "title": "Pengaturan",
-      "about": "Tentang ZeroTwo",
+      "title": "Tetapan",
+      "about": "Mengenai ZeroTwo",
       "aniList": "AniList",
-      "appSettings": "Pengaturan Aplikasi",
-      "changelog": "Perubahan Terakhir",
-      "specialThanks": "Kontributor"
+      "appSettings": "Tetapan Aplikasi",
+      "changelog": "Pindaan Terakhir",
+      "specialThanks": "Terima kasih teristimewa"
     }
   },
   "components": {
@@ -59,140 +59,140 @@
         "ascending": "Naik",
         "descending": "Turun"
       },
-      "sortingLabel": "Urutkan berdasarkan",
-      "title": "Judul",
+      "sortingLabel": "Isih mengikut",
+      "title": "Tajuk",
       "score": "Skor",
       "progress": "Kemajuan",
-      "startingDate": "Tanggal Mulai",
-      "episodeAmount": "Jumlah Episode"
+      "startingDate": "Tarikh Mula",
+      "episodeAmount": "Bilangan Episod"
     }
   },
   "pages": {
     "aniList": {
       "home": {
         "activities": {
-          "headline": "Aktivitas Terbaru",
+          "headline": "Aktiviti Terkini",
           "completed": "Selesai {0}",
-          "plansToWatch": "Direncanakan {0}",
-          "watchedEpisode": "Episode {1} dari {0} selesai",
-          "dropped": "Dihentikan {0}",
-          "rewatchedEpisode": "Episode {1} dari {0} ditonton kembali",
+          "plansToWatch": "Dirancang {0}",
+          "watchedEpisode": "Episod {1} dari {0} selesai",
+          "dropped": "Berhenti {0}",
+          "rewatchedEpisode": "Episod {1} dari {0} ditonton kembali",
           "paused": "Ditahan {0}"
         },
         "howToAuthenticate": {
-          "header": "How to login:",
+          "header": "Cara untuk login:",
           "text": [
-            "Please navigate to the settings page (cog in the right-hand corner) and then to the \"AniList\" tab.",
-            "There you will find a \"Login\" button which will open an AniList login window.",
-            "After inputting the login data the window will close and login process should be done successfully."
+            "Sila navigasi ke halaman tetapan (cog di sudut kanan) dan kemudian ke tab \"AniList\".",
+            "Di sana anda akan dapati butang \"Masuk\" yang akan membuka tetingkap log masuk AniList.",
+            "Selepas memasukkan data log masuk, tetingkap akan ditutup dan proses login telah selesai."
           ]
         }
       },
       "list": {
-        "airingFinished": "Selesai ditayangkan",
-        "missingEpisodes": "Satu episode untuk dinonton | {count} episode untuk dinonton",
+        "airingFinished": "Selesai siaran",
+        "missingEpisodes": "Satu episod untuk dinonton | {count} episod untuk dinonton",
         "notYetAired": "Belum ditayangkan",
-        "nextAiringEpisode": "Episode {0} akan ditayangkan {1}"
+        "nextAiringEpisode": "Episod {0} akan disiarkan {1}"
       },
       "detailView": {
-        "airedOn": "Ditayangkan pada {0}",
+        "airedOn": "Disiarkan pada` {0}",
         "airedOnTo": "{0} hingga {1}",
-        "airesFromTo": "Ditayangkan pada {0} hingga {1}",
-        "airesOn": "Aires on {0}",
-        "airingStartedOn": "Started on {0}",
-        "airingStartsOnDay": "Starts on {0}",
-        "airingStartsInMonthYear": "Starts in {0}",
-        "airingStartsInYear": "Starts in {0}",
-        "airingTime": "Airing time",
+        "airesFromTo": "Disiarkan pada {0} hingga {1}",
+        "airesOn": "Disiarkan pada {0}",
+        "airingStartedOn": "Dimulakan pada {0}",
+        "airingStartsOnDay": "Bermula di {0}",
+        "airingStartsInMonthYear": "Bermula di {0}",
+        "airingStartsInYear": "Bermula di {0}",
+        "airingTime": "Masa penyiaran",
         "airingWithUnknownStart": "? - {0}",
-        "description": "Description",
-        "englishTitle": "English title",
-        "episodes": "Episodes",
-        "genres": "Genres",
-        "nativeTitle": "Native title",
-        "ownInformation": "Information of your list",
-        "ownProgress": "Progress",
+        "description": "Penerangan",
+        "englishTitle": "Tajuk bahasa Inggeris",
+        "episodes": "Episod",
+        "genres": "Genre",
+        "nativeTitle": "Tajuk asli",
+        "ownInformation": "Maklumat senarai anda",
+        "ownProgress": "Kemajuan",
         "ownStatus": "Status",
-        "ownScore": "Score",
-        "romajiTitle": "Rōmaji title",
-        "score": "{0} / {1} points",
-        "scoreLabel": "Average score",
-        "streamingSubheader": "Streaming services",
-        "synonyms": "Synonyms"
+        "ownScore": "Skor",
+        "romajiTitle": "Tajuk Romaji",
+        "score": "{0} / {1} poin",
+        "scoreLabel": "Skor purata",
+        "streamingSubheader": "Perkhidmatan streaming",
+        "synonyms": "Sinonim"
       }
     },
     "search": {
-      "searchQuery": "Search...",
+      "searchQuery": "Cari...",
       "adultContent": {
-        "label": "Adult content",
-        "hint": "Keep clear to search for both adult and non-adult content",
-        "onlyNonAdult": "Only non-adult content",
-        "onlyAdult": "Only adult content"
+        "label": "Kandungan dewasa",
+        "hint": "Membantu menguruskan carian untuk kandungan dewasa dan bukan dewasa",
+        "onlyNonAdult": "Tunjukkan bukan kandungan dewasa saja",
+        "onlyAdult": "Tunjukkan hanya kandungan dewasa"
       },
       "inList": {
-        "label": "In List",
-        "hint": "Keep clear to also search for media that is not yet in your list"
+        "label": "Dalam senarai",
+        "hint": "Membantu menguruskan carian untuk mencari media yang belum ada dalam senarai anda"
       },
       "genres": {
         "label": "Genre",
-        "hint": "Max. 3",
-        "noMatch": "No genre matching \"<strong>{0}</strong>\". Press <kbd>enter</kbd> to create it."
+        "hint": "Maks. 3",
+        "noMatch": "Tiada genre \"<strong>{0}</strong>\" yang sesuai. Tekan <kbd>enter</kbd> untuk menjadikannya."
       }
     },
     "seasonPreview": {
-      "episodes": "? episodes | 1 episode | {count} episodes",
-      "startDate": "Start of airing:"
+      "episodes": "? episod | 1 episod | {count} episod",
+      "startDate": "Mulai disiarkan:"
     },
     "settings": {
       "aboutZeroTwo": {
-        "version": "Version"
+        "version": "Versi"
       },
       "aniList": {
-        "loggedInAs": "Logged in as {0}",
-        "refreshRate": "Refresh rate",
-        "refreshRateSuffix": "minutes",
-        "refreshRateHint": "This interval determines the amount of minutes until the next synchronization with the AniList server. Changes to the interval will be applied after the next synchronization."
+        "loggedInAs": "Masuk sebagai {0}",
+        "refreshRate": "Jarak penyegaran",
+        "refreshRateSuffix": "minit",
+        "refreshRateHint": "Selang masa tentukan bilangan minit hingga penyegerakan berikutnya terhadap server AniList. Perubahan selang masa akan digunakan selepas penyegerakan seterusnya."
       },
       "appSettings": {
-        "chooseLanguage": "Choose language",
-        "darkMode": "Dark mode"
+        "chooseLanguage": "Pilih bahasa",
+        "darkMode": "Mod gelap"
       },
       "changelog": {
-        "new": "NEW",
-        "fix": "FIX",
-        "remove": "REMOVE",
-        "version": "Version",
-        "changesIn": "Latest changes in {0}"
+        "new": "BARU",
+        "fix": "DIPERBAIKI",
+        "remove": "DIPADAMKAN",
+        "version": "Versi",
+        "changesIn": "Perubahan terakhir di {0}"
       },
-      "specialThanks": "Special Thanks",
-      "supporters": "Supporters"
+      "specialThanks": "Terimakasih Teristimewa",
+      "supporters": "Penyokong"
     }
   },
   "routes": {
     "aniList": "AniList",
-    "detailView": "Detail View",
-    "search": "Search",
-    "seasonPreview": "Season Preview",
-    "settings": "Settings"
+    "detailView": "Paparan Terperinci",
+    "search": "Carian",
+    "seasonPreview": "Pratonton Musim",
+    "settings": "Tetapan"
   },
   "notifications": {
     "aniList": {
-      "title": "Sinkronisasi sukses",
-      "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
-      "simpleUpdateText": "{0} was successfully synchronized to episode {1}.",
-      "addedToList": "{0} was successfully added to your list.",
-      "removeEntry": "{0} was successfully removed from your list."
+      "title": "Penyegerakan berjaya",
+      "completeUpdateText": "Penyegerakan tamat {0} berjaya ke episod {1}.",
+      "simpleUpdateText": "Penyegerakan {0} berjaya ke episod {1}.",
+      "addedToList": "Penambahan {0} berjaya ke senarai anda.",
+      "removeEntry": "Pemadaman {0} berjaya daripada senarai."
     }
   },
   "misc": {
     "aniList": {
       "listStatusses": {
         "completed": "Selesai",
-        "dropped": "Dihentikan",
+        "dropped": "Berhenti",
         "paused": "Ditahan",
-        "planning": "Direncanakan",
+        "planning": "Dirancangkan",
         "repeating": "Mengulang",
-        "watching": "Watching"
+        "watching": "Sedang Menonton"
       },
       "seasons": {
         "spring": "Spring",
@@ -206,16 +206,16 @@
       "full": "MMMM Do YYYY",
       "monthAndYear": "MMMM YYYY",
       "yearOnly": "YYYY",
-      "dateUnknown": "Tanggal tidak diketahui"
+      "dateUnknown": "Tarikh tidak diketahui"
     },
     "rules": {
-      "required": "This input must be filled."
+      "required": "Lajur ini perlu diisi."
     },
     "modules": {
       "aniList": "AniList"
     }
   },
   "$vuetify": {
-    "noDataText": "Tidak ada data"
+    "noDataText": "Tiada data"
   }
 }

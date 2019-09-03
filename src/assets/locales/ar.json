@@ -7,29 +7,29 @@
     "back": "Back",
     "fastSearch": "بحث... \u23ce",
     "loading": "جار التحميل...",
-    "login": "Login",
-    "logout": "Logout",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
     "remove": "إزالة",
     "reset": "أعاد التشغيل",
-    "save": "احفظ",
+    "save": "حفظ",
     "search": "بحث",
     "sort": "فرز وصفى",
-    "toPageTop": "Jump to top"
+    "toPageTop": "القفز إلى الأعلى"
   },
   "alerts": {
-    "adultContent": "This media is considered adult content! Viewer Discretion Advised.",
-    "noDescription": "No description available.",
-    "noEnglishTitle": "No English title available.",
-    "noInformation": "No information available.",
-    "noSynonyms": "No synonyms available.",
-    "notYetInList": "This media is not yet in your list.",
-    "unauthenticated": "You are not authenticated!",
+    "adultContent": "تعتبر هذه الوسائط محتوى للبالغين! المشاهد حرية التقدير.",
+    "noDescription": "لا يوجد وصف متاح.",
+    "noEnglishTitle": "لا يوجد عنوان باللغة الإنجليزية المتاحة.",
+    "noInformation": "لا توجد معلومات متاحة.",
+    "noSynonyms": "لا توجد مرادفات متاحة.",
+    "notYetInList": "هذه الوسائط ليست في قائمتك بعد.",
+    "unauthenticated": "أنت غير موثق!",
     "unknown": "غير معروف"
   },
   "errors": {
     "updateFailed": {
-      "title": "Update failed",
-      "text": "The committed update could not be synchronized! Check AniList availability or the internet connection!"
+      "title": "فشل التحديث",
+      "text": "لا يمكن مزامنة التحديث الملتزم! تحقق من توفر AniList أو الاتصال بالإنترنت!"
     }
   },
   "menus": {
@@ -43,7 +43,7 @@
       "seasonPreview": "Season Preview",
       "watching": "مشاهدة"
     },
-    "search": "Detailed Search",
+    "search": "بحث مفصل",
     "settings": {
       "title": "إعدادات",
       "about": "عن ZeroTwo",

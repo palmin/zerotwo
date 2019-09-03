@@ -6,6 +6,7 @@
       "fr": "Termine le nouveau design via Vuetify v2",
       "id": "Menyelesaikan desain baru melalui Vuetify v2",
       "ja": "「Ｖｕｅｔｉｆｙ」バージョン２を使って、新デザイン",
+      "ms": "Merekabentuk baru melalui Vuetify v2",
       "pt_BR": "Um completo novo design via Vuetify v2",
       "zh_CN": "利用Vuetify v2进行了全新设计"
     },
@@ -15,6 +16,7 @@
       "fr": "Améliore l'expérience de recherche",
       "id": "Pengembangan pengalaman dalam pencarian",
       "ja": "検索機能を改正",
+      "ms": "Pengalaman carian yang lebih baik",
       "pt_BR": "Experiência de pesquisa melhorada",
       "zh_CN": "改善了搜索功能"
     },
@@ -24,6 +26,7 @@
       "fr": "Intégration de la pré-visualisation de saison",
       "id": "Integrasi pada pratinjau musim",
       "ja": "シーズン予告機能を追加",
+      "ms": "Pratonton musim yang terbina dalam",
       "pt_BR": "Preview da Temporada embutido",
       "zh_CN": "加入了季度预告"
     },
@@ -33,6 +36,7 @@
       "fr": "Page d'accueil avec les dernières activités",
       "id": "Laman utama dengan aktivitas terbaru",
       "ja": "ユーザの最新情報ホームページを追加",
+      "ms": "Laman utama dengan aktifiti terkini",
       "pt_BR": "Página inicial com as últimas atividades",
       "zh_CN": "加入了含“最新动态”的个人主页"
     },
@@ -42,6 +46,7 @@
       "fr": "Journal des modifications visible dans l'App",
       "id": "Penambatan tampilan riwayat perubahan dalam aplikasi",
       "ja": "アプリ内に最新更新情報が見える",
+      "ms": "Penempatan paparan log perubahan dalam aplikasi",
       "pt_BR": "Changelog visível no aplicativo",
       "zh_CN": "可在程序内查看“最近更新”日志"
     },
@@ -51,6 +56,7 @@
       "fr": "Filtre par genre",
       "id": "Saring berdasarkan genre",
       "ja": "ジャンルのフィルタリングを追加",
+      "ms": "Penapis mengikuti genre",
       "pt_BR": "Filtragem por Género",
       "zh_CN": "加入了通过类型筛选"
     }
@@ -62,6 +68,7 @@
       "fr": "Séparation de la liste Complète d'AniList est maintenent entièrement supporté",
       "id": "Pemisahan daftar selesai pada AniList sekarang telah didukung penuh",
       "ja": "「ＡｎｉＬｉｓｔ」に設定できる「終了リストを分ける」はサポートします",
+      "ms": "Pemecahan senarai selesai AniList kini disokong sepenuhnya",
       "pt_BR": "A lista completa dividida no AniList agora é totalmente suportada",
       "zh_CN": "完全支持AniList上的拆分式完整列表"
     },
@@ -71,6 +78,7 @@
       "fr": "Tri par divers paramètres",
       "id": "Pengurutan melalui berbagai pengaturan",
       "ja": "リストアイテムの並べ替えはタイトル以外にも出来るになりました",
+      "ms": "Penapis mengikuti pelbagai tetapan",
       "pt_BR": "Ordenação através de vários parâmetros",
       "zh_CN": "现在可通过各种参数对列表进行排序"
     }
@@ -82,6 +90,7 @@
       "fr": "MyAnimeList n'est plus supporté",
       "id": "Dukungan untuk MyAnimeList telah dihapus",
       "ja": "「ＭｙＡｎｉｍｅＬｉｓｔ」はもうサポートしていません",
+      "ms": "Penyokongan terhadap MyAnimeList kini dipadamkan",
       "pt_BR": "Suporte para o MyAnimeList foi terminado",
       "zh_CN": "停止对MyAnimeList的技术支持"
     }

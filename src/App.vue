@@ -56,10 +56,13 @@ export default class App extends Vue {
    */
   @Watch('locale')
   public localeChanged(newLocale: string | undefined) {
+    const root = document.getElementsByTagName('html')[0];
+
     this.$i18n.locale = newLocale && validLanguageCodes.includes(newLocale)
       ? newLocale
       : this.$i18n.fallbackLocale;
     moment.locale(this.$i18n.locale);
+    root.setAttribute('class', `font-face-${this.getLocaleBasedFontFace(this.$i18n.locale)}`);
   }
 
   @Watch('darkMode')
@@ -78,24 +81,44 @@ export default class App extends Vue {
       this.$i18n.locale = this.locale;
     }
 
+    const root = document.getElementsByTagName('html')[0];
+    root.setAttribute('class', `font-face-${this.getLocaleBasedFontFace(this.$i18n.locale)}`);
+
     this.$vuetify.theme.dark = appStore.darkMode;
 
     moment.locale(this.$i18n.locale);
   }
 
-  private async beforeMount() {
-    // await appStore.setLoadingState(true);
-
-    // if (aniListStore.isAuthenticated) {
-    //   await aniListStore.refreshAniListData();
-    //   await aniListStore.restartRefreshTimer();
-    // }
-
-    // await appStore.setLoadingState(false);
-  }
-
   private async beforeDestroy() {
     await aniListStore.destroyRefreshTimer();
+  }
+
+  private getLocaleBasedFontFace(locale: string): string {
+    let fontFace = '';
+
+    switch (locale) {
+      case 'ja': // Japanese
+        fontFace = 'ja';
+        break;
+      case 'zh_CN': // Chinese
+        fontFace = 'zh';
+        break;
+      case 'kr': // Korean
+        fontFace = 'kr';
+        break;
+      case 'ru': // Russian
+        fontFace = 'ru';
+        break;
+      case 'de':
+      case 'en':
+      case 'fr':
+      case 'pt_BR': // Latin-based
+      default:
+        fontFace = 'lt';
+        break;
+    }
+
+    return fontFace;
   }
 }
 </script>

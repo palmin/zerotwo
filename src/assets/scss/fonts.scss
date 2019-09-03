@@ -1,11 +1,4 @@
 @font-face {
-  font-family: "Noto Sans";
-  font-weight: bold;
-  font-style: normal;
-  src: url("../fonts/NotoSansCJKjp-Medium.otf") format("opentype");
-}
-
-@font-face {
   font-family: "Nutito";
   font-weight: normal;
   font-style: normal;
@@ -19,9 +12,65 @@
   src: url("../fonts/Nunito-SemiBold.ttf") format("truetype");
 }
 
-* {
+$default-typo: 'Nunito, Lato, Helvetica Neue, Helvetica, Arial, sans-serif';
+$japanese-default-typo: 'ヒラギノ角ゴ Pro W3, Hiragino Kaku Gothic Pro, Osaka, メイリオ, Meiryo, ＭＳ Ｐゴシック, MS PGothic';
+%font-face-lt {
+  font-family: unquote($default-typo), unquote($japanese-default-typo) !important;
+}
+%font-face-ar {
+  font-family: 'Geeza Pro', unquote($default-typo) !important;
+}
+%font-face-ru {
+  font-family: 'Charcoal', 'Geneva', unquote($default-typo) !important;
+}
+%font-face-ja {
+  font-family: unquote($japanese-default-typo), unquote($default-typo) !important;
+}
+%font-face-zh {
+  font-family: '华文细黑', 'STXihei', 'PingFang TC', '微软雅黑体', 'Microsoft YaHei New', '微软雅黑', 'Microsoft Yahei', '宋体', 'SimSun', unquote($default-typo) !important;
+}
+%font-face-kr {
+  font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', '굴림', 'Gulim', '돋움', 'Dotum', unquote($default-typo) !important;
+}
+
+html.font-face-lt * {
   &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
   &[class^='display-'] {
-    font-family: 'Nunito', Lato, 'Helvetica Neue', 'Hiragino Sans GB', 'SimHei', Arial, Helvetica, 'Noto Sans', sans-serif !important;
+    @extend %font-face-lt;
+  }
+}
+
+html.font-face-ar * {
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &[class^='display-'] {
+    @extend %font-face-ar;
+  }
+}
+
+html.font-face-ru * {
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &[class^='display-'] {
+    @extend %font-face-ru;
+  }
+}
+
+html.font-face-ja * {
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &[class^='display-'] {
+    @extend %font-face-ja;
+  }
+}
+
+html.font-face-zh * {
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &[class^='display-'] {
+    @extend %font-face-zh;
+  }
+}
+
+html.font-face-kr * {
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &[class^='display-'] {
+    @extend %font-face-kr;
   }
 }

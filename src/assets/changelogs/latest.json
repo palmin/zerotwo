@@ -64,7 +64,9 @@
       "de": "Web-App ersetzt bisherige Electron-App",
       "en": "Web app replaces Electron app",
       "fr": "(to be translated) Web app replaces Electron app",
+      "id": "Menggantikan Aplikasi berbasis Electron ke Web App",
       "ja": "エレクトロンのアプリの代わりに、ウェブアプリに変わりました",
+      "ms": "Menggantikan Aplikasi berasaskan Electron kepada Web App",
       "pt_BR": "(to be translated) Web app replaces Electron app",
       "zh_CN": "用网页版 App 替代了 Electron 版 App"
     },
@@ -72,7 +74,9 @@
       "de": "Unterstützung für Französisch und brasilianisches Portugiesisch",
       "en": "French and Portuguese (Brazil) are supported",
       "fr": "(to be translated) French and Portuguese (Brazil) are supported",
+      "id": "Dukungan terhadap bahasa Perancis dan Portugis",
       "ja": "フランス語とブラジル語を追加しました",
+      "ms": "Penyokongan terhadap bahasa Perancis dan Portugis",
       "pt_BR": "(to be translated) French and Portuguese (Brazil) are supported",
       "zh_CN": "添加了法语和葡萄牙语（巴西）翻译"
     }

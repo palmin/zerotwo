@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Pembaruan daftar selanjutnya dalam: {0}"
+    },
     "aniList": {
       "completed": "Selesai",
       "dropped": "Dihentikan",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "Beranda",
+      "watching": "Sedang Menonton",
+      "repeating": "Mengulang",
+      "completed": "Selesai",
+      "paused": "Ditahan",
+      "dropped": "Dihentikan",
+      "planning": "Direncanakan"
+    },
     "detailView": "Tampilan Detail",
     "search": "Pencarian",
     "seasonPreview": "Pratinjau Musim",
@@ -177,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "Sinkronisasi sukses",
+      "successTitle": "Sinkronisasi sukses",
       "completeUpdateText": "Sinkronisasi selesai {0} sukses ke episode {1}.",
       "simpleUpdateText": "{0} sukses disinkronisasi ke episode {1}.",
       "addedToList": "{0} sukses ditambahkan ke dalam daftar kamu.",

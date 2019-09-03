@@ -33,6 +33,9 @@
     }
   },
   "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Kemas kini senarai berikutnya dalam: {0}"
+    },
     "aniList": {
       "completed": "Selesai",
       "dropped": "Berhenti",
@@ -169,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "Beranda",
+      "watching": "Sedang Menonton",
+      "repeating": "Mengulang",
+      "completed": "Selesai",
+      "paused": "Ditahan",
+      "dropped": "Berhenti",
+      "planning": "Dirancangkan"
+    },
     "detailView": "Paparan Terperinci",
     "search": "Carian",
     "seasonPreview": "Pratonton Musim",
@@ -177,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "Penyegerakan berjaya",
+      "successTitle": "Penyegerakan berjaya",
       "completeUpdateText": "Penyegerakan tamat {0} berjaya ke episod {1}.",
       "simpleUpdateText": "Penyegerakan {0} berjaya ke episod {1}.",
       "addedToList": "Penambahan {0} berjaya ke senarai anda.",

@@ -172,7 +172,15 @@
     }
   },
   "routes": {
-    "aniList": "AniList",
+    "aniList": {
+      "home": "Home",
+      "watching": "Watching",
+      "repeating": "Repeating",
+      "completed": "Completed",
+      "paused": "Paused",
+      "dropped": "Dropped",
+      "planning": "Planning"
+    },
     "detailView": "Detail View",
     "search": "Search",
     "seasonPreview": "Season Preview",
@@ -180,7 +188,7 @@
   },
   "notifications": {
     "aniList": {
-      "title": "Synchronization successful",
+      "successTitle": "Synchronization successful",
       "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
       "simpleUpdateText": "{0} was successfully synchronized to episode {1}.",
       "addedToList": "{0} was successfully added to your list.",

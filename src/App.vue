@@ -62,7 +62,7 @@ export default class App extends Vue {
       ? newLocale
       : this.$i18n.fallbackLocale;
     moment.locale(this.$i18n.locale);
-    root.setAttribute('class', `font-face-${this.getLocaleBasedFontFace(newLocale || this.$i18n.fallbackLocale)}`);
+    root.setAttribute('class', `font-face-${this.getLocaleBasedFontFace(this.$i18n.locale)}`);
   }
 
   @Watch('darkMode')

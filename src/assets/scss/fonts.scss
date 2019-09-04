@@ -34,42 +34,42 @@ $japanese-default-typo: 'ヒラギノ角ゴ Pro W3, Hiragino Kaku Gothic Pro, Os
 }
 
 html.font-face-lt * {
-  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info):not(.episodeCount):not(.episodeDivider):not(.episodeAmount),
   &[class^='display-'] {
     @extend %font-face-lt;
   }
 }
 
 html.font-face-ar * {
-  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info):not(.episodeCount):not(.episodeDivider):not(.episodeAmount),
   &[class^='display-'] {
     @extend %font-face-ar;
   }
 }
 
 html.font-face-ru * {
-  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info):not(.episodeCount):not(.episodeDivider):not(.episodeAmount),
   &[class^='display-'] {
     @extend %font-face-ru;
   }
 }
 
 html.font-face-ja * {
-  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info):not(.episodeCount):not(.episodeDivider):not(.episodeAmount),
   &[class^='display-'] {
     @extend %font-face-ja;
   }
 }
 
 html.font-face-zh * {
-  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info):not(.episodeCount):not(.episodeDivider):not(.episodeAmount),
   &[class^='display-'] {
     @extend %font-face-zh;
   }
 }
 
 html.font-face-kr * {
-  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info),
+  &:not(.fas):not(.far):not(.icon):not(.fab):not(.fa):not(.mdi):not(.v-progress-circular__info):not(.episodeCount):not(.episodeAmount),
   &[class^='display-'] {
     @extend %font-face-kr;
   }

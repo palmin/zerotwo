@@ -64,7 +64,7 @@
       },
       "sortingLabel": "فرز حسب",
       "title": "الاسم",
-      "score": "النتيجة",
+      "score": "درجة",
       "progress": "التقدم",
       "startingDate": "تاريخ البدء",
       "episodeAmount": "كمية أحداث"
@@ -80,7 +80,7 @@
           "watchedEpisode": "شاهد الحلقة {1} من {0}",
           "dropped": "توقفت {0}",
           "rewatchedEpisode": "حلق المشاهدة الحلقة {1} من {0}",
-          "paused": "توقف {0}"
+          "pausedWatching": "توقف {0}"
         },
         "howToAuthenticate": {
           "header": "خطوة لتسجيل الدخول:",
@@ -108,26 +108,26 @@
         "airingStartsInYear": "Starts in {0}",
         "airingTime": "Airing time",
         "airingWithUnknownStart": "? - {0}",
-        "description": "Description",
+        "description": "وصف",
         "englishTitle": "عنوان باللغة الإنجليزية",
         "episodes": "حلقات",
-        "genres": "Genres",
-        "nativeTitle": "Native title",
-        "ownInformation": "Information of your list",
-        "ownProgress": "Progress",
-        "ownStatus": "Status",
-        "ownScore": "Score",
-        "romajiTitle": "Rōmaji title",
-        "score": "{0} / {1} points",
-        "scoreLabel": "Average score",
-        "streamingSubheader": "Streaming services",
-        "synonyms": "Synonyms"
+        "genres": "فئة",
+        "nativeTitle": "عنوان الأصلي",
+        "ownInformation": "معلومات من قائمتك",
+        "ownProgress": "تقدم",
+        "ownStatus": "الحالة",
+        "ownScore": "درجة",
+        "romajiTitle": "عنوان روماجي",
+        "score": "{0} / {1} نقاط",
+        "scoreLabel": "متوسط درجة",
+        "streamingSubheader": "خدمات التدفق",
+        "synonyms": "مرادفات"
       }
     },
     "search": {
-      "searchQuery": "Search...",
+      "searchQuery": "بحث...",
       "adultContent": {
-        "label": "Adult content",
+        "label": "محتوى للبالغين",
         "hint": "Keep clear to search for both adult and non-adult content",
         "onlyNonAdult": "Only non-adult content",
         "onlyAdult": "Only adult content"

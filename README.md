@@ -11,7 +11,7 @@ With this program you will easily add, update or delete Anime from your list!
 
 You only have to login to AniList and the fun can begin!
 
-## [Get the latest release here!](https://github.com/NicoAiko/zerotwo/releases)
+## [Get right started on ZeroTwo.org!](https://zerotwo.org)
 
 ## Discord Server
 

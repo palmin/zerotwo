@@ -3,8 +3,8 @@
   "englishReading": "Arabic",
   "actions": {
     "add": "اضف",
-    "addToPlanToWatch": "Add to plan to watch",
-    "back": "Back",
+    "addToPlanToWatch": "إضافة إلى قائمة التخطيط",
+    "back": "رجع",
     "fastSearch": "بحث... \u23ce",
     "loading": "جار التحميل...",
     "login": "تسجيل الدخول",
@@ -77,9 +77,9 @@
           "headline": "أحدث الأنشطة",
           "completed": "منجز {0}",
           "plansToWatch": "مخطط للمشاهدة {0}",
-          "watchedEpisode": "شاهد الحديث {1} من {0}",
+          "watchedEpisode": "شاهد الحلقة {1} من {0}",
           "dropped": "توقفت {0}",
-          "rewatchedEpisode": "حلق المشاهدة الحديث {1} من {0}",
+          "rewatchedEpisode": "حلق المشاهدة الحلقة {1} من {0}",
           "paused": "توقف {0}"
         },
         "howToAuthenticate": {
@@ -92,14 +92,14 @@
         }
       },
       "list": {
-        "airingFinished": "Airing finished",
-        "missingEpisodes": "One episode to watch | {count} episodes to watch",
-        "notYetAired": "Not yet aired",
-        "nextAiringEpisode": "Episode {0} is airing {1}"
+        "airingFinished": " بث الانتهاء",
+        "missingEpisodes": "حلقة واحدة لمشاهدة | {count} حلقات لمشاهدة",
+        "notYetAired": "لم يتم بثه",
+        "nextAiringEpisode": "الحلقة {0} تبث {1}"
       },
       "detailView": {
         "airedOn": "Aired on {0}",
-        "airedOnTo": "{0} until {1}",
+        "airedOnTo": "{0} الى {1}",
         "airesFromTo": "Aires from {0} to {1}",
         "airesOn": "Aires on {0}",
         "airingStartedOn": "Started on {0}",
@@ -109,8 +109,8 @@
         "airingTime": "Airing time",
         "airingWithUnknownStart": "? - {0}",
         "description": "Description",
-        "englishTitle": "English title",
-        "episodes": "Episodes",
+        "englishTitle": "عنوان باللغة الإنجليزية",
+        "episodes": "حلقات",
         "genres": "Genres",
         "nativeTitle": "Native title",
         "ownInformation": "Information of your list",

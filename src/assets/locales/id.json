@@ -80,7 +80,7 @@
           "watchedEpisode": "Episode {1} dari {0} selesai",
           "dropped": "Dihentikan {0}",
           "rewatchedEpisode": "Episode {1} dari {0} ditonton kembali",
-          "paused": "Ditahan {0}"
+          "pausedWatching": "Ditahan {0}"
         },
         "howToAuthenticate": {
           "header": "Cara untuk masuk:",

@@ -94,6 +94,7 @@ export default class ProgressCircle extends Vue {
     z-index: 1;
     width: 50px;
     text-align: center;
+    font-family: 'Nunito', 'Helvetica Neue', 'Helvetica', Arial, sans-serif !important;
   }
 
   .episodeDivider {
@@ -104,6 +105,7 @@ export default class ProgressCircle extends Vue {
     transform: scaleX(5);
     text-align: center;
     z-index: 2;
+    font-family: 'Nunito', 'Helvetica Neue', 'Helvetica', Arial, sans-serif !important;
 
     &::before {
       content: '_';
@@ -118,6 +120,7 @@ export default class ProgressCircle extends Vue {
     text-align: center;
     width: 50px;
     transition: opacity ease-in-out 0.2s;
+    font-family: 'Nunito', 'Helvetica Neue', 'Helvetica', Arial, sans-serif !important;
   }
 
   .episodeIncrease {

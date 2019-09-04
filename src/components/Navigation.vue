@@ -26,8 +26,22 @@
       <v-list dense nav shaped>
         <v-list-item-group v-model="item" color="primary">
           <v-list-item
-            v-for="(item, index) in menuItems"
+            v-for="(item, index) in mainMenuItems"
             :key="index"
+            @click="navigateTo(item.location)"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon" />
+            </v-list-item-icon>
+
+            <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+          </v-list-item>
+
+          <v-divider class="py-1" />
+
+          <v-list-item
+            v-for="(item, index) in aniListMenuItems"
+            :key="index + 2"
             @click="navigateTo(item.location)"
           >
             <v-list-item-icon>
@@ -125,7 +139,7 @@ export default class Navigation extends Vue {
 
   private item = 0;
 
-  private menuItems: Array<{ title: string, location: RawLocation, routeName: string, icon: string }> = [{
+  private mainMenuItems: Array<{ title: string, location: RawLocation, routeName: string, icon: string }> = [{
     title: 'menus.aniList.home',
     location: { name: 'Home' },
     routeName: 'Home',
@@ -135,7 +149,9 @@ export default class Navigation extends Vue {
     location: { name: 'SeasonPreview' },
     routeName: 'SeasonPreview',
     icon: 'mdi-calendar-month',
-  }, {
+  }];
+
+  private aniListMenuItems: Array<{ title: string, location: RawLocation, routeName: string, icon: string }> = [{
     title: 'menus.aniList.watching',
     location: { name: 'Watching' },
     routeName: 'Watching',
@@ -199,7 +215,12 @@ export default class Navigation extends Vue {
 
   private created() {
     const currentRouteName = this.$route.name;
-    this.item = this.menuItems.findIndex(item => item.routeName === currentRouteName);
+
+    this.item = this.mainMenuItems.findIndex(item => item.routeName === currentRouteName);
+
+    if (this.item === -1) {
+      this.item = this.aniListMenuItems.findIndex(item => item.routeName === currentRouteName) + 2;
+    }
   }
 
   private navigateTo(location: RawLocation) {
@@ -209,7 +230,12 @@ export default class Navigation extends Vue {
   @Watch('currentRouteName')
   public routeChanged() {
     const currentRouteName = this.$route.name;
-    this.item = this.menuItems.findIndex(item => item.routeName === currentRouteName);
+
+    this.item = this.mainMenuItems.findIndex(item => item.routeName === currentRouteName);
+
+    if (this.item === -1) {
+      this.item = this.aniListMenuItems.findIndex(item => item.routeName === currentRouteName) + 2;
+    }
   }
 }
 </script>

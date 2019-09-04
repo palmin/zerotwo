@@ -148,17 +148,17 @@
     },
     "settings": {
       "aboutZeroTwo": {
-        "version": "Version"
+        "version": "الإصدار"
       },
       "aniList": {
-        "loggedInAs": "Logged in as {0}",
+        "loggedInAs": "تسجيل الدخول بـ {0}",
         "refreshRate": "Refresh rate",
-        "refreshRateSuffix": "minutes",
+        "refreshRateSuffix": "دقائق",
         "refreshRateHint": "This interval determines the amount of minutes until the next synchronization with the AniList server. Changes to the interval will be applied after the next synchronization."
       },
       "appSettings": {
-        "chooseLanguage": "Choose language",
-        "darkMode": "Dark mode"
+        "chooseLanguage": "اختر اللغة",
+        "darkMode": "الوضع الليلي"
       },
       "changelog": {
         "new": "NEW",

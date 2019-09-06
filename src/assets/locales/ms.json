@@ -214,7 +214,7 @@
       }
     },
     "dates": {
-      "full": "MMMM Do YYYY",
+      "full": "Do MMMM YYYY",
       "monthAndYear": "MMMM YYYY",
       "yearOnly": "YYYY",
       "dateUnknown": "Tarikh tidak diketahui"

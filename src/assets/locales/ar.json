@@ -23,7 +23,7 @@
     "noInformation": "لا توجد معلومات متاحة.",
     "noSynonyms": "لا توجد مرادفات متاحة.",
     "notYetInList": "هذه الوسائط ليست في قائمتك بعد.",
-    "unauthenticated": "أنت غير موثق!",
+    "unauthenticated": "أنت لم موثق!",
     "unknown": "غير معروف"
   },
   "errors": {
@@ -98,15 +98,15 @@
         "nextAiringEpisode": "الحلقة {0} تبث {1}"
       },
       "detailView": {
-        "airedOn": "Aired on {0}",
+        "airedOn": "تم البث على {0}",
         "airedOnTo": "{0} الى {1}",
-        "airesFromTo": "Aires from {0} to {1}",
-        "airesOn": "Aires on {0}",
-        "airingStartedOn": "Started on {0}",
-        "airingStartsOnDay": "Starts on {0}",
-        "airingStartsInMonthYear": "Starts in {0}",
-        "airingStartsInYear": "Starts in {0}",
-        "airingTime": "Airing time",
+        "airesFromTo": "البث من {0} إلى {1}",
+        "airesOn": "البث فى {0}",
+        "airingStartedOn": "تم البدء في {0}",
+        "airingStartsOnDay": "يبدأ في {0}",
+        "airingStartsInMonthYear": "يبدأ في {0}",
+        "airingStartsInYear": "يبدأ في {0}",
+        "airingTime": "وقت البث",
         "airingWithUnknownStart": "? - {0}",
         "description": "وصف",
         "englishTitle": "عنوان باللغة الإنجليزية",
@@ -128,23 +128,23 @@
       "searchQuery": "بحث...",
       "adultContent": {
         "label": "محتوى للبالغين",
-        "hint": "Keep clear to search for both adult and non-adult content",
-        "onlyNonAdult": "Only non-adult content",
-        "onlyAdult": "Only adult content"
+        "hint": "يساعد على إدارة البحث للعثور على البالغين المحتوى وغير البالغين المحتوى",
+        "onlyNonAdult": "محتوى غير للبالغين فقط",
+        "onlyAdult": "محتوى للبالغين فقط"
       },
       "inList": {
-        "label": "In List",
-        "hint": "Keep clear to also search for media that is not yet in your list"
+        "label": "في القائمة",
+        "hint": "المساعدة في إدارة البحث للعثور على الوسائط التي لم تكن على قائمتك"
       },
       "genres": {
-        "label": "Genres",
-        "hint": "Max. 3",
-        "noMatch": "No genre matching \"<strong>{0}</strong>\". Press <kbd>enter</kbd> to create it."
+        "label": "أنواء",
+        "hint": "ماكس 3",
+        "noMatch": "لا يوجد نوع \"<strong>{0}</strong>\" مطابقة. اضغط <kbd>ENTER</kbd> لإنشاء فإنه."
       }
     },
     "seasonPreview": {
-      "episodes": "? episodes | 1 episode | {count} episodes",
-      "startDate": "Start of airing:"
+      "episodes": "? حلقات | 1 حلقة | {count} حلقات",
+      "startDate": "بداء البث:"
     },
     "settings": {
       "aboutZeroTwo": {
@@ -152,81 +152,81 @@
       },
       "aniList": {
         "loggedInAs": "تسجيل الدخول بـ {0}",
-        "refreshRate": "Refresh rate",
+        "refreshRate": "معدل التحديث",
         "refreshRateSuffix": "دقائق",
-        "refreshRateHint": "This interval determines the amount of minutes until the next synchronization with the AniList server. Changes to the interval will be applied after the next synchronization."
+        "refreshRateHint": "يحدد هذا الفاصل الزمني مقدار الدقائق حتى المزامنة التالية بخادم AniList. سيتم تطبيق التغييرات على الفاصل الزمني بعد المزامنة التالية."
       },
       "appSettings": {
         "chooseLanguage": "اختر اللغة",
         "darkMode": "الوضع الليلي"
       },
       "changelog": {
-        "new": "NEW",
-        "fix": "FIX",
-        "remove": "REMOVE",
-        "version": "Version",
-        "changesIn": "Latest changes in {0}"
+        "new": "جديد",
+        "fix": "إصلاح",
+        "remove": "منزوع",
+        "version": "الإصدار",
+        "changesIn": "أحدث التغييرات بـ {0}"
       },
-      "specialThanks": "Special Thanks",
-      "supporters": "Supporters"
+      "specialThanks": "شكر خاص",
+      "supporters": "الأنصار"
     }
   },
   "routes": {
     "aniList": {
-      "home": "Home",
-      "watching": "Watching",
-      "repeating": "Repeating",
-      "completed": "Completed",
-      "paused": "Paused",
-      "dropped": "Dropped",
-      "planning": "Planning"
+      "home": "الصحفة الرئيسية",
+      "watching": "مشاهدة",
+      "repeating": "تكرار",
+      "completed": "منتهى",
+      "paused": "توقف",
+      "dropped": "إسقاط",
+      "planning": "خطة المشاهدة"
     },
-    "detailView": "Detail View",
-    "search": "Search",
-    "seasonPreview": "Season Preview",
-    "settings": "Settings"
+    "detailView": "رؤية التفاصيل",
+    "search": "بحث",
+    "seasonPreview": "معاينة الموسم",
+    "settings": "إعدادات"
   },
   "notifications": {
     "aniList": {
-      "successTitle": "Synchronization successful",
-      "completeUpdateText": "{0} was successfully completed with the synchronization to episode {1}.",
-      "simpleUpdateText": "{0} was successfully synchronized to episode {1}.",
-      "addedToList": "{0} was successfully added to your list.",
-      "removeEntry": "{0} was successfully removed from your list."
+      "successTitle": "نجاح المزامنة",
+      "completeUpdateText": "تم بنجاح {0} مع تزامن الحلقة {1}.",
+      "simpleUpdateText": "يتم مزامنة {0} نجاح لحلقة {1}.",
+      "addedToList": "تم إضافة {0} إلى قائمتك بنجاح.",
+      "removeEntry": "تم إزالة {0} من قائمتك بنجاح."
     }
   },
   "misc": {
     "aniList": {
       "listStatusses": {
-        "completed": "Completed",
-        "dropped": "Dropped",
-        "paused": "Paused",
-        "planning": "Planning",
-        "repeating": "Repeating",
-        "watching": "Watching"
+        "completed": "منتهى",
+        "dropped": "إسقاط",
+        "paused": "توقف",
+        "planning": "خطة المشاهدة",
+        "repeating": "تكرار",
+        "watching": "مشاهدة"
       },
       "seasons": {
-        "spring": "Spring",
-        "summer": "Summer",
-        "fall": "Fall",
-        "autumn": "Autumn",
-        "winter": "Winter"
+        "spring": "الربيع",
+        "summer": "الصيف",
+        "fall": "الخريف",
+        "autumn": "الخريف",
+        "winter": "الشتاء"
       }
     },
     "dates": {
-      "full": "MMMM Do YYYY",
+      "full": "Do MMMM YYYY",
       "monthAndYear": "MMMM YYYY",
       "yearOnly": "YYYY",
-      "dateUnknown": "Date unknown"
+      "dateUnknown": "تاريخ غير معروف"
     },
     "rules": {
-      "required": "This input must be filled."
+      "required": "يجب ملء هذا الإدخال."
     },
     "modules": {
       "aniList": "AniList"
     }
   },
   "$vuetify": {
-    "noDataText": "No data"
+    "noDataText": "لا توجد بيانات"
   }
 }

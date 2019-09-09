@@ -1,0 +1,232 @@
+{
+  "originalReading": "Bahasa Melayu",
+  "englishReading": "Malay",
+  "actions": {
+    "add": "Tambah",
+    "addToPlanToWatch": "Tambahkan ke senarai Dirancangkan",
+    "back": "Kembali",
+    "fastSearch": "Mencari... \u23ce",
+    "loading": "Memuatkan...",
+    "login": "Masuk",
+    "logout": "Keluar",
+    "remove": "Hapus",
+    "reset": "Tetapkan Semula",
+    "save": "Simpan",
+    "search": "Cari",
+    "sort": "Isih & Tapis",
+    "toPageTop": "Lompat ke atas"
+  },
+  "alerts": {
+    "adultContent": "Media ini dianggap kandungan dewasa! Kebijakan Penonton Disyorkan.",
+    "noDescription": "Tiada perihalan yang tersedia.",
+    "noEnglishTitle": "Tiada tajuk Bahasa Inggeris yang tersedia.",
+    "noInformation": "Tiada maklumat tersedia.",
+    "noSynonyms": "Tiada sinonim tersedia.",
+    "notYetInList": "Media ini belum disenaraikan dalam senarai anda.",
+    "unauthenticated": "Anda belum disahkan!",
+    "unknown": "Tidak diketahui"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "Kemas kini gagal",
+      "text": "Kemas kini yang komited tidak boleh disegerakkan! Semak ketersediaan AniList atau sambungan internet!"
+    }
+  },
+  "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Kemas kini senarai berikutnya dalam: {0}"
+    },
+    "aniList": {
+      "completed": "Selesai",
+      "dropped": "Berhenti",
+      "home": "Beranda",
+      "paused": "Ditahan",
+      "planning": "Dirancangkan",
+      "repeating": "Mengulang",
+      "seasonPreview": "Pratonton Musim",
+      "watching": "Sedang Menonton"
+    },
+    "search": "Carian Terperinci",
+    "settings": {
+      "title": "Tetapan",
+      "about": "Mengenai ZeroTwo",
+      "aniList": "AniList",
+      "appSettings": "Tetapan Aplikasi",
+      "changelog": "Pindaan Terakhir",
+      "specialThanks": "Terima kasih teristimewa"
+    }
+  },
+  "components": {
+    "sorting": {
+      "directions": {
+        "ascending": "Naik",
+        "descending": "Turun"
+      },
+      "sortingLabel": "Isih mengikut",
+      "title": "Tajuk",
+      "score": "Skor",
+      "progress": "Kemajuan",
+      "startingDate": "Tarikh Mula",
+      "episodeAmount": "Bilangan Episod"
+    }
+  },
+  "pages": {
+    "aniList": {
+      "home": {
+        "activities": {
+          "headline": "Aktiviti Terkini",
+          "completed": "Selesai {0}",
+          "plansToWatch": "Dirancang {0}",
+          "watchedEpisode": "Episod {1} dari {0} selesai",
+          "dropped": "Berhenti {0}",
+          "rewatchedEpisode": "Episod {1} dari {0} ditonton kembali",
+          "pausedWatching": "Ditahan {0}"
+        },
+        "howToAuthenticate": {
+          "header": "Cara untuk login:",
+          "text": [
+            "Sila navigasi ke halaman tetapan (cog di sudut kanan) dan kemudian ke tab \"AniList\".",
+            "Di sana anda akan dapati butang \"Masuk\" yang akan membuka tetingkap log masuk AniList.",
+            "Selepas memasukkan data log masuk, tetingkap akan ditutup dan proses login telah selesai."
+          ]
+        }
+      },
+      "list": {
+        "airingFinished": "Selesai siaran",
+        "missingEpisodes": "Satu episod untuk dinonton | {count} episod untuk dinonton",
+        "notYetAired": "Belum ditayangkan",
+        "nextAiringEpisode": "Episod {0} akan disiarkan {1}"
+      },
+      "detailView": {
+        "airedOn": "Disiarkan pada` {0}",
+        "airedOnTo": "{0} hingga {1}",
+        "airesFromTo": "Disiarkan pada {0} hingga {1}",
+        "airesOn": "Disiarkan pada {0}",
+        "airingStartedOn": "Dimulakan pada {0}",
+        "airingStartsOnDay": "Bermula di {0}",
+        "airingStartsInMonthYear": "Bermula di {0}",
+        "airingStartsInYear": "Bermula di {0}",
+        "airingTime": "Masa penyiaran",
+        "airingWithUnknownStart": "? - {0}",
+        "description": "Penerangan",
+        "englishTitle": "Tajuk bahasa Inggeris",
+        "episodes": "Episod",
+        "genres": "Genre",
+        "nativeTitle": "Tajuk asli",
+        "ownInformation": "Maklumat senarai anda",
+        "ownProgress": "Kemajuan",
+        "ownStatus": "Status",
+        "ownScore": "Skor",
+        "romajiTitle": "Tajuk Romaji",
+        "score": "{0} / {1} poin",
+        "scoreLabel": "Skor purata",
+        "streamingSubheader": "Perkhidmatan streaming",
+        "synonyms": "Sinonim"
+      }
+    },
+    "search": {
+      "searchQuery": "Cari...",
+      "adultContent": {
+        "label": "Kandungan dewasa",
+        "hint": "Membantu menguruskan carian untuk kandungan dewasa dan bukan dewasa",
+        "onlyNonAdult": "Tunjukkan bukan kandungan dewasa saja",
+        "onlyAdult": "Tunjukkan hanya kandungan dewasa"
+      },
+      "inList": {
+        "label": "Dalam senarai",
+        "hint": "Membantu menguruskan carian untuk mencari media yang belum ada dalam senarai anda"
+      },
+      "genres": {
+        "label": "Genre",
+        "hint": "Maks. 3",
+        "noMatch": "Tiada genre \"<strong>{0}</strong>\" yang sesuai. Tekan <kbd>enter</kbd> untuk menjadikannya."
+      }
+    },
+    "seasonPreview": {
+      "episodes": "? episod | 1 episod | {count} episod",
+      "startDate": "Mulai disiarkan:"
+    },
+    "settings": {
+      "aboutZeroTwo": {
+        "version": "Versi"
+      },
+      "aniList": {
+        "loggedInAs": "Masuk sebagai {0}",
+        "refreshRate": "Jarak penyegaran",
+        "refreshRateSuffix": "minit",
+        "refreshRateHint": "Selang masa tentukan bilangan minit hingga penyegerakan berikutnya terhadap server AniList. Perubahan selang masa akan digunakan selepas penyegerakan seterusnya."
+      },
+      "appSettings": {
+        "chooseLanguage": "Pilih bahasa",
+        "darkMode": "Mod gelap"
+      },
+      "changelog": {
+        "new": "BARU",
+        "fix": "DIPERBAIKI",
+        "remove": "DIPADAMKAN",
+        "version": "Versi",
+        "changesIn": "Perubahan terakhir di {0}"
+      },
+      "specialThanks": "Terimakasih Teristimewa",
+      "supporters": "Penyokong"
+    }
+  },
+  "routes": {
+    "aniList": {
+      "home": "Beranda",
+      "watching": "Sedang Menonton",
+      "repeating": "Mengulang",
+      "completed": "Selesai",
+      "paused": "Ditahan",
+      "dropped": "Berhenti",
+      "planning": "Dirancangkan"
+    },
+    "detailView": "Paparan Terperinci",
+    "search": "Carian",
+    "seasonPreview": "Pratonton Musim",
+    "settings": "Tetapan"
+  },
+  "notifications": {
+    "aniList": {
+      "successTitle": "Penyegerakan berjaya",
+      "completeUpdateText": "Penyegerakan tamat {0} berjaya ke episod {1}.",
+      "simpleUpdateText": "Penyegerakan {0} berjaya ke episod {1}.",
+      "addedToList": "Penambahan {0} berjaya ke senarai anda.",
+      "removeEntry": "Pemadaman {0} berjaya daripada senarai."
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "Selesai",
+        "dropped": "Berhenti",
+        "paused": "Ditahan",
+        "planning": "Dirancangkan",
+        "repeating": "Mengulang",
+        "watching": "Sedang Menonton"
+      },
+      "seasons": {
+        "spring": "Spring",
+        "summer": "Summer",
+        "fall": "Fall",
+        "autumn": "Autumn",
+        "winter": "Winter"
+      }
+    },
+    "dates": {
+      "full": "Do MMMM YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Tarikh tidak diketahui"
+    },
+    "rules": {
+      "required": "Lajur ini perlu diisi."
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
+  },
+  "$vuetify": {
+    "noDataText": "Tiada data"
+  }
+}

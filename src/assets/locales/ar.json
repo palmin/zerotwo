@@ -1,0 +1,232 @@
+{
+  "originalReading": "العربية",
+  "englishReading": "Arabic",
+  "actions": {
+    "add": "اضف",
+    "addToPlanToWatch": "إضافة إلى قائمة التخطيط",
+    "back": "رجع",
+    "fastSearch": "بحث... \u23ce",
+    "loading": "جار التحميل...",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "remove": "إزالة",
+    "reset": "أعاد التشغيل",
+    "save": "حفظ",
+    "search": "بحث",
+    "sort": "فرز وصفى",
+    "toPageTop": "القفز إلى الأعلى"
+  },
+  "alerts": {
+    "adultContent": "تعتبر هذه الوسائط محتوى للبالغين! المشاهد حرية التقدير.",
+    "noDescription": "لا يوجد وصف متاح.",
+    "noEnglishTitle": "لا يوجد عنوان باللغة الإنجليزية المتاحة.",
+    "noInformation": "لا توجد معلومات متاحة.",
+    "noSynonyms": "لا توجد مرادفات متاحة.",
+    "notYetInList": "هذه الوسائط ليست في قائمتك بعد.",
+    "unauthenticated": "أنت لم موثق!",
+    "unknown": "غير معروف"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "فشل التحديث",
+      "text": "لا يمكن مزامنة التحديث الملتزم! تحقق من توفر AniList أو الاتصال بالإنترنت!"
+    }
+  },
+  "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "تحديث القائمة التالية فى: {0}"
+    },
+    "aniList": {
+      "completed": "منتهى",
+      "dropped": "إسقاط",
+      "home": "الصحفة الرئيسية",
+      "paused": "توقف",
+      "planning": "خطة المشاهدة",
+      "repeating": "تكرار",
+      "seasonPreview": "معاينة الموسم",
+      "watching": "مشاهدة"
+    },
+    "search": "بحث مفصل",
+    "settings": {
+      "title": "إعدادات",
+      "about": "عن ZeroTwo",
+      "aniList": "AniList",
+      "appSettings": "إعدادات التطبيقات",
+      "changelog": "أحدث التغييرات",
+      "specialThanks": "شكر خاص"
+    }
+  },
+  "components": {
+    "sorting": {
+      "directions": {
+        "ascending": "إرتفاع",
+        "descending": "إنحدار"
+      },
+      "sortingLabel": "فرز حسب",
+      "title": "الاسم",
+      "score": "درجة",
+      "progress": "التقدم",
+      "startingDate": "تاريخ البدء",
+      "episodeAmount": "كمية أحداث"
+    }
+  },
+  "pages": {
+    "aniList": {
+      "home": {
+        "activities": {
+          "headline": "أحدث الأنشطة",
+          "completed": "منجز {0}",
+          "plansToWatch": "مخطط للمشاهدة {0}",
+          "watchedEpisode": "شاهد الحلقة {1} من {0}",
+          "dropped": "توقفت {0}",
+          "rewatchedEpisode": "حلق المشاهدة الحلقة {1} من {0}",
+          "pausedWatching": "توقف {0}"
+        },
+        "howToAuthenticate": {
+          "header": "خطوة لتسجيل الدخول:",
+          "text": [
+            "يرجى الانتقل إلى صحيفة الإعدادات (سن العجلة فى زاوية العليا اليمنى) وانتقال الى تبويب \"AniList\".",
+            "هناك ستجب زر \"تسجيل الدخول\" الذي سيفتح موقع دخول AniList.",
+            "بعد إدخال بيانات تسجيل الدخول، سيتم إغلاق الموقع وإتمام عملية تسجيل الدخول."
+          ]
+        }
+      },
+      "list": {
+        "airingFinished": " بث الانتهاء",
+        "missingEpisodes": "حلقة واحدة لمشاهدة | {count} حلقات لمشاهدة",
+        "notYetAired": "لم يتم بثه",
+        "nextAiringEpisode": "الحلقة {0} تبث {1}"
+      },
+      "detailView": {
+        "airedOn": "تم البث على {0}",
+        "airedOnTo": "{0} الى {1}",
+        "airesFromTo": "البث من {0} إلى {1}",
+        "airesOn": "البث فى {0}",
+        "airingStartedOn": "تم البدء في {0}",
+        "airingStartsOnDay": "يبدأ في {0}",
+        "airingStartsInMonthYear": "يبدأ في {0}",
+        "airingStartsInYear": "يبدأ في {0}",
+        "airingTime": "وقت البث",
+        "airingWithUnknownStart": "? - {0}",
+        "description": "وصف",
+        "englishTitle": "عنوان باللغة الإنجليزية",
+        "episodes": "حلقات",
+        "genres": "فئة",
+        "nativeTitle": "عنوان الأصلي",
+        "ownInformation": "معلومات من قائمتك",
+        "ownProgress": "تقدم",
+        "ownStatus": "الحالة",
+        "ownScore": "درجة",
+        "romajiTitle": "عنوان روماجي",
+        "score": "{0} / {1} نقاط",
+        "scoreLabel": "متوسط درجة",
+        "streamingSubheader": "خدمات التدفق",
+        "synonyms": "مرادفات"
+      }
+    },
+    "search": {
+      "searchQuery": "بحث...",
+      "adultContent": {
+        "label": "محتوى للبالغين",
+        "hint": "يساعد على إدارة البحث للعثور على البالغين المحتوى وغير البالغين المحتوى",
+        "onlyNonAdult": "محتوى غير للبالغين فقط",
+        "onlyAdult": "محتوى للبالغين فقط"
+      },
+      "inList": {
+        "label": "في القائمة",
+        "hint": "المساعدة في إدارة البحث للعثور على الوسائط التي لم تكن على قائمتك"
+      },
+      "genres": {
+        "label": "أنواء",
+        "hint": "ماكس 3",
+        "noMatch": "لا يوجد نوع \"<strong>{0}</strong>\" مطابقة. اضغط <kbd>ENTER</kbd> لإنشاء فإنه."
+      }
+    },
+    "seasonPreview": {
+      "episodes": "? حلقات | 1 حلقة | {count} حلقات",
+      "startDate": "بداء البث:"
+    },
+    "settings": {
+      "aboutZeroTwo": {
+        "version": "الإصدار"
+      },
+      "aniList": {
+        "loggedInAs": "تسجيل الدخول بـ {0}",
+        "refreshRate": "معدل التحديث",
+        "refreshRateSuffix": "دقائق",
+        "refreshRateHint": "يحدد هذا الفاصل الزمني مقدار الدقائق حتى المزامنة التالية بخادم AniList. سيتم تطبيق التغييرات على الفاصل الزمني بعد المزامنة التالية."
+      },
+      "appSettings": {
+        "chooseLanguage": "اختر اللغة",
+        "darkMode": "الوضع الليلي"
+      },
+      "changelog": {
+        "new": "جديد",
+        "fix": "إصلاح",
+        "remove": "منزوع",
+        "version": "الإصدار",
+        "changesIn": "أحدث التغييرات بـ {0}"
+      },
+      "specialThanks": "شكر خاص",
+      "supporters": "الأنصار"
+    }
+  },
+  "routes": {
+    "aniList": {
+      "home": "الصحفة الرئيسية",
+      "watching": "مشاهدة",
+      "repeating": "تكرار",
+      "completed": "منتهى",
+      "paused": "توقف",
+      "dropped": "إسقاط",
+      "planning": "خطة المشاهدة"
+    },
+    "detailView": "رؤية التفاصيل",
+    "search": "بحث",
+    "seasonPreview": "معاينة الموسم",
+    "settings": "إعدادات"
+  },
+  "notifications": {
+    "aniList": {
+      "successTitle": "نجاح المزامنة",
+      "completeUpdateText": "تم بنجاح {0} مع تزامن الحلقة {1}.",
+      "simpleUpdateText": "يتم مزامنة {0} نجاح لحلقة {1}.",
+      "addedToList": "تم إضافة {0} إلى قائمتك بنجاح.",
+      "removeEntry": "تم إزالة {0} من قائمتك بنجاح."
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "منتهى",
+        "dropped": "إسقاط",
+        "paused": "توقف",
+        "planning": "خطة المشاهدة",
+        "repeating": "تكرار",
+        "watching": "مشاهدة"
+      },
+      "seasons": {
+        "spring": "الربيع",
+        "summer": "الصيف",
+        "fall": "الخريف",
+        "autumn": "الخريف",
+        "winter": "الشتاء"
+      }
+    },
+    "dates": {
+      "full": "Do MMMM YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "تاريخ غير معروف"
+    },
+    "rules": {
+      "required": "يجب ملء هذا الإدخال."
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
+  },
+  "$vuetify": {
+    "noDataText": "لا توجد بيانات"
+  }
+}

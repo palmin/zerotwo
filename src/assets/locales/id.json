@@ -1,0 +1,232 @@
+{
+  "originalReading": "Bahasa Indonesia",
+  "englishReading": "Indonesian",
+  "actions": {
+    "add": "Tambah",
+    "addToPlanToWatch": "Tambahkan ke daftar Direncanakan",
+    "back": "Kembali",
+    "fastSearch": "Mencari... \u23ce",
+    "loading": "Memuat...",
+    "login": "Masuk",
+    "logout": "Keluar",
+    "remove": "Hapus",
+    "reset": "Reset",
+    "save": "Simpan",
+    "search": "Cari",
+    "sort": "Urutkan & Saring",
+    "toPageTop": "Lompat ke atas"
+  },
+  "alerts": {
+    "adultContent": "Media ini dianggap konten dewasa! Kebijakan Pemirsa Disarankan.",
+    "noDescription": "Tidak ada deskripsi yang tersedia.",
+    "noEnglishTitle": "Tidak ada judul Inggris yang tersedia.",
+    "noInformation": "Tidak ada informasi yang tersedia.",
+    "noSynonyms": "Tidak ada sinonim yang tersedia.",
+    "notYetInList": "Media ini belum terdaftar di daftar kamu.",
+    "unauthenticated": "Kamu tidak ter-otentikasi!",
+    "unknown": "Tidak Diketahui"
+  },
+  "errors": {
+    "updateFailed": {
+      "title": "Pembaharuan gagal",
+      "text": "Pembaruan informasi tidak dapat disinkronisasikan! Periksa koneksi internet kamu ataupun hubungan ke AniList!"
+    }
+  },
+  "menus": {
+    "navigationDrawer": {
+      "timeUntilNextRefresh": "Pembaruan daftar selanjutnya dalam: {0}"
+    },
+    "aniList": {
+      "completed": "Selesai",
+      "dropped": "Dihentikan",
+      "home": "Beranda",
+      "paused": "Ditahan",
+      "planning": "Direncanakan",
+      "repeating": "Mengulang",
+      "seasonPreview": "Pratinjau Musim",
+      "watching": "Sedang Menonton"
+    },
+    "search": "Pencarian Terperinci",
+    "settings": {
+      "title": "Pengaturan",
+      "about": "Tentang ZeroTwo",
+      "aniList": "AniList",
+      "appSettings": "Pengaturan Aplikasi",
+      "changelog": "Perubahan Terakhir",
+      "specialThanks": "Kontributor"
+    }
+  },
+  "components": {
+    "sorting": {
+      "directions": {
+        "ascending": "Naik",
+        "descending": "Turun"
+      },
+      "sortingLabel": "Urutkan berdasarkan",
+      "title": "Judul",
+      "score": "Skor",
+      "progress": "Kemajuan",
+      "startingDate": "Tanggal Mulai",
+      "episodeAmount": "Jumlah Episode"
+    }
+  },
+  "pages": {
+    "aniList": {
+      "home": {
+        "activities": {
+          "headline": "Aktivitas Terbaru",
+          "completed": "Selesai {0}",
+          "plansToWatch": "Direncanakan {0}",
+          "watchedEpisode": "Episode {1} dari {0} selesai",
+          "dropped": "Dihentikan {0}",
+          "rewatchedEpisode": "Episode {1} dari {0} ditonton kembali",
+          "pausedWatching": "Ditahan {0}"
+        },
+        "howToAuthenticate": {
+          "header": "Cara untuk masuk:",
+          "text": [
+            "Silakan navigasi ke halaman pengaturan (simbol geligi di ujung kanan aplikasi) dan kemudian ke tab \"AniList\".",
+            "Kamu akan menemukan tombol \"Masuk\" yang akan membuka jendela login AniList.",
+            "Setelah memasukkan data login, jendela tampilan akan ditutup dan proses login telah selesai."
+          ]
+        }
+      },
+      "list": {
+        "airingFinished": "Selesai ditayangkan",
+        "missingEpisodes": "Satu episode untuk dinonton | {count} episode untuk dinonton",
+        "notYetAired": "Belum ditayangkan",
+        "nextAiringEpisode": "Episode {0} akan ditayangkan {1}"
+      },
+      "detailView": {
+        "airedOn": "Ditayangkan pada {0}",
+        "airedOnTo": "{0} hingga {1}",
+        "airesFromTo": "Ditayangkan pada {0} hingga {1}",
+        "airesOn": "Ditayangkan pada {0}",
+        "airingStartedOn": "Ditayangkan pada {0}",
+        "airingStartsOnDay": "Ditayangkan pada hari {0}",
+        "airingStartsInMonthYear": "Ditayangkan di bulan {0}",
+        "airingStartsInYear": "Ditayangkan di tahun {0}",
+        "airingTime": "Waktu penayangan",
+        "airingWithUnknownStart": "? - {0}",
+        "description": "Deskripsi",
+        "englishTitle": "Judul Inggris",
+        "episodes": "Episode",
+        "genres": "Genre",
+        "nativeTitle": "Judul asli",
+        "ownInformation": "Informasi dari daftar kamu",
+        "ownProgress": "Perkembangan",
+        "ownStatus": "Status",
+        "ownScore": "Skor",
+        "romajiTitle": "Judul dalam Romaji",
+        "score": "{0} / {1} poin",
+        "scoreLabel": "Skor rata-rata",
+        "streamingSubheader": "Layanan Streaming",
+        "synonyms": "Sinonim"
+      }
+    },
+    "search": {
+      "searchQuery": "Cari...",
+      "adultContent": {
+        "label": "Konten dewasa",
+        "hint": "Membantu mengelola pencarian untuk konten dewasa maupun bukan",
+        "onlyNonAdult": "Tampilkan hanya bukan konten dewasa",
+        "onlyAdult": "Tampilkan hanya konten dewasa"
+      },
+      "inList": {
+        "label": "Dalam Daftar",
+        "hint": "Membantu mengelola pencarian untuk mencari media yang belum ada dalam daftar kamu"
+      },
+      "genres": {
+        "label": "Genre",
+        "hint": "Maks. 3",
+        "noMatch": "Tidak ada genre \"<strong>{0}</strong>\" yang cocok. Tekan <kbd>enter</kbd> untuk membuatnya."
+      }
+    },
+    "seasonPreview": {
+      "episodes": "? episode | 1 episode | {count} episode",
+      "startDate": "Mulai ditayangkan:"
+    },
+    "settings": {
+      "aboutZeroTwo": {
+        "version": "Versi"
+      },
+      "aniList": {
+        "loggedInAs": "Masuk sebagai {0}",
+        "refreshRate": "Jarak penyegaran",
+        "refreshRateSuffix": "menit",
+        "refreshRateHint": "Interval ini menentukan jumlah menit hingga sinkronisasi berikutnya dengan server AniList. Perubahan interval akan diterapkan setelah sinkronisasi berikutnya."
+      },
+      "appSettings": {
+        "chooseLanguage": "Pilih bahasa",
+        "darkMode": "Mode gelap"
+      },
+      "changelog": {
+        "new": "BARU",
+        "fix": "DIPERBAIKI",
+        "remove": "DIHAPUS",
+        "version": "Versi",
+        "changesIn": "Perubahan terakhir di {0}"
+      },
+      "specialThanks": "Terimakasih Terkhusus",
+      "supporters": "Pendukung"
+    }
+  },
+  "routes": {
+    "aniList": {
+      "home": "Beranda",
+      "watching": "Sedang Menonton",
+      "repeating": "Mengulang",
+      "completed": "Selesai",
+      "paused": "Ditahan",
+      "dropped": "Dihentikan",
+      "planning": "Direncanakan"
+    },
+    "detailView": "Tampilan Detail",
+    "search": "Pencarian",
+    "seasonPreview": "Pratinjau Musim",
+    "settings": "Pengaturan"
+  },
+  "notifications": {
+    "aniList": {
+      "successTitle": "Sinkronisasi sukses",
+      "completeUpdateText": "Sinkronisasi selesai {0} sukses ke episode {1}.",
+      "simpleUpdateText": "{0} sukses disinkronisasi ke episode {1}.",
+      "addedToList": "{0} sukses ditambahkan ke dalam daftar kamu.",
+      "removeEntry": "{0} sukses dihapus dari daftar."
+    }
+  },
+  "misc": {
+    "aniList": {
+      "listStatusses": {
+        "completed": "Selesai",
+        "dropped": "Dihentikan",
+        "paused": "Ditahan",
+        "planning": "Direncanakan",
+        "repeating": "Mengulang",
+        "watching": "Sedang Menonton"
+      },
+      "seasons": {
+        "spring": "Spring",
+        "summer": "Summer",
+        "fall": "Fall",
+        "autumn": "Autumn",
+        "winter": "Winter"
+      }
+    },
+    "dates": {
+      "full": "Do MMMM YYYY",
+      "monthAndYear": "MMMM YYYY",
+      "yearOnly": "YYYY",
+      "dateUnknown": "Tanggal tidak diketahui"
+    },
+    "rules": {
+      "required": "Kolom ini perlu diisi."
+    },
+    "modules": {
+      "aniList": "AniList"
+    }
+  },
+  "$vuetify": {
+    "noDataText": "Tidak ada data"
+  }
+}

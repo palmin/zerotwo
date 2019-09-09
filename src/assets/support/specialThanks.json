@@ -2,6 +2,7 @@
   "icon": "translate",
   "name": "TheRaphael0000",
   "message": {
+    "ar": "للترجمة فرنسي",
     "en": "for providing the French localisation.",
     "de": "für das Bereitstellen einer französischen Übersetzung.",
     "id": "untuk memberikan lokalisasi bahasa Perancis",
@@ -15,6 +16,7 @@
   "icon": "translate",
   "name": "fror",
   "message": {
+    "ar": "للترجمة البرتغالية (البرازيل)",
     "en": "for providing the Portuguese (Brazil) localisation.",
     "de": "für das Bereitstellen einer brasilianisch-portugiesischen Übersetzung.",
     "id": "untuk memberikan lokalisasi bahasa Portugis Brazil",
@@ -28,6 +30,7 @@
   "icon": "translate",
   "name": "晨风Mornwind",
   "message": {
+    "ar": "للترجمة الصينية المبسطة",
     "en": "for providing the Simplified Chinese localisation.",
     "de": "für das Bereitstellen einer chinesischen Übersetzung.",
     "id": "untuk memberikan lokalisasi bahasa China Mandarin",
@@ -36,5 +39,19 @@
     "fr": "pour avoir préparé la traduction chinoise.",
     "pt_BR": "por fornecer a tradução em chinês.",
     "zh_CN": "提供了简体中文翻译。"
+  }
+}, {
+  "icon": "translate",
+  "name": "nattadasu",
+  "message": {
+    "ar": "للترجمة الاندونيسية والماليزية والعربية",
+    "en": "for providing the Indonesian, Malay, and Arabic localisation.",
+    "de": "für das Bereitstellen einer indonesisch, malaiisch und arabisch Übersetzung.",
+    "id": "untuk memberikan lokalisasi bahasa Indonesia, Melayu, dan Arab",
+    "ja": "インドネシア語とマレー語とアラビア語の翻訳を作ったこと。",
+    "ms": "untuk menyediakan penyetempatan Indonesia, Melayu, dan Arab",
+    "fr": "pour avoir préparé la indonésienne, malaise et arabe.",
+    "pt_BR": "por fornecer a indonésia, malaia e árabe.",
+    "zh_CN": "提供了简印尼语马来语和阿拉伯语翻译。"
   }
 }]

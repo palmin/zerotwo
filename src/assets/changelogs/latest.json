@@ -1,6 +1,7 @@
 {
   "NEW": [
     {
+      "ar": "أكمل التصميم الجديد عبر Vuetify v2",
       "de": "Komplett neues Design via Vuetify v2",
       "en": "Complete new design via Vuetify v2",
       "fr": "Termine le nouveau design via Vuetify v2",
@@ -11,6 +12,7 @@
       "zh_CN": "使用 Vuetify v2 对 App 进行了全新设计"
     },
     {
+      "ar": "تحسين تجربة البحث",
       "de": "Verbesserte Suche",
       "en": "Improved search experience",
       "fr": "Améliore l'expérience de recherche",
@@ -21,6 +23,7 @@
       "zh_CN": "改善了搜索功能"
     },
     {
+      "ar": "المدمج في موسم المعاينة",
       "de": "Saison-Vorschau",
       "en": "Season preview built-in",
       "fr": "Intégration de la pré-visualisation de saison",
@@ -31,6 +34,7 @@
       "zh_CN": "加入了每季番组一览"
     },
     {
+      "ar": "الصفحة الرئيسية مع أحدث الأنشطة",
       "de": "Homepage mit den neusten Aktivitäten des Nutzers",
       "en": "Homepage with latest activities",
       "fr": "Page d'accueil avec les dernières activités",
@@ -41,6 +45,7 @@
       "zh_CN": "加入了含“最新动态”的个人主页"
     },
     {
+      "ar": "ربط عرض سجل التغيير في التطبيق",
       "de": "In-App einsehbare Änderungen zur neusten Version",
       "en": "In-app visible changelog",
       "fr": "Journal des modifications visible dans l'App",
@@ -51,6 +56,7 @@
       "zh_CN": "可在程序内查看“最近更新”日志"
     },
     {
+      "ar": "تصفية حسب النوع",
       "de": "Filterung nach Genres",
       "en": "Filtering by Genre",
       "fr": "Filtre par genre",
@@ -61,6 +67,7 @@
       "zh_CN": "筛选方式新增了“类型”选项"
     },
     {
+      "ar": "استبدال التطبيقات المستندة من Electron إلى تطبيق الويب",
       "de": "Web-App ersetzt bisherige Electron-App",
       "en": "Web app replaces Electron app",
       "fr": "(to be translated) Web app replaces Electron app",
@@ -71,18 +78,20 @@
       "zh_CN": "用网页版 App 替代了 Electron 版 App"
     },
     {
+      "ar": "دعم الفرنسية والبرتغالية البرازيلية",
       "de": "Unterstützung für Französisch und brasilianisches Portugiesisch",
       "en": "French and Portuguese (Brazil) are supported",
       "fr": "(to be translated) French and Portuguese (Brazil) are supported",
-      "id": "Dukungan terhadap bahasa Perancis dan Portugis",
+      "id": "Dukungan terhadap bahasa Perancis dan Portugis Brasil",
       "ja": "フランス語とブラジル語を追加しました",
-      "ms": "Penyokongan terhadap bahasa Perancis dan Portugis",
+      "ms": "Penyokongan terhadap bahasa Perancis dan Portugis Brazil",
       "pt_BR": "(to be translated) French and Portuguese (Brazil) are supported",
       "zh_CN": "添加了法语和葡萄牙语（巴西）翻译"
     }
   ],
   "FIX": [
     {
+      "ar": "فصل القوائم الكاملة على AniList المدعوم بالكامل الآن",
       "de": "Aufgeteilte Komplettliste auf AniList wird nun unterstützt",
       "en": "Split complete list on AniList is now fully supported",
       "fr": "Séparation de la liste Complète d'AniList est maintenent entièrement supporté",
@@ -93,6 +102,7 @@
       "zh_CN": "完全支持 AniList 上的拆分式完整列表"
     },
     {
+      "ar": "الفرز من خلال مختلف الإعدادات",
       "de": "Sortieren nun über diverse Parameter möglich",
       "en": "Sorting via various parameters",
       "fr": "Tri par divers paramètres",
@@ -105,6 +115,7 @@
   ],
   "REMOVE": [
     {
+      "ar": "تم إنهاء دعم MyAnimeList",
       "de": "MyAnimeList wird nun nicht mehr unterstützt",
       "en": "Support for MyAnimeList has been terminated",
       "fr": "MyAnimeList n'est plus supporté",

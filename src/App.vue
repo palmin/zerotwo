@@ -61,6 +61,8 @@ export default class App extends Vue {
     this.$i18n.locale = newLocale && validLanguageCodes.includes(newLocale)
       ? newLocale
       : this.$i18n.fallbackLocale;
+
+    this.$vuetify.rtl = this.isRTLLanguage(this.$i18n.locale);
     moment.locale(this.$i18n.locale);
     root.setAttribute('class', `font-face-${this.getLocaleBasedFontFace(this.$i18n.locale)}`);
   }
@@ -85,6 +87,7 @@ export default class App extends Vue {
     root.setAttribute('class', `font-face-${this.getLocaleBasedFontFace(this.$i18n.locale)}`);
 
     this.$vuetify.theme.dark = appStore.darkMode;
+    this.$vuetify.rtl = this.isRTLLanguage(this.$i18n.locale);
 
     moment.locale(this.$i18n.locale);
   }
@@ -109,6 +112,9 @@ export default class App extends Vue {
       case 'ru': // Russian
         fontFace = 'ru';
         break;
+      case 'ar': // Arabic
+        fontFace = 'ar';
+        break;
       case 'de':
       case 'en':
       case 'fr':
@@ -119,6 +125,20 @@ export default class App extends Vue {
     }
 
     return fontFace;
+  }
+
+  private isRTLLanguage(locale: string): boolean {
+    let rtl = false;
+
+    switch (locale) {
+      case 'ar':
+        rtl = true;
+        break;
+      default:
+        break;
+    }
+
+    return rtl;
   }
 }
 </script>

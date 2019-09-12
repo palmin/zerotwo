@@ -9,6 +9,7 @@
       v-model="navigationDrawer"
       temporary
       app
+      :right="$vuetify.rtl"
     >
       <v-list-item>
         <v-list-item-content>
